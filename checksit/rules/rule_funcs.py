@@ -13,13 +13,13 @@ def _preprocess(value, preprocessors):
     return value
 
 
-def match_file_name(value, context, preprocessors=None):
+def match_file_name(value, context, preprocessors=None, label=""):
     file_name = os.path.basename(context["file_path"])
     value = _preprocess(value, preprocessors)
     errors = []
 
     if value != file_name:
-        errors.append(f"'{value}' does not match file name: '{file_name}'")
+        errors.append(f"{label} '{value}' does not match file name: '{file_name}'")
 
     return errors
 

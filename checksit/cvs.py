@@ -58,16 +58,16 @@ class Vocabs:
 
 #         return item
 
-    def check(self, vocab_lookup, value):
+    def check(self, vocab_lookup, value, label=""):
         # Return a list of errors - empty list if no errors
         errors = []
         options = self.lookup(vocab_lookup)
 
         if isinstance(options, list):
             if value not in options:
-                errors.append(f"'{value}' not in vocab options: {options} (using: '{vocab_lookup}')")
+                errors.append(f"{label} '{value}' not in vocab options: {options} (using: '{vocab_lookup}')")
         elif value != options:
-            errors.append(f"'{value}' does not equal required vocab value: '{options}' (using: '{vocab_lookup}')")
+            errors.append(f"{label} '{value}' does not equal required vocab value: '{options}' (using: '{vocab_lookup}')")
 
         return errors
 

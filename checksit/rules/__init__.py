@@ -2,85 +2,27 @@ import os
 import re
 import json
 from collections import deque
+from numbers import Number
 
 from . import rule_funcs
 from ..config import get_config
 conf = get_config()
 
-# vocabs_dir = conf["settings"]["vocabs_dir"]
 rules_prefix = conf["settings"]["rules_prefix"]
 
 
 class Rules:
-    # def __init__(self):
-    #     self._vocabs = {}
 
-    # def _load(self, vocab_id):
-    #     # Loads a specific vocabulary file based on the vocab_id
-    #     vocab_file = os.path.join(vocabs_dir, f"{vocab_id}.json")
-    #     self._vocabs[vocab_id] = json.load(open(vocab_file))
+    def __init__(self):
+        self._setup_regex_rules()
 
-    # def __getitem__(self, vocab_id):
-    #     # Enables dictionary access to individual vocabulary items
-    #     if vocab_id not in self._vocabs:
-    #         self._load(vocab_id)
+    def _setup_regex_rules(self):
 
-    #     return self._vocabs[vocab_id] 
-
-    # def lookup(self, rule_lookup):
-    #     # A nested dictionary-style look-up using a string: vocab_lookup
-
-    #     obj = self
-    #     vocab_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
-
-    #     for key in rule_lookup.split(":"):
-    #         obj = obj[key]
-
-    #     return obj
-
-    def check(self, rule_lookup, value, context=None):
-        if not context:
-            context = {}
-
-        # Return a list of errors - empty list if no errors
-        errors = []
-
-        rule_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
-
-        if rule_lookup.startswith("rule_func:"):
-            rule_comps = rule_lookup.split(":")
-            rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
-            processors = rule_comps[2:]
-            errors.extend(rule_func(value, context, processors))
-        
-        elif rule_lookup.startswith("regex:"):
-            pattern = rule_lookup.split(":")[1]
-            if not re.match(f"^{pattern}$", value):
-                errors.append(f"Value '{value}' does not match regular expression: '{pattern}'.")
-
-        else:
-            raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
-
-        return errors
-
-
-rules = Rules()
-
-
-def GlobalAttrCheck():
-        try:
-            attr = row["Name"]
-            rule = row["Compliance checking rules"]
-            assert attr and rule
-        except (KeyError, AssertionError):
-            raise InvalidRowError()
-
-        # Regexes for exact matches in the rule column
         _NOT_APPLICABLE_RULES = "(N/A)|(NA)|(N A)|(n/a)|(na)|(n a)|" \
                  "(Not Applicable)|(Not applicable)|(Not available)|(Not Available)|" \
                  "(not applicable)|(not available)"
 
-        static_rules = {
+        static_rules_OLD = {
             "Integer": r"-?\d+",
             "Valid email": r"[^@\s]+@[^@\s]+\.[^\s@]+",
             "Valid URL": r"https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+)?",
@@ -91,70 +33,81 @@ def GlobalAttrCheck():
                  "(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
             "Exact match: <number> m": r"-?\d+(\.\d+)? m"
         }
+
+        self.static_regex_rules = {
+            "integer": r"-?\d+",
+            "valid-email": r"[^@\s]+@[^@\s]+\.[^\s@]+",
+            "valid-url": r"https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+)?",
+            "valid-url-or-na": r"(https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+))|" + _NOT_APPLICABLE_RULES,
+            "match:vN.M": r"v\d\.\d",
+            "datetime": "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
+            "datetime-or-na": 
+                 "(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
+            "number": r"-?\d+(\.\d+)?"
+        }
+
         # Regexes based on a regex in the rule column
-        regex_rules = {
+        self.dynamic_regex_rules = {
             r"String: min (?P<count>\d+) characters?":
                 lambda m: r".{" + str(m.group("count")) + r",}",
             r"One of:\s+(?P<choices>.+)":
                 lambda m: r"(" + "|".join([i.strip() for i in m.group("choices").split(",")]) + r")"
         }
 
-        regex = None
+    def _map_type_rule(self, type_rule):
+        mappings = {
+            "number": Number,
+            "integer": int,
+            "int": int,
+            "float": float,
+            "string": str,
+            "str": str
+        }
+        return mappings[type_rule]
+
+    def check(self, rule_lookup, value, context=None, label=""):
+        if not context:
+            context = {}
+
+        # Return a list of errors - empty list if no errors
+        errors = []
+
+        rule_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
+
+        if rule_lookup.startswith("rule-func:"):
+            rule_comps = rule_lookup.split(":")
+            rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
+            processors = rule_comps[2:]
+            errors.extend(rule_func(value, context, processors, label=label))
+
+        elif rule_lookup.startswith("type-rule"):
+            type_rule = rule_lookup.split(":")[1]
+
+            if not isinstance(value, self._map_type_rule(type_rule)):
+                errors.append(f"{label} Value '{value}' is not of required type: '{type_rule}'.")
         
-        try:
-            regex = static_rules[rule]
-        except KeyError:
-            for rule_regex, func in regex_rules.items():
+        elif rule_lookup.startswith("regex:"):
+            pattern = rule_lookup.split(":")[1]
+            if not re.match(f"^{pattern}$", value):
+                errors.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
 
-                match = re.match(rule_regex, rule)
+        elif rule_lookup.startswith("regex-rule:"):
+            regex_rule = rule_lookup.split(":", 1)[1]
 
-                if match:
-                    regex = func(match)
-                    break
+            if regex_rule in self.static_regex_rules:
+                pattern = self.static_regex_rules[regex_rule]
 
-        if regex is None:
-            # Handle 'exact match' case where need to look at other columns
-            fixed_val_col = "Fixed Value"
-            if (fixed_val_col in row
-                and rule.lower() in ("exact match", "exact match of text to the left")):
+                if not re.match("^" + pattern + "$", value):
+                    errors.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'.")
 
-                regex = re.escape(row["Fixed Value"])
-            elif rule.lower() in ("exact match in vocabulary"):
-                use_attr_check = "vocab"
-                vocabulary_ref = "ncas:amf"
-                vocab_options = row["Vocabulary"].split()
-                vocab_lookup = ''
-                for this_option in vocab_options:
-                    this_term, this_lookup = this_option.split(":")
-                    vocab_lookup = vocab_lookup + this_term + ":data:" + this_lookup + " "
-                
-                vocabulary_ref = "ncas:amf"
             else:
-                raise ValueError(
-                    "Unrecognised global attribute check rule: {}".format(rule)
-                )
+                raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
-        if regex is not None:
-            use_attr_check = "regex"
+        else:
+            raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
-        if use_attr_check == "regex":
-            check_details = {
-                "attr": attr,
-                "regex": regex,
-                "use_attr_check": use_attr_check
-            }
-        elif use_attr_check == "vocab":
-            check_details = {
-                "attr": attr,
-                "vocab_lookup": vocab_lookup,
-                "vocabulary_ref": vocabulary_ref,
-                "use_attr_check": use_attr_check
-            }
-        # Need to work out how to do this one
-        elif use_attr_check == "selection":
-            check_details = {
-                "attr": attr
-                
-            }
+        return errors
 
-        return check_details        
+
+rules = Rules()
+

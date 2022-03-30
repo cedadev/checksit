@@ -60,17 +60,19 @@ class Checker:
             if label_key in conf["settings"]["excludes"]:
                 pass
             elif key.startswith(f"{vocabs_prefix}:"):
-                errors.extend(vocabs.check(tmpl[key], rec.get(rec_key, UNDEFINED)))
+                errors.extend(vocabs.check(tmpl[key], rec.get(rec_key, UNDEFINED), label=label_key))
             elif tmpl_value.startswith(f"{vocabs_prefix}:"):
-                errors.extend(vocabs.check(tmpl[key], rec.get(rec_key, UNDEFINED)))
+                errors.extend(vocabs.check(tmpl[key], rec.get(rec_key, UNDEFINED), label=label_key))
             # Rule defined in template value
             elif tmpl_value.startswith(f"{rules_prefix}:"):
-                errors.extend(rules.check(tmpl[key], rec.get(rec_key, UNDEFINED), context=self_check_context))
+                errors.extend(rules.check(tmpl[key], rec.get(rec_key, UNDEFINED), 
+                              context=self._check_context, label=label_key))
             # Rule defined in `extra_rules` dictionary
             elif [rule for rule in extra_rules if rule.startswith(label_key)]:
                 rule_key = [rule for rule in extra_rules if rule.startswith(label_key)][0]
                 rule = extra_rules[rule_key]
-                errors.extend(rules.check(rule, rec.get(rec_key, UNDEFINED), context=self._check_context))
+                errors.extend(rules.check(rule, rec.get(rec_key, UNDEFINED), 
+                              context=self._check_context, label=label_key))
             # Else...
             elif tmpl[key] != rec.get(rec_key, UNDEFINED):
                 errors.append(f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'")
