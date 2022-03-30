@@ -108,4 +108,4 @@ ENV/
 # Application-specific
 *.err
 *.out
-
+setup-env.sh
