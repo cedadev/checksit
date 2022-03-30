@@ -1,0 +1,61 @@
+netcdf rsdsAnom_rcp85_land-prob_uk_river_pdf_b8100_1y_seas_19601201-20991130 {
+dimensions:
+	time = UNLIMITED ; // (556 currently)
+	region = 23 ;
+	percentile = 111 ;
+	bnds = 2 ;
+	string27 = 27 ;
+	string64 = 64 ;
+variables:
+	float rsdsAnom(time, region, percentile) ;
+		rsdsAnom:long_name = "Downward surface shortwave flux probability density" ;
+		rsdsAnom:units = "W-1 m2" ;
+		rsdsAnom:anomaly_type = "absolute_change" ;
+		rsdsAnom:description = "Total downward shortwave flux" ;
+		rsdsAnom:label_units = "W-1 m2" ;
+		rsdsAnom:plot_label = "Probability density for total downward shortwave flux anomaly (W-1 m2)" ;
+		rsdsAnom:cell_methods = "time: mean" ;
+		rsdsAnom:coordinates = "geo_region season year" ;
+	double time(time) ;
+		time:axis = "T" ;
+		time:bounds = "time_bnds" ;
+		time:units = "hours since 1970-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:calendar = "360_day" ;
+	double time_bnds(time, bnds) ;
+	int region(region) ;
+		region:units = "1" ;
+		region:standard_name = "region" ;
+	double percentile(percentile) ;
+		percentile:units = "%" ;
+		percentile:long_name = "percentile" ;
+	char geo_region(region, string27) ;
+		geo_region:units = "1" ;
+		geo_region:long_name = "River Basin" ;
+	char season(time, string64) ;
+		season:units = "1" ;
+		season:long_name = "season" ;
+	int year(time) ;
+		year:units = "1" ;
+		year:long_name = "year" ;
+
+// global attributes:
+		:baseline_period = "b8100" ;
+		:collection = "land-prob" ;
+		:contact = "ukcpproject@metoffice.gov.uk, UKCP Team, Met Office Hadley Centre" ;
+		:creation_date = "2018-12-23T16:07:50" ;
+		:domain = "uk" ;
+		:frequency = "seas" ;
+		:institution = "Met Office Hadley Centre (MOHC), FitzRoy Road, Exeter, Devon, EX1 3PB, UK." ;
+		:institution_id = "MOHC" ;
+		:prob_data_type = "pdf" ;
+		:project = "UKCP18" ;
+		:references = "http://ukclimateprojections.metoffice.gov.uk/" ;
+		:resolution = "river" ;
+		:scenario = "rcp85" ;
+		:source = "Probabilistic climate prediction based on family of Met Office Hadley Centre climate models HadCM3, HadRM3 and HadSM3, plus climate models from other climate centres contributing to IPCC AR5 and CFMIP." ;
+		:time_slice_type = "1y" ;
+		:title = "UKCP18 probabilistic projections for total downward shortwave flux anomaly (W m-2) for UK land points, for the RCP 8.5 scenario with a 1981-2000 baseline." ;
+		:version = "v20181220" ;
+		:Conventions = "CF-1.5" ;
+}

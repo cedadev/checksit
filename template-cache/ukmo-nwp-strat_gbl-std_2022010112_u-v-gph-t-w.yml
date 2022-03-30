@@ -1,0 +1,29 @@
+variables:
+  eastward_wind:
+    shape:
+    - 50
+    - 1921
+    - 2560
+  northward_wind:
+    shape:
+    - 50
+    - 1921
+    - 2560
+  upward_air_velocity:
+    shape:
+    - 50
+    - 1920
+    - 2560
+  geopotential_height:
+    shape:
+    - 2
+    - 10
+    - 1920
+    - 2560
+  air_temperature:
+    shape:
+    - 50
+    - 1920
+    - 2560
+dimensions: {}
+global_attributes: {}

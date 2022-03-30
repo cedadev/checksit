@@ -1,0 +1,64 @@
+netcdf prAnom_rcp85_land-prob_uk_river_pdf_b8100_20y_seas_20091201-20991130 {
+dimensions:
+	time = 32 ;
+	region = 23 ;
+	percentile = 111 ;
+	bnds = 2 ;
+	string27 = 27 ;
+	string64 = 64 ;
+variables:
+	float prAnom(time, region, percentile) ;
+		prAnom:long_name = "Precipitation rate" ;
+		prAnom:units = "%" ;
+		prAnom:anomaly_type = "percentage_change" ;
+		prAnom:description = "Precipitation rate" ;
+		prAnom:label_units = "%-1" ;
+		prAnom:plot_label = "Probability density for precipitation rate anomaly (%-1)" ;
+		prAnom:cell_methods = "time: mean" ;
+		prAnom:coordinates = "geo_region season season_year year" ;
+	double time(time) ;
+		time:axis = "T" ;
+		time:bounds = "time_bnds" ;
+		time:units = "hours since 1970-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:calendar = "360_day" ;
+	double time_bnds(time, bnds) ;
+	int region(region) ;
+		region:units = "1" ;
+		region:standard_name = "region" ;
+	double percentile(percentile) ;
+		percentile:units = "%" ;
+		percentile:long_name = "percentile" ;
+	char geo_region(region, string27) ;
+		geo_region:units = "no_unit" ;
+		geo_region:long_name = "River Basin" ;
+	char season(time, string64) ;
+		season:units = "1" ;
+		season:long_name = "season" ;
+	int season_year(time) ;
+		season_year:units = "1" ;
+		season_year:long_name = "season_year" ;
+	int year(time) ;
+		year:units = "1" ;
+		year:long_name = "year" ;
+
+// global attributes:
+		:baseline_period = "b8100" ;
+		:collection = "land-prob" ;
+		:contact = "ukcpproject@metoffice.gov.uk, UKCP Team, Met Office Hadley Centre" ;
+		:creation_date = "2018-12-23T16:07:17" ;
+		:domain = "uk" ;
+		:frequency = "seas" ;
+		:institution = "Met Office Hadley Centre (MOHC), FitzRoy Road, Exeter, Devon, EX1 3PB, UK." ;
+		:institution_id = "MOHC" ;
+		:prob_data_type = "pdf" ;
+		:project = "UKCP18" ;
+		:references = "http://ukclimateprojections.metoffice.gov.uk" ;
+		:resolution = "river" ;
+		:scenario = "rcp85" ;
+		:source = "Probabilistic climate prediction based on family of Met Office Hadley Centre climate models HadCM3, HadRM3 and HadSM3, plus climate models from other climate centres contributing to IPCC AR5 and CFMIP." ;
+		:time_slice_type = "20y" ;
+		:title = "UKCP18 probabilistic projections for precipitation rate anomaly (%) for UK land points, for the RCP 8.5 scenario with a 1981-2000 baseline." ;
+		:version = "v20181122" ;
+		:Conventions = "CF-1.5" ;
+}

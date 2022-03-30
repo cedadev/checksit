@@ -1,0 +1,58 @@
+netcdf pslAnom_rcp85_land-prob_uk_country_pdf_b6190_30y_ann_20091201-20991130 {
+dimensions:
+	time = 7 ;
+	region = 8 ;
+	percentile = 111 ;
+	bnds = 2 ;
+	string24 = 24 ;
+variables:
+	float pslAnom(time, region, percentile) ;
+		pslAnom:standard_name = "air_pressure_at_sea_level" ;
+		pslAnom:long_name = "Pressure at mean sea level" ;
+		pslAnom:units = "hPa" ;
+		pslAnom:anomaly_type = "absolute_change" ;
+		pslAnom:description = "Sea level pressure" ;
+		pslAnom:label_units = "hPa-1" ;
+		pslAnom:plot_label = "Probability density for sea level pressure anomaly (hPa-1)" ;
+		pslAnom:cell_methods = "time: mean" ;
+		pslAnom:coordinates = "geo_region year" ;
+	double time(time) ;
+		time:axis = "T" ;
+		time:bounds = "time_bnds" ;
+		time:units = "hours since 1970-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:calendar = "360_day" ;
+	double time_bnds(time, bnds) ;
+	int region(region) ;
+		region:units = "1" ;
+		region:standard_name = "region" ;
+	double percentile(percentile) ;
+		percentile:units = "%" ;
+		percentile:long_name = "percentile" ;
+	char geo_region(region, string24) ;
+		geo_region:units = "no_unit" ;
+		geo_region:long_name = "Country" ;
+	int year(time) ;
+		year:units = "1" ;
+		year:long_name = "year" ;
+
+// global attributes:
+		:baseline_period = "b6190" ;
+		:collection = "land-prob" ;
+		:contact = "ukcpproject@metoffice.gov.uk, UKCP Team, Met Office Hadley Centre" ;
+		:creation_date = "2018-12-23T16:07:17" ;
+		:domain = "uk" ;
+		:frequency = "ann" ;
+		:institution = "Met Office Hadley Centre (MOHC), FitzRoy Road, Exeter, Devon, EX1 3PB, UK." ;
+		:institution_id = "MOHC" ;
+		:prob_data_type = "pdf" ;
+		:project = "UKCP18" ;
+		:references = "http://ukclimateprojections.metoffice.gov.uk" ;
+		:resolution = "country" ;
+		:scenario = "rcp85" ;
+		:source = "Probabilistic climate prediction based on family of Met Office Hadley Centre climate models HadCM3, HadRM3 and HadSM3, plus climate models from other climate centres contributing to IPCC AR5 and CFMIP." ;
+		:time_slice_type = "30y" ;
+		:title = "UKCP18 probabilistic projections for sea level pressure anomaly (hPa) for UK land points, for the RCP 8.5 scenario with a 1961-1990 baseline." ;
+		:version = "v20181122" ;
+		:Conventions = "CF-1.5" ;
+}

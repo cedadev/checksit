@@ -1,0 +1,11 @@
+{
+  "collection": ["land-cpm", "land-derived", "land-gcm", "land-indices", "land-prob", "land-rcm", "land-rcm-gwl", "marine-sim"],
+  "variables": {
+    "season_year": {
+      "dimensions": ["time"],
+      "units": "1",
+      "dtype": "int",
+      "long_name": "season_year"
+    }
+  }
+}

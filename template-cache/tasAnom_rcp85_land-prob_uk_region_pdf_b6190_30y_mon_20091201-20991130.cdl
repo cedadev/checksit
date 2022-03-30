@@ -1,0 +1,67 @@
+netcdf tasAnom_rcp85_land-prob_uk_region_pdf_b6190_30y_mon_20091201-20991130 {
+dimensions:
+	time = 84 ;
+	region = 16 ;
+	percentile = 111 ;
+	bnds = 2 ;
+	string26 = 26 ;
+	string64 = 64 ;
+variables:
+	float tasAnom(time, region, percentile) ;
+		tasAnom:long_name = "Mean air temperature" ;
+		tasAnom:units = "degC" ;
+		tasAnom:anomaly_type = "absolute_change" ;
+		tasAnom:description = "Mean air temperature" ;
+		tasAnom:label_units = "°C-1" ;
+		tasAnom:plot_label = "Probability density for mean air temperature anomaly at 1.5m (°C-1)" ;
+		tasAnom:cell_methods = "time: mean" ;
+		tasAnom:coordinates = "geo_region month_number season season_year year" ;
+	double time(time) ;
+		time:axis = "T" ;
+		time:bounds = "time_bnds" ;
+		time:units = "hours since 1970-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:calendar = "360_day" ;
+	double time_bnds(time, bnds) ;
+	int region(region) ;
+		region:units = "1" ;
+		region:standard_name = "region" ;
+	double percentile(percentile) ;
+		percentile:units = "%" ;
+		percentile:long_name = "percentile" ;
+	char geo_region(region, string26) ;
+		geo_region:units = "no_unit" ;
+		geo_region:long_name = "Administrative Region" ;
+	int month_number(time) ;
+		month_number:units = "1" ;
+		month_number:long_name = "month_number" ;
+	char season(time, string64) ;
+		season:units = "1" ;
+		season:long_name = "season" ;
+	int season_year(time) ;
+		season_year:units = "1" ;
+		season_year:long_name = "season_year" ;
+	int year(time) ;
+		year:units = "1" ;
+		year:long_name = "year" ;
+
+// global attributes:
+		:baseline_period = "b6190" ;
+		:collection = "land-prob" ;
+		:contact = "ukcpproject@metoffice.gov.uk, UKCP Team, Met Office Hadley Centre" ;
+		:creation_date = "2018-12-23T15:59:37" ;
+		:domain = "uk" ;
+		:frequency = "mon" ;
+		:institution = "Met Office Hadley Centre (MOHC), FitzRoy Road, Exeter, Devon, EX1 3PB, UK." ;
+		:institution_id = "MOHC" ;
+		:prob_data_type = "pdf" ;
+		:project = "UKCP18" ;
+		:references = "http://ukclimateprojections.metoffice.gov.uk" ;
+		:resolution = "region" ;
+		:scenario = "rcp85" ;
+		:source = "Probabilistic climate prediction based on family of Met Office Hadley Centre climate models HadCM3, HadRM3 and HadSM3, plus climate models from other climate centres contributing to IPCC AR5 and CFMIP." ;
+		:time_slice_type = "30y" ;
+		:title = "UKCP18 probabilistic projections for mean air temperature anomaly at 1.5m (K) for UK land points, for the RCP 8.5 scenario with a 1961-1990 baseline." ;
+		:version = "v20181122" ;
+		:Conventions = "CF-1.5" ;
+}

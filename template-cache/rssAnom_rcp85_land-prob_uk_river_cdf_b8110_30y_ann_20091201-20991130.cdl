@@ -1,0 +1,58 @@
+netcdf rssAnom_rcp85_land-prob_uk_river_cdf_b8110_30y_ann_20091201-20991130 {
+dimensions:
+	time = 7 ;
+	region = 23 ;
+	percentile = 111 ;
+	bnds = 2 ;
+	string27 = 27 ;
+variables:
+	float rssAnom(time, region, percentile) ;
+		rssAnom:standard_name = "surface_net_downward_shortwave_flux" ;
+		rssAnom:long_name = "Net Surface short wave flux" ;
+		rssAnom:units = "W m-2" ;
+		rssAnom:anomaly_type = "absolute_change" ;
+		rssAnom:description = "Net Surface short wave flux" ;
+		rssAnom:label_units = "W m-2" ;
+		rssAnom:plot_label = "Net Surface short wave flux anomaly (W m-2)" ;
+		rssAnom:cell_methods = "time: mean" ;
+		rssAnom:coordinates = "geo_region year" ;
+	double time(time) ;
+		time:axis = "T" ;
+		time:bounds = "time_bnds" ;
+		time:units = "hours since 1970-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:calendar = "360_day" ;
+	double time_bnds(time, bnds) ;
+	int region(region) ;
+		region:units = "1" ;
+		region:standard_name = "region" ;
+	double percentile(percentile) ;
+		percentile:units = "%" ;
+		percentile:long_name = "percentile" ;
+	char geo_region(region, string27) ;
+		geo_region:units = "no_unit" ;
+		geo_region:long_name = "River Basin" ;
+	int year(time) ;
+		year:units = "1" ;
+		year:long_name = "year" ;
+
+// global attributes:
+		:baseline_period = "b8110" ;
+		:collection = "land-prob" ;
+		:contact = "ukcpproject@metoffice.gov.uk, UKCP Team, Met Office Hadley Centre" ;
+		:creation_date = "2018-12-23T16:07:51" ;
+		:domain = "uk" ;
+		:frequency = "ann" ;
+		:institution = "Met Office Hadley Centre (MOHC), FitzRoy Road, Exeter, Devon, EX1 3PB, UK." ;
+		:institution_id = "MOHC" ;
+		:prob_data_type = "cdf" ;
+		:project = "UKCP18" ;
+		:references = "http://ukclimateprojections.metoffice.gov.uk" ;
+		:resolution = "river" ;
+		:scenario = "rcp85" ;
+		:source = "Probabilistic climate prediction based on family of Met Office Hadley Centre climate models HadCM3, HadRM3 and HadSM3, plus climate models from other climate centres contributing to IPCC AR5 and CFMIP." ;
+		:time_slice_type = "30y" ;
+		:title = "UKCP18 probabilistic projections for net surface short wave flux anomaly (W m-2) for UK land points, for the RCP 8.5 scenario with a 1981-2010 baseline." ;
+		:version = "v20181122" ;
+		:Conventions = "CF-1.5" ;
+}

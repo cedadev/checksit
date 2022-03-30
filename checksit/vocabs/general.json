@@ -1,0 +1,10 @@
+{
+  "static_rules": { 
+     "Integer": "-?\\d+",
+     "Valid email": "[^@\\s]+@[^@z\\s]+\.[^\\s@]+"
+  },
+  "dynamic_rules": {
+     "String: min (?P<count>\\d+) characters?": "checker.utils.build_regex",
+     "One of:\\s+(?P<choices>.+)": "checker.utils.build_regex"
+  }
+}

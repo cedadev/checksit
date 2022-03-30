@@ -1,0 +1,66 @@
+netcdf vas_rcp26_land-gcm_uk_region_01_mon_189912-209911 {
+dimensions:
+	ensemble_member = 1 ;
+	time = 2400 ;
+	region = 16 ;
+	bnds = 2 ;
+	string20 = 20 ;
+	string27 = 27 ;
+	string64 = 64 ;
+variables:
+	float vas(ensemble_member, time, region) ;
+		vas:standard_name = "northward_wind" ;
+		vas:long_name = "Northward wind component" ;
+		vas:units = "m s-1" ;
+		vas:description = "Northward wind" ;
+		vas:label_units = "m s-1" ;
+		vas:plot_label = "Northward wind at 10m (m s-1)" ;
+		vas:cell_methods = "time: mean" ;
+		vas:coordinates = "ensemble_member_id geo_region month_number year yyyymm" ;
+	int ensemble_member(ensemble_member) ;
+		ensemble_member:units = "1" ;
+		ensemble_member:long_name = "ensemble_member" ;
+	double time(time) ;
+		time:axis = "T" ;
+		time:bounds = "time_bnds" ;
+		time:units = "hours since 1970-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:calendar = "360_day" ;
+	double time_bnds(time, bnds) ;
+	int region(region) ;
+		region:units = "1" ;
+		region:standard_name = "region" ;
+	char geo_region(region, string20) ;
+		geo_region:units = "1" ;
+		geo_region:long_name = "Region" ;
+	char ensemble_member_id(ensemble_member, string27) ;
+		ensemble_member_id:units = "1" ;
+		ensemble_member_id:long_name = "ensemble_member_id" ;
+	int month_number(time) ;
+		month_number:units = "1" ;
+		month_number:long_name = "month_number" ;
+	int year(time) ;
+		year:units = "1" ;
+		year:long_name = "year" ;
+	char yyyymm(time, string64) ;
+		yyyymm:units = "1" ;
+		yyyymm:long_name = "yyyymm" ;
+
+// global attributes:
+		:_NCProperties = "version=1|netcdflibversion=4.6.1|hdf5libversion=1.10.4" ;
+		:collection = "land-gcm" ;
+		:contact = "ukcpproject@metoffice.gov.uk" ;
+		:creation_date = "2020-03-02T00:00:00" ;
+		:domain = "uk" ;
+		:frequency = "mon" ;
+		:institution = "Met Office Hadley Centre (MOHC), FitzRoy Road, Exeter, Devon, EX1 3PB, UK." ;
+		:institution_id = "MOHC" ;
+		:project = "UKCP18" ;
+		:references = "https://ukclimateprojections.metoffice.gov.uk" ;
+		:resolution = "region" ;
+		:scenario = "rcp26" ;
+		:source = "UKCP18 global realisation from a set of 15 perturbed variants of HadGEM3-GC3.05 and 13 CMIP5 members that passed a qualitative evaluation" ;
+		:title = "UKCP18 land projections - 60km global climate model northward wind at 10m (m s-1) over the UK for the RCP 8.5 scenario" ;
+		:version = "v20200302" ;
+		:Conventions = "CF-1.5" ;
+}
