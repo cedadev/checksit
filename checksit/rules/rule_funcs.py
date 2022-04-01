@@ -1,4 +1,5 @@
 import os
+import re
 
 from . import processors
 from ..config import get_config
@@ -46,5 +47,20 @@ def match_one_or_more_of(value, context, extras=None, label=""):
 
     if not values.issubset(options) or len(values) == 0:
         errors.append(f"{label} '{value}' must be one or more of: '{sorted(options)}'")
+
+    return errors
+
+
+def string_of_length(value, context, extras=None, label=""):
+    spec = extras[0]
+    min_length = int(re.match("^(\d+)\+?", spec).groups()[0])
+
+    errors = []
+
+    if spec.endswith("+"):
+        if len(value) < min_length:
+            errors.append(f"{label} '{value}' must be at least {min_length} characters")
+    elif len(value) != min_length:
+        errors.append(f"{label} '{value}' must be exactly {min_length} characters")
 
     return errors

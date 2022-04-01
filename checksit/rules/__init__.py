@@ -14,9 +14,6 @@ rules_prefix = conf["settings"]["rules_prefix"]
 class Rules:
 
     def __init__(self):
-        self._setup_regex_rules()
-
-    def _setup_regex_rules(self):
 
         _NOT_APPLICABLE_RULES = "(N/A)|(NA)|(N A)|(n/a)|(na)|(n a)|" \
                  "(Not Applicable)|(Not applicable)|(Not available)|(Not Available)|" \
