@@ -35,7 +35,7 @@ class Checker:
         self._check_context["size"] = os.path.getsize(file_path)
         self._check_context["template"] = template
 
-    def compare_items(self, rec, tmpl, key, label, check_types="all", mappings=None, 
+    def _compare_items(self, rec, tmpl, key, label, mappings=None, 
                       extra_rules=None, ignore_attrs=None):
 
         mappings = mappings or self.mappings
@@ -53,7 +53,7 @@ class Checker:
         rec_key = mappings.get(key, key)
 
         if isinstance(tmpl[key], dict):
-            errors.extend(self.compare_structures(rec, tmpl, key, check_types=check_types, mappings=mappings, ignore_attrs=ignore_attrs))
+            errors.extend(self._compare_dicts(rec, tmpl, key, mappings=mappings, ignore_attrs=ignore_attrs))
         else:
             tmpl_value = str(tmpl[key])
 
@@ -79,53 +79,53 @@ class Checker:
 
         return errors
 
-    def compare_structures(self, record, template, label, check_types="all", mappings=None, ignore_attrs=None):
+    def _compare_dicts(self, record, template, label, mappings=None, ignore_attrs=None):
         mappings = mappings or self.mappings
         errors = []
-        list_types = [] #"variables" #- no longer used - as comparisons need key/values
+        # list_types = [] #"variables" #- no longer used - as comparisons need key/values
 
         do_sort = False
         if label in ("dimensions", "global_attributes"):
             do_sort = True
 
-        if not check_types:
-            # Simple check just compares dicts
-            if record[label] != template[label]:
-                errors.append(f"[ERROR] Content '{label}' differs")
+        # if not check_types:
+        #     # Simple check just compares dicts
+        #     if record[label] != template[label]:
+        #         errors.append(f"[ERROR] Content '{label}' differs")
 
-        elif label in list_types:
-            tmpl = template[label]
-            rec = record[label]
+        # elif label in list_types:
+        #     tmpl = template[label]
+        #     rec = record[label]
 
-            if len(tmpl) != len(rec):
-                errors.append(f"[ERROR] Number of '{label}' items differs between template ({len(tmpl)}) and record ({len(rec)})")
-            else:
-                for i in range(len(tmpl)):
-                    t = tmpl[i]
-                    r = rec[i]
-                    for key in t:
-                        errors.extend(self.compare_items(r, t, key, label=label, check_types=check_types, mappings=mappings, ignore_attrs=ignore_attrs))
+        #     if len(tmpl) != len(rec):
+        #         errors.append(f"[ERROR] Number of '{label}' items differs between template ({len(tmpl)}) and record ({len(rec)})")
+        #     else:
+        #         for i in range(len(tmpl)):
+        #             t = tmpl[i]
+        #             r = rec[i]
+        #             for key in t:
+        #                 errors.extend(self.compare_items(r, t, key, label=label, mappings=mappings, ignore_attrs=ignore_attrs))
+        # else:
+        # Recursively check dicts
+        tmpl = template[label]
+        rec_key = mappings.get(label, label)
+
+        if rec_key in record:
+            rec = record[rec_key]
+
+            keys = tmpl.keys()
+            if do_sort: keys = sorted(keys)
+
+            for key in keys:
+                errors.extend(self._compare_items(rec, tmpl, key, label=label, mappings=mappings, 
+                              ignore_attrs=ignore_attrs))
+
         else:
-            # Deeper checks recursively check dicts
-            tmpl = template[label]
-            rec_key = mappings.get(label, label)
-
-            if rec_key in record:
-                rec = record[rec_key]
-
-                keys = tmpl.keys()
-                if do_sort: keys = sorted(keys)
-
-                for key in keys:
-                    errors.extend(self.compare_items(rec, tmpl, key, label=label, check_types=check_types, mappings=mappings, ignore_attrs=ignore_attrs))
-
-            else:
-                errors.append(f"Expected item '{label}' not found in data file.")
+            errors.append(f"Expected item '{label}' not found in data file.")
 
         return errors
                         
-
-    def check_compliance(self, record, template, check_types="all", mappings=None, extra_rules=None,
+    def _check_file(self, record, template, mappings=None, extra_rules=None,
                         ignore_attrs=None, log_mode="standard"):
 
         if hasattr(record, "to_dict"):
@@ -141,7 +141,7 @@ class Checker:
         errors = []
 
         for section in sections:
-            errs = self.compare_structures(record, template, section, check_types=check_types, mappings=mappings, ignore_attrs=ignore_attrs)
+            errs = self._compare_dicts(record, template, section, mappings=mappings, ignore_attrs=ignore_attrs)
             errors.extend([f"[{section}] {err}" for err in errs])
 
         if log_mode == "compact":
@@ -158,52 +158,115 @@ class Checker:
                     count = i + 1
                     print(f"\t{count:02d}. {error}")
             else:
-                print("[INFO] File is compliant!")
-            
-    def _get_template_by_dataset(self, file_path, c):
-        if "template" in c:
-            return c["template"]
-        elif "template_cache" in c:
-            return self._get_template_from_cache(file_path, c["template_cache"]) 
-        else:
-            raise Exception("No rule for finding the template")
+                print("[INFO] File is compliant!")            
 
-    def _template_from_config(self, file_path, verbose=False):
+    def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, ignore_attrs=None, 
+                auto_cache=False, verbose=False, log_mode="standard"):
+
+        try:
+            fp = FileParser()
+            dfile = fp.parse_file_header(file_path, verbose=verbose)
+        except Exception as err:
+            if log_mode == "compact":
+                print(f"{file_path} | ABORTED | FATAL | Cannot parse input file")
+                sys.exit(1)
+            else:
+                raise Exception(err)
+
+        # if template == "auto":
+        #     template = self._template_from_config(file_path, verbose)
+        # elif not os.path.isfile(template):
+        #     if log_mode == "compact":
+        #         print(f"{file_path} | ABORTED | FATAL | Cannot find template file specified")
+        #         sys.exit(1)
+        #     else:
+        #         raise Exception(f"Cannot find specified template file: {template}")
+
+        # tmpl = self.parse_file_header(template, auto_cache=auto_cache, verbose=verbose)
+
+        tm = TemplateManager(auto_cache=auto_cache, verbose=verbose, log_mode=log_mode)
+        tmpl = tm.get(file_path, template=template)
+
+        self._update_check_context(file_path, template)
+
+        if verbose:
+            print("\n--- Template dictionary:\n", tmpl.to_dict())
+            print("\n--- Datafile dictionary:\n", dfile.to_dict())
+
+        if log_mode == "compact":
+            print(f"{file_path} | {tmpl.inpt} | ", end="")
+        else:
+            print(f"\nRunning with:\n\tTemplate: {tmpl.inpt}\n\tDatafile: {dfile.inpt}")
+
+        self._check_file(dfile, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
+                        ignore_attrs=ignore_attrs, log_mode=log_mode)
+
+
+class TemplateManager:
+
+    def __init__(self, auto_cache=False, verbose=False, log_mode="standard"):
+        self.auto_cache = auto_cache
+        self.verbose = verbose
+        self.log_mode = log_mode
+
+    def get(self, file_path, template="auto"):
+        if template == "auto":
+            template = self._get_template_from_config(file_path)
+        elif not os.path.isfile(template):
+            if self.log_mode == "compact":
+                print(f"{file_path} | ABORTED | FATAL | Cannot find template file specified")
+                sys.exit(1)
+            else:
+                raise Exception(f"Cannot find specified template file: {template}")
+
+        fp = FileParser()
+        tmpl = fp.parse_file_header(template, auto_cache=self.auto_cache, verbose=self.verbose)
+        return tmpl
+
+    def _get_template_from_config(self, file_path):
         # Loop through datasets in config to find appropriate template (cached or in archive)
         dsets = [key.split(":")[1] for key in conf if key.startswith("dataset:")]
 
         for dset in dsets:
+            config = conf[f"dataset:{dset}"]
 
-            c = conf[f"dataset:{dset}"]
-            if "regex_path" in c and re.search(c["regex_path"], file_path):
-                return self._get_template_by_dataset(file_path, c) 
-            elif "regex_file" in c and re.match(c["regex_file"], os.path.basename(file_path)):
-                return self._get_template_by_dataset(file_path, c)
-            
+            if "regex_path" in config and re.search(config["regex_path"], file_path):
+                return self._get_template_by_dataset(file_path, config) 
+            elif "regex_file" in config and re.match(config["regex_file"], os.path.basename(file_path)):
+                return self._get_template_by_dataset(file_path, config)
         else:
-            return self._find_template(file_path, verbose) 
+            return self._get_template_from_cache(file_path) 
 
+    def _get_template_by_dataset(self, file_path, config):
+        if "template" in config:
+            return config["template"]
+        elif "template_cache" in config:
+            return self._get_template_from_cache(file_path, config["template_cache"]) 
+        else:
+            raise Exception("No rule for finding the template")
 
-    def _get_template_from_cache(self, file_path, template_cache=None, verbose=False):
+    def _get_template_from_cache(self, file_path, template_cache=None):
         if not template_cache:
             template_cache = conf["settings"]["template_cache"]
 
         tmpl_base = get_file_base(file_path)
 
-        if verbose: print(f"[INFO] Searching for exact match for: {tmpl_base}")
+        if self.verbose: print(f"[INFO] Searching for exact match for: {tmpl_base}")
         matches = glob.glob(f"{template_cache}/{tmpl_base}_*.cdl")
 
         if matches:
             match = matches[0] 
-            if verbose: print(f"[INFO] Found exact match: {match}")
+            if self.verbose: print(f"[INFO] Found exact match: {match}")
         else:
-            if verbose: print("[WARNING] Failed to find exact match, so trying nearest...")
+            if self.verbose: print("[WARNING] Failed to find exact match, so trying nearest...")
             templates = os.listdir(template_cache)
             matches = difflib.get_close_matches(tmpl_base, templates)
             match = os.path.join(template_cache, matches[0])
 
         return match
 
+
+class FileParser:
 
     def parse_file_header(self, file_path, auto_cache=False, verbose=False):
         ext = extension(file_path)
@@ -234,43 +297,6 @@ class Checker:
                             default_flow_style=False, sort_keys=False)
                 
         return content
-
-    def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, ignore_attrs=None, 
-                auto_cache=False, verbose=False, log_mode="standard"):
-
-        try:
-            dfile = self.parse_file_header(file_path, verbose)
-        except Exception as err:
-            if log_mode == "compact":
-                print(f"{file_path} | ABORTED | FATAL | Cannot parse input file")
-                sys.exit(1)
-            else:
-                raise Exception(err)
-
-        if template == "auto":
-            template = self._template_from_config(file_path, verbose)
-        elif not os.path.isfile(template):
-            if log_mode == "compact":
-                print(f"{file_path} | ABORTED | FATAL | Cannot find template file specified")
-                sys.exit(1)
-            else:
-                raise Exception(f"Cannot find specified template file: {template}")
-
-        tmpl = self.parse_file_header(template, auto_cache=auto_cache, verbose=verbose)
-
-        self._update_check_context(file_path, template)
-
-        if verbose:
-            print("\n--- Template dictionary:\n", tmpl.to_dict())
-            print("\n--- Datafile dictionary:\n", dfile.to_dict())
-
-        if log_mode == "compact":
-            print(f"{file_path} | {tmpl.inpt} | ", end="")
-        else:
-            print(f"\nRunning with:\n\tTemplate: {tmpl.inpt}\n\tDatafile: {dfile.inpt}")
-
-        self.check_compliance(dfile, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
-                        ignore_attrs=ignore_attrs, log_mode=log_mode)
 
 
 def check_file(file_path, **kwargs):
