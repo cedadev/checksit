@@ -36,4 +36,6 @@ checksit check --rules=global_attributes:project=regex:ukcp18 /gws/nopw/j04/cmip
 # Match a variety of rules
 checksit check -r transverse_mercator:false_northing=type-rule:integer,transverse_mercator:false_easting=type-rule:number,global_attributes:project=regex:ukcp18,global_attributes:creation_date=regex-rule:datetime /gws/nopw/j04/cmip6_prep_vol1/ukcp18/data/land-prob/v20211110/uk/25km/rcp85/sample/b8110/30y/cltAnom/mon/v20211110/cltAnom_rcp85_land-prob_uk_25km_sample_b8110_30y_mon_20091201-20991130.nc
 
+# Match the one-of and one-or-more-of rules
+checksit check --rules=global_attributes:project=rule-func:match-one-of:"ukcp18|ukcp09",global_attributes:contact=rule-func:match-one-or-more-of:"ukcpproject@metoffice.gov.uk|UKCP Team|MOHC"  /gws/nopw/j04/cmip6_prep_vol1/ukcp18/data/land-prob/v20211110/uk/25km/rcp85/sample/b8110/30y/cltAnom/mon/v20211110/cltAnom_rcp85_land-prob_uk_25km_sample_b8110_30y_mon_20091201-20991130.nc 
 

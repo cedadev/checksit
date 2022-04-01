@@ -77,8 +77,8 @@ class Rules:
         if rule_lookup.startswith("rule-func:"):
             rule_comps = rule_lookup.split(":")
             rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
-            processors = rule_comps[2:]
-            errors.extend(rule_func(value, context, processors, label=label))
+            extras = rule_comps[2:]
+            errors.extend(rule_func(value, context, extras, label=label))
 
         elif rule_lookup.startswith("type-rule"):
             type_rule = rule_lookup.split(":")[1]
