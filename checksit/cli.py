@@ -29,7 +29,7 @@ def main():
 @click.option("-A", "--ignore-all-variable-attrs", default=False)
 @click.option("--auto-cache/--no-auto-cache", default=False)
 @click.option("-l", "--log-mode", default="standard")
-@click.option("--verbose/--no-verbose", default=False)
+@click.option("-v", "--verbose/--no-verbose", default=False)
 @click.option("-t", "--template", default="auto")
 def check(file_path, mappings=None, rules=None, ignore_attrs=None, ignore_all_globals=False,
           ignore_all_dimensions=False, ignore_all_variables=False, ignore_all_variable_attrs=False,

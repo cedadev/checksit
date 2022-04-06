@@ -18,6 +18,7 @@ class CDLParser:
         self.inpt = inpt
         self.verbose = verbose
         self._parse(inpt)
+        self._check_format()
 
     def _parse(self, inpt):
         if self.verbose: print(f"[INFO] Parsing input: {inpt[:100]}...")        
@@ -47,6 +48,14 @@ class CDLParser:
         self.dimensions = self._ordered_dict(sections[0])
         self.variables, self.global_attrs = self._split_vars_globals(sections[1])
 
+    def _check_format(self):
+        self.fmt_errors = []
+
+        source = self.global_attrs.get("source", "UNDEFINED")
+
+        if len(source) < 400:
+            self.fmt_errors.append(f"[FORMAT:global_attributes:source] Must be at least 400 characters, not {source}") 
+
     def _get_sections(self, lines, split_patterns, start_at):
         split_patterns = deque(split_patterns)
         splitter = split_patterns.popleft()
@@ -70,7 +79,6 @@ class CDLParser:
                 if not line_no_comments.startswith("//"):
                     current.append(line_no_comments)
         
-#        if self.verbose: print("RETURNING:", sections)
         return sections
 
     def _split_vars_globals(self, content):

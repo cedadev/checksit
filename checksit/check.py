@@ -8,7 +8,7 @@ import yaml
 
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
-from .readers import pp, badc_csv, cdl
+from .readers import pp, badc_csv, cdl, yml
 from .utils import get_file_base, extension
 from .config import get_config
 
@@ -88,12 +88,7 @@ class Checker:
         if label in ("dimensions", "global_attributes"):
             do_sort = True
 
-        # if not check_types:
-        #     # Simple check just compares dicts
-        #     if record[label] != template[label]:
-        #         errors.append(f"[ERROR] Content '{label}' differs")
-
-        # elif label in list_types:
+        # if label in list_types:
         #     tmpl = template[label]
         #     rec = record[label]
 
@@ -106,6 +101,7 @@ class Checker:
         #             for key in t:
         #                 errors.extend(self.compare_items(r, t, key, label=label, mappings=mappings, ignore_attrs=ignore_attrs))
         # else:
+
         # Recursively check dicts
         tmpl = template[label]
         rec_key = mappings.get(label, label)
@@ -125,11 +121,11 @@ class Checker:
 
         return errors
                         
-    def _check_file(self, record, template, mappings=None, extra_rules=None,
-                        ignore_attrs=None, log_mode="standard"):
-
-        if hasattr(record, "to_dict"):
-            record = record.to_dict()
+    def _check_file(self, file_content, template, mappings=None, extra_rules=None,
+                        ignore_attrs=None, log_mode="standard", fmt_errors=None):
+ 
+        if hasattr(file_content, "to_dict"):
+            record = file_content.to_dict()
 
         if hasattr(template, "to_dict"):
             template = template.to_dict()
@@ -138,7 +134,7 @@ class Checker:
             print("\n\n---------------- Running checks ------------------\n")
 
         sections = "dimensions", "variables", "global_attributes"
-        errors = []
+        errors = getattr(file_content, "fmt_errors", [])
 
         for section in sections:
             errs = self._compare_dicts(record, template, section, mappings=mappings, ignore_attrs=ignore_attrs)
@@ -165,7 +161,7 @@ class Checker:
 
         try:
             fp = FileParser()
-            dfile = fp.parse_file_header(file_path, verbose=verbose)
+            file_content = fp.parse_file_header(file_path, verbose=verbose)
         except Exception as err:
             if log_mode == "compact":
                 print(f"{file_path} | ABORTED | FATAL | Cannot parse input file")
@@ -191,14 +187,14 @@ class Checker:
 
         if verbose:
             print("\n--- Template dictionary:\n", tmpl.to_dict())
-            print("\n--- Datafile dictionary:\n", dfile.to_dict())
+            print("\n--- Datafile dictionary:\n", file_content.to_dict())
 
         if log_mode == "compact":
             print(f"{file_path} | {tmpl.inpt} | ", end="")
         else:
-            print(f"\nRunning with:\n\tTemplate: {tmpl.inpt}\n\tDatafile: {dfile.inpt}")
+            print(f"\nRunning with:\n\tTemplate: {tmpl.inpt}\n\tDatafile: {file_content.inpt}")
 
-        self._check_file(dfile, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
+        self._check_file(file_content, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
                         ignore_attrs=ignore_attrs, log_mode=log_mode)
 
 
@@ -247,7 +243,7 @@ class TemplateManager:
 
     def _get_template_from_cache(self, file_path, template_cache=None):
         if not template_cache:
-            template_cache = conf["settings"]["template_cache"]
+            template_cache = conf["settings"]["default_template_cache_dir"]
 
         tmpl_base = get_file_base(file_path)
 
@@ -261,7 +257,14 @@ class TemplateManager:
             if self.verbose: print("[WARNING] Failed to find exact match, so trying nearest...")
             templates = os.listdir(template_cache)
             matches = difflib.get_close_matches(tmpl_base, templates)
-            match = os.path.join(template_cache, matches[0])
+
+            if matches:
+                match = os.path.join(template_cache, matches[0])
+            else: 
+                match = conf["settings"].get("default_template")
+
+        if not match:
+            raise Exception(f"Unable to choose a template for: {file_path}")
 
         return match
 
@@ -277,6 +280,8 @@ class FileParser:
             reader = pp
         elif ext in ("txt"):
             reader = badc_csv
+        elif ext in ("yml"):
+            reader = yml
         else:
             raise Exception(f"No known reader for file with extension: {ext}")
 

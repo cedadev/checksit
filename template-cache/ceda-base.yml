@@ -1,0 +1,4 @@
+global_attributes:
+  source: __rules__:rule-func:string-of-length:5+
+  Conventions: __vocabs__:cf-netcdf:Conventions
+  Hello: world
