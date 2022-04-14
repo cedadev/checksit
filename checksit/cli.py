@@ -10,7 +10,7 @@ import click
 from .utils import string_to_dict, string_to_list
 from .check import check_file
 from .summary import summarise
-
+from . import describer
 
 @click.group()
 def main():
@@ -58,6 +58,13 @@ def check(file_path, mappings=None, rules=None, ignore_attrs=None, ignore_all_gl
 @click.option("--verbose/--no-verbose", default=False)
 def summary(log_files=None, log_directory=None, verbose=False):
     return summarise(log_files, log_directory=log_directory, verbose=verbose)
+
+
+@main.command()
+@click.argument("check_ids", nargs=-1, default=None) 
+@click.option("--verbose/--no-verbose", default=False)
+def describe(check_ids=None, verbose=False):
+    return describer.describe(check_ids, verbose=verbose)
 
 
 if __name__ == "__main__":

@@ -62,7 +62,7 @@ def summarise(log_files=None, log_directory=None, verbose=False):
     for err_col in err_cols:
         all_errors.extend(list(set(
             [f"{err} [found in {int(df[df[err_col] == err][err_col].value_counts())} file(s)]" 
-            for err in df[err_col].unique()])))
+            for err in df[err_col].unique() if err.strip()])))
 
     all_errors = sorted(set(all_errors))
     print(f"[INFO] {len(all_errors)} found. They are...")

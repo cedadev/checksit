@@ -18,6 +18,9 @@ def _preprocess(value, preprocessors):
 
 
 def match_file_name(value, context, extras=None, label=""):
+    """
+    Matches file name to value...
+    """
     file_name = os.path.basename(context["file_path"])
     value = _preprocess(value, extras)
     errors = []
@@ -29,6 +32,9 @@ def match_file_name(value, context, extras=None, label=""):
 
 
 def match_one_of(value, context, extras=None, label=""):
+    """
+    Matches only one of...
+    """
     options = [x.strip() for x in extras[0].split(rule_splitter)]
     errors = []
 
@@ -39,6 +45,9 @@ def match_one_of(value, context, extras=None, label=""):
 
 
 def match_one_or_more_of(value, context, extras=None, label=""):
+    """
+    Matches one of more of...
+    """
     def as_set(x, sep): return set([i.strip() for i in x.split(sep)])
     options = as_set(extras[0], rule_splitter)
     values = as_set(value, ",")
@@ -52,6 +61,9 @@ def match_one_or_more_of(value, context, extras=None, label=""):
 
 
 def string_of_length(value, context, extras=None, label=""):
+    """
+    Matches string of length...
+    """
     spec = extras[0]
     min_length = int(re.match("^(\d+)\+?", spec).groups()[0])
 
