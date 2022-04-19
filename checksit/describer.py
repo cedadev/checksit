@@ -9,7 +9,7 @@ def describe(check_ids=None, verbose=False):
         check_funcs = [(map_to_rule(func), func) for func in all_funcs]
     else:
         check_funcs = []
-        func_dict = dict([(map_to_fule(func), func) for func in all_funcs])
+        func_dict = dict([(map_to_rule(func), func) for func in all_funcs])
 
         for check_id in check_ids:
             if check_id in func_dict:

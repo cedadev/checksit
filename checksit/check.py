@@ -9,21 +9,22 @@ import yaml
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
 from .readers import pp, badc_csv, cdl, yml
-from .utils import get_file_base, extension
+from .specs import SpecificationChecker
+from .utils import get_file_base, extension, UNDEFINED
 from .config import get_config
 
-UNDEFINED = "UNDEFINED"
+
 conf = get_config()
-self_check_context = {}
 
 
 class Checker:
 
-    def __init__(self, template="auto", mappings=None, extra_rules=None, ignore_attrs=None, 
+    def __init__(self, template="auto", mappings=None, extra_rules=None, specs=None, ignore_attrs=None, 
                 auto_cache=False, verbose=False, log_mode="standard"):
         self.template = template
         self.mappings = mappings or {}
         self.extra_rules = extra_rules or {}
+        self.specs = specs or []
         self.ignore_attrs = ignore_attrs or []
         self.auto_cache = auto_cache
         self.verbose = verbose
@@ -121,7 +122,7 @@ class Checker:
 
         return errors
                         
-    def _check_file(self, file_content, template, mappings=None, extra_rules=None,
+    def _check_file(self, file_content, template, mappings=None, extra_rules=None, specs=None,
                         ignore_attrs=None, log_mode="standard", fmt_errors=None):
  
         if hasattr(file_content, "to_dict"):
@@ -133,12 +134,24 @@ class Checker:
         if log_mode == "standard":
             print("\n\n---------------- Running checks ------------------\n")
 
-        sections = "dimensions", "variables", "global_attributes"
+        # Create a container for collecting errors
         errors = getattr(file_content, "fmt_errors", [])
 
-        for section in sections:
-            errs = self._compare_dicts(record, template, section, mappings=mappings, ignore_attrs=ignore_attrs)
-            errors.extend([f"[{section}] {err}" for err in errs])
+        # Use check specifications if requested
+        specs = specs or self.specs
+
+        for spec in specs:
+            sr = SpecificationChecker(spec)
+            errors.extend(sr.run_checks(record))
+
+        if template == "off" and log_mode == "standard":
+            print("[WARNING] Template checks switched off!")
+        else:
+            sections = "dimensions", "variables", "global_attributes"
+
+            for section in sections:
+                errs = self._compare_dicts(record, template, section, mappings=mappings, ignore_attrs=ignore_attrs)
+                errors.extend([f"[{section}] {err}" for err in errs])
 
         if log_mode == "compact":
             highest = "ERROR" if len(errors) > 0 else "NONE" 
@@ -156,8 +169,8 @@ class Checker:
             else:
                 print("[INFO] File is compliant!")            
 
-    def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, ignore_attrs=None, 
-                auto_cache=False, verbose=False, log_mode="standard"):
+    def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, specs=None,
+                ignore_attrs=None, auto_cache=False, verbose=False, log_mode="standard"):
 
         try:
             fp = FileParser()
@@ -180,19 +193,28 @@ class Checker:
 
         # tmpl = self.parse_file_header(template, auto_cache=auto_cache, verbose=verbose)
 
-        tm = TemplateManager(auto_cache=auto_cache, verbose=verbose, log_mode=log_mode)
-        tmpl = tm.get(file_path, template=template)
+        if template == "off":
+            tmpl = template
+            tmpl_input = "OFF"
+        else:
+            tm = TemplateManager(auto_cache=auto_cache, verbose=verbose, log_mode=log_mode)
+            tmpl = tm.get(file_path, template=template)
+            tmpl_input = tmpl.inpt
 
         self._update_check_context(file_path, template)
 
         if verbose:
-            print("\n--- Template dictionary:\n", tmpl.to_dict())
+            if tmpl == "off":
+                print("\n--- NOT USING Template CHECK!")
+            else:
+                print("\n--- Template dictionary:\n", tmpl.to_dict())
+
             print("\n--- Datafile dictionary:\n", file_content.to_dict())
 
         if log_mode == "compact":
-            print(f"{file_path} | {tmpl.inpt} | ", end="")
+            print(f"{file_path} | {tmpl_input} | ", end="")
         else:
-            print(f"\nRunning with:\n\tTemplate: {tmpl.inpt}\n\tDatafile: {file_content.inpt}")
+            print(f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tDatafile: {file_content.inpt}")
 
         self._check_file(file_content, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
                         ignore_attrs=ignore_attrs, log_mode=log_mode)
