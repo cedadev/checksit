@@ -121,10 +121,8 @@ class CDLParser:
                 try:
                     current[key] = eval(value)
                 except:
-                    # Try stripping float "f" suffix, and try for list in case value
-                    # is an array
-                    current[key] = eval(", ".join([part.strip().rstrip("f") for part in value.split(",")]))
-#                    current[key] = eval(value.rstrip("f"))
+                    # Try stripping data type suffixes and try for list in case value is an array
+                    current[key] = eval(", ".join([part.strip().rstrip("bBcCfFiIlLsS") for part in value.split(",")]))
         else:
             variables[var_id] = current.copy()
 
