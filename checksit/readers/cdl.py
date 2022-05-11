@@ -98,6 +98,16 @@ class CDLParser:
         dimensions = dim_info.strip("()").replace(" ", "").split(",")
         return var_id, dtype, dimensions
 
+    def _safe_parse_value(self, value):
+        if value in ("NaN", "UNLIMITED"):
+            value = f'"{value}"'
+
+        try:
+            return eval(value)
+        except:
+            # Remove datatype suffixes and parse as list if commas are in value
+            return eval(", ".join([part.strip().rstrip("bBcCfFiIlLsS") for part in value.split(",")]))
+
     def _construct_variables(self, content):
         variables = {}
         var_id = None
@@ -117,12 +127,7 @@ class CDLParser:
                 current = {"dtype": dtype, "dimensions": dimensions}
             else:
                 key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
-                value = self._fix_value(value)
-                try:
-                    current[key] = eval(value)
-                except:
-                    # Try stripping data type suffixes and try for list in case value is an array
-                    current[key] = eval(", ".join([part.strip().rstrip("bBcCfFiIlLsS") for part in value.split(",")]))
+                current[key] = self._safe_parse_value(value)
         else:
             variables[var_id] = current.copy()
 
@@ -133,15 +138,9 @@ class CDLParser:
         for line in content:
             if self.verbose: print(f"WORKING ON LINE: {line}")
             key, value = [x.strip() for x in line.lstrip(":").split("=", 1)]
-            value = self._fix_value(value)
-            resp[key] = eval(value)
+            resp[key] = self._safe_parse_value(value)
 
         return resp
-
-    def _fix_value(self, value):
-        if value in ("NaN", "UNLIMITED"):
-            value = f'"{value}"'
-        return value 
 
     def to_yaml(self):
         return yaml.dump(self.to_dict(), Dumper=yaml.SafeDumper, 
