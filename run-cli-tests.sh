@@ -4,13 +4,24 @@ prompt=false
 [ "$1" == "--prompt" ] || [ "$1" == "-p" ] && prompt=true
 
 mapfile -t lines < cli_tests.txt
+test_count=0
 
+for i in $(seq ${#lines[@]}) ; do
+    CMD=${lines[$i]}
+    [ ! "$CMD" ] || [[ "$CMD" =~ \# ]] && continue
+    let test_count+=1
+done
+
+echo "[INFO] Running $test_count tests..."
+test_number=1
 for i in $(seq ${#lines[@]}) ; do 
     CMD=${lines[$i]} 
 
     echo
     [ ! "$CMD" ] || [[ "$CMD" =~ \# ]] && continue
-    echo "[INFO] Running: "
+    echo "[INFO] Running (${test_number} / ${test_count}): "
+
+    let test_number+=1
     
     count=0
     for i in $(echo $CMD); do 
@@ -29,7 +40,7 @@ for i in $(seq ${#lines[@]}) ; do
         fi
     fi
  
-    $CMD
+    ${CMD}
 
     if [ $? -ne 0 ]; then
         echo
