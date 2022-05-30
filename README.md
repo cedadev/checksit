@@ -32,7 +32,7 @@ checksit check /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_r
 
 ### Main Features
 
-Define template
+#### Define template
 ```
 checksit check --template=template-cache/rls_rcp85_land-cpm_uk_2.2km_01_day_19801201-19811130.cdl /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc
 ```
@@ -41,7 +41,7 @@ checksit check --template=template-cache/rls_rcp85_land-cpm_uk_2.2km_01_day_1980
 * Note: cdl files are a representation of a netCDF file, being the output from `ncdump -h` on the netCDF file
 
 
-Map variable names
+#### Map variable names
 ```
 checksit check -m cltAnom=cloud_area_fraction /gws/nopw/j04/cmip6_prep_vol1/ukcp18/data/land-prob/v20211110/uk/25km/rcp85/sample/b8110/30y/cltAnom/mon/v20211110/cltAnom_rcp85_land-prob_uk_25km_sample_b8110_30y_mon_20091201-20991130.nc
 ```
@@ -50,14 +50,14 @@ checksit check -m cltAnom=cloud_area_fraction /gws/nopw/j04/cmip6_prep_vol1/ukcp
 * **Check how to define multiple mappings**
 
 
-Ignore attributes
+#### Ignore attributes
 ```
 checksit check --ignore-attrs=global_attributes:time_coverage_start,global_attributes:time_coverage_end,global_attributes:tracking_id /neodc/esacci/sea_ice/data/sea_ice_thickness/L3C/envisat/v2.0/SH/2012/ESACCI-SEAICE-L3C-SITHICK-RA2_ENVISAT-SH50KMEASE2-201202-fv2.0.nc
 ```
 * Define attributes to ignore in checking
 
 
-Define additional rules for checking
+#### Define additional rules for checking
 ```
 checksit check --rules=global_attributes:id=rule-func:match-file-name:lowercase:no-extension /neodc/esacci/sea_ice/data/sea_ice_thickness/L3C/envisat/v2.0/SH/2012/ESACCI-SEAICE-L3C-SITHICK-RA2_ENVISAT-SH50KMEASE2-201202-fv2.0.nc
 ```
@@ -77,21 +77,21 @@ checksit check --rules=global_attributes:id=rule-func:match-file-name:lowercase:
 
 ### Additional Options
 
-specs
+#### specs
 ```
 checksit check --specs=ceda-base /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc
 ```
 * Checks file against a given specification. For more info, see [checksit show-specs](#checksit-show-specs)
 
 
-auto-cache
+#### auto-cache
 ```
 checksit check --auto-cache --template=/badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/08/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_08_day_20671201-20681130.nc /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc
 ```
 * Create a cache of the given template to add to add to checksit's template_cache
 
 
-verbose
+#### verbose
 ```
 checksit check --verbose /group_workspaces/jasmin2/ukcp18/incoming-astephen/ukcordex-example/tasmax_rcp85_land-rcm_uk_12km_EC-EARTH_r12i1p1_HIRHAM5_day_19801201-19901130.nc
 ```
