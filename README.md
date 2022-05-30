@@ -66,8 +66,8 @@ checksit check --rules=global_attributes:id=rule-func:match-file-name:lowercase:
 * Four options for `<rule type>`:
   * `rule-func` - check item against a defined function, 4 options:
     * `match-file-name` - item must be the same as the file name, allowing for formatting through `<extras>` - `lowercase`, `uppercase`, `no_extension` - example: `global_attributes:id=rule-func:match-file-name:lowercase:no-extension`
-    * `match-one-of` - item must be the same as one of the `<extras>` given
-    * `match-one-or-more-of` - item must be the same as one or more of the `<extras>` given
+    * `match-one-of` - item must be the same as one of the `<extras>` given. Multiple options should be separated by a `|` and surrounded by double quotation marks - example: `global_attributes:project=rule-func:match-one-of:"ukcp18|ukcp09"`
+    * `match-one-or-more-of` - item must be the same as one or more of the `<extras>` given. Multiple options should be separated by a `|` and surrounded by double quotation marks - example: `global_attributes:contact=rule-func:match-one-or-more-of:"ukcpproject@metoffice.gov.uk|UKCP Team|MOHC"`
     * `string-of-length` - item must be the same length as given `<extra>` or greater if `+` is given at end of `<extra>` - example: `global_attributes:project=rule-func:string-of-length:10,global_attributes:contact=rule-func:string-of-length:100+`
   * `type-rule` - check item is of type as defined in `<extra>` - example: `transverse_mercator:false_northing=type-rule:integer`
   * `regex` - check item for regular expression match - example: `global_attributes:project=regex:ukcp18`
