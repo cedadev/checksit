@@ -81,7 +81,7 @@ specs
 ```
 checksit check --specs=ceda-base /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc
 ```
-* Checks file against a given specification. For more info, see checksit show-specs
+* Checks file against a given specification. For more info, see [checksit show-specs](#checksit-show-specs)
 
 
 auto-cache
