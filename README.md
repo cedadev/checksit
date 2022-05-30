@@ -14,7 +14,7 @@ pip install -e .
 
 ## Usage
 
-checksit is comprised of four key components - [check](#checksit-check), describe, show-specs, summary
+checksit is comprised of four key components - [check](#checksit-check), [describe](#checksit-describe), [show-specs](#checksit-show-specs), and [summary](#checksit-summary)
 
 
 ## checksit check
