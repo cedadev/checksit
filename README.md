@@ -47,7 +47,7 @@ checksit check -m cltAnom=cloud_area_fraction /gws/nopw/j04/cmip6_prep_vol1/ukcp
 ```
 * Allows mapping of variable name, for the case that the name of a variable is different between the file to be checked and the template
 * Format - `-m <template variable name>=<file variable name>`
-* **Check how to define multiple mappings**
+* Multiple mappings should be comma separated 
 
 
 #### Ignore attributes
