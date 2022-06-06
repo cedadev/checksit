@@ -40,11 +40,11 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None):
     errors = []
 
     for attr in defined_attrs:
-        if is_undefined(dct.get(attr)):
+        if is_undefined(dct['global_attributes'].get(attr)):
             errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' must have a valid definition.")
 
     for attr in vocab_attrs:
-        errors.extend(vocabs.check(vocab_attrs[attr], dct.get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
+        errors.extend(vocabs.check(vocab_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
  
 
     return errors
