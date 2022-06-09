@@ -53,8 +53,9 @@ class CDLParser:
 
         source = self.global_attrs.get("source", "UNDEFINED")
 
-        if len(source) < 400:
-            self.fmt_errors.append(f"[FORMAT:global_attributes:source] Must be at least 400 characters, not {source}") 
+        min_chars = 10
+        if len(source) < min_chars:
+           self.fmt_errors.append(f"[FORMAT:global_attributes:source] Must be at least {min_chars} characters, not {source}")
 
     def _get_sections(self, lines, split_patterns, start_at):
         split_patterns = deque(split_patterns)
@@ -99,7 +100,7 @@ class CDLParser:
         return var_id, dtype, dimensions
 
     def _safe_parse_value(self, value):
-        if value in ("NaN", "UNLIMITED"):
+        if value in ("NaN", "NaNf", "UNLIMITED"):
             value = f'"{value}"'
 
         try:
