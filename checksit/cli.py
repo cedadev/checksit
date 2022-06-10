@@ -55,9 +55,28 @@ def check(file_path, mappings=None, rules=None, ignore_attrs=None, ignore_all_gl
 @main.command()
 @click.argument("log_files", nargs=-1, default=None)
 @click.option("-d", "--log-directory", default=None)
+@click.option("--show-files/--no-show-files", default=False)
+@click.option("-x", "--exclude", default=None)
+@click.option("-e", "--exclude-file", default=None)
 @click.option("--verbose/--no-verbose", default=False)
-def summary(log_files=None, log_directory=None, verbose=False):
-    return summarise(log_files, log_directory=log_directory, verbose=verbose)
+def summary(log_files=None, log_directory=None, show_files=False,
+            exclude=None, exclude_file=None,
+            verbose=False):
+
+    if exclude:
+        exclude = string_to_list(exclude)  
+    else:
+        exclude = []
+    
+    if exclude_file:
+        if not os.path.isfile(exclude_file):
+            raise Exception(f"'--exclude-file' does not point to a valid file")
+
+        with open(exclude_file) as exfile:
+            exclude.extend([exclude_pattern for exclude_pattern in exfile if exclude_pattern.strip()])
+
+    return summarise(log_files, log_directory=log_directory, show_files=show_files,
+                     exclude=exclude, verbose=verbose)
 
 
 @main.command()
