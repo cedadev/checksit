@@ -58,14 +58,21 @@ class Vocabs:
 
 #         return item
 
-    def check(self, vocab_lookup, value, label=""):
+    def check(self, vocab_lookup, value, label="", lookup=True):
         # Return a list of errors - empty list if no errors
         errors = []
-        options = self.lookup(vocab_lookup)
+        options = [ self.lookup(vocab_lookup) if lookup else vocab_lookup ][0]
 
         if isinstance(options, list):
             if value not in options:
                 errors.append(f"{label} '{value}' not in vocab options: {options} (using: '{vocab_lookup}')")
+        elif isinstance(options, dict):
+            for key in options.keys():
+                print(options,value)
+                if key in value.keys():
+                    errors.extend(self.check(options[key], value[key], label = f"{label}:{key}", lookup=False))
+                else:
+                    errors.append(f"{label} does not have attribute '{key}'")
         elif value != options:
             errors.append(f"{label} '{value}' does not equal required vocab value: '{options}' (using: '{vocab_lookup}')")
 
