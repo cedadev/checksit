@@ -1,0 +1,10 @@
+{
+  "Conventions": "CF-1.6, NCAS-AMF-2.0.0",
+  "institution": "National Centre for Atmospheric Science (NCAS)",
+  "licence": "Data usage licence - UK Government Open Licence agreement: http://www.nationalarchives.gov.uk/doc/open-government-licence",
+  "acknowledgement": "Acknowledgement of NCAS as the data provider is required whenever and wherever these data are used",
+  "platform_type": ["stationary_platform","moving_platform"],
+  "deployment_mode": ["land","sea","air","trajectory"],
+  "featureType": ["timeSeries","timeSeriesProfile","trajectory"],
+  "platform": ["mobile","wao","cvao","iao","cdao","cao"]
+}
