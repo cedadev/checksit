@@ -1,0 +1,29 @@
+var-requires:
+  func: checksit.generic.check_var_attrs
+  params:
+    defined_attrs: 
+      - long_name
+      - units
+  func: checksit.generic.check_var_exists
+  params:
+    variables:
+      - time
+      - latitude 
+      - longitude
+      - day_of_year
+      - year
+      - month
+      - day
+      - hour
+      - minute
+      - second
+      - cows
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - time
+      - latitude
+      - longitude
+      - fields
