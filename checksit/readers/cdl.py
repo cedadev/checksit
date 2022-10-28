@@ -125,7 +125,7 @@ class CDLParser:
                     variables[var_id] = current.copy()
 
                 var_id, dtype, dimensions = self._parse_var_dtype_dims(line)
-                current = {"dtype": dtype, "dimensions": dimensions}
+                current = {"type": dtype, "dimension": ', '.join(dimensions)}
             else:
                 key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
                 current[key] = self._safe_parse_value(value)
