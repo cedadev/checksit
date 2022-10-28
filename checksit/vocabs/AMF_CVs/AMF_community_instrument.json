@@ -1,0 +1,49 @@
+{
+    "community_instrument": {
+        "uea-aws-1": {
+            "instrument_id": "uea-aws-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Automatic Weather Station unit 1"
+        },
+        "uea-aws-2": {
+            "instrument_id": "uea-aws-2",
+            "previous_instrument_ids": [],
+            "description": "UEA Automatic Weather Station unit 2"
+        },
+        "uea-caps-1": {
+            "instrument_id": "uea-caps-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Cavity Attenuated Phase Shift Spectroscopy unit 1"
+        },
+        "uea-42i-nox-1": {
+            "instrument_id": "uea-42i-nox-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Thermo 42i NOX Monitor unit 1"
+        },
+        "uea-49i-o3-1": {
+            "instrument_id": "uea-49i-o3-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Thermo 49i O3 Monitor unit 1"
+        },
+        "uea-fidas200E-1": {
+            "instrument_id": "uea-fidas200E-1",
+            "previous_instrument_ids": [],
+            "description": "UEA PM Mass Concentration Counter unit 1"
+        },
+        "uea-radon-1": {
+            "instrument_id": "uea-radon-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Radon Monitor unit 1"
+        },
+        "uea-43i-so2-1": {
+            "instrument_id": "uea-43i-so2-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Thermo 43i SO2 Monitor unit 1"
+        },
+        "uea-sodar-rass-1": {
+            "instrument_id": "uea-sodar-rass-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Sodar Rass unit 1"
+        }
+    }
+}

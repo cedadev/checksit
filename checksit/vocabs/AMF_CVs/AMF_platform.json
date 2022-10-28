@@ -1,0 +1,40 @@
+{
+    "platform": {
+        "wao": {
+            "platform_id": "wao",
+            "description": "weybourne atmospheric observatory"
+        },
+        "cvao": {
+            "platform_id": "cvao",
+            "description": "cape verde atmospheric observatory"
+        },
+        "iao": {
+            "platform_id": "iao",
+            "description": "icelandic atmospheric observatory"
+        },
+        "bt-tower-t35": {
+            "platform_id": "bt-tower-t35",
+            "description": "british telecoms tower observatory"
+        },
+        "cdao": {
+            "platform_id": "cdao",
+            "description": "capel dewi atmospheric observatory"
+        },
+        "cdao-frongoch": {
+            "platform_id": "cdao-frongoch",
+            "description": "capel dewi atmospheric observatory - frongoch sub site"
+        },
+        "cao": {
+            "platform_id": "cao",
+            "description": "chilbolton atmospheric observatory"
+        },
+        "cao-sparsholt": {
+            "platform_id": "cao-sparsholt",
+            "description": "chilbolton atmospheric observatory - sparsholt sub site"
+        },
+        "faam": {
+            "platform_id": "faam",
+            "description": null
+        }
+    }
+}

@@ -1,0 +1,46 @@
+dimensions:
+  time: __vocabs__:AMF_CVs/AMF_product_common_dimension_land:product_common_dimension_land:time:length 
+variables:
+  time: __vocabs__:AMF_CVs/AMF_product_common_variable_land:product_common_variable_land:time 
+  year: __vocabs__:AMF_CVs/AMF_product_common_variable_land:product_common_variable_land:year
+  month: __vocabs__:AMF_CVs/AMF_product_common_variable_land:product_common_variable_land:month
+  eastward_wind: __vocabs__:AMF_CVs/AMF_product_snr-winds_variable:product_snr-winds_variable:eastward_wind
+global_attributes:
+  source: __rules__:rule-func:string-of-length:5+
+  Conventions: __vocabs__:AMF_CVs/AMF_product_common_global-attributes_land:product_common_global-attributes_land:Conventions:fixed_value 
+  instrument_manufacturer: __rules__:rule-func:string-of-length:2+
+  instrument_serial_number: __rules__:rule-func:string-of-length:3+
+  instrument_software: __rules__:rule-func:string-of-length:3+
+  instrument_software_version: __rules__:rule-func:string-of-length:2+
+  creator_name: __rules__:rule-func:string-of-length:3+
+  creator_email: __rules__:regex-rule:valid-email
+  creator_url: __rules__:regex-rule:valid-url
+  institution: National Centre for Atmospheric Science (NCAS)
+  processing_software_url: __rules__:regex-rule:valid-url
+  processing_software_version: __rules__:rule-func:string-of-length:2+
+  calibration_sensitivity: __rules__:rule-func:string-of-length:5+
+  calibration_certification_date: __rules__:regex-rule:datetime-or-na
+  calibration_certification_url: __rules__:regex-rule:valid-url-or-na
+  sampling_interval: __rules__:regex:^[1-9]\d*(\.\d*){0,1} (microsecond|millisecond|second|minute|hour|day|year)s*$
+  averaging_interval: __rules__:regex:^[1-9]\d*(\.\d*){0,1} (microsecond|millisecond|second|minute|hour|day|year)s*$
+  product_version: __rules__:regex:^v\d+\.\d+$
+  processing_level: __rules__:rule-func:match-one-of:0|1|2|3
+  last_revised_date: __rules__:regex-rule:datetime
+  project: __rules__:rule-func:string-of-length:3+
+  project_principal_investigator: __rules__:rule-func:string-of-length:3+
+  project_principal_investigator_email: __rules__:regex-rule:valid-email
+  project_principal_investigator_url: __rules__:regex-rule:valid-url
+  acknowledgement: __rules__:regex:Acknowledgement of NCAS as the data provider is required whenever and wherever these data are used
+  platform: __rules__:rule-func:string-of-length:3+
+  platform_type: __rules__:rule-func:match-one-of:stationary_platform|moving_platform
+  deployment_mode: __rules__:rule-func:match-one-of:land|sea|air|trajectory
+  title: __rules__:rule-func:string-of-length:10+
+  featureType: __rules__:rule-func:match-one-of:timeSeries|timeSeriesProfile|trajectory
+  time_coverage_start: __rules__:regex-rule:datetime
+  time_coverage_end: __rules__:regex-rule:datetime
+  geospatial_bounds: __rules__:rule-func:string-of-length:8+
+  platform_altitude: __rules__:regex:^\d+(.\d+)? m$
+  location_keywords: __rules__:rule-func:string-of-length:3+
+  amf_vocabularies_release: __rules__:regex-rule:valid-url
+  history: __rules__:rule-func:string-of-length:1+
+  comment: __rules__:rule-func:string-of-length:4+
