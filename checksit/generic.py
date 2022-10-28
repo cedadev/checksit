@@ -1,6 +1,7 @@
 from .utils import UNDEFINED, is_undefined
 from .cvs import vocabs
 
+import re
 
 def _get_bounds_var_ids(dct):
     return [var_id for var_id in dct["variables"] if (
@@ -27,7 +28,7 @@ def check_var_attrs(dct, defined_attrs, ignore_bounds=True):
     return errors
  
 
-def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None):
+def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=None):
     """
     Check that required global attributes are correct.
 
@@ -36,6 +37,7 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None):
     """
     defined_attrs = defined_attrs or []
     vocab_attrs = vocab_attrs or {}
+    regex_attrs = regex_attrs or {}
 
     errors = []
 
@@ -45,7 +47,40 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None):
 
     for attr in vocab_attrs:
         errors.extend(vocabs.check(vocab_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
- 
+    
+    for attr in regex_attrs:
+        if is_undefined(dct['global_attributes'].get(attr)) or not re.match(regex_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED)):
+            errors.append(f"[global-attributes:******:{attr}]: '{dct['global_attributes'].get(attr, UNDEFINED)}' does not match regex pattern '{regex_attrs[attr]}'.") 
+
 
     return errors
- 
+
+
+def check_var_exists(dct, variables):
+    """
+    Check that variables exist
+
+    E.g. check-var-exists:variables:time|altitude
+    """
+    errors = []
+
+    for var in variables:
+        if var not in dct["variables"].keys():
+            errors.append(f"[variable**************:{var}]: Does not exist in file.")
+
+    return errors
+
+
+def check_dim_exists(dct, dimensions):
+    """
+    Check that variables exist
+
+    E.g. check-dim-exists:dimensions:time|latitude
+    """
+    errors = []
+
+    for dim in dimensions:
+        if dim not in dct["dimensions"].keys():
+            errors.append(f"[dimension**************:{dim}]: Does not exist in file.")
+
+    return errors 
