@@ -68,7 +68,6 @@ class Vocabs:
                 errors.append(f"{label} '{value}' not in vocab options: {options} (using: '{vocab_lookup}')")
         elif isinstance(options, dict):
             for key in options.keys():
-                print(options,value)
                 if key in value.keys():
                     errors.extend(self.check(options[key], value[key], label = f"{label}:{key}", lookup=False))
                 else:
