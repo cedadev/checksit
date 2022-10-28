@@ -11,3 +11,4 @@ pre-commit==2.8.2
 Click==7.0
 pytest==4.6.5
 pytest-runner==5.1
+deepdiff
