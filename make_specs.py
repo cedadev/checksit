@@ -128,7 +128,7 @@ for product in products:
                 for attr in product_attrs_info[key_number]:
                     f.write(f'      - {attr}\n')
             f.write('\n')
-        if product_dims:
+        if prod_dims_exist:
             f.write('dims-requires:\n  func: checksit.generic.check_dim_exists\n  params:\n    dimensions:\n')
             for dim in product_dims:
                 f.write(f'      - {dim}')

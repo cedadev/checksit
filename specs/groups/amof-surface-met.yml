@@ -61,8 +61,3 @@ var-requires2:
       - flag_values
       - flag_meanings
 
-dims-requires:
-  func: checksit.generic.check_dim_exists
-  params:
-    dimensions:
-      - index
