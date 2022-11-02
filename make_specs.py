@@ -71,6 +71,48 @@ with open(f'{out_dir}/amof-global-attrs.yml', 'w') as f:
 # DEPLOYMENT MODES #
 ####################
 
+deployment_modes = ['land','sea','air','trajectory']
+
+for mode in deployment_modes:
+    with open(f'{cvs_dir}/AMF_product_common_dimension_{mode}.json') as f:
+        deploy_dims = json.load(f)[f'product_common_dimension_{mode}'].keys()
+    with open(f'{cvs_dir}/AMF_product_common_variable_{mode}.json') as f:
+        data = json.load(f)[f'product_common_variable_{mode}']
+        deploy_vars_attrs = {}
+        deploy_vars = {}
+        count = 0
+        for variable in data.keys():
+            attrs = data[variable].keys()
+            if attrs not in deploy_vars_attrs.values():
+                deploy_vars_attrs[count] = attrs
+                deploy_vars[count] = [variable]
+                count += 1
+            else:
+                # find key based on value
+                for attr_key in deploy_vars_attrs.keys():
+                    if deploy_vars_attrs[attr_key] == attrs:
+                        deploy_vars[attr_key].append(variable)
+     
+
+
+    spec_file_name = f'{out_dir}/amof-common-{mode}.yml'
+    with open(spec_file_name, 'w') as f:
+        # variables
+        for key_number in deploy_vars.keys():
+            f.write(f'var-requires{key_number}:\n')
+            f.write('  func: checksit.generic.check_var\n  params:\n    variables:\n')
+            for var in deploy_vars[key_number]:
+                f.write(f'      - {var}\n')
+            f.write('    defined_attrs:\n')
+            for attr in deploy_vars_attrs[key_number]:
+                f.write(f'      - {attr}\n')
+        f.write('\n')
+        # dimensions
+        f.write('dims-requires:\n  func: checksit.generic.check_dim_exists\n  params:\n    dimensions:\n')
+        for dim in deploy_dims:
+            f.write(f'      - {dim}\n')
+
+
 
 
 
@@ -131,5 +173,5 @@ for product in products:
         if prod_dims_exist:
             f.write('dims-requires:\n  func: checksit.generic.check_dim_exists\n  params:\n    dimensions:\n')
             for dim in product_dims:
-                f.write(f'      - {dim}')
+                f.write(f'      - {dim}\n')
             
