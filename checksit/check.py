@@ -13,7 +13,7 @@ from .specs import SpecificationChecker
 from .utils import get_file_base, extension, UNDEFINED
 from .config import get_config
 
-
+AMOF_CONVENTIONS = ['"CF-1.6, NCAS-AMF-2.0.0"']
 conf = get_config()
 
 
@@ -193,6 +193,23 @@ class Checker:
 
         # tmpl = self.parse_file_header(template, auto_cache=auto_cache, verbose=verbose)
 
+        ### Check for AMOF netCDF file and gather specs ###
+        if template == "auto" and file_path.split('.')[-1] == 'nc':
+            # Look for AMOF Convention string in Conventions global attr, if it exists
+            if ':Conventions' in file_content.cdl:
+                conventions = file_content.cdl.split(':Conventions =')[1].split(';')[0].strip()
+                if conventions in AMOF_CONVENTIONS:
+                    print("\nAMOF file detected, finding correct spec files")
+                    # get deployment mode and data product, to then get specs
+                    deployment_mode = file_content.cdl.split(':deployment_mode =')[1].split(';')[0].strip().strip('"')
+                    deploy_spec = f'amof-common-{deployment_mode}'
+                    product = file_path.split('/')[-1].split('_')[3]
+                    product_spec = f'amof-{product}'
+                    specs = [deploy_spec, product_spec]
+                    # don't need to do template check
+                    template = "off"
+
+
         if template == "off":
             tmpl = template
             tmpl_input = "OFF"
@@ -217,7 +234,7 @@ class Checker:
             print(f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tDatafile: {file_content.inpt}")
 
         self._check_file(file_content, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
-                        ignore_attrs=ignore_attrs, log_mode=log_mode)
+                        specs=specs, ignore_attrs=ignore_attrs, log_mode=log_mode)
 
 
 class TemplateManager:
