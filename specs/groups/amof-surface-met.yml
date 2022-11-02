@@ -1,0 +1,68 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - air_pressure
+      - air_temperature
+      - relative_humidity
+      - wind_speed
+      - wind_from_direction
+      - thickness_of_rainfall_amount
+      - rainfall_rate
+      - downwelling_longwave_flux_in_air
+      - downwelling_shortwave_flux_in_air
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - hail_intensity
+      - hail_rate
+      - downwelling_total_irradiance
+      - net_total_irradiance
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_temperature
+      - qc_flag_relative_humidity
+      - qc_flag_pressure
+      - qc_flag_wind_speed
+      - qc_flag_wind_from_direction
+      - qc_flag_radiation
+      - qc_flag_precipitation
+      - qc_flag_downwelling_total_irradiance
+      - qc_flag_net_total_irradiance
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index

@@ -1,0 +1,95 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - time_minutes_since_start_of_day
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - valid_min
+      - valid_max
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - altitude
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - axis
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - size_of_gate
+      - signal_to_noise_ratio_of_beam_1
+      - signal_to_noise_ratio_of_beam_2
+      - signal_to_noise_ratio_of_beam_3
+      - signal_to_noise_ratio_minimum
+      - spectral_width_of_beam_1
+      - spectral_width_of_beam_2
+      - spectral_width_of_beam_3
+      - skew_of_beam_1
+      - skew_of_beam_2
+      - skew_of_beam_3
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - wind_speed
+      - wind_from_direction
+      - eastward_wind
+      - northward_wind
+      - upward_air_velocity
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_wind
+      - qc_flag_beam_1
+      - qc_flag_beam_2
+      - qc_flag_beam_3
+      - qc_flag_rain_detected
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude

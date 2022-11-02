@@ -1,5 +1,6 @@
 from .utils import UNDEFINED, is_undefined
 from .cvs import vocabs
+from .rules import rules
 
 import re
 
@@ -28,7 +29,7 @@ def check_var_attrs(dct, defined_attrs, ignore_bounds=True):
     return errors
  
 
-def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=None):
+def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=None, rules_attrs=None):
     """
     Check that required global attributes are correct.
 
@@ -38,6 +39,7 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
     defined_attrs = defined_attrs or []
     vocab_attrs = vocab_attrs or {}
     regex_attrs = regex_attrs or {}
+    rules_attrs = rules_attrs or {}
 
     errors = []
 
@@ -51,6 +53,9 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
     for attr in regex_attrs:
         if is_undefined(dct['global_attributes'].get(attr)) or not re.match(regex_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED)):
             errors.append(f"[global-attributes:******:{attr}]: '{dct['global_attributes'].get(attr, UNDEFINED)}' does not match regex pattern '{regex_attrs[attr]}'.") 
+
+    for attr in rules_attrs:
+        errors.extend(rules.check(rules_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
 
 
     return errors
@@ -84,3 +89,18 @@ def check_dim_exists(dct, dimensions):
             errors.append(f"[dimension**************:{dim}]: Does not exist in file.")
 
     return errors 
+
+def check_var(dct, variables, defined_attrs):
+    """
+    Check variables exist and have attributes defined.
+    """
+    errors = []
+    for var in variables:
+        if var not in dct["variables"].keys():
+            errors.append(f"[variable**************:{var}]: Does not exist in file.")
+        else:
+            for attr in defined_attrs:
+                if is_undefined(dct["variables"][var].get(attr)):
+                    errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")            
+
+    return errors
