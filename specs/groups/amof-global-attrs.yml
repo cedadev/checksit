@@ -2,8 +2,8 @@ required-global-attrs:
   func: checksit.generic.check_global_attrs
   params:
     vocab_attrs:
-      source: __vocab__:EDIT:Exact\smatch\sin\svocabulary
-      platform: __vocab__:EDIT:Exact\smatch\sin\svocabulary
+      source: __vocab__:EDIT:Exact match in vocabulary
+      platform: __vocab__:EDIT:Exact match in vocabulary
     rules_attrs:
       Conventions: regex:CF-1.6,\sNCAS-AMF-2.0.0
       instrument_manufacturer: rule-func:string-of-length:2+
@@ -18,13 +18,13 @@ required-global-attrs:
       processing_software_url: regex-rule:valid-url
       processing_software_version: rule-func:string-of-length:2+
       calibration_sensitivity: rule-func:string-of-length:5+
-      calibration_certification_date: regex-rule:EDIT:Match:\sYYYY-MM-DDThh:mm:ss\.\d+\s_or_\sN/A
+      calibration_certification_date: regex-rule:datetime-or-na
       calibration_certification_url: regex-rule:valid-url-or-na
       sampling_interval: rule-func:string-of-length:2+
       averaging_interval: rule-func:string-of-length:2+
-      product_version: regex-rule:EDIT:Match:\svN.M
+      product_version: regex-rule:match:vN.M
       processing_level: type-rule:integer
-      last_revised_date: regex-rule:EDIT:Match:\sYYYY-MM-DDThh:mm:ss\.\d+
+      last_revised_date: regex-rule:datetime
       project: rule-func:string-of-length:3+
       project_principal_investigator: rule-func:string-of-length:3+
       project_principal_investigator_email: regex-rule:valid-email
@@ -35,10 +35,10 @@ required-global-attrs:
       deployment_mode: rule-func:match-one-of:land|sea|air|trajectory
       title: rule-func:string-of-length:10+
       featureType: rule-func:match-one-of:timeSeries|timeSeriesProfile|trajectory
-      time_coverage_start: regex-rule:EDIT:Match:\sYYYY-MM-DDThh:mm:ss\.\d+
-      time_coverage_end: regex-rule:EDIT:Match:\sYYYY-MM-DDThh:mm:ss\.\d+
+      time_coverage_start: regex-rule:datetime
+      time_coverage_end: regex-rule:datetime
       geospatial_bounds: rule-func:string-of-length:8+
-      platform_altitude: regex-rule:EDIT:Exact\smatch:\s<number>\sm
+      platform_altitude: regex-rule:EDIT:Exact match: <number> m
       location_keywords: rule-func:string-of-length:3+
       amf_vocabularies_release: regex-rule:valid-url
       history: rule-func:string-of-length:1+

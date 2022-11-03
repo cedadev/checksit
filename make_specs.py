@@ -36,7 +36,14 @@ for attr in data.keys():
     elif compliance.lower() == "valid url _or_ n/a":
         rule = "regex-rule:valid-url-or-na"
     elif "match: " in compliance.lower():
-        rule = f"regex-rule:EDIT:{compliance}"
+        if 'YYYY-MM-DDThh:mm:ss\.\d+ _or_ N/A' in compliance:
+            rule = "regex-rule:datetime-or-na"
+        elif 'vN.M' in compliance:
+            rule = "regex-rule:match:vN.M"
+        elif 'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
+            rule = "regex-rule:datetime"
+        else:
+            rule = f"regex-rule:EDIT:{compliance}"
     elif compliance.lower() in ["number","integer","int","float","string","str"]:
         rule = f"type-rule:{compliance.lower()}"
     elif compliance.lower() == "exact match in vocabulary":
@@ -51,7 +58,7 @@ for attr in data.keys():
         rule = f"UNKNOWN compliance: {compliance}"
     rule = rule.replace('(','\(')
     rule = rule.replace(')','\)')
-    rule = rule.replace(' ','\s')
+    rule = [ rule.replace(' ','\s') if "regex:" in rule else rule ][0]
     attr_rules[attr] = rule
 
 
