@@ -1,0 +1,47 @@
+netcdf summer_rainfall_2001 {
+dimensions:
+	projection_y_coordinate = UNLIMITED ; // (290 currently)
+	projection_x_coordinate = 180 ;
+	bnds = 2 ;
+variables:
+	float seasonal_rainfall(projection_y_coordinate, projection_x_coordinate) ;
+		seasonal_rainfall:_FillValue = 1.e+20f ;
+		seasonal_rainfall:standard_name = "precipitation_amount" ;
+		seasonal_rainfall:long_name = "Seasonal total precipitation amount" ;
+		seasonal_rainfall:units = "mm" ;
+		seasonal_rainfall:cell_methods = "time: sum" ;
+		seasonal_rainfall:coordinates = "lat lon time" ;
+	double projection_y_coordinate(projection_y_coordinate) ;
+		projection_y_coordinate:axis = "Y" ;
+		projection_y_coordinate:bounds = "projection_y_coordinate_bnds" ;
+		projection_y_coordinate:units = "m" ;
+		projection_y_coordinate:standard_name = "projection_y_coordinate" ;
+	double projection_y_coordinate_bnds(projection_y_coordinate, bnds) ;
+	double projection_x_coordinate(projection_x_coordinate) ;
+		projection_x_coordinate:axis = "X" ;
+		projection_x_coordinate:bounds = "projection_x_coordinate_bnds" ;
+		projection_x_coordinate:units = "m" ;
+		projection_x_coordinate:standard_name = "projection_x_coordinate" ;
+	double projection_x_coordinate_bnds(projection_x_coordinate, bnds) ;
+	double lat(projection_y_coordinate, projection_x_coordinate) ;
+		lat:units = "degree_north" ;
+		lat:standard_name = "latitude" ;
+	double lon(projection_y_coordinate, projection_x_coordinate) ;
+		lon:units = "degree_east" ;
+		lon:standard_name = "longitude" ;
+	double time ;
+		time:bounds = "time_bnds" ;
+		time:units = "hours since 1800-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:calendar = "standard" ;
+	double time_bnds(bnds) ;
+
+// global attributes:
+		:comment = "These data are part of the Met Office Gridded Observation and Derived Data Sets in support of UKCP09" ;
+		:institution = "Met Office" ;
+		:references = "" ;
+		:short_name = "seasonal_rainfall" ;
+		:source = "UKCP09" ;
+		:title = "Gridded surface climate observations data for the UK" ;
+		:Conventions = "CF-1.5" ;
+}
