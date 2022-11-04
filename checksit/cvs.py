@@ -10,6 +10,8 @@ conf = get_config()
 vocabs_dir = conf["settings"]["vocabs_dir"]
 vocabs_prefix = conf["settings"]["vocabs_prefix"]
 
+WILDCARD = ["__all__"]
+
 
 class Vocabs:
     def __init__(self):
@@ -33,8 +35,14 @@ class Vocabs:
         obj = self
         vocab_lookup = re.sub(f"^{vocabs_prefix}:", "", vocab_lookup)
 
-        for key in vocab_lookup.split(":"):
-            obj = obj[key]
+        for i,key in enumerate(vocab_lookup.split(":")):
+            if key in WILDCARD:
+                if i+1 != len(vocab_lookup.split(":")):
+                    raise ValueError(f"WILDCARD {key} only allowed as last argument")
+                else:
+                    obj = list(obj.keys())
+            else:
+                obj = obj[key]
 
         return obj
 
