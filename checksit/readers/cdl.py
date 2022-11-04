@@ -119,6 +119,7 @@ class CDLParser:
         value = None
 
         for line in content:
+            print(line)
             if re.match(f"^{vocabs_prefix}:[0-9a-zA-Z_-]+:variables:", line):
                 vocab_var_id = line.split(":")[3]
                 vocab_lookup = line.split(":", 1)[-1]
