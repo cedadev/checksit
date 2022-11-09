@@ -164,6 +164,56 @@ for product in products:
     else:
         prod_dims_exist = False
 
+    
+    if exists(f'{cvs_dir}/AMF_product_{product}_global-attributes.json'):
+        with open(f'{cvs_dir}/AMF_product_{product}_global-attributes.json') as f:
+            data = json.load(f)[f'product_{product}_global-attributes']
+            
+            attr_rules = {}
+
+            for attr in data.keys():
+                compliance = data[attr]['compliance_checking_rules']
+                if compliance.lower() in ["exact match", "exact match of text to the left"]:
+                    rule = f"regex:{data[attr]['fixed_value']}"
+                elif "String: min" in compliance:
+                    number = compliance.split(' ')[2]
+                    rule = f"rule-func:string-of-length:{number}+"
+                elif compliance.lower() == "valid email":
+                    rule = "regex-rule:valid-email"
+                elif compliance.lower() == "valid url":
+                    rule = "regex-rule:valid-url"
+                elif compliance.lower() == "valid url _or_ n/a":
+                    rule = "regex-rule:valid-url-or-na"
+                elif "match: " in compliance.lower():
+                    if 'YYYY-MM-DDThh:mm:ss\.\d+ _or_ N/A' in compliance:
+                        rule = "regex-rule:datetime-or-na"
+                    elif 'vN.M' in compliance:
+                        rule = "regex-rule:match:vN.M"
+                    elif 'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
+                        rule = "regex-rule:datetime"
+                    else:
+                        rule = f"regex-rule:EDIT:{compliance}"
+                elif compliance.lower() in ["number","integer","int","float","string","str"]:
+                    rule = f"type-rule:{compliance.lower()}"
+                elif compliance.lower() == "exact match in vocabulary":
+                    rule = f"__vocab__:EDIT:{compliance}"
+                elif "one of: " in compliance.lower():
+                    options = compliance.split(': ')[1]
+                    options = options.replace(',','|')
+                    while ' ' in options:
+                        options = options.replace(' ','')
+                    rule = f"rule-func:match-one-of:{options}"
+                else:
+                    rule = f"UNKNOWN compliance: {compliance}"
+                rule = rule.replace('(','\(')
+                rule = rule.replace(')','\)')
+                rule = [ rule.replace(' ','\s') if "regex:" in rule else rule ][0]
+                attr_rules[attr] = rule
+        prod_attrs_exist = True
+    else:
+        prod_attrs_exist = False
+
+        
 
     spec_file_name = f'{out_dir}/amof-{product}.yml'
     with open(spec_file_name, 'w') as f:
@@ -181,4 +231,15 @@ for product in products:
             f.write('dims-requires:\n  func: checksit.generic.check_dim_exists\n  params:\n    dimensions:\n')
             for dim in product_dims:
                 f.write(f'      - {dim}\n')
+        if prod_attrs_exist:
+            f.write('\nrequired-global-attrs:\n  func: checksit.generic.check_global_attrs\n  params:\n    vocab_attrs:\n')
+            for attr, rule in attr_rules.items():
+                if "__vocab__" in rule:
+                    f.write(f'      {attr}: {rule}\n')
+            f.write('    rules_attrs:\n')
+            for attr, rule in attr_rules.items():
+                if rule.split(':')[0] in ['regex','regex-rule','type-rule','rule-func']:
+                    f.write(f'      {attr}: {rule}\n') 
+
+
             
