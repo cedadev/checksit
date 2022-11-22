@@ -1,5 +1,4 @@
 click
 pyyaml
-cf
+cf-python
 netcdf4
-
