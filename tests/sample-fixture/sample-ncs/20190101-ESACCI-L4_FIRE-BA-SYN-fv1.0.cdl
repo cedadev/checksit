@@ -1,0 +1,115 @@
+netcdf \20190101-ESACCI-L4_FIRE-BA-SYN-fv1.0 {
+dimensions:
+	vegetation_class = 18 ;
+	lat = 720 ;
+	lon = 1440 ;
+	bounds = 2 ;
+	strlen = 150 ;
+	time = UNLIMITED ; // (1 currently)
+variables:
+	double lat(lat) ;
+		lat:units = "degree_north" ;
+		lat:standard_name = "latitude" ;
+		lat:long_name = "latitude" ;
+		lat:bounds = "lat_bounds" ;
+	double lat_bounds(lat, bounds) ;
+	double lon(lon) ;
+		lon:units = "degree_east" ;
+		lon:standard_name = "longitude" ;
+		lon:long_name = "longitude" ;
+		lon:bounds = "lon_bounds" ;
+	double lon_bounds(lon, bounds) ;
+	double time(time) ;
+		time:units = "days since 1970-01-01 00:00:00" ;
+		time:standard_name = "time" ;
+		time:long_name = "time" ;
+		time:bounds = "time_bounds" ;
+		time:calendar = "standard" ;
+	float time_bounds(time, bounds) ;
+	int vegetation_class(vegetation_class) ;
+		vegetation_class:units = "1" ;
+		vegetation_class:long_name = "vegetation class number" ;
+	char vegetation_class_name(vegetation_class, strlen) ;
+		vegetation_class_name:units = "1" ;
+		vegetation_class_name:long_name = "vegetation class name" ;
+	float burned_area(time, lat, lon) ;
+		burned_area:units = "m2" ;
+		burned_area:standard_name = "burned_area" ;
+		burned_area:long_name = "total burned_area" ;
+		burned_area:valid_range = 0.f, 7.693146e+08f ;
+		burned_area:cell_methods = "time: sum" ;
+	float standard_error(time, lat, lon) ;
+		standard_error:units = "m2" ;
+		standard_error:long_name = "standard error of the estimation of burned area" ;
+		standard_error:valid_range = 0.f, 7.693146e+08f ;
+	float fraction_of_burnable_area(time, lat, lon) ;
+		fraction_of_burnable_area:units = "1" ;
+		fraction_of_burnable_area:long_name = "fraction of burnable area" ;
+		fraction_of_burnable_area:comment = "The fraction of burnable area is the fraction of the cell that corresponds to vegetated land covers that could burn. The land cover classes are those from C3S Land Cover, https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview" ;
+		fraction_of_burnable_area:valid_range = 0.f, 1.f ;
+	float fraction_of_observed_area(time, lat, lon) ;
+		fraction_of_observed_area:units = "1" ;
+		fraction_of_observed_area:long_name = "fraction of observed area" ;
+		fraction_of_observed_area:comment = "The fraction of observed area is the fraction of the total burnable area in the cell (fraction_of_burnable_area variable of this file) that was observed during the time interval, and was not marked as unsuitable/not observable. The latter refers to the area where it was not possible to obtain observational burned area information for the whole time interval because of the lack of input data (non-existing data for that location and period)." ;
+		fraction_of_observed_area:valid_range = 0.f, 1.f ;
+	float burned_area_in_vegetation_class(time, vegetation_class, lat, lon) ;
+		burned_area_in_vegetation_class:units = "m2" ;
+		burned_area_in_vegetation_class:long_name = "burned area in vegetation class" ;
+		burned_area_in_vegetation_class:cell_methods = "time: sum" ;
+		burned_area_in_vegetation_class:comment = "Burned area by land cover classes; land cover classes are from C3S Land Cover, https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview" ;
+		burned_area_in_vegetation_class:valid_range = 0.f, 7.693146e+08f ;
+	int crs ;
+		crs:wkt = "GEOGCS[\"WGS84(DD)\", \n",
+			"  DATUM[\"WGS84\", \n",
+			"    SPHEROID[\"WGS84\", 6378137.0, 298.257223563]], \n",
+			"  PRIMEM[\"Greenwich\", 0.0], \n",
+			"  UNIT[\"degree\", 0.017453292519943295], \n",
+			"  AXIS[\"Geodetic longitude\", EAST], \n",
+			"  AXIS[\"Geodetic latitude\", NORTH]]" ;
+		crs:i2m = "0.25,0.0,0.0,-0.25,-180.0,90.0" ;
+
+// global attributes:
+		:title = "Sentinel-3 SYN Burned Area Grid product, version 1.0" ;
+		:institution = "University of Alcala" ;
+		:source = "Sentinel-3 Synergy (SYN) product, derived from OLCI+SLSTR Surface Reflectance, VIIRS VNP14IMGML thermal anomalies, C3S Land Cover dataset v2.1.1" ;
+		:history = "Created on 2022-03-01 17:20:33" ;
+		:references = "See https://climate.esa.int/en/projects/fire/" ;
+		:tracking_id = "d978331b-be86-46d3-887c-3525f652b830" ;
+		:Conventions = "CF-1.7" ;
+		:product_version = "v1.0" ;
+		:format_version = "CCI Data Standards v2.3" ;
+		:summary = "The grid product is the result of summing burned area pixels and their attributes within each cell of 0.25x0.25 degrees in a regular grid covering the whole Earth in monthly composites. The attributes stored are sum of burned area, standard error, fraction of burnable area, fraction of observed area, and the burned area for 18 land cover classes of C3S Land Cover." ;
+		:keywords = "Burned Area, Fire Disturbance, Climate Change, ESA, GCOS" ;
+		:id = "20190101-ESACCI-L4_FIRE-BA-SYN-fv1.0.nc" ;
+		:naming_authority = "int.esa.climate" ;
+		:doi = "10.5285/3aaaaf94813e48f18f2b83242a8dacbe" ;
+		:keywords_vocabulary = "none" ;
+		:cdm_data_type = "Grid" ;
+		:comment = "These data were produced as part of the Climate Change Initiative Programme, Fire Disturbance ECV." ;
+		:date_created = "20220301T172033Z" ;
+		:creator_name = "University of Alcala" ;
+		:creator_url = "https://geogra.uah.es/gita/en/" ;
+		:creator_email = "emilio.chuvieco@uah.es" ;
+		:contact = "mlucrecia.pettinari@uah.es" ;
+		:project = "Climate Change Initiative - European Space Agency" ;
+		:geospatial_lat_min = "-90" ;
+		:geospatial_lat_max = "90" ;
+		:geospatial_lon_min = "-180" ;
+		:geospatial_lon_max = "180" ;
+		:geospatial_vertical_min = "0" ;
+		:geospatial_vertical_max = "0" ;
+		:time_coverage_start = "20190101T000000Z" ;
+		:time_coverage_end = "20190131T235959Z" ;
+		:time_coverage_duration = "P1M" ;
+		:time_coverage_resolution = "P1M" ;
+		:standard_name_vocabulary = "NetCDF Climate and Forecast (CF) Metadata Convention" ;
+		:license = "ESA CCI Data Policy: free and open access" ;
+		:platform = "Sentinel-3A, Sentinel-3B" ;
+		:sensor = "OLCI, SLSTR" ;
+		:spatial_resolution = "0.25 degrees" ;
+		:key_variables = "burned_area" ;
+		:geospatial_lon_units = "degrees_east" ;
+		:geospatial_lat_units = "degrees_north" ;
+		:geospatial_lon_resolution = "0.25" ;
+		:geospatial_lat_resolution = "0.25" ;
+}

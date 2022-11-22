@@ -114,12 +114,16 @@ class CDLParser:
         var_id = None
         current = None
 
+        # Set defaults for key and value so they can be sent to multiline parser even if not set
+        key = None
+        value = None
+
         for line in content:
             if re.match(f"^{vocabs_prefix}:[0-9a-zA-Z_-]+:variables:", line):
                 vocab_var_id = line.split(":")[3]
                 vocab_lookup = line.split(":", 1)[-1]
                 variables[vocab_var_id] = vocabs.lookup(vocab_lookup)
-            elif not var_id or not line.startswith(f"{var_id}:"):
+            elif not var_id or not line.startswith(f"{var_id}:") and last_line.strip()[-1] != ",":
                 # Add current collected variable to list if it exists
                 if current: 
                     variables[var_id] = current.copy()
@@ -127,18 +131,52 @@ class CDLParser:
                 var_id, dtype, dimensions = self._parse_var_dtype_dims(line)
                 current = {"dtype": dtype, "dimensions": dimensions}
             else:
-                key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
+#                key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
+                # Send last key and last value (from last iteration of loop) and line to get new value
+                key, value = self._parse_key_value_multiline_safe(line, key, value, variable_attr=True)
                 current[key] = self._safe_parse_value(value)
+
+            last_line = line
         else:
             variables[var_id] = current.copy()
 
         return variables
 
+    def _parse_key_value_multiline_safe(self, line, last_key, last_value, variable_attr=False):
+        # Caters for continuation lines for arrays of strings, etc
+        if "=" in line:
+            # A new (key, value) pair is found
+            if variable_attr: # var attr
+                key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
+            else:        # global attr
+                key, value = [x.strip() for x in line.lstrip(":").split("=", 1)]
+        else:
+            # Assume a continuation of th last value, so set key to None
+            key, value = last_key, last_value + " " + line.strip().rstrip(";")
+
+        return key, value
+
+
     def _ordered_dict(self, content):
         resp = {}
+        key = None
+        value = None
+
         for line in content:
             if self.verbose: print(f"WORKING ON LINE: {line}")
-            key, value = [x.strip() for x in line.lstrip(":").split("=", 1)]
+            
+            # Cater for continuation lines for arrays of strings, etc
+#            if "=" in line: 
+                # A new (key, value) pair is found
+#                key, value = [x.strip() for x in line.lstrip(":").split("=", 1)]
+#            else:
+                # Assume a continuation of th last value
+#                value += " " + line.strip()
+            # Send last key and last value (from last iteration of loop) and line to get new value
+            key, value = self._parse_key_value_multiline_safe(line, key, value)
+
+            # This will overwrite the previous value - which is safe if a continuation happened
+            # as the key is the same as last time
             resp[key] = self._safe_parse_value(value)
 
         return resp
