@@ -205,7 +205,7 @@ class Checker:
                     deploy_spec = f'amof-common-{deployment_mode}'
                     product = file_path.split('/')[-1].split('_')[3]
                     product_spec = f'amof-{product}'
-                    specs = [deploy_spec, product_spec]
+                    specs = [deploy_spec, product_spec, 'amof-global-attrs']
                     # don't need to do template check
                     template = "off"
 
@@ -231,7 +231,7 @@ class Checker:
         if log_mode == "compact":
             print(f"{file_path} | {tmpl_input} | ", end="")
         else:
-            print(f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tDatafile: {file_content.inpt}")
+            print(f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {specs}\n\tDatafile: {file_content.inpt}")
 
         self._check_file(file_content, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
                         specs=specs, ignore_attrs=ignore_attrs, log_mode=log_mode)
