@@ -1,0 +1,61 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - wind_speed
+      - wind_speed_of_gust
+      - wind_from_direction
+      - eastward_wind
+      - northward_wind
+      - upward_air_velocity
+      - divergence_of_wind
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - wind_speed_of_gust_from_direction
+      - divergence_of_wind_from_direction
+      - divergence_of_eastward_wind
+      - divergence_of_northward_wind
+      - divergence_of_upward_air_velocity
+      - sonic_air_temperature
+      - divergence_of_sonic_air_temperature
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_sonic_temperature
+      - qc_flag_wind_speed
+      - qc_flag_wind_direction
+      - qc_flag_wind_component_eastward
+      - qc_flag_wind_component_northward
+      - qc_flag_wind_component_upward_air_velocity
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

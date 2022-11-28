@@ -1,0 +1,71 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - cloud_base_altitude
+      - sensor_zenith_angle
+      - sensor_azimuth_angle
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - laser_pulse_energy
+      - laser_temperature
+      - profile_pulses
+      - profile_scaling
+      - window_contamination
+      - window_transmttance
+      - background_light
+      - backscatter_sum
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - layer_index
+
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    vocab_attrs:
+    rules_attrs:
+      laser_wavelength: rule-func:string-of-length:3+
+      nominal_laser_pulse_energy: rule-func:string-of-length:3+
+      pulse_repetition_frequency: rule-func:string-of-length:3+
+      lens_diameter: rule-func:string-of-length:3+
+      beam_divergence: rule-func:string-of-length:3+
+      pulse_length: rule-func:string-of-length:3+
+      sampling_frequency: rule-func:string-of-length:3+

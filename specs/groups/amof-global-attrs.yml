@@ -2,8 +2,6 @@ required-global-attrs:
   func: checksit.generic.check_global_attrs
   params:
     vocab_attrs:
-      #source: __vocabs__:AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description
-      platform: __vocabs__:AMF_CVs/AMF_platform:platform:__all__
     rules_attrs:
       Conventions: regex:CF-1.6,\sNCAS-AMF-2.0.0
       instrument_manufacturer: rule-func:string-of-length:2+
@@ -38,6 +36,7 @@ required-global-attrs:
       time_coverage_start: regex-rule:datetime
       time_coverage_end: regex-rule:datetime
       geospatial_bounds: rule-func:string-of-length:8+
+      platform_altitude: regex:^\d+\.?\d*\sm$
       location_keywords: rule-func:string-of-length:3+
       amf_vocabularies_release: regex-rule:valid-url
       history: rule-func:string-of-length:1+

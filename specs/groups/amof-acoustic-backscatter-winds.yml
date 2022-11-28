@@ -1,0 +1,77 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - altitude
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - axis
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - sound_intensity_level_in_air
+      - wind_speed
+      - wind_from_direction
+      - eastward_wind
+      - northward_wind
+      - upward_air_velocity
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - divergence_of_eastward_wind
+      - divergence_of_northward_wind
+      - divergence_of_upward_air_velocity
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_mean_winds
+      - qc_flag_wind_component_eastward
+      - qc_flag_wind_component_northward
+      - qc_flag_wind_component_upward_air_velocity
+      - qc_flag_backscatter
+      - qc_flag_background_noise
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude

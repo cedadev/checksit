@@ -1,0 +1,46 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_fraction_of_peroxyacetyl_nitrate_in_air
+      - mass_fraction_of_peroxyacetyl_nitrate_in_air
+    defined_attrs:
+      - type
+      - dimension
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_concentration_of_peroxyacetyl_nitrate_in_air
+      - mass_concentration_of_peroxyacetyl_nitrate_in_air
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

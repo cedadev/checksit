@@ -1,0 +1,79 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - range
+      - sensor_azimuth_angle_instrument_frame
+      - sensor_view_angle_instrument_frame
+      - sensor_azimuth_angle_earth_frame
+      - sensor_view_angle_earth_frame
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - attenuated_aerosol_backscatter_coefficient_co
+      - signal_to_noise_ratio_plus_1_co
+      - attenuated_aerosol_backscatter_coefficient_cr
+      - signal_to_noise_ratio_plus_1_cr
+      - depolarisation_ratio
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_attenuated_aerosol_backscatter_coefficient_co
+      - qc_flag_attenuated_aerosol_backscatter_coefficient_cr
+      - qc_flag_depolarisation_ratio
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index_of_angle
+      - index_of_range
+
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    vocab_attrs:
+    rules_attrs:
+      laser_wavelength: rule-func:string-of-length:3+
+      laser_pulse_energy: rule-func:string-of-length:3+
+      pulse_repetition_frequency: rule-func:string-of-length:3+
+      pulses_per_ray: type-rule:integer
+      rays_per_point: type-rule:integer
+      lens_diameter: rule-func:string-of-length:3+
+      beam_divergence: rule-func:string-of-length:3+
+      pulse_length: rule-func:string-of-length:3+
+      sampling_frequency: rule-func:string-of-length:3+
+      focus: rule-func:string-of-length:3+
+      velocity_resolution: rule-func:string-of-length:3+
+      number_of_gates: type-rule:integer
+      gate_length: rule-func:string-of-length:3+
+      fft_length: type-rule:integer
+      maximum_range: rule-func:string-of-length:3+

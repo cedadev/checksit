@@ -1,0 +1,52 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - downward_heat_flux_in_soil
+      - soil_temperature
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - soil_water_potential
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_soil_heat_flux
+      - qc_flag_soil_temperature
+      - qc_flag_soil_water_potential
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index

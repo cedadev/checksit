@@ -1,0 +1,39 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - time
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - axis
+      - valid_min
+      - valid_max
+      - calendar
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - day_of_year
+      - year
+      - month
+      - day
+      - hour
+      - minute
+      - second
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - valid_min
+      - valid_max
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - time

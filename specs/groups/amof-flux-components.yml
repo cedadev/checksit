@@ -1,0 +1,154 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - start_of_run
+      - run_length
+      - number_of_samples_in_run
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - air_temperature
+      - air_pressure
+      - mole_concentration_of_carbon_dioxide_in_air
+      - mole_concentration_of_water_vapor_in_air
+      - specific_humidity
+      - water_vapur_partial_pressure_in_air
+      - humidity_mixing_ratio
+      - eastward_wind
+      - northward_wind
+      - upward_air_velocity
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - sonic_air_temperature_theta
+      - sonic_air_temperature
+      - eastward_wind_rotated_to_run
+      - northward_wind_rotated_to_run
+      - upward_air_velocity_rotated_to_run
+      - skew_eastward_wind
+      - skew_northward_wind
+      - skew_upward_air_velocity
+      - skew_sonic_air_temperature
+      - kurtosis_eastward_wind
+      - kurtosis_northward_wind
+      - kurtosis_upward_air_velocity
+      - kurtosis_sonic_air_temperature
+      - sst_wu
+      - sst_wv
+      - sst_wts
+      - friction_velocity
+      - obukhov_length
+      - stability_parameter
+      - divergence_of_upward_air_velocity
+      - integral_turbulent_characteristic_upward_air_velocity
+      - ubar
+      - vbar
+      - wbar
+      - tsbar
+      - co2bar
+      - h2obar
+      - qbar
+      - thetabar
+      - wvmmrbar
+      - uprime
+      - vprime
+      - wprime
+      - tsprime
+      - co2prime
+      - h2oprime
+      - qprime
+      - thetaprime
+      - wvmmrprime
+      - wprimeuprime
+      - wprimevprime
+      - wprimewprime
+      - uprimeuprime
+      - vprimevprime
+      - wprimetsprime
+      - wprimeco2prime
+      - wprimeh2oprime
+      - wprimeqprime
+      - wprimethetaprime
+      - wprimewvmmrprime
+      - wprimeuprimebar
+      - wprimevprimebar
+      - wprimewprimebar
+      - uprimeuprimebar
+      - vprimevprimebar
+      - wprimetsprimebar
+      - wprimeco2primebar
+      - wprimeh2oprimebar
+      - wprimeqprimebar
+      - wprimethetaprimebar
+      - wprimewvmmrprimebar
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_skew_u
+      - qc_flag_skew_v
+      - qc_flag_skew_w
+      - qc_flag_skew_ts
+      - qc_flag_kurtosis_u
+      - qc_flag_kurtosis_v
+      - qc_flag_kurtosis_w
+      - qc_flag_kurtosis_ts
+      - qc_flag_sstclass_wu
+      - qc_flag_sstclass_wv
+      - qc_flag_sstclass_wts
+      - qc_flag_quality_wu
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_quality_wv
+    defined_attrs:
+      - type
+      - dimension
+      - units
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index

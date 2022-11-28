@@ -1,0 +1,69 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - altitude
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - axis
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - air_temperature
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_surface_temperature
+      - qc_flag_surface_relative_humidity
+      - qc_flag_surface_pressure
+      - qc_flag_precipitation
+      - qc_flag_channel_1_failure
+      - qc_flag_channel_2_failure
+      - qc_flag_channel_3_failure
+      - qc_flag_channel_4_failure
+      - qc_flag_channel_5_failure
+      - qc_flag_channel_6_failure
+      - qc_flag_channel_7_failure
+      - qc_flag_channel_8_failure
+      - qc_flag_channel_9_failure
+      - qc_flag_channel_10_failure
+      - qc_flag_channel_11_failure
+      - qc_flag_channel_12_failure
+      - qc_flag_channel_13_failure
+      - qc_flag_channel_14_failure
+      - qc_flag_t_receiver_temperature_stability
+      - qc_flag_rh_receiver_temperature_stability
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude

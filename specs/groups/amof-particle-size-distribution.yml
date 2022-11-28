@@ -1,0 +1,63 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - ambient_particle_diameter
+      - measurement_channel_lower_limit
+      - measurement_channel_upper_limit
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - ambient_particle_number_per_channel
+      - ambient_particle_size_distribution
+      - ambient_particle_size_log_distribution
+      - total_number_concentration_of_ambient_particles_in_air
+      - number_of_instrument_counts_per_channel
+      - sample_pressure
+      - sample_temperature
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_temperature
+      - qc_flag_pressure
+      - qc_flag_number_of_instrument_counts_per_channel
+      - qc_flag_ambient_particle_number_per_channel
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index
+
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    vocab_attrs:
+    rules_attrs:
+      measurement_technique: rule-func:string-of-length:3+

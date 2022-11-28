@@ -1,0 +1,88 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_fraction_of_nitric_oxide_in_air
+      - mass_fraction_of_nitric_oxide_in_air
+      - mole_fraction_of_noy_expressed_as_nitrogen_in_air
+      - mass_fraction_of_noy_expressed_as_nitrogen_in_air
+    defined_attrs:
+      - type
+      - dimension
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_concentration_of_nitric_oxide_in_air
+      - mass_concentration_of_nitric_oxide_in_air
+      - mole_concentration_of_noy_expressed_as_nitrogen_in_air
+      - mass_concentration_of_noy_expressed_as_nitrogen_in_air
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_fraction_of_nitrogen_dioxide_in_air
+      - mass_fraction_of_nitrogen_dioxide_in_air
+      - mole_fraction_of_nox_expressed_as_nitrogen_in_air
+      - mass_fraction_of_nox_expressed_as_nitrogen_in_air
+    defined_attrs:
+      - type
+      - dimension
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_concentration_of_nitrogen_dioxide_in_air
+      - mass_concentration_of_nitrogen_dioxide_in_air
+      - mole_concentration_of_nox_expressed_as_nitrogen_in_air
+      - mass_concentration_of_nox_expressed_as_nitrogen_in_air
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_no
+      - qc_flag_no2
+      - qc_flag_nox
+      - qc_flag_noy
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

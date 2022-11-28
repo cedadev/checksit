@@ -1,0 +1,31 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - solar_actinic_flux
+      - photolysis_frequencies_jno2
+      - photolysis_frequencies_jo1d
+      - photolysis_frequencies_jhcho
+      - photolysis_frequencies_jhono
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

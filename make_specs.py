@@ -42,12 +42,19 @@ for attr in data.keys():
             rule = "regex-rule:match:vN.M"
         elif 'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
             rule = "regex-rule:datetime"
+        elif '<number> m' in compliance:
+            rule = "regex:^\d+\.?\d* m$"
         else:
             rule = f"regex-rule:EDIT:{compliance}"
     elif compliance.lower() in ["number","integer","int","float","string","str"]:
         rule = f"type-rule:{compliance.lower()}"
     elif compliance.lower() == "exact match in vocabulary":
-        rule = f"__vocab__:EDIT:{compliance}"
+        if attr == 'source':
+            rule = "AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description"
+        elif attr == 'platform':
+            rule = "AMF_CVs/AMF_platform:platform:__all__"
+        else:
+            rule = f"__vocab__:EDIT:{compliance}"
     elif "one of: " in compliance.lower():
         options = compliance.split(': ')[1]
         options = options.replace(',','|')

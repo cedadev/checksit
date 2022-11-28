@@ -1,0 +1,50 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - altitude
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - axis
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_355
+      - volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_316
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_355
+      - qc_flag_316
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude
