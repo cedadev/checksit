@@ -2,6 +2,8 @@ required-global-attrs:
   func: checksit.generic.check_global_attrs
   params:
     vocab_attrs:
+      source: __vocabs__:AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description
+      platform: __vocabs__:AMF_CVs/AMF_platform:platform:__all__
     rules_attrs:
       Conventions: regex:CF-1.6,\sNCAS-AMF-2.0.0
       instrument_manufacturer: rule-func:string-of-length:2+

@@ -50,11 +50,11 @@ for attr in data.keys():
         rule = f"type-rule:{compliance.lower()}"
     elif compliance.lower() == "exact match in vocabulary":
         if attr == 'source':
-            rule = "AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description"
+            rule = "__vocabs__:AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description"
         elif attr == 'platform':
-            rule = "AMF_CVs/AMF_platform:platform:__all__"
+            rule = "__vocabs__:AMF_CVs/AMF_platform:platform:__all__"
         else:
-            rule = f"__vocab__:EDIT:{compliance}"
+            rule = f"__vocabs__:EDIT:{compliance}"
     elif "one of: " in compliance.lower():
         options = compliance.split(': ')[1]
         options = options.replace(',','|')
@@ -72,7 +72,7 @@ for attr in data.keys():
 with open(f'{out_dir}/amof-global-attrs.yml', 'w') as f:
     f.write('required-global-attrs:\n  func: checksit.generic.check_global_attrs\n  params:\n    vocab_attrs:\n')
     for attr, rule in attr_rules.items():
-        if "__vocab__" in rule:
+        if "__vocabs__" in rule:
             f.write(f'      {attr}: {rule}\n')
     f.write('    rules_attrs:\n')
     for attr, rule in attr_rules.items():
@@ -203,7 +203,12 @@ for product in products:
                 elif compliance.lower() in ["number","integer","int","float","string","str"]:
                     rule = f"type-rule:{compliance.lower()}"
                 elif compliance.lower() == "exact match in vocabulary":
-                    rule = f"__vocab__:EDIT:{compliance}"
+                    if attr == 'source':
+                        rule = "__vocabs__:AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description"
+                    elif attr == 'platform':
+                        rule = "__vocabs__:AMF_CVs/AMF_platform:platform:__all__"
+                    else:
+                        rule = f"__vocabs__:EDIT:{compliance}"
                 elif "one of: " in compliance.lower():
                     options = compliance.split(': ')[1]
                     options = options.replace(',','|')
@@ -241,7 +246,7 @@ for product in products:
         if prod_attrs_exist:
             f.write('\nrequired-global-attrs:\n  func: checksit.generic.check_global_attrs\n  params:\n    vocab_attrs:\n')
             for attr, rule in attr_rules.items():
-                if "__vocab__" in rule:
+                if "__vocabs__" in rule:
                     f.write(f'      {attr}: {rule}\n')
             f.write('    rules_attrs:\n')
             for attr, rule in attr_rules.items():
