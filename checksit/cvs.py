@@ -36,13 +36,24 @@ class Vocabs:
         vocab_lookup = re.sub(f"^{vocabs_prefix}:", "", vocab_lookup)
 
         for i,key in enumerate(vocab_lookup.split(":")):
-            if key in WILDCARD:
-                if i+1 != len(vocab_lookup.split(":")):
-                    raise ValueError(f"WILDCARD {key} only allowed as last argument")
+            if isinstance(obj, dict) or i == 0:
+                if key in WILDCARD:
+                    if i+1 != len(vocab_lookup.split(":")):
+                        obj = [ obj[key] for key in obj.keys() ]
+                    else:
+                        # WILDCARD used as last option, just get keys
+                        obj = list(obj.keys())
                 else:
-                    obj = list(obj.keys())
+                    obj = obj[key]
             else:
-                obj = obj[key]
+                if not isinstance(obj,list):
+                    # sanity check
+                    raise ValueError(f"Confused how we got here, obj = {obj}")
+                elif key in WILDCARD:
+                    raise ValueError(f"Second WILDCARD ({WILDCARD}) in query {vocab_lookup} not allowed")
+                else:
+                    # obj should be list of dicts, creating list of values or dicts
+                    obj = [ d[key] for d in obj ]
 
         return obj
 
