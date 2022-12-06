@@ -2,13 +2,13 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - wind_speed
-      - wind_speed_of_gust
-      - wind_from_direction
-      - eastward_wind
-      - northward_wind
-      - upward_air_velocity
-      - divergence_of_wind
+      - wind_speed:__OPTIONAL__
+      - wind_speed_of_gust:__OPTIONAL__
+      - wind_from_direction:__OPTIONAL__
+      - eastward_wind:__OPTIONAL__
+      - northward_wind:__OPTIONAL__
+      - upward_air_velocity:__OPTIONAL__
+      - divergence_of_wind:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -24,13 +24,13 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - wind_speed_of_gust_from_direction
-      - divergence_of_wind_from_direction
-      - divergence_of_eastward_wind
-      - divergence_of_northward_wind
-      - divergence_of_upward_air_velocity
-      - sonic_air_temperature
-      - divergence_of_sonic_air_temperature
+      - wind_speed_of_gust_from_direction:__OPTIONAL__
+      - divergence_of_wind_from_direction:__OPTIONAL__
+      - divergence_of_eastward_wind:__OPTIONAL__
+      - divergence_of_northward_wind:__OPTIONAL__
+      - divergence_of_upward_air_velocity:__OPTIONAL__
+      - sonic_air_temperature:__OPTIONAL__
+      - divergence_of_sonic_air_temperature:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -45,12 +45,12 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag_sonic_temperature
-      - qc_flag_wind_speed
-      - qc_flag_wind_direction
-      - qc_flag_wind_component_eastward
-      - qc_flag_wind_component_northward
-      - qc_flag_wind_component_upward_air_velocity
+      - qc_flag_sonic_temperature:__OPTIONAL__
+      - qc_flag_wind_speed:__OPTIONAL__
+      - qc_flag_wind_direction:__OPTIONAL__
+      - qc_flag_wind_component_eastward:__OPTIONAL__
+      - qc_flag_wind_component_northward:__OPTIONAL__
+      - qc_flag_wind_component_upward_air_velocity:__OPTIONAL__
     defined_attrs:
       - type
       - dimension

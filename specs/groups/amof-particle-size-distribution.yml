@@ -2,9 +2,9 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - ambient_particle_diameter
-      - measurement_channel_lower_limit
-      - measurement_channel_upper_limit
+      - ambient_particle_diameter:__OPTIONAL__
+      - measurement_channel_lower_limit:__OPTIONAL__
+      - measurement_channel_upper_limit:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -17,13 +17,13 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - ambient_particle_number_per_channel
-      - ambient_particle_size_distribution
-      - ambient_particle_size_log_distribution
-      - total_number_concentration_of_ambient_particles_in_air
-      - number_of_instrument_counts_per_channel
-      - sample_pressure
-      - sample_temperature
+      - ambient_particle_number_per_channel:__OPTIONAL__
+      - ambient_particle_size_distribution:__OPTIONAL__
+      - ambient_particle_size_log_distribution:__OPTIONAL__
+      - total_number_concentration_of_ambient_particles_in_air:__OPTIONAL__
+      - number_of_instrument_counts_per_channel:__OPTIONAL__
+      - sample_pressure:__OPTIONAL__
+      - sample_temperature:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -37,10 +37,10 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag_temperature
-      - qc_flag_pressure
-      - qc_flag_number_of_instrument_counts_per_channel
-      - qc_flag_ambient_particle_number_per_channel
+      - qc_flag_temperature:__OPTIONAL__
+      - qc_flag_pressure:__OPTIONAL__
+      - qc_flag_number_of_instrument_counts_per_channel:__OPTIONAL__
+      - qc_flag_ambient_particle_number_per_channel:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -53,7 +53,7 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - index
+      - index:__OPTIONAL__
 
 required-global-attrs:
   func: checksit.generic.check_global_attrs

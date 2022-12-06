@@ -2,10 +2,10 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - mole_fraction_of_carbon_monoxide_in_air
-      - mass_fraction_of_carbon_monoxide_in_air
-      - mole_fraction_of_molecular_hydrogen_in_air
-      - mass_fraction_of_molecular_hydrogen_in_air
+      - mole_fraction_of_carbon_monoxide_in_air:__OPTIONAL__
+      - mass_fraction_of_carbon_monoxide_in_air:__OPTIONAL__
+      - mole_fraction_of_molecular_hydrogen_in_air:__OPTIONAL__
+      - mass_fraction_of_molecular_hydrogen_in_air:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -20,10 +20,10 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - mole_concentration_of_carbon_monoxide_in_air
-      - mass_concentration_of_carbon_monoxide_in_air
-      - mole_concentration_of_molecular_hydrogen_in_air
-      - mass_concentration_of_molecular_hydrogen_in_air
+      - mole_concentration_of_carbon_monoxide_in_air:__OPTIONAL__
+      - mass_concentration_of_carbon_monoxide_in_air:__OPTIONAL__
+      - mole_concentration_of_molecular_hydrogen_in_air:__OPTIONAL__
+      - mass_concentration_of_molecular_hydrogen_in_air:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -39,8 +39,8 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag_co
-      - qc_flag_h2
+      - qc_flag_co:__OPTIONAL__
+      - qc_flag_h2:__OPTIONAL__
     defined_attrs:
       - type
       - dimension

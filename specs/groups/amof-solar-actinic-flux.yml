@@ -2,11 +2,11 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - solar_actinic_flux
-      - photolysis_frequencies_jno2
-      - photolysis_frequencies_jo1d
-      - photolysis_frequencies_jhcho
-      - photolysis_frequencies_jhono
+      - solar_actinic_flux:__OPTIONAL__
+      - photolysis_frequencies_jno2:__OPTIONAL__
+      - photolysis_frequencies_jo1d:__OPTIONAL__
+      - photolysis_frequencies_jhcho:__OPTIONAL__
+      - photolysis_frequencies_jhono:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -20,7 +20,7 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag
+      - qc_flag:__OPTIONAL__
     defined_attrs:
       - type
       - dimension

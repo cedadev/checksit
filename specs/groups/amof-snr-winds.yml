@@ -2,7 +2,7 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - time_minutes_since_start_of_day
+      - time_minutes_since_start_of_day:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -14,7 +14,7 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - altitude
+      - altitude:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -30,17 +30,17 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - size_of_gate
-      - signal_to_noise_ratio_of_beam_1
-      - signal_to_noise_ratio_of_beam_2
-      - signal_to_noise_ratio_of_beam_3
-      - signal_to_noise_ratio_minimum
-      - spectral_width_of_beam_1
-      - spectral_width_of_beam_2
-      - spectral_width_of_beam_3
-      - skew_of_beam_1
-      - skew_of_beam_2
-      - skew_of_beam_3
+      - size_of_gate:__OPTIONAL__
+      - signal_to_noise_ratio_of_beam_1:__OPTIONAL__
+      - signal_to_noise_ratio_of_beam_2:__OPTIONAL__
+      - signal_to_noise_ratio_of_beam_3:__OPTIONAL__
+      - signal_to_noise_ratio_minimum:__OPTIONAL__
+      - spectral_width_of_beam_1:__OPTIONAL__
+      - spectral_width_of_beam_2:__OPTIONAL__
+      - spectral_width_of_beam_3:__OPTIONAL__
+      - skew_of_beam_1:__OPTIONAL__
+      - skew_of_beam_2:__OPTIONAL__
+      - skew_of_beam_3:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -55,11 +55,11 @@ var-requires3:
   func: checksit.generic.check_var
   params:
     variables:
-      - wind_speed
-      - wind_from_direction
-      - eastward_wind
-      - northward_wind
-      - upward_air_velocity
+      - wind_speed:__OPTIONAL__
+      - wind_from_direction:__OPTIONAL__
+      - eastward_wind:__OPTIONAL__
+      - northward_wind:__OPTIONAL__
+      - upward_air_velocity:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -75,11 +75,11 @@ var-requires4:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag_wind
-      - qc_flag_beam_1
-      - qc_flag_beam_2
-      - qc_flag_beam_3
-      - qc_flag_rain_detected
+      - qc_flag_wind:__OPTIONAL__
+      - qc_flag_beam_1:__OPTIONAL__
+      - qc_flag_beam_2:__OPTIONAL__
+      - qc_flag_beam_3:__OPTIONAL__
+      - qc_flag_rain_detected:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -92,4 +92,4 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - altitude
+      - altitude:__OPTIONAL__

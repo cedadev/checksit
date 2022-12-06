@@ -2,7 +2,7 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - altitude
+      - altitude:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -18,9 +18,9 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - spectral_reflectivity
-      - rain_drop_diameter
-      - drop_size_distribution
+      - spectral_reflectivity:__OPTIONAL__
+      - rain_drop_diameter:__OPTIONAL__
+      - drop_size_distribution:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -35,7 +35,7 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag
+      - qc_flag:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -48,5 +48,5 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - index_bin
-      - altitude
+      - index_bin:__OPTIONAL__
+      - altitude:__OPTIONAL__

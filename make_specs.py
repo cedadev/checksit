@@ -234,7 +234,7 @@ for product in products:
                 f.write(f'var-requires{key_number}:\n')
                 f.write('  func: checksit.generic.check_var\n  params:\n    variables:\n')
                 for var in product_info[key_number]:
-                    f.write(f'      - {var}\n')
+                    f.write(f'      - {var}:__OPTIONAL__\n')
                 f.write('    defined_attrs:\n')
                 for attr in product_attrs_info[key_number]:
                     f.write(f'      - {attr}\n')
@@ -242,7 +242,7 @@ for product in products:
         if prod_dims_exist:
             f.write('dims-requires:\n  func: checksit.generic.check_dim_exists\n  params:\n    dimensions:\n')
             for dim in product_dims:
-                f.write(f'      - {dim}\n')
+                f.write(f'      - {dim}:__OPTIONAL__\n')
         if prod_attrs_exist:
             f.write('\nrequired-global-attrs:\n  func: checksit.generic.check_global_attrs\n  params:\n    vocab_attrs:\n')
             for attr, rule in attr_rules.items():

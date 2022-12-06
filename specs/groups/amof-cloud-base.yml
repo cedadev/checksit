@@ -2,9 +2,9 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - cloud_base_altitude
-      - sensor_zenith_angle
-      - sensor_azimuth_angle
+      - cloud_base_altitude:__OPTIONAL__
+      - sensor_zenith_angle:__OPTIONAL__
+      - sensor_azimuth_angle:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -20,14 +20,14 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - laser_pulse_energy
-      - laser_temperature
-      - profile_pulses
-      - profile_scaling
-      - window_contamination
-      - window_transmttance
-      - background_light
-      - backscatter_sum
+      - laser_pulse_energy:__OPTIONAL__
+      - laser_temperature:__OPTIONAL__
+      - profile_pulses:__OPTIONAL__
+      - profile_scaling:__OPTIONAL__
+      - window_contamination:__OPTIONAL__
+      - window_transmttance:__OPTIONAL__
+      - background_light:__OPTIONAL__
+      - backscatter_sum:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -42,7 +42,7 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag
+      - qc_flag:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -55,7 +55,7 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - layer_index
+      - layer_index:__OPTIONAL__
 
 required-global-attrs:
   func: checksit.generic.check_global_attrs

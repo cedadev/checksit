@@ -2,9 +2,9 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - altitude
-      - latitude
-      - longitude
+      - altitude:__OPTIONAL__
+      - latitude:__OPTIONAL__
+      - longitude:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -20,11 +20,11 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - air_pressure
-      - air_temperature
-      - relative_humidity
-      - wind_speed
-      - wind_from_direction
+      - air_pressure:__OPTIONAL__
+      - air_temperature:__OPTIONAL__
+      - relative_humidity:__OPTIONAL__
+      - wind_speed:__OPTIONAL__
+      - wind_from_direction:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -40,7 +40,7 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - upward_balloon_velocity
+      - upward_balloon_velocity:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -55,7 +55,7 @@ var-requires3:
   func: checksit.generic.check_var
   params:
     variables:
-      - elapsed_time
+      - elapsed_time:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -68,7 +68,7 @@ var-requires4:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag
+      - qc_flag:__OPTIONAL__
     defined_attrs:
       - type
       - dimension

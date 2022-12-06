@@ -2,10 +2,10 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - mass_concentration_of_pm1_ambient_aerosol_in_air
-      - mass_concentration_of_pm2p5_ambient_aerosol_in_air
-      - mass_concentration_of_pm10_ambient_aerosol_in_air
-      - number_concentration_of_ambient_aerosol_particles_in_air
+      - mass_concentration_of_pm1_ambient_aerosol_in_air:__OPTIONAL__
+      - mass_concentration_of_pm2p5_ambient_aerosol_in_air:__OPTIONAL__
+      - mass_concentration_of_pm10_ambient_aerosol_in_air:__OPTIONAL__
+      - number_concentration_of_ambient_aerosol_particles_in_air:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -20,8 +20,8 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - mass_concentration_of_pm4_ambient_aerosol_in_air
-      - mass_concentration_of_total_pm_ambient_aerosol_in_air
+      - mass_concentration_of_pm4_ambient_aerosol_in_air:__OPTIONAL__
+      - mass_concentration_of_total_pm_ambient_aerosol_in_air:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -35,9 +35,9 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - air_pressure
-      - air_temperature
-      - relative_humidity
+      - air_pressure:__OPTIONAL__
+      - air_temperature:__OPTIONAL__
+      - relative_humidity:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -53,15 +53,15 @@ var-requires3:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag_pm1
-      - qc_flag_pm2p5
-      - qc_flag_pm4
-      - qc_flag_pm10
-      - qc_flag_total_pm
-      - qc_flag_total_number
-      - qc_flag_temperature
-      - qc_flag_relative_humidity
-      - qc_flag_pressure
+      - qc_flag_pm1:__OPTIONAL__
+      - qc_flag_pm2p5:__OPTIONAL__
+      - qc_flag_pm4:__OPTIONAL__
+      - qc_flag_pm10:__OPTIONAL__
+      - qc_flag_total_pm:__OPTIONAL__
+      - qc_flag_total_number:__OPTIONAL__
+      - qc_flag_temperature:__OPTIONAL__
+      - qc_flag_relative_humidity:__OPTIONAL__
+      - qc_flag_pressure:__OPTIONAL__
     defined_attrs:
       - type
       - dimension

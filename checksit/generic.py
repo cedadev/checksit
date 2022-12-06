@@ -70,8 +70,14 @@ def check_var_exists(dct, variables):
     errors = []
 
     for var in variables:
-        if var not in dct["variables"].keys():
-            errors.append(f"[variable**************:{var}]: Does not exist in file.")
+        if ':__OPTIONAL__' in var:
+            var = var.split(':')[0]
+            if var not in dct["variables"].keys():
+                # add warning/advisory
+                pass
+        else:
+            if var not in dct["variables"].keys():
+                errors.append(f"[variable**************:{var}]: Does not exist in file.")
 
     return errors
 
@@ -85,10 +91,17 @@ def check_dim_exists(dct, dimensions):
     errors = []
 
     for dim in dimensions:
-        if dim not in dct["dimensions"].keys():
-            errors.append(f"[dimension**************:{dim}]: Does not exist in file.")
+        if ':__OPTIONAL__' in dim:
+            dim = dim.split(':')[0]
+            if dim not in dct["dimensions"].keys():
+                # add warning/advisory
+                pass
+        else:
+            if dim not in dct["dimensions"].keys():
+                errors.append(f"[dimension**************:{dim}]: Does not exist in file.")
 
     return errors 
+
 
 def check_var(dct, variables, defined_attrs):
     """
@@ -96,11 +109,21 @@ def check_var(dct, variables, defined_attrs):
     """
     errors = []
     for var in variables:
-        if var not in dct["variables"].keys():
-            errors.append(f"[variable**************:{var}]: Does not exist in file.")
+        if ':__OPTIONAL__' in var:
+            var = var.split(':')[0]
+            if var not in dct["variables"].keys():
+                # add warning/advisory
+                pass
+            else:
+                for attr in defined_attrs:
+                    if is_undefined(dct["variables"][var].get(attr)):
+                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")
         else:
-            for attr in defined_attrs:
-                if is_undefined(dct["variables"][var].get(attr)):
-                    errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")            
+            if var not in dct["variables"].keys():
+                errors.append(f"[variable**************:{var}]: Does not exist in file.")
+            else:
+                for attr in defined_attrs:
+                    if is_undefined(dct["variables"][var].get(attr)):
+                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")            
 
     return errors

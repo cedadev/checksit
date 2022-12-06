@@ -2,7 +2,7 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - altitude
+      - altitude:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -18,13 +18,13 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - wind_speed
-      - wind_speed_of_gust
-      - wind_from_direction
-      - eastward_wind
-      - northward_wind
-      - upward_air_velocity
-      - divergence_of_wind
+      - wind_speed:__OPTIONAL__
+      - wind_speed_of_gust:__OPTIONAL__
+      - wind_from_direction:__OPTIONAL__
+      - eastward_wind:__OPTIONAL__
+      - northward_wind:__OPTIONAL__
+      - upward_air_velocity:__OPTIONAL__
+      - divergence_of_wind:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -40,11 +40,11 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - wind_speed_of_gust_from_direction
-      - divergence_of_wind_from_direction
-      - divergence_of_eastward_wind
-      - divergence_of_northward_wind
-      - divergence_of_upward_air_velocity
+      - wind_speed_of_gust_from_direction:__OPTIONAL__
+      - divergence_of_wind_from_direction:__OPTIONAL__
+      - divergence_of_eastward_wind:__OPTIONAL__
+      - divergence_of_northward_wind:__OPTIONAL__
+      - divergence_of_upward_air_velocity:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -59,7 +59,7 @@ var-requires3:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag
+      - qc_flag:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -72,4 +72,4 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - altitude
+      - altitude:__OPTIONAL__

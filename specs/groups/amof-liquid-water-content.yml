@@ -2,7 +2,7 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - cloud_liquid_water_content
+      - cloud_liquid_water_content:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -16,7 +16,7 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag
+      - qc_flag:__OPTIONAL__
     defined_attrs:
       - type
       - dimension

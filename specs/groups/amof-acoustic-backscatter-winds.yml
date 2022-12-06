@@ -2,7 +2,7 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - altitude
+      - altitude:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -18,12 +18,12 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - sound_intensity_level_in_air
-      - wind_speed
-      - wind_from_direction
-      - eastward_wind
-      - northward_wind
-      - upward_air_velocity
+      - sound_intensity_level_in_air:__OPTIONAL__
+      - wind_speed:__OPTIONAL__
+      - wind_from_direction:__OPTIONAL__
+      - eastward_wind:__OPTIONAL__
+      - northward_wind:__OPTIONAL__
+      - upward_air_velocity:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -39,9 +39,9 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - divergence_of_eastward_wind
-      - divergence_of_northward_wind
-      - divergence_of_upward_air_velocity
+      - divergence_of_eastward_wind:__OPTIONAL__
+      - divergence_of_northward_wind:__OPTIONAL__
+      - divergence_of_upward_air_velocity:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -56,12 +56,12 @@ var-requires3:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag_mean_winds
-      - qc_flag_wind_component_eastward
-      - qc_flag_wind_component_northward
-      - qc_flag_wind_component_upward_air_velocity
-      - qc_flag_backscatter
-      - qc_flag_background_noise
+      - qc_flag_mean_winds:__OPTIONAL__
+      - qc_flag_wind_component_eastward:__OPTIONAL__
+      - qc_flag_wind_component_northward:__OPTIONAL__
+      - qc_flag_wind_component_upward_air_velocity:__OPTIONAL__
+      - qc_flag_backscatter:__OPTIONAL__
+      - qc_flag_background_noise:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -74,4 +74,4 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - altitude
+      - altitude:__OPTIONAL__

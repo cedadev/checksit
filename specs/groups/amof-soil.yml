@@ -2,8 +2,8 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - downward_heat_flux_in_soil
-      - soil_temperature
+      - downward_heat_flux_in_soil:__OPTIONAL__
+      - soil_temperature:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -19,7 +19,7 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - soil_water_potential
+      - soil_water_potential:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -34,9 +34,9 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag_soil_heat_flux
-      - qc_flag_soil_temperature
-      - qc_flag_soil_water_potential
+      - qc_flag_soil_heat_flux:__OPTIONAL__
+      - qc_flag_soil_temperature:__OPTIONAL__
+      - qc_flag_soil_water_potential:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -49,4 +49,4 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - index
+      - index:__OPTIONAL__

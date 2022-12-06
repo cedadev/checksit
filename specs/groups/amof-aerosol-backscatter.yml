@@ -2,7 +2,7 @@ var-requires0:
   func: checksit.generic.check_var
   params:
     variables:
-      - altitude
+      - altitude:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -18,16 +18,16 @@ var-requires1:
   func: checksit.generic.check_var
   params:
     variables:
-      - attenuated_aerosol_backscatter_coefficient
-      - range_squared_corrected_backscatter_power
-      - laser_pulse_energy
-      - laser_temperature
-      - profile_pulses
-      - profile_scaling
-      - window_contamination
-      - window_transmittance
-      - background_light
-      - backscatter_sum
+      - attenuated_aerosol_backscatter_coefficient:__OPTIONAL__
+      - range_squared_corrected_backscatter_power:__OPTIONAL__
+      - laser_pulse_energy:__OPTIONAL__
+      - laser_temperature:__OPTIONAL__
+      - profile_pulses:__OPTIONAL__
+      - profile_scaling:__OPTIONAL__
+      - window_contamination:__OPTIONAL__
+      - window_transmittance:__OPTIONAL__
+      - background_light:__OPTIONAL__
+      - backscatter_sum:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -42,8 +42,8 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variables:
-      - sensor_zenith_angle
-      - sensor_azimuth_angle
+      - sensor_zenith_angle:__OPTIONAL__
+      - sensor_azimuth_angle:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -59,7 +59,7 @@ var-requires3:
   func: checksit.generic.check_var
   params:
     variables:
-      - qc_flag
+      - qc_flag:__OPTIONAL__
     defined_attrs:
       - type
       - dimension
@@ -72,7 +72,7 @@ dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
-      - altitude
+      - altitude:__OPTIONAL__
 
 required-global-attrs:
   func: checksit.generic.check_global_attrs
