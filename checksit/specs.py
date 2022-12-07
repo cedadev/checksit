@@ -60,8 +60,11 @@ class SpecificationChecker:
 
     def run_checks(self, record):
         errors = []
+        warnings = []
 
         for check_id, check_dict in self.spec.items():
-            errors.extend(self._run_check(record, check_dict)) 
+            check_errors, check_warnings = self._run_check(record, check_dict)
+            errors.extend(check_errors)
+            warnings.extend(check_warnings) 
 
-        return errors
+        return errors, warnings

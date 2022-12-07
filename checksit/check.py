@@ -20,13 +20,14 @@ conf = get_config()
 class Checker:
 
     def __init__(self, template="auto", mappings=None, extra_rules=None, specs=None, ignore_attrs=None, 
-                auto_cache=False, verbose=False, log_mode="standard"):
+                auto_cache=False, verbose=False, log_mode="standard", ignore_warnings=False):
         self.template = template
         self.mappings = mappings or {}
         self.extra_rules = extra_rules or {}
         self.specs = specs or []
         self.ignore_attrs = ignore_attrs or []
         self.auto_cache = auto_cache
+        self.ignore_warnings = ignore_warnings
         self.verbose = verbose
         self.log_mode = log_mode
         self._check_context = {}
@@ -123,7 +124,7 @@ class Checker:
         return errors
                         
     def _check_file(self, file_content, template, mappings=None, extra_rules=None, specs=None,
-                        ignore_attrs=None, log_mode="standard", fmt_errors=None):
+                        ignore_attrs=None, log_mode="standard", fmt_errors=None, ignore_warnings=False):
  
         if hasattr(file_content, "to_dict"):
             record = file_content.to_dict()
@@ -136,13 +137,16 @@ class Checker:
 
         # Create a container for collecting errors
         errors = getattr(file_content, "fmt_errors", [])
+        warnings = []
 
         # Use check specifications if requested
         specs = specs or self.specs
 
         for spec in specs:
             sr = SpecificationChecker(spec)
-            errors.extend(sr.run_checks(record))
+            spec_errors, spec_warnings = sr.run_checks(record)
+            errors.extend(spec_errors)
+            warnings.extend(spec_warnings)
 
         if template == "off" and log_mode == "standard":
             print("[WARNING] Template checks switched off!")
@@ -166,11 +170,22 @@ class Checker:
                 for i, error in enumerate(errors):
                     count = i + 1
                     print(f"\t{count:02d}. {error}")
+                compliant = False
             else:
+                compliant = True
+
+            if warnings and not ignore_warnings:
+                print(f"\n[WARNING] {len(warnings)} warnings about file:\n")
+                for i, warning in enumerate(warnings):
+                    count = i + 1
+                    print(f"\t{count:02d}. {warning}")
+
+            if compliant:
                 print("[INFO] File is compliant!")            
 
+
     def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, specs=None,
-                ignore_attrs=None, auto_cache=False, verbose=False, log_mode="standard"):
+                ignore_attrs=None, auto_cache=False, verbose=False, log_mode="standard", ignore_warnings=False):
 
         try:
             fp = FileParser()
@@ -234,7 +249,7 @@ class Checker:
             print(f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {specs}\n\tDatafile: {file_content.inpt}")
 
         self._check_file(file_content, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
-                        specs=specs, ignore_attrs=ignore_attrs, log_mode=log_mode)
+                        specs=specs, ignore_attrs=ignore_attrs, log_mode=log_mode, ignore_warnings=ignore_warnings)
 
 
 class TemplateManager:

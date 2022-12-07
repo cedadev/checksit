@@ -33,9 +33,10 @@ def main():
 @click.option("-l", "--log-mode", default="standard")
 @click.option("-v", "--verbose/--no-verbose", default=False)
 @click.option("-t", "--template", default="auto")
+@click.option("-w", "--ignore-warnings", is_flag=True)
 def check(file_path, mappings=None, rules=None, specs=None, ignore_attrs=None, ignore_all_globals=False,
           ignore_all_dimensions=False, ignore_all_variables=False, ignore_all_variable_attrs=False,
-          auto_cache=False, log_mode="standard", verbose=False, template="auto"):
+          auto_cache=False, log_mode="standard", verbose=False, template="auto", ignore_warnings=False):
 
     if ignore_all_globals or ignore_all_dimensions or ignore_all_variables or ignore_all_variable_attrs:
         raise Exception("Options not implemented yet!!!!!")
@@ -55,7 +56,7 @@ def check(file_path, mappings=None, rules=None, specs=None, ignore_attrs=None, i
     return check_file(file_path, template=template, mappings=mappings, extra_rules=rules, 
                 specs=specs, ignore_attrs=ignore_attrs, 
                 auto_cache=auto_cache, verbose=verbose, 
-                log_mode=log_mode)
+                log_mode=log_mode, ignore_warnings=ignore_warnings)
 
 
 @main.command()
