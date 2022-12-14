@@ -159,7 +159,8 @@ class Checker:
 
         if log_mode == "compact":
             highest = "ERROR" if len(errors) > 0 else "NONE" 
-            print(f"{highest} | {len(errors)} ", end="")
+            endstr = "" if len(errors) > 0 else "\n"
+            print(f"{highest} | {len(errors)} ", end=endstr)
             err_string = " | ".join([err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors])
             if err_string:
                 print(f"| {err_string}") 

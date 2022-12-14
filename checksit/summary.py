@@ -1,6 +1,8 @@
 import os
 import re
 import glob
+from collections import defaultdict, OrderedDict as OD
+
 import pandas as pd
 
 
@@ -20,8 +22,18 @@ def get_max_column_count(files, sep):
     return count
 
 
-def summarise(log_files=None, log_directory=None, verbose=False):
+def do_exclude(err, exclude_patterns):
+    for exclude_pattern in exclude_patterns:
+        if exclude_pattern in err:
+            return True
+
+    return False
+
+
+def summarise(log_files=None, log_directory=None, show_files=False,
+              exclude=None, verbose=False):
     log_files = log_files or find_log_files(log_directory)
+    exclude_patterns = exclude or []
 
     if len(log_files) == 0:
         print("[ERROR] No log files found!")
@@ -58,16 +70,32 @@ def summarise(log_files=None, log_directory=None, verbose=False):
     fatals = len(df[df["highest_error"].str.contains("FATAL")])
     print(f"[INFO] Found {fatals} FATAL errors.")
 
-    all_errors = []
-    for err_col in err_cols:
-        all_errors.extend(list(set(
-            [f"{err} [found in {int(df[df[err_col] == err][err_col].value_counts())} file(s)]" 
-            for err in df[err_col].unique() if err.strip()])))
+    errors_by_type = defaultdict(list)
 
-    all_errors = sorted(set(all_errors))
+    for err_col in err_cols:
+        for err in df[err_col].unique():
+            err = err.strip()
+            if not err or do_exclude(err, exclude_patterns): continue
+
+            filepaths = sorted(df[df[err_col] == err]["filepath"])
+            errors_by_type[err].extend(filepaths)
+
+    all_errors = OD()
+    for err in sorted(errors_by_type):
+        filepaths = errors_by_type[err]
+        all_errors[err] = sorted(filepaths)
+
     print(f"[INFO] {len(all_errors)} found. They are...")
 
     for err in all_errors:
-        print(f"\t\t{err}")
- 
+        filepaths = all_errors[err]
+        print(f"\t\t{err} [found in {len(filepaths)} file(s)]")
+
+    if show_files: 
+        print("\n------- File paths --------\n")
+
+        for err in all_errors:
+            print(f"\t\t{err}") 
+            for filepath in all_errors[err]:
+                print(f"\t\t\t{filepath}")
 
