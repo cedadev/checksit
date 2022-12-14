@@ -1,6 +1,8 @@
 import os
 import inspect
 
+UNDEFINED = "UNDEFINED"
+
 
 def string_to_dict(s):
     return dict([x.split("=") for x in s.split(",")])
@@ -34,3 +36,8 @@ def get_public_funcs(module):
                 funcs.append(prop) 
 
     return funcs
+
+
+def is_undefined(x):
+    return not x and x != 0
+

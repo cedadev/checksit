@@ -1,0 +1,79 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - altitude:__OPTIONAL__
+      - latitude:__OPTIONAL__
+      - longitude:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - axis
+      - valid_min
+      - valid_max
+      - cell_methods
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - air_pressure:__OPTIONAL__
+      - air_temperature:__OPTIONAL__
+      - relative_humidity:__OPTIONAL__
+      - wind_speed:__OPTIONAL__
+      - wind_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - upward_balloon_velocity:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - elapsed_time:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

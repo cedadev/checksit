@@ -11,6 +11,7 @@ from .utils import string_to_dict, string_to_list
 from .check import check_file
 from .summary import summarise
 from . import describer
+from . import specs
 
 @click.group()
 def main():
@@ -22,6 +23,7 @@ def main():
 @click.argument("file_path")
 @click.option("-m", "--mappings", default=None)
 @click.option("-r", "--rules", default=None)
+@click.option("-s", "--specs", default=None)
 @click.option("-i", "--ignore-attrs", default=None)
 @click.option("-G", "--ignore-all-globals", default=False)
 @click.option("-D", "--ignore-all-dimensions", default=False)
@@ -31,9 +33,10 @@ def main():
 @click.option("-l", "--log-mode", default="standard")
 @click.option("-v", "--verbose/--no-verbose", default=False)
 @click.option("-t", "--template", default="auto")
-def check(file_path, mappings=None, rules=None, ignore_attrs=None, ignore_all_globals=False,
+@click.option("-w", "--ignore-warnings", is_flag=True)
+def check(file_path, mappings=None, rules=None, specs=None, ignore_attrs=None, ignore_all_globals=False,
           ignore_all_dimensions=False, ignore_all_variables=False, ignore_all_variable_attrs=False,
-          auto_cache=False, log_mode="standard", verbose=False, template="auto"):
+          auto_cache=False, log_mode="standard", verbose=False, template="auto", ignore_warnings=False):
 
     if ignore_all_globals or ignore_all_dimensions or ignore_all_variables or ignore_all_variable_attrs:
         raise Exception("Options not implemented yet!!!!!")
@@ -44,12 +47,16 @@ def check(file_path, mappings=None, rules=None, ignore_attrs=None, ignore_all_gl
     if rules:
         rules = string_to_dict(rules)
 
+    if specs:
+        specs = string_to_list(specs)
+
     if ignore_attrs:
         ignore_attrs = string_to_list(ignore_attrs)
 
-    return check_file(file_path, template=template, mappings=mappings, extra_rules=rules, ignore_attrs=ignore_attrs, 
+    return check_file(file_path, template=template, mappings=mappings, extra_rules=rules, 
+                specs=specs, ignore_attrs=ignore_attrs, 
                 auto_cache=auto_cache, verbose=verbose, 
-                log_mode=log_mode)
+                log_mode=log_mode, ignore_warnings=ignore_warnings)
 
 
 @main.command()
@@ -84,6 +91,13 @@ def summary(log_files=None, log_directory=None, show_files=False,
 @click.option("--verbose/--no-verbose", default=False)
 def describe(check_ids=None, verbose=False):
     return describer.describe(check_ids, verbose=verbose)
+
+
+@main.command()
+@click.argument("spec_ids", nargs=-1, default=None)
+@click.option("--verbose/--no-verbose", default=False)
+def show_specs(spec_ids=None, verbose=False):
+    return specs.show_specs(spec_ids, verbose=verbose)
 
 
 if __name__ == "__main__":

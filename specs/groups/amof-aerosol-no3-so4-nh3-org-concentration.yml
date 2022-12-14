@@ -1,0 +1,34 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mass_concentration_of_nitrate_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+      - mass_concentration_of_sulfate_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+      - mass_concentration_of_ammonia_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+      - mass_concentration_of_organics_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_no3:__OPTIONAL__
+      - qc_flag_so4:__OPTIONAL__
+      - qc_flag_nh3:__OPTIONAL__
+      - qc_flag_org:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

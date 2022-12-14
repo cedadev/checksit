@@ -1,0 +1,113 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_fraction_of_carbon_tetrachloride_in_air:__OPTIONAL__
+      - mass_fraction_of_carbon_tetrachloride_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_concentration_of_carbon_tetrachloride_in_air:__OPTIONAL__
+      - mass_concentration_of_carbon_tetrachloride_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_fraction_of_bromoform_in_air:__OPTIONAL__
+      - mass_fraction_of_bromoform_in_air:__OPTIONAL__
+      - mole_fraction_of_diiodomethane_in_air:__OPTIONAL__
+      - mass_fraction_of_diiodomethane_in_air:__OPTIONAL__
+      - mole_fraction_of_chloroiodomethane_in_air:__OPTIONAL__
+      - mass_fraction_of_chloroiodomethane_in_air:__OPTIONAL__
+      - mole_fraction_of_bromodichloromethane_in_air:__OPTIONAL__
+      - mass_fraction_of_bromodichloromethane_in_air:__OPTIONAL__
+      - mole_fraction_of_dibromomethane_in_air:__OPTIONAL__
+      - mass_fraction_of_dibromomethane_in_air:__OPTIONAL__
+      - mole_fraction_of_chloroform_in_air:__OPTIONAL__
+      - mass_fraction_of_chloroform_in_air:__OPTIONAL__
+      - mole_fraction_of_methyl_iodide_in_air:__OPTIONAL__
+      - mass_fraction_of_methyl_iodide_in_air:__OPTIONAL__
+      - mole_fraction_of_bromochloromethane_in_air:__OPTIONAL__
+      - mass_fraction_of_bromochloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - mole_concentration_of_bromoform_in_air:__OPTIONAL__
+      - mass_concentration_of_bromoform_in_air:__OPTIONAL__
+      - mole_concentration_of_diiodomethane_in_air:__OPTIONAL__
+      - mass_concentration_of_diiodomethane_in_air:__OPTIONAL__
+      - mole_concentration_of_chloroiodomethane_in_air:__OPTIONAL__
+      - mass_concentration_of_chloroiodomethane_in_air:__OPTIONAL__
+      - mole_concentration_of_bromodichloromethane_in_air:__OPTIONAL__
+      - mass_concentration_of_bromodichloromethane_in_air:__OPTIONAL__
+      - mole_concentration_of_dibromomethane_in_air:__OPTIONAL__
+      - mass_concentration_of_dibromomethane_in_air:__OPTIONAL__
+      - mole_concentration_of_chloroform_in_air:__OPTIONAL__
+      - mass_concentration_of_chloroform_in_air:__OPTIONAL__
+      - mole_concentration_of_methyl_iodide_in_air:__OPTIONAL__
+      - mass_concentration_of_methyl_iodide_in_air:__OPTIONAL__
+      - mole_concentration_of_bromochloromethane_in_air:__OPTIONAL__
+      - mass_concentration_of_bromochloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+      - chemical_species
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_ccl4:__OPTIONAL__
+      - qc_flag_chbr3:__OPTIONAL__
+      - qc_flag_ch2i2:__OPTIONAL__
+      - qc_flag_ch2icl:__OPTIONAL__
+      - qc_flag_chbrcl2:__OPTIONAL__
+      - qc_flag_ch2br2:__OPTIONAL__
+      - qc_flag_chcl3:__OPTIONAL__
+      - qc_flag_ch3i:__OPTIONAL__
+      - qc_flag_ch2brcl:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

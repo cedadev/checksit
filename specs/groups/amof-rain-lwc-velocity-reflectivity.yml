@@ -1,0 +1,69 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - altitude:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - axis
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - rainfall_rate:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - rain_liquid_water_content:__OPTIONAL__
+      - rainfall_velocity:__OPTIONAL__
+      - radar_reflectivity:__OPTIONAL__
+      - attenuated_radar_reflectivity:__OPTIONAL__
+      - path_integrated_attenuation:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude:__OPTIONAL__

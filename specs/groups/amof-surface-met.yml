@@ -1,0 +1,63 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - air_pressure:__OPTIONAL__
+      - air_temperature:__OPTIONAL__
+      - relative_humidity:__OPTIONAL__
+      - wind_speed:__OPTIONAL__
+      - wind_from_direction:__OPTIONAL__
+      - thickness_of_rainfall_amount:__OPTIONAL__
+      - rainfall_rate:__OPTIONAL__
+      - downwelling_longwave_flux_in_air:__OPTIONAL__
+      - downwelling_shortwave_flux_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - hail_intensity:__OPTIONAL__
+      - hail_rate:__OPTIONAL__
+      - downwelling_total_irradiance:__OPTIONAL__
+      - net_total_irradiance:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_temperature:__OPTIONAL__
+      - qc_flag_relative_humidity:__OPTIONAL__
+      - qc_flag_pressure:__OPTIONAL__
+      - qc_flag_wind_speed:__OPTIONAL__
+      - qc_flag_wind_from_direction:__OPTIONAL__
+      - qc_flag_radiation:__OPTIONAL__
+      - qc_flag_precipitation:__OPTIONAL__
+      - qc_flag_downwelling_total_irradiance:__OPTIONAL__
+      - qc_flag_net_total_irradiance:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

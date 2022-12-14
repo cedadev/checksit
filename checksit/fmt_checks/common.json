@@ -1,0 +1,11 @@
+{
+  "require-global-attrs": {
+    "func": "common.require_global_attrs",
+    "params": {
+      "attrs": {
+        "source": "func-rule:string-of-length:5+",
+        "institution": "func-rule:string-of-length:5+"
+      }
+    }
+  }
+}

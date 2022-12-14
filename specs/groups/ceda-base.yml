@@ -1,0 +1,16 @@
+var-requires:
+  func: checksit.generic.check_var_attrs
+  params:
+    defined_attrs: 
+      - long_name
+      - units
+
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    defined_attrs:
+      - source
+    vocab_attrs:
+      Conventions: __vocabs__:cf-netcdf:Conventions
+       
+

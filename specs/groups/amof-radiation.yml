@@ -1,0 +1,65 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - downwelling_longwave_flux_in_air:__OPTIONAL__
+      - upwelling_longwave_flux_in_air:__OPTIONAL__
+      - downwelling_shortwave_flux_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - upwelling_shortwave_flux_in_air:__OPTIONAL__
+    defined_attrs:
+      - type
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - radiometer_body_temperature:__OPTIONAL__
+    defined_attrs:
+      - type
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_upwelling_shortwave:__OPTIONAL__
+      - qc_flag_downwelling_shortwave:__OPTIONAL__
+      - qc_flag_upwelling_longwave:__OPTIONAL__
+      - qc_flag_downwelling_longwave:__OPTIONAL__
+      - qc_flag_body_temperature:__OPTIONAL__
+      - qc_flag_cleaning:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+

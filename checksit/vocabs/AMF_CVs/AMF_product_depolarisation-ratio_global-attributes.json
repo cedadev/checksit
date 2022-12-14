@@ -1,0 +1,109 @@
+{
+    "product_depolarisation-ratio_global-attributes": {
+        "laser_wavelength": {
+            "global_attribute_id": "laser_wavelength",
+            "description": "laser wavelength",
+            "fixed_value": "1550 nm",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "laser_pulse_energy": {
+            "global_attribute_id": "laser_pulse_energy",
+            "description": "laser energy",
+            "fixed_value": "1.0e-05 J",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "pulse_repetition_frequency": {
+            "global_attribute_id": "pulse_repetition_frequency",
+            "description": "pulse repetion frequency",
+            "fixed_value": "15000 s-1",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "pulses_per_ray": {
+            "global_attribute_id": "pulses_per_ray",
+            "description": "no pulses averaged to give a ray (500 - 15000)",
+            "fixed_value": "",
+            "compliance_checking_rules": "Integer",
+            "convention_providence": null
+        },
+        "rays_per_point": {
+            "global_attribute_id": "rays_per_point",
+            "description": "number of ray averaged to give a measurement",
+            "fixed_value": "",
+            "compliance_checking_rules": "Integer",
+            "convention_providence": null
+        },
+        "lens_diameter": {
+            "global_attribute_id": "lens_diameter",
+            "description": "lens diameter",
+            "fixed_value": "0.08 m",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "beam_divergence": {
+            "global_attribute_id": "beam_divergence",
+            "description": "beam divergence",
+            "fixed_value": "0.00189 degrees",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "pulse_length": {
+            "global_attribute_id": "pulse_length",
+            "description": "pulse length",
+            "fixed_value": "2.0e-07 s",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "sampling_frequency": {
+            "global_attribute_id": "sampling_frequency",
+            "description": "digitisation frequency (10, 15, or 50MHz)",
+            "fixed_value": "1.5e+07 s-1",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "focus": {
+            "global_attribute_id": "focus",
+            "description": "focus (300m, 500m, 800m, 1000m, 1250m, 1500m, 1750m, 2000m or Inf)",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "velocity_resolution": {
+            "global_attribute_id": "velocity_resolution",
+            "description": "velocity resolution",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "number_of_gates": {
+            "global_attribute_id": "number_of_gates",
+            "description": "number of gates",
+            "fixed_value": "",
+            "compliance_checking_rules": "Integer",
+            "convention_providence": null
+        },
+        "gate_length": {
+            "global_attribute_id": "gate_length",
+            "description": "gate length",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "fft_length": {
+            "global_attribute_id": "fft_length",
+            "description": "doppler FFT length",
+            "fixed_value": "",
+            "compliance_checking_rules": "Integer",
+            "convention_providence": null
+        },
+        "maximum_range": {
+            "global_attribute_id": "maximum_range",
+            "description": "maximum measurement range",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        }
+    }
+}

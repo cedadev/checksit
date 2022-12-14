@@ -10,6 +10,8 @@ conf = get_config()
 vocabs_dir = conf["settings"]["vocabs_dir"]
 vocabs_prefix = conf["settings"]["vocabs_prefix"]
 
+WILDCARD = ["__all__"]
+
 
 class Vocabs:
     def __init__(self):
@@ -33,8 +35,25 @@ class Vocabs:
         obj = self
         vocab_lookup = re.sub(f"^{vocabs_prefix}:", "", vocab_lookup)
 
-        for key in vocab_lookup.split(":"):
-            obj = obj[key]
+        for i,key in enumerate(vocab_lookup.split(":")):
+            if isinstance(obj, dict) or i == 0:
+                if key in WILDCARD:
+                    if i+1 != len(vocab_lookup.split(":")):
+                        obj = [ obj[key] for key in obj.keys() ]
+                    else:
+                        # WILDCARD used as last option, just get keys
+                        obj = list(obj.keys())
+                else:
+                    obj = obj[key]
+            else:
+                if not isinstance(obj,list):
+                    # sanity check
+                    raise ValueError(f"Confused how we got here, obj = {obj}")
+                elif key in WILDCARD:
+                    raise ValueError(f"Second WILDCARD ({WILDCARD}) in query {vocab_lookup} not allowed")
+                else:
+                    # obj should be list of dicts, creating list of values or dicts
+                    obj = [ d[key] for d in obj ]
 
         return obj
 
@@ -58,14 +77,20 @@ class Vocabs:
 
 #         return item
 
-    def check(self, vocab_lookup, value, label=""):
+    def check(self, vocab_lookup, value, label="", lookup=True):
         # Return a list of errors - empty list if no errors
         errors = []
-        options = self.lookup(vocab_lookup)
+        options = [ self.lookup(vocab_lookup) if lookup else vocab_lookup ][0]
 
         if isinstance(options, list):
             if value not in options:
                 errors.append(f"{label} '{value}' not in vocab options: {options} (using: '{vocab_lookup}')")
+        elif isinstance(options, dict):
+            for key in options.keys():
+                if key in value.keys():
+                    errors.extend(self.check(options[key], value[key], label = f"{label}:{key}", lookup=False))
+                else:
+                    errors.append(f"{label} does not have attribute '{key}'")
         elif value != options:
             errors.append(f"{label} '{value}' does not equal required vocab value: '{options}' (using: '{vocab_lookup}')")
 

@@ -1,0 +1,39 @@
+{
+    "product_precipitation_global-attributes": {
+        "measurement_technique": {
+            "global_attribute_id": "measurement_technique",
+            "description": "optical, peizoelectric, tipping_bucket, drop_counting, weighing, collecting, droplet_impact",
+            "fixed_value": "",
+            "compliance_checking_rules": "One of: optical, peizoelectric, tipping_bucket, drop_counting, weighing, collecting, droplet_impact",
+            "convention_providence": null
+        },
+        "measurement_quanta": {
+            "global_attribute_id": "measurement_quanta",
+            "description": "amount, drop size or amount needed to tip the bucket",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "collection_area": {
+            "global_attribute_id": "collection_area",
+            "description": "collection area",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "laser_wavelength": {
+            "global_attribute_id": "laser_wavelength",
+            "description": "laser wavelength",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "laser_sample_area": {
+            "global_attribute_id": "laser_sample_area",
+            "description": "sample area for laser based instruments",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        }
+    }
+}

@@ -1,0 +1,83 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - radiation_frequency:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - brightness_temperature:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - atmospheric_attenuation:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag_surface_temperature:__OPTIONAL__
+      - qc_flag_surface_relative_humidity:__OPTIONAL__
+      - qc_flag_surface_pressure:__OPTIONAL__
+      - qc_flag_precipitation:__OPTIONAL__
+      - qc_flag_channel_1_failure:__OPTIONAL__
+      - qc_flag_channel_2_failure:__OPTIONAL__
+      - qc_flag_channel_3_failure:__OPTIONAL__
+      - qc_flag_channel_4_failure:__OPTIONAL__
+      - qc_flag_channel_5_failure:__OPTIONAL__
+      - qc_flag_channel_6_failure:__OPTIONAL__
+      - qc_flag_channel_7_failure:__OPTIONAL__
+      - qc_flag_channel_8_failure:__OPTIONAL__
+      - qc_flag_channel_9_failure:__OPTIONAL__
+      - qc_flag_channel_10_failure:__OPTIONAL__
+      - qc_flag_channel_11_failure:__OPTIONAL__
+      - qc_flag_channel_12_failure:__OPTIONAL__
+      - qc_flag_channel_13_failure:__OPTIONAL__
+      - qc_flag_channel_14_failure:__OPTIONAL__
+      - qc_flag_t_receiver_temperature_stability:__OPTIONAL__
+      - qc_flag_rh_receiver_temperature_stability:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - radiation_frequency:__OPTIONAL__

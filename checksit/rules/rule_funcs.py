@@ -20,6 +20,12 @@ def _preprocess(value, preprocessors):
 def match_file_name(value, context, extras=None, label=""):
     """
     Matches file name to value...
+
+    Example usage:
+     - match-file-name:lowercase:no-extension
+     - match-file-name:uppercase
+     - match-file-name
+
     """
     file_name = os.path.basename(context["file_path"])
     value = _preprocess(value, extras)

@@ -64,7 +64,7 @@ class Rules:
                 errors.append(f"{label} Value '{value}' is not of required type: '{type_rule}'.")
         
         elif rule_lookup.startswith("regex:"):
-            pattern = rule_lookup.split(":")[1]
+            pattern = ':'.join(rule_lookup.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
             if not re.match(f"^{pattern}$", value):
                 errors.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
 

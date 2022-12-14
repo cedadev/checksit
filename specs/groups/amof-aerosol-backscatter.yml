@@ -1,0 +1,88 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - altitude:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - axis
+      - valid_min
+      - valid_max
+      - coordinates
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - attenuated_aerosol_backscatter_coefficient:__OPTIONAL__
+      - range_squared_corrected_backscatter_power:__OPTIONAL__
+      - laser_pulse_energy:__OPTIONAL__
+      - laser_temperature:__OPTIONAL__
+      - profile_pulses:__OPTIONAL__
+      - profile_scaling:__OPTIONAL__
+      - window_contamination:__OPTIONAL__
+      - window_transmittance:__OPTIONAL__
+      - background_light:__OPTIONAL__
+      - backscatter_sum:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - sensor_zenith_angle:__OPTIONAL__
+      - sensor_azimuth_angle:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - standard_name
+      - long_name
+      - _FillValue
+      - valid_min
+      - valid_max
+      - cell_methods
+      - coordinates
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variables:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type
+      - dimension
+      - units
+      - long_name
+      - flag_values
+      - flag_meanings
+
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude:__OPTIONAL__
+
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    vocab_attrs:
+    rules_attrs:
+      laser_wavelength: rule-func:string-of-length:3+
+      nominal_laser_pulse_energy: rule-func:string-of-length:3+
+      pulse_repetition_frequency: rule-func:string-of-length:3+
+      lens_diameter: rule-func:string-of-length:3+
+      beam_divergence: rule-func:string-of-length:3+
+      pulse_length: rule-func:string-of-length:3+
+      sampling_frequency: rule-func:string-of-length:3+
