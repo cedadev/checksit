@@ -10,6 +10,35 @@ def _get_bounds_var_ids(dct):
             var_id.endswith("_bounds") or var_id.endswith("_bnds"))] 
 
 
+def edits1(word):
+    """
+    All edits that are one edit away from `word`.
+    Adapted from https://norvig.com/spell-correct.html
+    """
+    letters    = 'abcdefghijklmnopqrstuvwxyz0123456789._-'
+    splits     = [(word[:i], word[i:])    for i in range(1,len(word) + 1)]  # 1 in range requires first letter to be correct
+    deletes    = [L + R[1:]               for L, R in splits if R]
+    transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R)>1]
+    replaces   = [L + c + R[1:]           for L, R in splits if R for c in letters]
+    inserts    = [L + c + R               for L, R in splits for c in letters]
+    #return [i for i in set(deletes + transposes + replaces + inserts) if i[-1] == word[-1]]  # require last letter to be correct
+    return set(deletes + transposes + replaces + inserts)
+
+def edits2(word): 
+    """
+    All edits that are two edits away from `word`.
+    From https://norvig.com/spell-correct.html
+    """
+    return [ e2 for e1 in edits1(word) for e2 in edits1(e1) ]
+
+def search_close_match(search_for, search_in):
+    possible_close_edits = edits2(search_for.lower())
+    for s in search_in:
+        if s.lower() in possible_close_edits:
+            return f"'{s}' was found in this file, should this be '{search_for}'?"
+    return ""
+
+
 def check_var_attrs(dct, defined_attrs, ignore_bounds=True):
     """
     Check that variable attributes are defined.
@@ -47,18 +76,35 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
     warnings = []
 
     for attr in defined_attrs:
-        if is_undefined(dct['global_attributes'].get(attr)):
-            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' must have a valid definition.")
+        if attr not in dct['global_attributes']:
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+        elif is_undefined(dct['global_attributes'].get(attr)):
+            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
 
     for attr in vocab_attrs:
-        errors.extend(vocabs.check(vocab_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
+        if attr not in dct['global_attributes']:
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+        elif is_undefined(dct['global_attributes'].get(attr)):
+            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
+        else:
+            errors.extend(vocabs.check(vocab_attrs[attr], dct["global_attributes"].get(attr), label=f"[global-attributes:******:{attr}]***"))
     
     for attr in regex_attrs:
-        if is_undefined(dct['global_attributes'].get(attr)) or not re.match(regex_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED)):
+        if attr not in dct['global_attributes']:
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+        elif is_undefined(dct['global_attributes'].get(attr)):
+            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
+        elif not re.match(regex_attrs[attr], dct['global_attributes'].get(attr)):
             errors.append(f"[global-attributes:******:{attr}]: '{dct['global_attributes'].get(attr, UNDEFINED)}' does not match regex pattern '{regex_attrs[attr]}'.") 
 
     for attr in rules_attrs:
-        errors.extend(rules.check(rules_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
+        #errors.extend(rules.check(rules_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
+        if attr not in dct['global_attributes']:
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+        elif is_undefined(dct['global_attributes'].get(attr)):
+            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
+        else:
+            errors.extend(rules.check(rules_attrs[attr], dct['global_attributes'].get(attr), label=f"[global-attributes:******:{attr}]***"))
 
 
     return errors, warnings
@@ -77,10 +123,10 @@ def check_var_exists(dct, variables):
         if ':__OPTIONAL__' in var:
             var = var.split(':')[0]
             if var not in dct["variables"].keys():
-                warnings.append(f"[variable**************:{var}]: Optional variable does not exist in file.")
+                warnings.append(f"[variable**************:{var}]: Optional variable does not exist in file. {search_close_match(var, dct['variables'].keys())}")
         else:
             if var not in dct["variables"].keys():
-                errors.append(f"[variable**************:{var}]: Does not exist in file.")
+                errors.append(f"[variable**************:{var}]: Does not exist in file. {search_close_match(var, dct['variables'].keys())}")
 
     return errors, warnings
 
@@ -98,10 +144,10 @@ def check_dim_exists(dct, dimensions):
         if ':__OPTIONAL__' in dim:
             dim = dim.split(':')[0]
             if dim not in dct["dimensions"].keys():
-                warnings.append(f"[dimension**************:{dim}]: Optional dimension does not exist in file.")
+                warnings.append(f"[dimension**************:{dim}]: Optional dimension does not exist in file. {search_close_match(dim, dct['dimensions'].keys())}")
         else:
             if dim not in dct["dimensions"].keys():
-                errors.append(f"[dimension**************:{dim}]: Does not exist in file.")
+                errors.append(f"[dimension**************:{dim}]: Does not exist in file. {search_close_match(dim, dct['dimensions'].keys())}")
 
     return errors, warnings 
 
@@ -117,17 +163,21 @@ def check_var(dct, variables, defined_attrs):
         if ':__OPTIONAL__' in var:
             var = var.split(':')[0]
             if var not in dct["variables"].keys():
-                warnings.append(f"[variable**************:{var}]: Optional variable does not exist in file.")
+                warnings.append(f"[variable**************:{var}]: Optional variable does not exist in file. {search_close_match(var, dct['variables'].keys())}")
             else:
                 for attr in defined_attrs:
-                    if is_undefined(dct["variables"][var].get(attr)):
+                    if attr not in dct["variables"][var]:
+                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['variables'][var])}")
+                    elif is_undefined(dct["variables"][var].get(attr)):
                         errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")
         else:
             if var not in dct["variables"].keys():
-                errors.append(f"[variable**************:{var}]: Does not exist in file.")
+                errors.append(f"[variable**************:{var}]: Does not exist in file. {search_close_match(var, dct['variables'].keys())}")
             else:
                 for attr in defined_attrs:
-                    if is_undefined(dct["variables"][var].get(attr)):
+                    if attr not in dct["variables"][var]:
+                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['variables'][var])}")
+                    elif is_undefined(dct["variables"][var].get(attr)):
                         errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")            
 
     return errors, warnings
