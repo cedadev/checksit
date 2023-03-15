@@ -1,65 +1,93 @@
 var-requires0:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - altitude:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - axis
-      - valid_min
-      - valid_max
-      - coordinates
+      - type:float
+      - dimension:altitude
+      - units:m
+      - standard_name:altitude
+      - long_name:Geometric height above geoid (WGS84).
+      - _FillValue:-1e+20
+      - axis:Z
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
 var-requires1:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - mole_fraction_of_ozone_in_air:__OPTIONAL__
-      - mass_fraction_of_ozone_in_air:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - coordinates
-      - chemical_species
+      - type:float
+      - dimension:time, altitude
+      - standard_name:mole_fraction_of_ozone_in_air
+      - long_name:Mole Fraction of Ozone in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:O3
 var-requires2:
   func: checksit.generic.check_var
   params:
-    variables:
-      - mole_concentration_of_ozone_in_air:__OPTIONAL__
-      - mass_concentration_of_ozone_in_air:__OPTIONAL__
+    variable:
+      - mass_fraction_of_ozone_in_air:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - coordinates
-      - chemical_species
+      - type:float
+      - dimension:time, altitude
+      - standard_name:mass_fraction_of_ozone_in_air
+      - long_name:Mass Fraction of Ozone in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:O3
 var-requires3:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
+      - mole_concentration_of_ozone_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:mol m-3
+      - standard_name:mole_concentration_of_ozone_in_air
+      - long_name:Mole Concentration of Ozone in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:O3
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_ozone_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:kg m-3
+      - standard_name:mass_concentration_of_ozone_in_air
+      - long_name:Mass Concentration of Ozone in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:O3
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - flag_values
-      - flag_meanings
-
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data bad_data_no ozone_wavelengths_available bad_data_gate_index_exceeds_number_of_measurement_gates_in_use
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

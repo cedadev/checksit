@@ -1,46 +1,74 @@
 var-requires0:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - mole_fraction_of_nitrogen_dioxide_in_air:__OPTIONAL__
-      - mass_fraction_of_nitrogen_dioxide_in_air:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - coordinates
-      - chemical_species
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_nitrogen_dioxide_in_air
+      - long_name:Mole Fraction of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
 var-requires1:
   func: checksit.generic.check_var
   params:
-    variables:
-      - mole_concentration_of_nitrogen_dioxide_in_air:__OPTIONAL__
-      - mass_concentration_of_nitrogen_dioxide_in_air:__OPTIONAL__
+    variable:
+      - mass_fraction_of_nitrogen_dioxide_in_air:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - coordinates
-      - chemical_species
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_nitrogen_dioxide_in_air
+      - long_name:Mass Fraction of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
 var-requires2:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
+      - mole_concentration_of_nitrogen_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_nitrogen_dioxide_in_air
+      - long_name:Mole Concentration of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_nitrogen_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_nitrogen_dioxide_in_air
+      - long_name:Mass Concentration of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - flag_values
-      - flag_meanings
-
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag
+      - flag_values:0b,1b, 2b,3b
+      - flag_meanings:not_used good_data bad_data_gas_concentration_outside_instrument_operational _range suspect_data_time_stamp _error

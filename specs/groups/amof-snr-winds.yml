@@ -1,93 +1,336 @@
 var-requires0:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - time_minutes_since_start_of_day:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - valid_min
-      - valid_max
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Time in Minutes Since Start of Day
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
 var-requires1:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - altitude:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - axis
-      - valid_min
-      - valid_max
-      - coordinates
+      - type:float
+      - dimension:altitude
+      - units:m
+      - standard_name:altitude
+      - long_name:Geometric height above geoid (WGS84).
+      - _FillValue:-1e+20
+      - axis:Z
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
 var-requires2:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - size_of_gate:__OPTIONAL__
-      - signal_to_noise_ratio_of_beam_1:__OPTIONAL__
-      - signal_to_noise_ratio_of_beam_2:__OPTIONAL__
-      - signal_to_noise_ratio_of_beam_3:__OPTIONAL__
-      - signal_to_noise_ratio_minimum:__OPTIONAL__
-      - spectral_width_of_beam_1:__OPTIONAL__
-      - spectral_width_of_beam_2:__OPTIONAL__
-      - spectral_width_of_beam_3:__OPTIONAL__
-      - skew_of_beam_1:__OPTIONAL__
-      - skew_of_beam_2:__OPTIONAL__
-      - skew_of_beam_3:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - cell_methods
-      - coordinates
+      - type:float
+      - dimension:time
+      - units:m
+      - long_name:Size of Gate.
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
 var-requires3:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - wind_speed:__OPTIONAL__
-      - wind_from_direction:__OPTIONAL__
-      - eastward_wind:__OPTIONAL__
-      - northward_wind:__OPTIONAL__
-      - upward_air_velocity:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - cell_methods
-      - coordinates
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:wind_speed
+      - long_name:Wind Speed
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
 var-requires4:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
+      - wind_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:degree
+      - standard_name:wind_from_direction
+      - long_name:Wind From Direction
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:eastward_wind
+      - long_name:Eastward Wind Component (U)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:northward_wind
+      - long_name:Northward Wind Component (V)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:upward_air_velocity
+      - long_name:Upward Air Velocity Component (W)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - signal_to_noise_ratio_of_beam_1:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:dB
+      - long_name:Signal to Noise Ratio of beam 1 (back panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - signal_to_noise_ratio_of_beam_2:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:dB
+      - long_name:Signal to Noise Ratio of beam 2 (side panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - signal_to_noise_ratio_of_beam_3:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:dB
+      - long_name:Signal to Noise Ratio of beam 3 (vertical beam from centre panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - signal_to_noise_ratio_minimum:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:dB
+      - long_name:Minimum Signal to Noise Ratio of the three beams
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - spectral_width_of_beam_1:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Spectral Width of beam 1 (back panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - spectral_width_of_beam_2:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Spectral Width of beam 2 (side panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - spectral_width_of_beam_3:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Spectral Width of beam 3 (vertical beam from centre panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - skew_of_beam_1:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Skew of beam 1 (back panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: skew
+      - coordinates:latitude longitude
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - skew_of_beam_2:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Skew of beam 2 (side panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: skew
+      - coordinates:latitude longitude
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - skew_of_beam_3:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Skew of beam 3 (vertical beam from centre panel)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: skew
+      - coordinates:latitude longitude
+var-requires18:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_wind:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag: Mean Winds
+      - flag_values:0b,1b,2b,3b
+      - flag_meanings:not_used good_data bad_data bad_data_gates_not_available
+var-requires19:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_beam_1:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag: SNR Beam 1 (back panel)
+      - flag_values:0b,1b,2b,3b
+      - flag_meanings:not_used good_data bad_data bad_data_gates_not_available
+var-requires20:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_beam_2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag: SNR Beam 2 (side panel)
+      - flag_values:0b,1b,2b,3b
+      - flag_meanings:not_used good_data bad_data bad_data_gates_not_available
+var-requires21:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_beam_3:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag: SNR Beam 3 (vertical beam from centre panel)
+      - flag_values:0b,1b,2b,3b
+      - flag_meanings:not_used good_data bad_data bad_data_gates_not_available
+var-requires22:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_rain_detected:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - flag_values
-      - flag_meanings
-
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Rain Detected
+      - flag_values:0b,1b,2b,3b
+      - flag_meanings:not_used good_data_no_rain suspect_data_rain_detected suspect_data_discontinuous_rain
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

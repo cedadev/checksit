@@ -3,6 +3,7 @@ from .cvs import vocabs
 from .rules import rules
 
 import re
+import numpy as np
 
 def _get_bounds_var_ids(dct):
     return [var_id for var_id in dct["variables"] if (
@@ -152,32 +153,55 @@ def check_dim_exists(dct, dimensions):
     return errors, warnings 
 
 
-def check_var(dct, variables, defined_attrs):
+def check_var(dct, variable, defined_attrs):
     """
-    Check variables exist and have attributes defined.
+    Check variable exists and has attributes defined.
     """
     errors = []
     warnings = []
 
-    for var in variables:
-        if ':__OPTIONAL__' in var:
-            var = var.split(':')[0]
-            if var not in dct["variables"].keys():
-                warnings.append(f"[variable**************:{var}]: Optional variable does not exist in file. {search_close_match(var, dct['variables'].keys())}")
-            else:
-                for attr in defined_attrs:
-                    if attr not in dct["variables"][var]:
-                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['variables'][var])}")
-                    elif is_undefined(dct["variables"][var].get(attr)):
-                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")
+    if isinstance(variable, list):
+        variable = variable[0]
+    if ':__OPTIONAL__' in variable:
+        variable = variable.split(':')[0]
+        if variable not in dct["variables"].keys():
+            warnings.append(f"[variable**************:{variable}]: Optional variable does not exist in file. {search_close_match(variable, dct['variables'].keys())}")
         else:
-            if var not in dct["variables"].keys():
-                errors.append(f"[variable**************:{var}]: Does not exist in file. {search_close_match(var, dct['variables'].keys())}")
-            else:
-                for attr in defined_attrs:
-                    if attr not in dct["variables"][var]:
-                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['variables'][var])}")
-                    elif is_undefined(dct["variables"][var].get(attr)):
-                        errors.append(f"[variable**************:{var}]: Attribute '{attr}' must have a valid definition.")            
+            for attr in defined_attrs:
+                if isinstance(attr, dict) and len(attr.keys()) == 1:
+                    for key,value in attr.items():
+                        attr = f'{key}: {value}'
+                attr_key = attr.split(':')[0]
+                attr_value = ':'.join(attr.split(':')[1:])
+                if attr_key not in dct["variables"][variable]:
+                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. {search_close_match(attr_key, dct['variables'][variable])}")
+                elif '<derived from file>' in attr_value:
+                    # work this out
+                    pass
+                elif attr_key == 'flag_values':
+                    attr_value = attr_value.strip(',')
+                    attr_value = [ int(i.strip('b')) for i in attr_value.split(',') ]
+                    attr_value = np.array(attr_value, dtype=np.int8)
+                    if not np.all(dct["variables"][variable].get(attr_key) == attr_value):
+                        errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, not {dct['variables'][variable].get(attr_key)}.")
+                #elif attr_key == 'flag_meanings':
+                #    print(attr_value)
+                #    print(dct["variables"][variable].get(attr_key))
+                elif not str(dct["variables"][variable].get(attr_key)) == attr_value:
+                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, not {dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}.")
+    else:
+        if variable not in dct["variables"].keys():
+            errors.append(f"[variable**************:{variable}]: Optional variable does not exist in file. {search_close_match(variable, dct['variables'].keys())}")
+        else:
+            for attr in defined_attrs:
+                attr_key = attr.split(':')[0]
+                attr_value = ':'.join(attr.split(':')[1:]) 
+                if attr_key not in dct["variables"][variable]:
+                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. {search_close_match(attr_key, dct['variables'][variable])}")
+                elif '<' in attr_value:
+                    # work this out
+                    pass
+                elif not dct["variables"][variable].get(attr_key) == attr_value:
+                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, not {dct['variables'][variable].get(attr_key)}.")
 
     return errors, warnings
