@@ -150,7 +150,7 @@ class Checker:
 
         if template == "off" and log_mode == "standard":
             print("[WARNING] Template checks switched off!")
-        else:
+        elif template != "off":
             sections = "dimensions", "variables", "global_attributes"
 
             for section in sections:
