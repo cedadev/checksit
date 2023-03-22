@@ -30,7 +30,7 @@ def edits2(word):
     All edits that are two edits away from `word`.
     From https://norvig.com/spell-correct.html
     """
-    return [ e2 for e1 in edits1(word) for e2 in edits1(e1) ]
+    return set([ e2 for e1 in edits1(word) for e2 in edits1(e1) ])
 
 def search_close_match(search_for, search_in):
     possible_close_edits = edits2(search_for.lower())
