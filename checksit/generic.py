@@ -40,7 +40,7 @@ def search_close_match(search_for, search_in):
     return ""
 
 
-def check_var_attrs(dct, defined_attrs, ignore_bounds=True):
+def check_var_attrs(dct, defined_attrs, ignore_bounds=True, skip_spellcheck=False):
     """
     Check that variable attributes are defined.
 
@@ -61,7 +61,7 @@ def check_var_attrs(dct, defined_attrs, ignore_bounds=True):
     return errors, warnings
  
 
-def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=None, rules_attrs=None):
+def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=None, rules_attrs=None, skip_spellcheck=False):
     """
     Check that required global attributes are correct.
 
@@ -78,13 +78,13 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
 
     for attr in defined_attrs:
         if attr not in dct['global_attributes']:
-            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}")
         elif is_undefined(dct['global_attributes'].get(attr)):
             errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
 
     for attr in vocab_attrs:
         if attr not in dct['global_attributes']:
-            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}")
         elif is_undefined(dct['global_attributes'].get(attr)):
             errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
         else:
@@ -92,7 +92,7 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
     
     for attr in regex_attrs:
         if attr not in dct['global_attributes']:
-            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}")
         elif is_undefined(dct['global_attributes'].get(attr)):
             errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
         elif not re.match(regex_attrs[attr], dct['global_attributes'].get(attr)):
@@ -101,7 +101,7 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
     for attr in rules_attrs:
         #errors.extend(rules.check(rules_attrs[attr], dct['global_attributes'].get(attr, UNDEFINED), label=f"[global-attributes:******:{attr}]***"))
         if attr not in dct['global_attributes']:
-            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys())}")
+            errors.append(f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. {search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}")
         elif is_undefined(dct['global_attributes'].get(attr)):
             errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
         else:
@@ -111,7 +111,7 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
     return errors, warnings
 
 
-def check_var_exists(dct, variables):
+def check_var_exists(dct, variables, skip_spellcheck=False):
     """
     Check that variables exist
 
@@ -124,15 +124,15 @@ def check_var_exists(dct, variables):
         if ':__OPTIONAL__' in var:
             var = var.split(':')[0]
             if var not in dct["variables"].keys():
-                warnings.append(f"[variable**************:{var}]: Optional variable does not exist in file. {search_close_match(var, dct['variables'].keys())}")
+                warnings.append(f"[variable**************:{var}]: Optional variable does not exist in file. {search_close_match(var, dct['variables'].keys()) if not skip_spellcheck else ''}")
         else:
             if var not in dct["variables"].keys():
-                errors.append(f"[variable**************:{var}]: Does not exist in file. {search_close_match(var, dct['variables'].keys())}")
+                errors.append(f"[variable**************:{var}]: Does not exist in file. {search_close_match(var, dct['variables'].keys()) if not skip_spellcheck else ''}")
 
     return errors, warnings
 
 
-def check_dim_exists(dct, dimensions):
+def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     """
     Check that variables exist
 
@@ -145,15 +145,15 @@ def check_dim_exists(dct, dimensions):
         if ':__OPTIONAL__' in dim:
             dim = dim.split(':')[0]
             if dim not in dct["dimensions"].keys():
-                warnings.append(f"[dimension**************:{dim}]: Optional dimension does not exist in file. {search_close_match(dim, dct['dimensions'].keys())}")
+                warnings.append(f"[dimension**************:{dim}]: Optional dimension does not exist in file. {search_close_match(dim, dct['dimensions'].keys()) if not skip_spellcheck else ''}")
         else:
             if dim not in dct["dimensions"].keys():
-                errors.append(f"[dimension**************:{dim}]: Does not exist in file. {search_close_match(dim, dct['dimensions'].keys())}")
+                errors.append(f"[dimension**************:{dim}]: Does not exist in file. {search_close_match(dim, dct['dimensions'].keys()) if not skip_spellcheck else ''}")
 
     return errors, warnings 
 
 
-def check_var(dct, variable, defined_attrs):
+def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
     """
     Check variable exists and has attributes defined.
     """
@@ -165,7 +165,7 @@ def check_var(dct, variable, defined_attrs):
     if ':__OPTIONAL__' in variable:
         variable = variable.split(':')[0]
         if variable not in dct["variables"].keys():
-            warnings.append(f"[variable**************:{variable}]: Optional variable does not exist in file. {search_close_match(variable, dct['variables'].keys())}")
+            warnings.append(f"[variable**************:{variable}]: Optional variable does not exist in file. {search_close_match(variable, dct['variables'].keys()) if not skip_spellcheck else ''}")
         else:
             for attr in defined_attrs:
                 if isinstance(attr, dict) and len(attr.keys()) == 1:
@@ -174,7 +174,7 @@ def check_var(dct, variable, defined_attrs):
                 attr_key = attr.split(':')[0]
                 attr_value = ':'.join(attr.split(':')[1:])
                 if attr_key not in dct["variables"][variable]:
-                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. {search_close_match(attr_key, dct['variables'][variable])}")
+                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. {search_close_match(attr_key, dct['variables'][variable]) if not skip_spellcheck else ''}")
                 elif '<derived from file>' in attr_value:
                     # work this out
                     pass
@@ -183,7 +183,7 @@ def check_var(dct, variable, defined_attrs):
                     attr_value = [ int(i.strip('b')) for i in attr_value.split(',') ]
                     attr_value = np.array(attr_value, dtype=np.int8)
                     if not np.all(dct["variables"][variable].get(attr_key) == attr_value):
-                        errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, not {dct['variables'][variable].get(attr_key)}.")
+                        errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, not {dct['variables'][variable].get(attr_key) if skip_spellcheck else ''}.")
                 #elif attr_key == 'flag_meanings':
                 #    print(attr_value)
                 #    print(dct["variables"][variable].get(attr_key))
@@ -191,13 +191,13 @@ def check_var(dct, variable, defined_attrs):
                     errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, not {dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}.")
     else:
         if variable not in dct["variables"].keys():
-            errors.append(f"[variable**************:{variable}]: Optional variable does not exist in file. {search_close_match(variable, dct['variables'].keys())}")
+            errors.append(f"[variable**************:{variable}]: Optional variable does not exist in file. {search_close_match(variable, dct['variables'].keys()) if not skip_spellcheck else ''}")
         else:
             for attr in defined_attrs:
                 attr_key = attr.split(':')[0]
                 attr_value = ':'.join(attr.split(':')[1:]) 
                 if attr_key not in dct["variables"][variable]:
-                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. {search_close_match(attr_key, dct['variables'][variable])}")
+                    errors.append(f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. {search_close_match(attr_key, dct['variables'][variable]) if not skip_spellcheck else ''}")
                 elif '<' in attr_value:
                     # work this out
                     pass

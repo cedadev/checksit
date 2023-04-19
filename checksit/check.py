@@ -20,7 +20,8 @@ conf = get_config()
 class Checker:
 
     def __init__(self, template="auto", mappings=None, extra_rules=None, specs=None, ignore_attrs=None, 
-                auto_cache=False, verbose=False, log_mode="standard", ignore_warnings=False):
+                auto_cache=False, verbose=False, log_mode="standard", ignore_warnings=False,
+                skip_spellcheck=False):
         self.template = template
         self.mappings = mappings or {}
         self.extra_rules = extra_rules or {}
@@ -30,6 +31,7 @@ class Checker:
         self.ignore_warnings = ignore_warnings
         self.verbose = verbose
         self.log_mode = log_mode
+        self.skip_spellcheck = skip_spellcheck
         self._check_context = {}
 
     def _update_check_context(self, file_path, template):
@@ -124,7 +126,8 @@ class Checker:
         return errors
                         
     def _check_file(self, file_content, template, mappings=None, extra_rules=None, specs=None,
-                        ignore_attrs=None, log_mode="standard", fmt_errors=None, ignore_warnings=False):
+                        ignore_attrs=None, log_mode="standard", fmt_errors=None,
+                        ignore_warnings=False, skip_spellcheck=False):
  
         if hasattr(file_content, "to_dict"):
             record = file_content.to_dict()
@@ -144,7 +147,7 @@ class Checker:
 
         for spec in specs:
             sr = SpecificationChecker(spec)
-            spec_errors, spec_warnings = sr.run_checks(record)
+            spec_errors, spec_warnings = sr.run_checks(record, skip_spellcheck=skip_spellcheck)
             errors.extend(spec_errors)
             warnings.extend(spec_warnings)
 
@@ -186,7 +189,8 @@ class Checker:
 
 
     def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, specs=None,
-                ignore_attrs=None, auto_cache=False, verbose=False, log_mode="standard", ignore_warnings=False):
+                ignore_attrs=None, auto_cache=False, verbose=False, log_mode="standard",
+                ignore_warnings=False, skip_spellcheck=False):
 
         try:
             fp = FileParser()
@@ -250,7 +254,8 @@ class Checker:
             print(f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {specs}\n\tDatafile: {file_content.inpt}")
 
         self._check_file(file_content, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
-                        specs=specs, ignore_attrs=ignore_attrs, log_mode=log_mode, ignore_warnings=ignore_warnings)
+                        specs=specs, ignore_attrs=ignore_attrs, log_mode=log_mode,
+                        ignore_warnings=ignore_warnings, skip_spellcheck=skip_spellcheck)
 
 
 class TemplateManager:
