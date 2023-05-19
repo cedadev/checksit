@@ -9,7 +9,7 @@ checksit check --template=/badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/08/rss/day/l
 # Switch on automatic-caching when checking a file
 checksit check --auto-cache --template=/badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/08/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_08_day_20671201-20681130.nc /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc
 
-checksit check --verbose /group_workspaces/jasmin2/ukcp18/incoming-astephen/ukcordex-example/tasmax_rcp85_land-rcm_uk_12km_EC-EARTH_r12i1p1_HIRHAM5_day_19801201-19901130.nc
+checksit check --verbose /gws/pw/j07/ukcp18/incoming-astephen/ukcordex-example/tasmax_rcp85_land-rcm_uk_12km_EC-EARTH_r12i1p1_HIRHAM5_day_19801201-19901130.nc
 
 checksit check /badc/ukmo-assim/data/standard/2022/ukmo-nwp-strat_gbl-std_2022020112_u-v-gph-t-w.pp
 
