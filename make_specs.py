@@ -2,7 +2,20 @@ import json
 from os.path import exists
 
 
+####################
+# USEFUL FUNCTIONS #
+####################
 
+def map_data_type(dtype):
+    data_map = {
+        'float64':'double',
+        'float32':'float',
+        'int32':'int',
+        'byte':'byte',
+    }
+    return data_map[dtype]
+    
+    
 
 ###############
 # DIRECTORIES #
@@ -50,7 +63,8 @@ for attr in data.keys():
         rule = f"type-rule:{compliance.lower()}"
     elif compliance.lower() == "exact match in vocabulary":
         if attr == 'source':
-            rule = "__vocabs__:AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description"
+            rule = ("__vocabs__:AMF_CVs/AMF_ncas_instrument:"
+                    "ncas_instrument:__all__:description")
         elif attr == 'platform':
             rule = "__vocabs__:AMF_CVs/AMF_platform:platform:__all__"
         else:
@@ -70,7 +84,8 @@ for attr in data.keys():
 
 
 with open(f'{out_dir}/amof-global-attrs.yml', 'w') as f:
-    f.write('required-global-attrs:\n  func: checksit.generic.check_global_attrs\n  params:\n    vocab_attrs:\n')
+    f.write(('required-global-attrs:\n  func: checksit.generic.check_global_attrs\n'
+             '  params:\n    vocab_attrs:\n'))
     for attr, rule in attr_rules.items():
         if "__vocabs__" in rule:
             f.write(f'      {attr}: {rule}\n')
@@ -92,37 +107,33 @@ for mode in deployment_modes:
         deploy_dims = json.load(f)[f'product_common_dimension_{mode}'].keys()
     with open(f'{cvs_dir}/AMF_product_common_variable_{mode}.json') as f:
         data = json.load(f)[f'product_common_variable_{mode}']
-        deploy_vars_attrs = {}
+        #deploy_vars_attrs = {}
         deploy_vars = {}
-        count = 0
         for variable in data.keys():
-            attrs = data[variable].keys()
-            if attrs not in deploy_vars_attrs.values():
-                deploy_vars_attrs[count] = attrs
-                deploy_vars[count] = [variable]
-                count += 1
-            else:
-                # find key based on value
-                for attr_key in deploy_vars_attrs.keys():
-                    if deploy_vars_attrs[attr_key] == attrs:
-                        deploy_vars[attr_key].append(variable)
+            deploy_vars[variable] = []
+            for attr in data[variable].keys():
+                attr_value = data[variable][attr]
+                if attr == 'type':
+                    attr_value = map_data_type(attr_value)
+                deploy_vars[variable].append(f'{attr}:{attr_value}')
      
 
 
     spec_file_name = f'{out_dir}/amof-common-{mode}.yml'
     with open(spec_file_name, 'w') as f:
         # variables
-        for key_number in deploy_vars.keys():
-            f.write(f'var-requires{key_number}:\n')
-            f.write('  func: checksit.generic.check_var\n  params:\n    variables:\n')
-            for var in deploy_vars[key_number]:
-                f.write(f'      - {var}\n')
-            f.write('    defined_attrs:\n')
-            for attr in deploy_vars_attrs[key_number]:
-                f.write(f'      - {attr}\n')
+        for i, var in enumerate(deploy_vars.items()):
+            f.write(f'var-requires{i}:\n')
+            f.write(('  func: checksit.generic.check_var\n  params:\n    variable:\n'
+                     f'      - {var[0]}\n    defined_attrs:\n'))
+            for attr in var[1]:
+                attr_key = attr.split(':')[0]
+                attr_value = ':'.join(attr.split(':')[1:])
+                f.write(f'      - {attr_key}:{attr_value}\n')
         f.write('\n')
         # dimensions
-        f.write('dims-requires:\n  func: checksit.generic.check_dim_exists\n  params:\n    dimensions:\n')
+        f.write(('dims-requires:\n  func: checksit.generic.check_dim_exists\n'
+                 '  params:\n    dimensions:\n'))
         for dim in deploy_dims:
             f.write(f'      - {dim}\n')
 
@@ -146,20 +157,16 @@ for product in products:
     if exists(f'{cvs_dir}/AMF_product_{product}_variable.json'):
         with open(f'{cvs_dir}/AMF_product_{product}_variable.json') as f:
             data = json.load(f)[f'product_{product}_variable']
-            product_attrs_info = {}
-            count = 0
             product_info = {}
             for variable in data.keys():
-                attrs = data[variable].keys()
-                if attrs not in product_attrs_info.values():
-                    product_attrs_info[count] = attrs
-                    product_info[count] = [variable]
-                    count += 1
-                else:
-                    # find key based on value
-                    for attr_key in product_attrs_info.keys():
-                        if product_attrs_info[attr_key] == attrs:
-                            product_info[attr_key].append(variable)
+                product_info[variable] = []
+                for attr in data[variable].keys():
+                    attr_value = data[variable][attr]
+                    if attr == 'flag_meanings':
+                        attr_value = attr_value.replace('|',' ').replace('  ',' ')
+                    elif attr == 'type':
+                        attr_value = map_data_type(attr_value)
+                    product_info[variable].append(f'{attr}:{attr_value}')
         prod_vars_exist = True
     else:
         prod_vars_exist = False
@@ -180,7 +187,8 @@ for product in products:
 
             for attr in data.keys():
                 compliance = data[attr]['compliance_checking_rules']
-                if compliance.lower() in ["exact match", "exact match of text to the left"]:
+                if compliance.lower() in ["exact match",
+                                          "exact match of text to the left"]:
                     rule = f"regex:{data[attr]['fixed_value']}"
                 elif "String: min" in compliance:
                     number = compliance.split(' ')[2]
@@ -200,11 +208,13 @@ for product in products:
                         rule = "regex-rule:datetime"
                     else:
                         rule = f"regex-rule:EDIT:{compliance}"
-                elif compliance.lower() in ["number","integer","int","float","string","str"]:
+                elif compliance.lower() in ["number","integer",
+                                            "int","float","string","str"]:
                     rule = f"type-rule:{compliance.lower()}"
                 elif compliance.lower() == "exact match in vocabulary":
                     if attr == 'source':
-                        rule = "__vocabs__:AMF_CVs/AMF_ncas_instrument:ncas_instrument:__all__:description"
+                        rule = ("__vocabs__:AMF_CVs/AMF_ncas_instrument:"
+                                "ncas_instrument:__all__:description")
                     elif attr == 'platform':
                         rule = "__vocabs__:AMF_CVs/AMF_platform:platform:__all__"
                     else:
@@ -230,21 +240,25 @@ for product in products:
     spec_file_name = f'{out_dir}/amof-{product}.yml'
     with open(spec_file_name, 'w') as f:
         if prod_vars_exist:
-            for key_number in product_info.keys():
-                f.write(f'var-requires{key_number}:\n')
-                f.write('  func: checksit.generic.check_var\n  params:\n    variables:\n')
-                for var in product_info[key_number]:
-                    f.write(f'      - {var}:__OPTIONAL__\n')
-                f.write('    defined_attrs:\n')
-                for attr in product_attrs_info[key_number]:
-                    f.write(f'      - {attr}\n')
-            f.write('\n')
+            for i, var in enumerate(product_info.items()):
+                f.write(f'var-requires{i}:\n')
+                f.write(('  func: checksit.generic.check_var\n'
+                         '  params:\n    variable:\n'
+                         f'      - {var[0]}:__OPTIONAL__\n    defined_attrs:\n'))
+                for attr in var[1]:
+                    attr_key = attr.split(':')[0]
+                    attr_value = ':'.join(attr.split(':')[1:])
+                    f.write(f'      - {attr_key}:{attr_value}\n')
+
         if prod_dims_exist:
-            f.write('dims-requires:\n  func: checksit.generic.check_dim_exists\n  params:\n    dimensions:\n')
+            f.write(('dims-requires:\n  func: checksit.generic.check_dim_exists\n'
+                     '  params:\n    dimensions:\n'))
             for dim in product_dims:
                 f.write(f'      - {dim}:__OPTIONAL__\n')
         if prod_attrs_exist:
-            f.write('\nrequired-global-attrs:\n  func: checksit.generic.check_global_attrs\n  params:\n    vocab_attrs:\n')
+            f.write(('\nrequired-global-attrs:\n  func:'
+                     ' checksit.generic.check_global_attrs\n'
+                     '  params:\n    vocab_attrs:\n'))
             for attr, rule in attr_rules.items():
                 if "__vocabs__" in rule:
                     f.write(f'      {attr}: {rule}\n')

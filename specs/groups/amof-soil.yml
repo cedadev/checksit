@@ -1,50 +1,86 @@
 var-requires0:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - downward_heat_flux_in_soil:__OPTIONAL__
-      - soil_temperature:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - cell_methods
-      - coordinates
+      - type:float
+      - dimension:time, index
+      - units:W m-2
+      - standard_name:downward_heat_flux_in_soil
+      - long_name:Downward Heat Flux in Soil
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
 var-requires1:
   func: checksit.generic.check_var
   params:
-    variables:
-      - soil_water_potential:__OPTIONAL__
+    variable:
+      - soil_temperature:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - cell_methods
-      - coordinates
+      - type:float
+      - dimension:time, index
+      - units:K
+      - standard_name:soil_temperature
+      - long_name:Soil Temperature
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
 var-requires2:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
+      - soil_water_potential:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:kPa
+      - long_name:Soil Water Potential
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_soil_heat_flux:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Soil Heat Flux
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(-30C_to_70C) suspect_data_time_stamp_error
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_soil_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Soil Temperature
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(-35C_to_50C) suspect_data_time_stamp_error
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_soil_water_potential:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - flag_values
-      - flag_meanings
-
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Soil Water Potential
+      - flag_values:0b,1b, 2b, 3b, 4b
+      - flag_meanings:not_used good_data bad_data_soil_water_potential_>_80 kPa_contact_between_soil_and_sensor_usually_lost bad_data_value_outside_operational_range_(0_to_200_kPa) suspect_data_time_stamp_error
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

@@ -1,48 +1,71 @@
 var-requires0:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - altitude:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - axis
-      - valid_min
-      - valid_max
-      - coordinates
+      - type:float
+      - dimension:altitude
+      - units:m
+      - standard_name:altitude
+      - long_name:Geometric height above geoid (WGS84).
+      - _FillValue:-1e+20
+      - axis:Z
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
 var-requires1:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_355:__OPTIONAL__
-      - volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_316:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - coordinates
+      - type:float
+      - dimension:time, altitude
+      - units:m-1 sr-1
+      - long_name:Volume Extinction Coefficient in air due to Ambient Aerosol Particles (Wavelength = 355 nm)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
 var-requires2:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
+      - volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_316:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m-1 sr-1
+      - long_name:Volume Extinction Coefficient in air due to Ambient Aerosol Particles (Wavelength = 316 nm)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_355:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag: 355nm
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b
+      - flag_meanings:not_used good_data good_data_only_355nm_channel_operating suspect_data_cloudy_profile bad_data_gate_index_exceeds_number_of_measurement_gates_in_use suspect_data_time_stamp_error
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag_316:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - flag_values
-      - flag_meanings
-
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag: 316nm
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b
+      - flag_meanings:not_used good_data good_data_only_316nm_channel_operating suspect_data_cloudy_profile bad_data_gate_index_exceeds_number_of_measurement_gates_in_use suspect_data_time_stamp_error
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

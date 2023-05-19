@@ -1,56 +1,183 @@
 var-requires0:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - cloud_base_altitude:__OPTIONAL__
-      - sensor_zenith_angle:__OPTIONAL__
-      - sensor_azimuth_angle:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - cell_methods
-      - coordinates
+      - type:float
+      - dimension:time, layer_index
+      - units:m
+      - standard_name:cloud_base_altitude
+      - long_name:Cloud Base Altitude (Geometric height above geoid WGS84)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
 var-requires1:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - laser_pulse_energy:__OPTIONAL__
-      - laser_temperature:__OPTIONAL__
-      - profile_pulses:__OPTIONAL__
-      - profile_scaling:__OPTIONAL__
-      - window_contamination:__OPTIONAL__
-      - window_transmttance:__OPTIONAL__
-      - background_light:__OPTIONAL__
-      - backscatter_sum:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - cell_methods
-      - coordinates
+      - type:float
+      - dimension:time
+      - units:%
+      - long_name:Laser Pulse Energy (% of maximum)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
 var-requires2:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
+      - laser_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - long_name:Laser Temperature
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_zenith_angle:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - standard_name:sensor_zenith_angle
+      - long_name:Sensor Zenith Angle (from vertical)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_azimuth_angle:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - standard_name:sensor_azimuth_angle
+      - long_name:Sensor Azimuth Angle (clockwise from true North)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - profile_pulses:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Number of pulses in each profile
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: sum
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - profile_scaling:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:%
+      - long_name:Scaling of range profile (default = 100%)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - window_contamination:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mV
+      - long_name:Window Contamination (mV as measured by ADC: 0 - 2500)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - window_transmttance:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:%
+      - long_name:Window Transmittance, % of nominal value
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - background_light:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mV
+      - long_name:Background Light (mV as measured by ADC: 0 - 2500)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - backscatter_sum:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:sr-1
+      - long_name:Sum of detected and normalized backscatter
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - flag_values
-      - flag_meanings
-
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Cloud Base
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b
+      - flag_meanings:not_used good_data suspect_data_no_signifcant_backscatter suspect_data_full_obscuration_determined_but_no_cloud_base_detected suspect_data_some_obscuration_detected_but_determined_to_be_transparent bad_data_raw_data_missing suspect_data_time_stamp_error
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

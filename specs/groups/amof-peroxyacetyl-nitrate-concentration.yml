@@ -1,46 +1,74 @@
 var-requires0:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
       - mole_fraction_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
-      - mass_fraction_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - coordinates
-      - chemical_species
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mole Fraction of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
 var-requires1:
   func: checksit.generic.check_var
   params:
-    variables:
-      - mole_concentration_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
-      - mass_concentration_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
+    variable:
+      - mass_fraction_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - standard_name
-      - long_name
-      - _FillValue
-      - valid_min
-      - valid_max
-      - coordinates
-      - chemical_species
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mass Fraction of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
 var-requires2:
   func: checksit.generic.check_var
   params:
-    variables:
+    variable:
+      - mole_concentration_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mole Concentration of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mass Concentration of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
       - qc_flag:__OPTIONAL__
     defined_attrs:
-      - type
-      - dimension
-      - units
-      - long_name
-      - flag_values
-      - flag_meanings
-
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_unspecified_instrument_performance_issues_contact_data_originator_for_more_information suspect_data_time_stamp_error
