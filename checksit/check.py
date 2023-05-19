@@ -218,14 +218,18 @@ class Checker:
             # Look for AMOF Convention string in Conventions global attr, if it exists
             if ':Conventions' in file_content.cdl:
                 conventions = file_content.cdl.split(':Conventions =')[1].split(';')[0].strip()
-                if conventions in AMOF_CONVENTIONS:
-                    print("\nAMOF file detected, finding correct spec files")
+                if "NCAS-AMOF" in conventions or "NCAS-GENERAL" in conventions or "NCAS-AMF" in conventions:
+                    print("\nNCAS-AMOF file detected, finding correct spec files")
+                    print("Finding correct AMOF version...")
+                    version_number = conventions[conventions.index("NCAS-"):].split("-")[2].replace('"','')
+                    spec_folder = f"ncas-amof-{version_number}"
+                    print(f"  {version_number}")
                     # get deployment mode and data product, to then get specs
                     deployment_mode = file_content.cdl.split(':deployment_mode =')[1].split(';')[0].strip().strip('"')
-                    deploy_spec = f'amof-common-{deployment_mode}'
+                    deploy_spec = f'{spec_folder}/amof-common-{deployment_mode}'
                     product = file_path.split('/')[-1].split('_')[3]
-                    product_spec = f'amof-{product}'
-                    specs = [deploy_spec, product_spec, 'amof-global-attrs']
+                    product_spec = f'{spec_folder}/amof-{product}'
+                    specs = [deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
                     # don't need to do template check
                     template = "off"
 
