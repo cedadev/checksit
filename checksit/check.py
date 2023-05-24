@@ -256,8 +256,8 @@ class Checker:
                             print("Aborting...")
                             sys.exit()
                         except PermissionError:
-                            print(f"[ERROR]: Permission Error when trying to write spec files to {specs_dir}")
-                            print(f"Please talk to your Admin about getting version {version_number} installed.")
+                            print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
+                            print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
                             sys.exit()
                         except:
                             raise
