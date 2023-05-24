@@ -40,7 +40,7 @@
         "ambient_aerosol_size_distribution": {
             "type": "float32",
             "dimension": "time, index",
-            "units": "cm-3 um-1",
+            "units": "cm3-1 um-1",
             "long_name": "Ambient Aerosol Size Distribution (dN\\dD)",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",

@@ -20,11 +20,11 @@
             "valid_max": "<derived from file>",
             "coordinates": "latitude longitude"
         },
-        "sum_of_hydroxyl_and_hydroperoxyl_radical_concentration_in_air": {
+        "sum_of _hydroxyl_and_hydroperoxyl_radical_concentration_in_air": {
             "type": "float32",
             "dimension": "time",
             "units": "m-3",
-            "long_name": "Sum of Hydroxyl and Hydroperoxyl Radical Concentration in air",
+            "long_name": "Sum of  Hydroxyl and Hydroperoxyl Radical Concentration in air",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",

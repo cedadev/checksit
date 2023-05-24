@@ -22,7 +22,7 @@ var-requires1:
       - type:float
       - dimension:time
       - standard_name:mass_fraction_of_carbon_tetrachloride_in_air
-      - long_name:Mass Fraction of Carbon Tetrachloride in air
+      - long_name:Mass Fraction of  Carbon Tetrachloride in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -54,7 +54,7 @@ var-requires3:
       - dimension:time
       - units:kg m-3
       - standard_name:mass_concentration_of_carbon_tetrachloride_in_air
-      - long_name:Mass Concentration of Carbon Tetrachloride in air
+      - long_name:Mass Concentration of  Carbon Tetrachloride in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -126,7 +126,7 @@ var-requires8:
     defined_attrs:
       - type:float
       - dimension:time
-      - long_name:Mole Fraction of Diiodomethane in air
+      - long_name:Mole Fraction of  Diiodomethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -140,7 +140,7 @@ var-requires9:
     defined_attrs:
       - type:float
       - dimension:time
-      - long_name:Mass Fraction of Diiodomethane in air
+      - long_name:Mass Fraction of  Diiodomethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -170,7 +170,7 @@ var-requires11:
       - type:float
       - dimension:time
       - units:kg m-3
-      - long_name:Mass Concentration of Diiodomethane in air
+      - long_name:Mass Concentration of  Diiodomethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -286,7 +286,7 @@ var-requires19:
       - type:float
       - dimension:time
       - units:kg m-3
-      - long_name:Mass Concentration of Bromodichloromethane in air
+      - long_name:Mass Concentration ofBromodichloromethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>

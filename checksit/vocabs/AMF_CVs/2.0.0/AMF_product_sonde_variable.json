@@ -53,7 +53,7 @@
             "dimension": "time",
             "units": "K",
             "standard_name": "air_temperature",
-            "long_name": "Air Temperature",
+            "long_name": "AirTemperature",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",

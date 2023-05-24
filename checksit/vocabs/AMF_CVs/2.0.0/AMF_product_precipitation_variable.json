@@ -24,19 +24,19 @@
             "type": "float32",
             "dimension": "time, fallspeed, diameter",
             "units": "1",
-            "long_name": "Number of Hydrometeors per Fallspeed Channel per Instrument Channel",
-            "_FillValue": -1e+20,
+            "long_name": "Number of Hydrometeors per Instrument Channel",
+            "_FillValue": -10000000000.0,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
             "cell_methods": "time: mean",
             "coordinates": "latitude longitude"
         },
-        "number_of_hydrometeors_per_size_channel": {
+        "number_of_hydrometeor_per_size_channel": {
             "type": "float32",
             "dimension": "time, diameter",
             "units": "1",
             "long_name": "Number of Hydrometeors per Instrument Channel",
-            "_FillValue": -1e+20,
+            "_FillValue": -10000000000.0,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
             "cell_methods": "time: mean",
@@ -122,11 +122,11 @@
             "coordinates": "latitude longitude"
         },
         "number_of_drops": {
-            "type": "int32",
+            "type": "float32",
             "dimension": "time",
             "units": "1",
             "long_name": "Number of Pulses\\Drops Counted in Integration Period",
-            "_FillValue": -1000000000.0,
+            "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
             "cell_methods": "time: sum",

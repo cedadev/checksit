@@ -30,12 +30,12 @@ var-requires2:
   func: checksit.generic.check_var
   params:
     variable:
-      - sum_of_hydroxyl_and_hydroperoxyl_radical_concentration_in_air:__OPTIONAL__
+      - sum_of _hydroxyl_and_hydroperoxyl_radical_concentration_in_air:__OPTIONAL__
     defined_attrs:
       - type:float
       - dimension:time
       - units:m-3
-      - long_name:Sum of Hydroxyl and Hydroperoxyl Radical Concentration in air
+      - long_name:Sum of  Hydroxyl and Hydroperoxyl Radical Concentration in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>

@@ -59,7 +59,7 @@ var-requires4:
     defined_attrs:
       - type:float
       - dimension:time, index
-      - units:cm-3 um-1
+      - units:cm3-1 um-1
       - long_name:Ambient Aerosol Size Distribution (dN\dD)
       - _FillValue:-1e+20
       - valid_min:<derived from file>
@@ -177,5 +177,5 @@ required-global-attrs:
       dma_outer_radius: rule-func:string-of-length:3+
       dma_length: rule-func:string-of-length:3+
       impactor_orifice_diameter: rule-func:string-of-length:3+
-      lower_channel_cut_off: rule-func:string-of-length:3+
+      lower_channel_cuf_off: rule-func:string-of-length:3+
       upper_channel_cut_off: rule-func:string-of-length:3+

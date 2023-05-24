@@ -7,7 +7,7 @@ var-requires0:
       - type:float
       - dimension:time
       - standard_name:mole_fraction_of_ethane_in_air
-      - long_name:Mole Fraction of Ethane in air
+      - long_name:Mole Fraction of Ehane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -69,7 +69,7 @@ var-requires4:
       - type:float
       - dimension:time
       - standard_name:mole_fraction_of_ethene_in_air
-      - long_name:Mole Fraction of Ethene in air
+      - long_name:Mole Fraction of Ehene in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -971,7 +971,7 @@ var-requires64:
       - type:float
       - dimension:time
       - standard_name:mole_fraction_of_ethanol_in_air
-      - long_name:Mole Fraction of Ethanol in air
+      - long_name:Mole Fraction of Ehanol in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>

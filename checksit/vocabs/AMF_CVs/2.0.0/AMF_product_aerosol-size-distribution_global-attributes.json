@@ -35,8 +35,8 @@
             "compliance_checking_rules": "String: min 3 characters",
             "convention_providence": null
         },
-        "lower_channel_cut_off": {
-            "global_attribute_id": "lower_channel_cut_off",
+        "lower_channel_cuf_off": {
+            "global_attribute_id": "lower_channel_cuf_off",
             "description": "Theoretical lower size limit",
             "fixed_value": "",
             "compliance_checking_rules": "String: min 3 characters",

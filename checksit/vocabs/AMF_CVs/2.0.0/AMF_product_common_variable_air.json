@@ -5,7 +5,7 @@
             "dimension": "time",
             "units": "seconds since 1970-01-01 00:00:00",
             "standard_name": "time",
-            "long_name": "Time (seconds since 1970-01-01 00:00:00)",
+            "long_name": "Time (seconds since 1970-01-01)",
             "axis": "T",
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -21,7 +21,7 @@
             "axis": "Y",
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
-            "cell_methods": "time: mean"
+            "cell_methods": "time: point"
         },
         "longitude": {
             "type": "float32",
@@ -33,7 +33,7 @@
             "axis": "X",
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
-            "cell_methods": "time: mean"
+            "cell_methods": "time: point"
         },
         "platform_speed_wrt_air": {
             "type": "float32",

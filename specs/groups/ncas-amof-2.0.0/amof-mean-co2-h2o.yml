@@ -103,7 +103,7 @@ var-requires6:
       - dimension:time
       - units:mmol m-3
       - standard_name:mole_concentration_of_water_vapor_in_air
-      - long_name:Mole concentration of Water Vapor in air
+      - long_name:Mole concentration of Water Vapour in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -119,7 +119,7 @@ var-requires7:
       - type:float
       - dimension:time
       - units:mmol m-3
-      - long_name:Divergence of mole concentration of Water Vapor in air
+      - long_name:Divergence of mole concentration of Water Vapour in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -136,7 +136,7 @@ var-requires8:
       - dimension:time
       - units:kg kg-1
       - standard_name:specific_humidity
-      - long_name:Specific Humidity (Q)
+      - long_name:Specific_humidity (Q)
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>

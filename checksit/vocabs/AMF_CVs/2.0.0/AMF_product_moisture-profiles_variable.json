@@ -71,7 +71,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 1 failure",
+            "long_name": "Data Quality flag: Receiver channel 1 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -79,7 +79,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 2 failure",
+            "long_name": "Data Quality flag: Receiver channel 2 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -87,7 +87,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 3 failure",
+            "long_name": "Data Quality flag: Receiver channel 3 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -95,7 +95,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 4 failure",
+            "long_name": "Data Quality flag: Receiver channel 4 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -103,7 +103,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 5 failure",
+            "long_name": "Data Quality flag: Receiver channel 5 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -111,15 +111,15 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 6 failure",
+            "long_name": "Data Quality flag: Receiver channel 6 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
         "qc_flag_channel_7_failure": {
-            "type": "byte",
+            "type": "int32",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 7 failure",
+            "long_name": "Data Quality flag: Receiver channel 7 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -127,7 +127,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 8 failure",
+            "long_name": "Data Quality flag: Receiver channel 8 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -135,7 +135,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 9 failure",
+            "long_name": "Data Quality flag: Receiver channel 9 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -143,7 +143,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 10 failure",
+            "long_name": "Data Quality flag: Receiver channel 10 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -151,7 +151,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 11 failure",
+            "long_name": "Data Quality flag: Receiver channel 11 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -159,15 +159,15 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 12 failure",
+            "long_name": "Data Quality flag: Receiver channel 12 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
         "qc_flag_channel_13_failure": {
-            "type": "byte",
+            "type": "int32",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 13 failure",
+            "long_name": "Data Quality flag: Receiver channel 13 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },
@@ -175,7 +175,7 @@
             "type": "byte",
             "dimension": "time",
             "units": "1",
-            "long_name": "Data Quality flag: Receiver channel 14 failure",
+            "long_name": "Data Quality flag: Receiver channel 14 failed",
             "flag_values": "0b,1b, 2b, 3b",
             "flag_meanings": "not_used|good_data |bad_data_channel_failure|suspect_data_time_stamp_error"
         },

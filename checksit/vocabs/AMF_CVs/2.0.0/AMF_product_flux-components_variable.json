@@ -4,7 +4,7 @@
             "type": "float64",
             "dimension": "time",
             "units": "seconds since 1970-01-01 00:00:00",
-            "long_name": "Start of run (seconds since 1970-01-01 00:00:00)",
+            "long_name": "Start of run (seconds since 1970-01-01)",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -47,7 +47,7 @@
             "dimension": "time, index",
             "units": "hPa",
             "standard_name": "air_pressure",
-            "long_name": "Air Pressure (P)",
+            "long_name": "Air  Pressure (P)",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -71,7 +71,7 @@
             "dimension": "time, index",
             "units": "mmol m-3",
             "standard_name": "mole_concentration_of_water_vapor_in_air",
-            "long_name": "Water Vapor mole concentration",
+            "long_name": "Water Vapour mole concentration",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -83,19 +83,19 @@
             "dimension": "time, index",
             "units": "kg kg-1",
             "standard_name": "specific_humidity",
-            "long_name": "Specific Humidity (Q)",
+            "long_name": "Specific_humidity (Q)",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
             "cell_methods": "time: point",
             "coordinates": "latitude longitude"
         },
-        "water_vapur_partial_pressure_in_air": {
+        "water_vapour_partial_pressure_in_air": {
             "type": "float32",
             "dimension": "time, index",
             "units": "Pa",
             "standard_name": "water_vapor_partial_pressure_in_air",
-            "long_name": "Water Vapor Partial Pressure in air",
+            "long_name": "Water Vapour Partial Pressure in air",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -107,7 +107,7 @@
             "dimension": "time, index",
             "units": "1",
             "standard_name": "humidity_mixing_ratio",
-            "long_name": "Water Vapor Mass Mixing Ratio (WVMMR)",
+            "long_name": "Water Vapour Mass Mixing Ratio (WVMMR)",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -129,7 +129,7 @@
             "type": "float32",
             "dimension": "time, index",
             "units": "K",
-            "long_name": "Sonic Temperature (Ts) corrected for sidewind",
+            "long_name": "Sonic temperature (Ts) corrected for sidewind",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -246,7 +246,7 @@
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
-            "cell_methods": "time: skew",
+            "cell_methods": "time: point",
             "coordinates": "latitude longitude"
         },
         "kurtosis_eastward_wind": {
@@ -257,7 +257,7 @@
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
-            "cell_methods": "time: kurtosis",
+            "cell_methods": "time: point",
             "coordinates": "latitude longitude"
         },
         "kurtosis_northward_wind": {
@@ -268,7 +268,7 @@
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
-            "cell_methods": "time: kurtosis",
+            "cell_methods": "time: point",
             "coordinates": "latitude longitude"
         },
         "kurtosis_upward_air_velocity": {
@@ -279,7 +279,7 @@
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
-            "cell_methods": "time: kurtosis",
+            "cell_methods": "time: point",
             "coordinates": "latitude longitude"
         },
         "kurtosis_sonic_air_temperature": {
@@ -290,7 +290,7 @@
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
-            "cell_methods": "time: kurtosis",
+            "cell_methods": "time: point",
             "coordinates": "latitude longitude"
         },
         "sst_wu": {
@@ -363,7 +363,7 @@
             "type": "float32",
             "dimension": "time",
             "units": "m s-1",
-            "long_name": "Divergence of Upward Air Velocity (sigma W)",
+            "long_name": "Divergence  of Upward Air Velocity (sigma W)",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",

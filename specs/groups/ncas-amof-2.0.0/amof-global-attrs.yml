@@ -14,7 +14,7 @@ required-global-attrs:
       creator_name: rule-func:string-of-length:3+
       creator_email: regex-rule:valid-email
       creator_url: regex-rule:valid-url
-      institution: regex:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)
+      institution: regex:National\sCentre\sfor\sAtmospheric\sScience\s\\(NCAS\\)
       processing_software_url: regex-rule:valid-url
       processing_software_version: rule-func:string-of-length:2+
       calibration_sensitivity: rule-func:string-of-length:5+

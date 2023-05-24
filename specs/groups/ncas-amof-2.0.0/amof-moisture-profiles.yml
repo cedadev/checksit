@@ -102,7 +102,7 @@ var-requires7:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 1 failure
+      - long_name:Data Quality flag: Receiver channel 1 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires8:
@@ -114,7 +114,7 @@ var-requires8:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 2 failure
+      - long_name:Data Quality flag: Receiver channel 2 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires9:
@@ -126,7 +126,7 @@ var-requires9:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 3 failure
+      - long_name:Data Quality flag: Receiver channel 3 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires10:
@@ -138,7 +138,7 @@ var-requires10:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 4 failure
+      - long_name:Data Quality flag: Receiver channel 4 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires11:
@@ -150,7 +150,7 @@ var-requires11:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 5 failure
+      - long_name:Data Quality flag: Receiver channel 5 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires12:
@@ -162,7 +162,7 @@ var-requires12:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 6 failure
+      - long_name:Data Quality flag: Receiver channel 6 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires13:
@@ -171,10 +171,10 @@ var-requires13:
     variable:
       - qc_flag_channel_7_failure:__OPTIONAL__
     defined_attrs:
-      - type:byte
+      - type:int
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 7 failure
+      - long_name:Data Quality flag: Receiver channel 7 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires14:
@@ -186,7 +186,7 @@ var-requires14:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 8 failure
+      - long_name:Data Quality flag: Receiver channel 8 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires15:
@@ -198,7 +198,7 @@ var-requires15:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 9 failure
+      - long_name:Data Quality flag: Receiver channel 9 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires16:
@@ -210,7 +210,7 @@ var-requires16:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 10 failure
+      - long_name:Data Quality flag: Receiver channel 10 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires17:
@@ -222,7 +222,7 @@ var-requires17:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 11 failure
+      - long_name:Data Quality flag: Receiver channel 11 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires18:
@@ -234,7 +234,7 @@ var-requires18:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 12 failure
+      - long_name:Data Quality flag: Receiver channel 12 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires19:
@@ -243,10 +243,10 @@ var-requires19:
     variable:
       - qc_flag_channel_13_failure:__OPTIONAL__
     defined_attrs:
-      - type:byte
+      - type:int
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 13 failure
+      - long_name:Data Quality flag: Receiver channel 13 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires20:
@@ -258,7 +258,7 @@ var-requires20:
       - type:byte
       - dimension:time
       - units:1
-      - long_name:Data Quality flag: Receiver channel 14 failure
+      - long_name:Data Quality flag: Receiver channel 14 failed
       - flag_values:0b,1b, 2b, 3b
       - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
 var-requires21:

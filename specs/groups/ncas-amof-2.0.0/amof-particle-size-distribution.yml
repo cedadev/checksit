@@ -46,7 +46,7 @@ var-requires3:
       - type:float
       - dimension:time, index
       - units:cm-3
-      - long_name:Ambient particle number per channel (dN)
+      - long_name:ambient particle number per channel (dN)
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>

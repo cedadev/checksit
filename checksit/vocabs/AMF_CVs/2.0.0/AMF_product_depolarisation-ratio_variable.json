@@ -2,7 +2,7 @@
     "product_depolarisation-ratio_variable": {
         "range": {
             "type": "float32",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "m",
             "long_name": "Distance of Measurement Volume Centre Point from Instrument",
             "_FillValue": -1e+20,
@@ -44,7 +44,7 @@
             "type": "float32",
             "dimension": "time, index_of_angle",
             "units": "degree",
-            "long_name": "Scanning head elevation angle in the Earth frame of reference",
+            "long_name": "Scanning head elevation angle in the Earth frame of refeence",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",
@@ -52,7 +52,7 @@
         },
         "attenuated_aerosol_backscatter_coefficient_co": {
             "type": "float32",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "m-1 sr-1",
             "long_name": "Attenuated backscatter coefficient (Planar Polarised)",
             "_FillValue": -1e+20,
@@ -63,7 +63,7 @@
         },
         "signal_to_noise_ratio_plus_1_co": {
             "type": "float32",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "1",
             "long_name": "Signal to Noise Ratio: SNR+1 (Planar Polarised)",
             "_FillValue": -1e+20,
@@ -74,7 +74,7 @@
         },
         "attenuated_aerosol_backscatter_coefficient_cr": {
             "type": "float32",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "m-1 sr-1",
             "long_name": "Attenuated backscatter coefficient (Cross Polarised)",
             "_FillValue": -1e+20,
@@ -85,7 +85,7 @@
         },
         "signal_to_noise_ratio_plus_1_cr": {
             "type": "float32",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "1",
             "long_name": "Signal to Noise Ratio: SNR+1 (Cross Polarised)",
             "_FillValue": -1e+20,
@@ -96,7 +96,7 @@
         },
         "depolarisation_ratio": {
             "type": "float32",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "1",
             "long_name": "Volume Linear Depolarization Ratio",
             "_FillValue": -1e+20,
@@ -107,7 +107,7 @@
         },
         "qc_flag_attenuated_aerosol_backscatter_coefficient_co": {
             "type": "byte",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "1",
             "long_name": "Data Quality flag:  Attenuated backscatter coefficient (Planar Polarised)",
             "flag_values": "0b,1b, 2b, 3b,4b, 5b, 6b, 7b, 8b, 9b,10b",
@@ -115,7 +115,7 @@
         },
         "qc_flag_attenuated_aerosol_backscatter_coefficient_cr": {
             "type": "byte",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "1",
             "long_name": "Data Quality flag:  Attenuated backscatter coefficient (Cross Polarised)",
             "flag_values": "0b,1b, 2b, 3b,4b, 5b, 6b, 7b, 8b, 9b,10b",
@@ -123,7 +123,7 @@
         },
         "qc_flag_depolarisation_ratio": {
             "type": "byte",
-            "dimension": "time, index_of_range",
+            "dimension": "time, index_of_range, index_of_angle",
             "units": "1",
             "long_name": "Data Quality flag:  Depolarisation R",
             "flag_values": "0b,1b, 2b, 3b,4b, 5b, 6b, 7b, 8b, 9b,10b",

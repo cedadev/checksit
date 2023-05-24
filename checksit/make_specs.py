@@ -64,13 +64,22 @@ def make_amof_specs(version_number):
         elif compliance.lower() in ["number","integer","int","float","string","str"]:
             rule = f"type-rule:{compliance.lower()}"
         elif compliance.lower() == "exact match in vocabulary":
+            # known vocab matches
             if attr == 'source':
                 rule = (f"__vocabs__:AMF_CVs/{version_number}/AMF_ncas_instrument:"
                         "ncas_instrument:__all__:description")
             elif attr == 'platform':
                 rule = f"__vocabs__:AMF_CVs/{version_number}/AMF_platform:platform:__all__"
             else:
-                rule = f"__vocabs__:EDIT:{compliance}"
+                # a few extra catches
+                if attr == "institution":
+                    rule = "regex:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)"
+                elif attr == "platform_type":
+                    rule = "rule-func:match-one-of:stationary_platform|moving_platform"
+                elif attr == "featureType":
+                    rule = "rule-func:match-one-of:timeSeries|timeSeriesProfile|trajectory"
+                else:
+                    rule = f"__vocabs__:EDIT:{compliance}"
         elif "one of: " in compliance.lower():
             options = compliance.split(': ')[1]
             options = options.replace(',','|')

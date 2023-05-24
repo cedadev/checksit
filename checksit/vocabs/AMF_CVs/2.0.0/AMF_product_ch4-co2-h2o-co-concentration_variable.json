@@ -96,7 +96,7 @@
             "type": "float32",
             "dimension": "time",
             "standard_name": "mole_fraction_of_water_vapor_in_air",
-            "long_name": "Mole Fraction of Water Vapor in air",
+            "long_name": "Mole Fraction of Water Vapour in air",
             "_FillValue": -1e+20,
             "valid_min": "<derived from file>",
             "valid_max": "<derived from file>",

@@ -73,8 +73,8 @@
         "institution": {
             "global_attribute_id": "institution",
             "description": "Institution the maker affliated to",
-            "fixed_value": "National Centre for Atmospheric Science (NCAS)",
-            "compliance_checking_rules": "Exact match",
+            "fixed_value": "",
+            "compliance_checking_rules": "Exact match in vocabulary",
             "convention_providence": "CF"
         },
         "processing_software_url": {
@@ -200,7 +200,7 @@
             "global_attribute_id": "platform_type",
             "description": "Type of platform on which the instrument was deployed",
             "fixed_value": "",
-            "compliance_checking_rules": "One of: stationary_platform, moving_platform",
+            "compliance_checking_rules": "Exact match in vocabulary",
             "convention_providence": "AMF"
         },
         "deployment_mode": {
@@ -221,7 +221,7 @@
             "global_attribute_id": "featureType",
             "description": "Feature Type of measurements (set for each instrument type).",
             "fixed_value": "",
-            "compliance_checking_rules": "One of: timeSeries, timeSeriesProfile, trajectory",
+            "compliance_checking_rules": "Exact match in vocabulary",
             "convention_providence": "CF"
         },
         "time_coverage_start": {
