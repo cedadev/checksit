@@ -46,7 +46,7 @@ class SpecificationChecker:
 
     def _setup(self, spec_id):
         self.spec_id = spec_id
-        self.spec = load_specs([spec_id])[spec_id]
+        self.spec = load_specs([spec_id])[spec_id.split("/")[-1]]
 
     def _run_check(self, record, check_dict, skip_spellcheck=False):
         d = check_dict

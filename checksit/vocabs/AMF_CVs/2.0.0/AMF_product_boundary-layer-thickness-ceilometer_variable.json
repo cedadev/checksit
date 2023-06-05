@@ -1,0 +1,136 @@
+{
+    "product_boundary-layer-thickness-ceilometer_variable": {
+        "atmosphere_boundary_layer_thickness": {
+            "type": "float32",
+            "dimension": "time, layer_index",
+            "units": "m",
+            "standard_name": "atmosphere_boundary_layer_thickness",
+            "long_name": "Boundary Layer Thickness",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "laser_pulse_energy": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "%",
+            "long_name": "Laser Pulse Energy (% of maximum)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "laser_temperature": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "K",
+            "long_name": "Laser Temperature",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "sensor_zenith_angle": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "sensor_zenith_angle",
+            "long_name": "Sensor Zenith Angle (from vertical)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "sensor_azimuth_angle": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "sensor_azimuth_angle",
+            "long_name": "Sensor Azimuth Angle (clockwise from true North)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "profile_pulses": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Number of pulses in each profile",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: sum",
+            "coordinates": "latitude longitude"
+        },
+        "profile_scaling": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "%",
+            "long_name": "Scaling of range profile (default = 100%)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "window_contamination": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mV",
+            "long_name": "Window Contamination (mV as measured by ADC: 0 - 2500)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "window_transmttance": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "%",
+            "long_name": "Window Transmittance, % of nominal value",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "background_light": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mV",
+            "long_name": "Background Light (mV as measured by ADC: 0 - 2500)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "backscatter_sum": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "sr-1",
+            "long_name": "Sum of detected and normalized backscatter",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time, layer_index",
+            "units": "1",
+            "long_name": "Data Quality flag: Cloud Base",
+            "flag_values": "0b,1b, 2b, 3b, 4b, 5b, 6b",
+            "flag_meanings": "not_used|good_data |suspect_data_no_signifcant_backscatter|suspect_data_full_obscuration_determined_but_no_cloud_base_detected|suspect_data_some_obscuration_detected_but_determined_to_be_transparent|bad_data_raw_data_missing|suspect_data_time_stamp_error"
+        }
+    }
+}

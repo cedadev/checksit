@@ -1,0 +1,167 @@
+{
+    "product_precipitation_variable": {
+        "diameter": {
+            "type": "float32",
+            "dimension": "diameter",
+            "units": "mm",
+            "long_name": "Hydrometeor Diameter",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "fallspeed": {
+            "type": "float32",
+            "dimension": "fallspeed",
+            "units": "m s-1",
+            "long_name": "Hydrometeor Fallspeed",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "number_of_hydrometeors_per_fallspeed_channel_per_size_channel": {
+            "type": "float32",
+            "dimension": "time, fallspeed, diameter",
+            "units": "1",
+            "long_name": "Number of Hydrometeors per Instrument Channel",
+            "_FillValue": -10000000000.0,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "number_of_hydrometeor_per_size_channel": {
+            "type": "float32",
+            "dimension": "time, diameter",
+            "units": "1",
+            "long_name": "Number of Hydrometeors per Instrument Channel",
+            "_FillValue": -10000000000.0,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "thickness_of_rainfall_amount": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mm",
+            "standard_name": "thickness_of_rainfall_amount",
+            "long_name": "Rain Accumulated in Averaging Period",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: sum",
+            "coordinates": "latitude longitude"
+        },
+        "rainfall_rate": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mm hr-1",
+            "standard_name": "rainfall_rate",
+            "long_name": "Rainfall Rate",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "total_precipitation_rate": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mm hr-1",
+            "long_name": "Total Precipitation Rate",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "solid_precipitation_rate": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mm hr-1",
+            "long_name": "Solid Precipitation Rate",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "hail_intensity": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "hits cm-2",
+            "long_name": "Hail Intensity",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "hail_rate": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "hits cm-2 hr-1",
+            "long_name": "Hail Rate",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "maximum_diameter_of_hail": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mm",
+            "long_name": "Maximum Diameter of Hail",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "number_of_drops": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Number of Pulses\\Drops Counted in Integration Period",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: sum",
+            "coordinates": "latitude longitude"
+        },
+        "equivalent_reflectivity_factor": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "dBZ",
+            "standard_name": "equivalent_reflectivity_factor",
+            "long_name": "Equivalent Radar Reflectivity Factor",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "precipitation_visibility": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m",
+            "long_name": "Visibility Reduction Caused by Precipitation.",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag",
+            "flag_values": "0b,1b, 2b, 3b, 4b, 5b",
+            "flag_meanings": "not_used|good_data |instrument_error|bad_data_precipitation_rate_<_0_mm_hr-1|suspect_data_precipitation_rate_>_300_mm_hr-1|suspect_data_solid_precipitation_rate_>_300_mm_hr-1"
+        }
+    }
+}

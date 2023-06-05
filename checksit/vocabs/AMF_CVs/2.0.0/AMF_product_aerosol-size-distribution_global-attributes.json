@@ -1,0 +1,53 @@
+{
+    "product_aerosol-size-distribution_global-attributes": {
+        "measurement_technique": {
+            "global_attribute_id": "measurement_technique",
+            "description": "What measurement technique does the instrument employ?",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "dma_inner_radius": {
+            "global_attribute_id": "dma_inner_radius",
+            "description": "Physical diameter of inner column",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "dma_outer_radius": {
+            "global_attribute_id": "dma_outer_radius",
+            "description": "Physical diameter of outer column",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "dma_length": {
+            "global_attribute_id": "dma_length",
+            "description": "Physical lengty of coulm",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "impactor_orifice_diameter": {
+            "global_attribute_id": "impactor_orifice_diameter",
+            "description": "Diameter of Imapctor nozzle",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "lower_channel_cuf_off": {
+            "global_attribute_id": "lower_channel_cuf_off",
+            "description": "Theoretical lower size limit",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "upper_channel_cut_off": {
+            "global_attribute_id": "upper_channel_cut_off",
+            "description": "Theoretical upper size limit",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        }
+    }
+}

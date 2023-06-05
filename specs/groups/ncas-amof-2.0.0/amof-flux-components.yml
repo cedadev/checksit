@@ -1,0 +1,1275 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - start_of_run:__OPTIONAL__
+    defined_attrs:
+      - type:double
+      - dimension:time
+      - units:seconds since 1970-01-01 00:00:00
+      - long_name:Start of run (seconds since 1970-01-01)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - run_length:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:s
+      - long_name:Length of run
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_of_samples_in_run:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Number of samples in run
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - air_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:K
+      - standard_name:air_temperature
+      - long_name:Air Temperature (T)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - air_pressure:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:hPa
+      - standard_name:air_pressure
+      - long_name:Air  Pressure (P)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_carbon_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:mmol m-3
+      - standard_name:mole_concentration_of_carbon_dioxide_in_air
+      - long_name:CO2 mole concentration
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_water_vapor_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:mmol m-3
+      - standard_name:mole_concentration_of_water_vapor_in_air
+      - long_name:Water Vapour mole concentration
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - specific_humidity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:kg kg-1
+      - standard_name:specific_humidity
+      - long_name:Specific_humidity (Q)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - water_vapour_partial_pressure_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:Pa
+      - standard_name:water_vapor_partial_pressure_in_air
+      - long_name:Water Vapour Partial Pressure in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - humidity_mixing_ratio:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:1
+      - standard_name:humidity_mixing_ratio
+      - long_name:Water Vapour Mass Mixing Ratio (WVMMR)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sonic_air_temperature_theta:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:K
+      - long_name:Sonic Temperature (Theta) corrected for sidewind and humidity
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sonic_air_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:K
+      - long_name:Sonic temperature (Ts) corrected for sidewind
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - standard_name:eastward_wind
+      - long_name:Eastward Wind Component (U earth frame)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - standard_name:northward_wind
+      - long_name:Northward Wind Component (V earth frame)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - standard_name:upward_air_velocity
+      - long_name:Upward Air Velocity Component (W earth frame)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - eastward_wind_rotated_to_run:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:Eastward Wind Component (U rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - northward_wind_rotated_to_run:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:Northward Wind Component (V rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - upward_air_velocity_rotated_to_run:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:Upward Air Velocity Component (W rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires18:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - skew_eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Skew of Eastward Wind Component (U rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: skew
+      - coordinates:latitude longitude
+var-requires19:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - skew_northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Skew of Northward Wind Component (V rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: skew
+      - coordinates:latitude longitude
+var-requires20:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - skew_upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Skew of Upward Air Velocity Component (W rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: skew
+      - coordinates:latitude longitude
+var-requires21:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - skew_sonic_air_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Skew Sonic AirTemperature (Ts)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires22:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - kurtosis_eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Kurtosis of Eastward Wind Component (U rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires23:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - kurtosis_northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Kurtosis of Northward Wind Component (V rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires24:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - kurtosis_upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Kurtosis of Upward Air Velocity Component (W rotated to run)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires25:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - kurtosis_sonic_air_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Kurtosis Sonic AIr Temperature (Ts)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires26:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sst_wu:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Steady State Test Result WU
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires27:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sst_wv:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Steady State Test Result WV
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires28:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sst_wts:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Steady State Test Result WTs
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires29:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - friction_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m s-1
+      - long_name:Friction Velocity (U*)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires30:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - obukhov_length:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m
+      - long_name:Obukhov Length (L)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires31:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - stability_parameter:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Stability Parameter (Z/L)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires32:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m s-1
+      - long_name:Divergence  of Upward Air Velocity (sigma W)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires33:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - integral_turbulent_characteristic_upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Integral Turbulent Characteristic of Upward Air Velocity (itc_W)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires34:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - ubar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m s-1
+      - long_name:<U>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires35:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - vbar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m s-1
+      - long_name:<V>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires36:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wbar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m s-1
+      - long_name:<W>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires37:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - tsbar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - long_name:<Ts>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires38:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - co2bar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mmol m-3
+      - long_name:<CO2>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires39:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - h2obar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mmol m-3
+      - long_name:<H2O>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires40:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qbar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg kg-1
+      - long_name:<Q>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires41:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - thetabar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - long_name:<Theta>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires42:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wvmmrbar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:<WVMMR>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires43:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - uprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:U'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires44:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - vprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:V'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires45:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:W'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires46:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - tsprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:K
+      - long_name:Ts'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires47:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - co2prime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:mmol m-3
+      - long_name:CO2'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires48:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - h2oprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:mmol m-3
+      - long_name:H2O'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires49:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:kg kg-1
+      - long_name:Q'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires50:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - thetaprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:K
+      - long_name:Theta'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires51:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wvmmrprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:1
+      - long_name:WVMMR'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires52:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeuprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m2 s-2
+      - long_name:W'U'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires53:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimevprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m2 s-2
+      - long_name:W'V'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires54:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimewprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m2 s-2
+      - long_name:W'W'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires55:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - uprimeuprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m2 s-2
+      - long_name:U'U'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires56:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - vprimevprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m2 s-2
+      - long_name:V'V'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires57:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimetsprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:K m s-1
+      - long_name:W'Ts'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires58:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeco2prime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:mmol m-2 s-1
+      - long_name:W'CO2'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires59:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeh2oprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:mmol m-2 s-1
+      - long_name:W'H2O'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires60:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeqprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:kg kg-1 m s-1
+      - long_name:W'Q'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires61:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimethetaprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:K m s-1
+      - long_name:W'Theta'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires62:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimewvmmrprime:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:W'WVMMR'
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires63:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeuprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m2 s-2
+      - long_name:<W'U'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires64:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimevprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m2 s-2
+      - long_name:<W'V'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires65:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimewprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m2 s-2
+      - long_name:<W'W'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires66:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - uprimeuprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m2 s-2
+      - long_name:<U'U'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires67:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - vprimevprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m2 s-2
+      - long_name:<V'V'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires68:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimetsprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K m s-1
+      - long_name:<W'Ts'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires69:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeco2primebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mmol m-2 s-1
+      - long_name:<W'CO2'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires70:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeh2oprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mmol m-2 s-1
+      - long_name:<W'H2O'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires71:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimeqprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg kg-1 m s-1
+      - long_name:<W'Q'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires72:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimethetaprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K m s-1
+      - long_name:<W'Theta'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires73:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wprimewvmmrprimebar:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m s-1
+      - long_name:<W'WVMMR'>
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires74:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_u:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew U
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires75:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_v:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew V
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires76:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_w:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew W
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires77:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_ts:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew Ts
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires78:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_u:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis U
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires79:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_v:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis V
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires80:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_w:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis W
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires81:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_ts:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis Ts
+      - flag_values:0b,1b, 2b
+      - flag_meanings:bad_data good_data suspect_data
+var-requires82:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_sstclass_wu:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Steady State Class WU
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b
+      - flag_meanings:not_used good_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data bad_data
+var-requires83:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_sstclass_wv:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Steady State Class WV
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b
+      - flag_meanings:not_used good_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data bad_data
+var-requires84:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_sstclass_wts:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Steady State Class WTs
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b
+      - flag_meanings:not_used good_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data bad_data
+var-requires85:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_quality_wu:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: WU
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:bad_data good_data _good_for_reasearch suspect_data_good_for_general_use suspect_data_requires_further_checking_but_may_be_ok_for_general_use
+var-requires86:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_quality_wv:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index:__OPTIONAL__

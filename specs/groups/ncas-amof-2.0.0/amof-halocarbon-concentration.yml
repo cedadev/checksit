@@ -1,0 +1,634 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_carbon_tetrachloride_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_carbon_tetrachloride_in_air
+      - long_name:Mole Fraction of Carbon Tetrachloride in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CCl4
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_carbon_tetrachloride_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_carbon_tetrachloride_in_air
+      - long_name:Mass Fraction of  Carbon Tetrachloride in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CCl4
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_carbon_tetrachloride_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_carbon_tetrachloride_in_air
+      - long_name:Mole Concentration of Carbon Tetrachloride in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CCl4
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_carbon_tetrachloride_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_carbon_tetrachloride_in_air
+      - long_name:Mass Concentration of  Carbon Tetrachloride in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CCl4
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_bromoform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Bromoform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBr3
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_bromoform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Bromoform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBr3
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_bromoform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Bromoform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBr3
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_bromoform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of Bromoform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBr3
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_diiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of  Diiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2I2
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_diiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of  Diiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2I2
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_diiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Diiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2I2
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_diiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of  Diiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2I2
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_chloroiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Chloroiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2ICl
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_chloroiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Chloroiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2ICl
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_chloroiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Chloroiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2ICl
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_chloroiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of Chloroiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2ICl
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_bromodichloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Bromodichloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBrCl2
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_bromodichloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Bromodichloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBrCl2
+var-requires18:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_bromodichloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Bromodichloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBrCl2
+var-requires19:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_bromodichloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration ofBromodichloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHBrCl2
+var-requires20:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_dibromomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Dibromomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2Br2
+var-requires21:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_dibromomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Dibromomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2Br2
+var-requires22:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_dibromomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Dibromomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2Br2
+var-requires23:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_dibromomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of Dibromomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2Br2
+var-requires24:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_chloroform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Chloroform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHCl3
+var-requires25:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_chloroform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Chloroform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHCl3
+var-requires26:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_chloroform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Chloroform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHCl3
+var-requires27:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_chloroform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of Chloroform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CHCl3
+var-requires28:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_methyl_iodide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Methyl Iodide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH3I
+var-requires29:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_methyl_iodide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Methyl Iodide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH3I
+var-requires30:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_methyl_iodide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Methyl Iodide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH3I
+var-requires31:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_methyl_iodide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of Methyl Iodide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH3I
+var-requires32:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_bromochloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Bromochloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2BrCl
+var-requires33:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_bromochloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Bromochloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2BrCl
+var-requires34:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_bromochloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Bromochloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2BrCl
+var-requires35:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_bromochloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration ofBromochloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH2BrCl
+var-requires36:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ccl4:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CCl4
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires37:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_chbr3:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CHBr3
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires38:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2i2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2I2
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires39:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2icl:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2ICl
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires40:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_chbrcl2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CHBrCl2
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires41:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2br2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2Br2
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires42:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_chcl3:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CHCl3
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires43:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch3i:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH3I
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+var-requires44:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2brcl:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2BrCl
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use

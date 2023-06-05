@@ -1,0 +1,219 @@
+{
+    "product_ch4-co2-h2o-co-concentration_variable": {
+        "mole_fraction_of_methane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mole_fraction_of_methane_in_air",
+            "long_name": "Mole Fraction of Methane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH4"
+        },
+        "mass_fraction_of_methane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mass_fraction_of_methane_in_air",
+            "long_name": "Mass Fraction of Methane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH4"
+        },
+        "mole_concentration_of_methane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mol m-3",
+            "standard_name": "mole_concentration_of_methane_in_air",
+            "long_name": "Mole Concentration of Methane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH4"
+        },
+        "mass_concentration_of_methane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-3",
+            "standard_name": "mass_concentration_of_methane_in_air",
+            "long_name": "Mass Concentration of Methane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH4"
+        },
+        "mole_fraction_of_carbon_dioxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mole_fraction_of_carbon_dioxide_in_air",
+            "long_name": "Mole Fraction of Carbon Dioxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO2"
+        },
+        "mass_fraction_of_carbon_dioxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mass_fraction_of_carbon_dioxide_in_air",
+            "long_name": "Mass Fraction of Carbon Dioxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO2"
+        },
+        "mole_concentration_of_carbon_dioxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mol m-3",
+            "standard_name": "mole_concentration_of_carbon_dioxide_in_air",
+            "long_name": "Mole Concentration of Carbon Dioxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO2"
+        },
+        "mass_concentration_of_carbon_dioxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-3",
+            "standard_name": "mass_concentration_of_carbon_dioxide_in_air",
+            "long_name": "Mass Concentration of Carbon Dioxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO2"
+        },
+        "mole_fraction_of_water_vapor_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mole_fraction_of_water_vapor_in_air",
+            "long_name": "Mole Fraction of Water Vapour in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "H2O"
+        },
+        "mass_fraction_of_water_vapor_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "long_name": "Mass Fraction of Water Vapor in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "H2O"
+        },
+        "mole_concentration_of_water_vapor_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mol m-3",
+            "standard_name": "mole_concentration_of_water_vapor_in_air",
+            "long_name": "Mole Concentration of Water Vapor in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "H2O"
+        },
+        "mass_concentration_of_water_vapor_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-3",
+            "standard_name": "mass_concentration_of_water_vapor_in_air",
+            "long_name": "Mass Concentration of Water Vapor in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "H2O"
+        },
+        "mole_fraction_of_carbon_monoxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mole_fraction_of_carbon_monoxide_in_air",
+            "long_name": "Mole Fraction of Carbon Monoxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO"
+        },
+        "mass_fraction_of_carbon_monoxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mass_fraction_of_carbon_monoxide_in_air",
+            "long_name": "Mass Fraction of Carbon Monoxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO"
+        },
+        "mole_concentration_of_carbon_monoxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mol m-3",
+            "standard_name": "mole_concentration_of_carbon_monoxide_in_air",
+            "long_name": "Mole Concentration of Carbon Monoxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO"
+        },
+        "mass_concentration_of_carbon_monoxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-3",
+            "standard_name": "mass_concentration_of_carbon_monoxide_in_air",
+            "long_name": "Mass Concentration of Carbon Monoxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO"
+        },
+        "qc_flag_ch4": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1.00E+00",
+            "long_name": "Data Quality flag: CH4",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        },
+        "qc_flag_co2": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CO2",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        },
+        "qc_flag_h2o": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: H2O",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        },
+        "qc_flag_co": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CO",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        }
+    }
+}

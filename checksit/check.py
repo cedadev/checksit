@@ -5,6 +5,8 @@ import tempfile
 import re
 import difflib
 import yaml
+import urllib.request
+import urllib.error
 
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
@@ -12,6 +14,7 @@ from .readers import pp, badc_csv, cdl, yml
 from .specs import SpecificationChecker
 from .utils import get_file_base, extension, UNDEFINED
 from .config import get_config
+from .make_specs import make_amof_specs
 
 AMOF_CONVENTIONS = ['"CF-1.6, NCAS-AMF-2.0.0"']
 conf = get_config()
@@ -218,14 +221,54 @@ class Checker:
             # Look for AMOF Convention string in Conventions global attr, if it exists
             if ':Conventions' in file_content.cdl:
                 conventions = file_content.cdl.split(':Conventions =')[1].split(';')[0].strip()
-                if conventions in AMOF_CONVENTIONS:
-                    print("\nAMOF file detected, finding correct spec files")
+                if "NCAS-AMOF" in conventions or "NCAS-GENERAL" in conventions or "NCAS-AMF" in conventions:
+                    if verbose:
+                        print("\nNCAS-AMOF file detected, finding correct spec files")
+                        print("Finding correct AMOF version...")
+                    version_number = conventions[conventions.index("NCAS-"):].split("-")[2].replace('"','')
+                    spec_folder = f"ncas-amof-{version_number}"
+                    if verbose: print(f"  {version_number}")
+
+                    # check specs exist for that version
+                    specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
+                    if not os.path.exists(specs_dir):
+                        if verbose: print(f"Specs for version {version_number} not found, attempting download...")
+                        try:
+                            vocabs_dir = os.path.join(conf["settings"].get("vocabs_dir", "./checksit/vocabs"), f"AMF_CVs/{version_number}")
+                            cvs = urllib.request.urlopen(f"https://github.com/ncasuk/AMF_CVs/tree/v{version_number}/AMF_CVs")
+                            data = cvs.readlines()
+                            if not os.path.exists(specs_dir):
+                                os.mkdir(specs_dir)
+                            if not os.path.exists(vocabs_dir):
+                                os.mkdir(vocabs_dir)
+                            for line in data:
+                                if f'href="/ncasuk/AMF_CVs/blob/v{version_number}/AMF_CVs' in line.decode():
+                                    json_file = line.decode().split('href="')[1].split('">')[0]
+                                    if json_file.startswith("/ncasuk/AMF_CVs/blob/"):
+                                        cv = urllib.request.urlopen(f"https://raw.githubusercontent.com{json_file.replace('/blob','')}")
+                                        json_file_name = json_file.split("/")[-1]
+                                        with open(f"{vocabs_dir}/{json_file_name}", "w") as f:
+                                            _ = f.write(cv.read().decode())
+                            make_amof_specs(version_number)
+                            if verbose: print("  Downloaded of specs successful")
+                        except urllib.error.HTTPError:
+                            print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
+                            print("Aborting...")
+                            sys.exit()
+                        except PermissionError:
+                            print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
+                            print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
+                            sys.exit()
+                        except:
+                            raise
+                            
+
                     # get deployment mode and data product, to then get specs
                     deployment_mode = file_content.cdl.split(':deployment_mode =')[1].split(';')[0].strip().strip('"')
-                    deploy_spec = f'amof-common-{deployment_mode}'
+                    deploy_spec = f'{spec_folder}/amof-common-{deployment_mode}'
                     product = file_path.split('/')[-1].split('_')[3]
-                    product_spec = f'amof-{product}'
-                    specs = [deploy_spec, product_spec, 'amof-global-attrs']
+                    product_spec = f'{spec_folder}/amof-{product}'
+                    specs = [deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
                     # don't need to do template check
                     template = "off"
 
