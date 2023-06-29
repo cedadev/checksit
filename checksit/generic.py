@@ -251,3 +251,55 @@ def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
                     )
 
     return errors, warnings
+
+
+def check_file_name(file_name, vocab_checks=None, **kwargs):
+    """
+    Checks format of file name
+
+    Works for NCAS-GENERAL, would work for NCAS-RADAR if radar scan type is added as data product
+    """
+    vocab_checks = vocab_checks or {}
+    errors = []
+    warnings = []
+    file_name_parts = file_name.split("_")
+
+    # check instrument name
+    if "instrument" in vocab_checks.keys():
+        if vocabs.check(vocabs_checks["instrument"], file_name_parts[0], label="_") != []:
+            errors.append(f"[file name]: Invalid file name format - unknown instrument {file_name_parts[0]}")
+    else:
+        msg = "No instrument vocab defined in specs"
+        raise KeyError(msg)
+
+    # check platform
+    if "platform" in vocab_checks.keys():
+        if vocabs.check(vocabs_checks["platform"], file_name_parts[1], label="_") != []:
+            errors.append(f"[file name]: Invalid file name format - unknown platform {file_name_parts[1]}")
+    else:
+        msg = "No platform vocab defined in specs"
+        raise KeyError(msg)
+    
+    # check date format
+    # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
+    # note, checks date format, not valid date (e.g. 20233212 would pass)
+    if not re.match("^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$", file_name_parts[2]):
+        errors.append(f"[file name]: Invalid file name format - bad date formate {file_name_parts[2]}")
+
+    # check data product
+    if "data_product" in vocab_checks.keys():
+        if vocabs.check(vocabs_checks["data_product"], file_name_parts[3], label="_") != []:
+            errors.append(f"[file name]: Invalid file name format - unknown data product {file_name_parts[3]}")
+    else:
+        msg = "No platform vocab defined in specs"
+        raise KeyError(msg)
+
+    # check version number format
+    if not re.match("^v\d.\d$", file_name_parts[-1].split(".nc")[0]):
+        errors.append(f"[file name]: Invalid file name format - incorrect file version number {file_name_parts[-1].split('.nc')[0]}")
+
+    # check number of options - max length of splitted file name
+    if len(file_name_parts) > 8:
+        errors.append(f"[file name]: Invalid file name format - too many options in file name")
+
+    return errors, warnings
