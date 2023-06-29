@@ -266,7 +266,7 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
 
     # check instrument name
     if "instrument" in vocab_checks.keys():
-        if vocabs.check(vocabs_checks["instrument"], file_name_parts[0], label="_") != []:
+        if vocabs.check(vocab_checks["instrument"], file_name_parts[0], label="_") != []:
             errors.append(f"[file name]: Invalid file name format - unknown instrument {file_name_parts[0]}")
     else:
         msg = "No instrument vocab defined in specs"
@@ -274,7 +274,7 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
 
     # check platform
     if "platform" in vocab_checks.keys():
-        if vocabs.check(vocabs_checks["platform"], file_name_parts[1], label="_") != []:
+        if vocabs.check(vocab_checks["platform"], file_name_parts[1], label="_") != []:
             errors.append(f"[file name]: Invalid file name format - unknown platform {file_name_parts[1]}")
     else:
         msg = "No platform vocab defined in specs"
@@ -288,10 +288,10 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
 
     # check data product
     if "data_product" in vocab_checks.keys():
-        if vocabs.check(vocabs_checks["data_product"], file_name_parts[3], label="_") != []:
+        if vocabs.check(vocab_checks["data_product"], file_name_parts[3], label="_") != []:
             errors.append(f"[file name]: Invalid file name format - unknown data product {file_name_parts[3]}")
     else:
-        msg = "No platform vocab defined in specs"
+        msg = "No data product vocab defined in specs"
         raise KeyError(msg)
 
     # check version number format
