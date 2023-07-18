@@ -22,7 +22,7 @@ formats: all
 #  version: 3.8
 python:
   install:
-  - requirements: requirements.txt
+  - requirements: docs/requirements.txt
   - method: pip
     path: .
 #          extra_requirements:
