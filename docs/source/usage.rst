@@ -50,4 +50,5 @@ A spec file, or number of spec files, can also be given to ``checksit`` to compa
 Brief other flags
 -----------------
 
+Coming soon...
 
