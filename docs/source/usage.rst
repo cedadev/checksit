@@ -11,15 +11,13 @@ First, ``cd`` into the ``checksit`` repository and activate the environment ``ch
    cd ~/checksit
    source venv/bin/activate
 
-Then ``checksit`` can be run using the following
+Then ``checksit`` can be run using the following, as an example:
 
 .. code-block::
 
    checksit check /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc 
 
-where ``/name/of/file`` is replaced with the path to and name of the file you wish to check.
-
-``checksit`` will then look at ``/name/of/file`` and attempt to find either a template file to compare against or a series of specs to match with, and then print out the results of the checks.
+``checksit`` will then look at the file given and attempt to find either a template file to compare against or a series of specs to match with, and then print out the results of the checks.
 
 Specify Template
 ----------------
@@ -30,7 +28,7 @@ A specific template can be chosen for ``checksit`` to use using the ``-t/--templ
 
    checksit check --template=template-cache/rls_rcp85_land-cpm_uk_2.2km_01_day_19801201-19811130.cdl /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc
 
-If ``/name/of/file`` is a file which you might want to check other files against, a template can be created when checking ``/name/of/file`` by using the ``--auto-cache`` flag
+If the file being checked is a file which you might want to check other files against, a template can be created when checking this file by using the ``--auto-cache`` flag, e.g.
 
 .. code-block::
 
