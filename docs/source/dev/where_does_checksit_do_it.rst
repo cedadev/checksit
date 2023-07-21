@@ -3,6 +3,11 @@ What where and how?
 
 Description on some of the key parts of checksit, how they work, what to add/edit
 
+checksit working directory
+--------------------------
+
+By default, checksit needs to be run from the top level of the checksit repository. This can be changed by editing the ``basedir`` value in ``checksit/etc/checksit.ini`` to the location of the checksit repository before installing checksit.
+
 Readers
 -------
 
