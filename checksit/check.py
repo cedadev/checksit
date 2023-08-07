@@ -385,6 +385,8 @@ class FileParser:
             reader = badc_csv
         elif ext in ("yml"):
             reader = yml
+        elif ext in ("png", "PNG", "jpg", "JPG", "jpeg", "JPEG"):
+            reader = image   
         else:
             raise Exception(f"No known reader for file with extension: {ext}")
 
