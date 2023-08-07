@@ -37,8 +37,8 @@ class ImageParser:
         attr_dict = {}
         for line in content_lines:
             if self.verbose: print(f"WORKING ON LINE: {line}")
-            key = line.split(":")[0].strip()
-            value = line.split(":")[1].strip()
+            key = line.split(":",1)[0].strip()
+            value = line.split(":",1)[1].strip()
             attr_dict[key] = value
         return attr_dict
 
