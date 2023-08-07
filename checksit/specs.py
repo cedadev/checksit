@@ -5,7 +5,6 @@ import yaml
 import importlib
 
 from .config import get_config
-# test
 
 conf = get_config()
 specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), "groups")
