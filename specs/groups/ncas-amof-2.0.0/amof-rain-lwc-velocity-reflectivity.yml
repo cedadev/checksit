@@ -1,0 +1,124 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - altitude:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:altitude
+      - units:m
+      - standard_name:altitude
+      - long_name:Geometric height above geoid (WGS84).
+      - _FillValue:-1e+20
+      - axis:Z
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - rainfall_rate:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:mm hr-1
+      - standard_name:rainfall_rate
+      - long_name:Rainfall Rate
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - rain_liquid_water_content:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:g m-3
+      - long_name:Rain Liquid Water Content
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - rainfall_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Rainfall Velocity
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_reflectivity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:dBZ
+      - long_name:Radar Reflectivity (Z)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - attenuated_radar_reflectivity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:dBZ
+      - long_name:Attenuated Radar Reflectivity (z)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - path_integrated_attenuation:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:dB
+      - long_name:Path Integrated Attenuation
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b
+      - flag_meanings:not_used good_data suspect_data_zero_radar_return bad_data_rainfall_rate_<_0_mm_hr-1 suspect_data_rainfall_rate_>_300_mm_hr-1 bad_data_rainfall_velocity_<_0_m_s-1 good_data_rainfall_rate_=_0_m_s-1 bad_data_gate_index_exceeds_number_of_measurement_gates_in_use suspect_data_time_stamp_error
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude:__OPTIONAL__

@@ -1,0 +1,82 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - solar_actinic_flux:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:cm-2 s-1 nm-1
+      - long_name:Solar Actinic Flux (280–420 nm)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - photolysis_frequencies_jno2:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:s-1
+      - long_name:Photolysis Frequencies (j(NO(2))
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - photolysis_frequencies_jo1d:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:s-1
+      - long_name:Photolysis Frequencies (j(O(1))(D))
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - photolysis_frequencies_jhcho:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:s-1
+      - long_name:Photolysis Frequencies (j(HCHO))
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - photolysis_frequencies_jhono:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:s-1
+      - long_name:Photolysis Frequencies (j(HONO))
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag
+      - flag_values:0b,1b, 2b, 3b
+      - flag_meanings:not_used good_data suspect_data_unspecified_instrument_performance_issues_contact_data_originator_for_more_information suspect_data_time_stamp_error

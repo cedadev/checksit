@@ -1,0 +1,133 @@
+{
+    "product_particle-size-distribution_variable": {
+        "ambient_particle_diameter": {
+            "type": "float32",
+            "dimension": "index",
+            "units": "um",
+            "long_name": "Ambient Particle Diameter",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "measurement_channel_lower_limit": {
+            "type": "float32",
+            "dimension": "index",
+            "units": "um",
+            "long_name": "Lower Limit of Spectrometer Measurement Channel",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "measurement_channel_upper_limit": {
+            "type": "float32",
+            "dimension": "index",
+            "units": "um",
+            "long_name": "Upper Limit of Spectrometer Measurement Channel",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "ambient_particle_number_per_channel": {
+            "type": "float32",
+            "dimension": "time, index",
+            "units": "cm-3",
+            "long_name": "ambient particle number per channel (dN)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "ambient_particle_size_distribution": {
+            "type": "float32",
+            "dimension": "time, index",
+            "units": "cm-3 um-1",
+            "long_name": "Ambient Particle Size Distribution (dN\\dD)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "ambient_particle_size_log_distribution": {
+            "type": "float32",
+            "dimension": "time, index",
+            "units": "cm-3",
+            "long_name": "Ambient Particle Size Log Distribution (dN\\dlogD)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "total_number_concentration_of_ambient_particles_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "cm-3",
+            "long_name": "Number Concentration of Ambient Particles in air (N)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "number_of_instrument_counts_per_channel": {
+            "type": "float32",
+            "dimension": "time, index",
+            "units": "1",
+            "long_name": "Number of Instrument Counts per Channel",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "sample_pressure": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kPa",
+            "long_name": "Pressure of Sample Stream",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "sample_temperature": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "K",
+            "long_name": "Temperature of Sample Stream",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag_temperature": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Temperature",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        },
+        "qc_flag_pressure": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Pressure",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        },
+        "qc_flag_number_of_instrument_counts_per_channel": {
+            "type": "byte",
+            "dimension": "time, index",
+            "units": "1",
+            "long_name": "Data Quality flag: Instrument Counts",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        },
+        "qc_flag_ambient_particle_number_per_channel": {
+            "type": "byte",
+            "dimension": "time, index",
+            "units": "1",
+            "long_name": "Data Quality flag: Ambient Particle Number per Channel",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        }
+    }
+}

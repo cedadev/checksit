@@ -1,0 +1,220 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - altitude:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:altitude
+      - units:m
+      - standard_name:altitude
+      - long_name:Geometric height above geoid (WGS84).
+      - _FillValue:-1e+20
+      - axis:Z
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_speed:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:wind_speed
+      - long_name:Mean Wind Speed
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_speed_of_gust:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:wind_speed_of_gust
+      - long_name:Maximum Wind Speed Observed in Averaging Period
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: maximum
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:degree
+      - standard_name:wind_from_direction
+      - long_name:Wind From Direction
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_speed_of_gust_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:degree
+      - long_name:Direction of Maximum Wind Speed Observed in Averaging Period
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: maximum
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:eastward_wind
+      - long_name:Eastward Wind Component (U)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:northward_wind
+      - long_name:Northward Wind Component (V)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:upward_air_velocity
+      - long_name:Upward Air Velocity Component (W)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - standard_name:divergence_of_wind
+      - long_name:Divergence of Horizontal Winds Speed
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_wind_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:degree
+      - long_name:Divergence of Wind from Direction
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Divergence of Eastward Wind Component (Sigma U)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Divergence of Northward Wind Component (Sigma V)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, altitude
+      - units:m s-1
+      - long_name:Divergence of Upward Air Velocity (Sigma W)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, altitude
+      - units:1
+      - long_name:Data Quality flag
+      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b
+      - flag_meanings:not_used good_data bad_data_data_values_outside_measurement_range bad_data_signal_below_instrument _threshold suspect_data_line_of_sight_radial_velocity_ -19m_s-1_<> _19m_s-1 suspect_data_line_of_sight_radial_velocity_wind_shear_-5m_s-1_<>_5m_s-1 suspect_data_instrument_internal_temperature_outside_operational_range_low _(15C) suspect_data_Instrument_internal_temperature_outside_operational_range_high_(40C) bad_data_gate_index_exceeds_number_of_measurement_gates_in_use suspect_data_time_stamp_error
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - altitude:__OPTIONAL__

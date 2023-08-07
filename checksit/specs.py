@@ -46,9 +46,9 @@ class SpecificationChecker:
 
     def _setup(self, spec_id):
         self.spec_id = spec_id
-        self.spec = load_specs([spec_id])[spec_id]
+        self.spec = load_specs([spec_id])[spec_id.split("/")[-1]]
 
-    def _run_check(self, record, check_dict):
+    def _run_check(self, record, check_dict, skip_spellcheck=False):
         d = check_dict
         parts = d["func"].split(".")
 
@@ -56,14 +56,17 @@ class SpecificationChecker:
         func = getattr(importlib.import_module(mod_path), func)
 
         params = d["params"]
+        params["skip_spellcheck"] = skip_spellcheck
         return func(record, **params)
 
-    def run_checks(self, record):
+    def run_checks(self, record, skip_spellcheck=False):
         errors = []
         warnings = []
 
         for check_id, check_dict in self.spec.items():
-            check_errors, check_warnings = self._run_check(record, check_dict)
+            check_errors, check_warnings = self._run_check(
+                                               record, check_dict, skip_spellcheck=skip_spellcheck
+                                           )
             errors.extend(check_errors)
             warnings.extend(check_warnings) 
 
