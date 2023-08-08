@@ -28,7 +28,14 @@ class Rules:
             "datetime": "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
             "datetime-or-na": 
                  "(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
-            "number": r"-?\d+(\.\d+)?"
+            "number": r"-?\d+(\.\d+)?",
+            "location": r'[a-zA-Z\,\ ]+',
+            "latitude": r'[\+|\-]?[0-9]?[0-9](\.| )[0-9]?[0-9](\.| )?[0-9][0-9]\.?[0-9][0-9]?[ N|S]?',
+            "longitude": r'[\+|\-]?[0-9]?[0-9](\.| )[0-9]?[0-9](\.| )?[0-9][0-9]\.?[0-9][0-9]?[ E|W]?',
+            "title": r'[a-zA-Z0-9\-]+_[a-zA-Z0-9\-]+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?_[a-zA-Z0-9\-]+[a-zA-Z0-9\-\_]+_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)',
+            "name": r'(\D+), (\D+) ((\D+)|([A-Z]\.))',
+            "altitude-image": r'^-?\d+\sm$',    # integers only for images
+            "work-email": r'[^@\s]+@ncas.ac.uk'
         }
 
     def _map_type_rule(self, type_rule):

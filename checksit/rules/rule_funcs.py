@@ -82,3 +82,71 @@ def string_of_length(value, context, extras=None, label=""):
         errors.append(f"{label} '{value}' must be exactly {min_length} characters")
 
     return errors
+    
+
+def validate_image_date_time(value, context, extras=None, label=""):
+    """
+    A function to indifity if a date-time value is compatible with the NCAS image standard
+    """
+    errors = []
+
+    try:
+        if value != datetime.strptime(value, "%Y:%m:%d %H:%M:%S").strftime("%Y:%m:%d %H:%M:%S") and value != datetime.strptime(value, "%Y:%m:%d #%H:%M:%S.%f").strftime("%Y:%m:%d %H:%M:%S.%f"):
+            errors.append(f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s")
+    except ValueError:
+        errors.append(f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s")
+    
+    return errors
+
+
+def validate_orcid_ID(value, context, extras=None, label=""):
+    """
+    A function to verify the format of an orcid ID
+    """
+    orcid_string = "https://orcid.org/"                                     # required format of start of the string
+    
+    errors = []
+
+    # Check the start of the string (first 18 characters)
+    if value[0:18] != orcid_string:
+        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+
+    # Check that the "-" are in the correct places
+    if value[22] != "-":
+        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+    if value[27] != "-":
+        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+    if value[32] != "-":
+        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+
+    # Check that the last characters contain only "-" and digits
+    PI_orcid_digits = value[-19:]
+    PI_orcid_digits_only = PI_orcid_digits.replace("-", "")
+    if not PI_orcid_digits_only.isdigit:
+        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+
+    # Check that total the length is correct
+    if len(value) != 37:
+        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+
+    return errors
+
+
+def list_of_names(value, context, extras=None, label=""):
+    """
+    A function to verify the names of people when a list of names may be provided
+    """
+    name_pattern = r'(\D+), (\D+) ((\D+)|([A-Z]\.))'                # The format names should be written in
+
+    errors = []
+
+    if type(value) == list:
+        for i in value:
+            if not re.fullmatch(name_pattern, i):
+                errors.append(f"{label} '{value} needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+
+    if type(value) == str:
+        if not re.fullmatch(name_pattern, value):
+            errors.append(f"{label} '{value} needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+
+    return errors
