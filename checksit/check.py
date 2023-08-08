@@ -10,7 +10,7 @@ import urllib.error
 
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
-from .readers import pp, badc_csv, cdl, yml
+from .readers import pp, badc_csv, cdl, yml, image
 from .specs import SpecificationChecker
 from .utils import get_file_base, extension, UNDEFINED
 from .config import get_config
