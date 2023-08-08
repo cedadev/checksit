@@ -7,32 +7,15 @@ required-global-attrs:
       # Description of what is shown in the image
       XMP-photoshop:Headline: rule-func:string-of-length:10+
       XMP-dc:Description: rule-func:string-of-length:10+
-      # Location of a camera or an instrument (plots)
-      XMP-iptcExt:LocationShownLocationName: regex-rule:location
-      XMP-iptcExt:LocationShownGPSAltitude: regex-rule:altitude
-      XMP-iptcExt:LocationShownGPSLatitude: regex-rule:latitude
-      XMP-iptcExt:LocationShownGPSLongitude: regex-rule:longitude
-      # Location of a camera or an instrument (photo)
-      XMP-iptcExt:LocationCreatedLocationName: regex-rule:location
-      XMP-iptcExt:LocationCreatedGPSAltitude: regex-rule:altitude
-      XMP-iptcExt:LocationCreatedGPSLatitude: regex-rule:latitude
-      XMP-iptcExt:LocationCreatedGPSLongitude: regex-rule:longitude
       # Date-time details
       XMP-xmp:CreateDate: rule-func:validate-image-date-time
       XMP-xmp:MetadataDate: rule-func:validate-image-date-time
-      # (For plots only)
-      XMP-iptcExt:TemporalCoverageFrom: rule-func:validate-image-date-time
-      XMP-iptcExt:TemporalCoverageTo: rule-func:validate-image-date-time
       # Licensing and acknowledgement details
       XMP-dc:Rights: regex:Use\sof\sthis\simage\sis\scovered\sby\sthe\s(UK)\sOpen\sGovernment\sLicence,\shttp://www.nationalarchives.gov.uk/doc/open-government-licence/"
       XMP-xmpRights:WebStatement: regex:http://www.nationalarchives.gov.uk/doc/open-government-licence/
       XMP-photoshop:Credit: regex:National\sCentre\sfor\sAtmospheric\sScience\s(NCAS)
       # Source of the image
       XMP-dc:Title: regex-rule:title
-      # (Relation for plots)
-      XMP-dc:Relation: regex:(IsBasedOn\shttps://catalogue.ceda.ac.uk/uuid/)[a-z0-9]+
-      # (Relation for photos)
-      XMP-dc:Relation: regex:((IsPartOf\shttps://catalogue.ceda.ac.uk/uuid/)|(IsFormatOf\shttps://catalogue.ceda.ac.uk/uuid/))[a-z0-9]+
       # Instrument Scientist’s Details
       XMP-dc:Creator: rule-func:list_of_names
       XMP-iptcCore:CreatorWorkEmail: regex-rule:work-email
