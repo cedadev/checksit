@@ -1,0 +1,14 @@
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    rules_attrs:
+      # Location of a camera or an instrument (plots)
+      XMP-iptcExt:LocationShownLocationName: regex-rule:location
+      XMP-iptcExt:LocationShownGPSAltitude: regex-rule:altitude-image
+      XMP-iptcExt:LocationShownGPSLatitude: regex-rule:latitude
+      XMP-iptcExt:LocationShownGPSLongitude: regex-rule:longitude
+      # (For plots only)
+      XMP-iptcExt:TemporalCoverageFrom: rule-func:validate-image-date-time
+      XMP-iptcExt:TemporalCoverageTo: rule-func:validate-image-date-time
+      # (Relation for plots)
+      XMP-dc:Relation: regex:(isBasedOn\shttps://catalogue.ceda.ac.uk/uuid/)[a-z0-9]+
