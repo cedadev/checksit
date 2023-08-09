@@ -8,4 +8,4 @@ required-global-attrs:
       XMP-iptcExt:LocationCreatedGPSLatitude: regex-rule:latitude
       XMP-iptcExt:LocationCreatedGPSLongitude: regex-rule:longitude
       # (Relation for photos)
-      XMP-dc:Relation: regex:((isPartOf\shttps://catalogue.ceda.ac.uk/uuid/)|(isFormatOf\shttps://catalogue.ceda.ac.uk/uuid/))[a-z0-9]+
+      XMP-dc:Relation: regex:(((i|I)sPartOf\shttps://catalogue.ceda.ac.uk/uuid/)|((i|I)sFormatOf\shttps://catalogue.ceda.ac.uk/uuid/))[a-z0-9]+
