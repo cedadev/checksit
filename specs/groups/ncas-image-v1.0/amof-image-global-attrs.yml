@@ -11,7 +11,7 @@ required-global-attrs:
       XMP-xmp:CreateDate: rule-func:validate-image-date-time
       XMP-xmp:MetadataDate: rule-func:validate-image-date-time
       # Licensing and acknowledgement details
-      XMP-dc:Rights: regex:Use\sof\sthis\simage\sis\scovered\sby\sthe\s(UK)\sOpen\sGovernment\sLicence,\shttp://www.nationalarchives.gov.uk/doc/open-government-licence/
+      XMP-dc:Rights: regex:Use\sof\sthis\simage\sis\scovered\sby\sthe\s\(UK\)\sOpen\sGovernment\sLicence,\shttp://www.nationalarchives.gov.uk/doc/open-government-licence/
       XMP-xmpRights:WebStatement: regex:http://www.nationalarchives.gov.uk/doc/open-government-licence/
       XMP-photoshop:Credit: regex:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)
       # Source of the image
