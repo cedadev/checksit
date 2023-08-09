@@ -16,7 +16,7 @@ class ImageParser:
 
     def _parse(self, inpt):
         if self.verbose: print(f"[INFO] Parsing input: {inpt[:100]}...")
-        self.content, _ = get_output(f"{self.exiftool_location} {inpt}")
+        self.content, _ = get_output(f"{self.exiftool_location} -G1 -args -c %+.6f {inpt}")
         content_lines = self.content.strip().split("\n")
         self.global_attrs = self._attrs_dict(content_lines)
 
@@ -37,8 +37,9 @@ class ImageParser:
         attr_dict = {}
         for line in content_lines:
             if self.verbose: print(f"WORKING ON LINE: {line}")
-            key = line.split(":",1)[0].strip()
-            value = line.split(":",1)[1].strip()
+            key_0 = line.split("=",1)[0].strip()
+            key = key_0[1:]
+            value = line.split("=",1)[1].strip()
             attr_dict[key] = value
         return attr_dict
 
