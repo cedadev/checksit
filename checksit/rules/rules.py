@@ -55,6 +55,7 @@ class Rules:
 
         # Return a list of errors - empty list if no errors
         errors = []
+        warnings = []
 
         rule_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
 
@@ -69,11 +70,28 @@ class Rules:
 
             if not isinstance(value, self._map_type_rule(type_rule)):
                 errors.append(f"{label} Value '{value}' is not of required type: '{type_rule}'.")
-        
+              
+        elif rule_lookup.startswith("regex-warning:"):
+            pattern = ':'.join(rule_lookup.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
+            if not re.match(f"^{pattern}$", value):
+                warnings.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
+
         elif rule_lookup.startswith("regex:"):
             pattern = ':'.join(rule_lookup.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
             if not re.match(f"^{pattern}$", value):
                 errors.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
+
+        elif rule_lookup.startswith("regex-rule-warning:"):
+            regex_rule = rule_lookup.split(":", 1)[1]
+
+            if regex_rule in self.static_regex_rules:
+                pattern = self.static_regex_rules[regex_rule]
+
+                if not re.match("^" + pattern + "$", value):
+                    warnings.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'.")
+
+            else:
+                raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
         elif rule_lookup.startswith("regex-rule:"):
             regex_rule = rule_lookup.split(":", 1)[1]
@@ -86,11 +104,15 @@ class Rules:
 
             else:
                 raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
-
+        
         else:
             raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
-        return errors
+        #print(type(errors))
+        #return warnings   #[FAILED] with 1 errors
+        #return errors  #[INFO] File is compliant!
+        return errors, warnings   #[FAILED] with 44 errors
+        #return warnings, errors #[FAILED] with 44 errors
 
 
 rules = Rules()
