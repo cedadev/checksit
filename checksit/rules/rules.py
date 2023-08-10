@@ -108,11 +108,8 @@ class Rules:
         else:
             raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
-        #print(type(errors))
-        #return warnings   #[FAILED] with 1 errors
-        #return errors  #[INFO] File is compliant!
-        return errors, warnings   #[FAILED] with 44 errors
-        #return warnings, errors #[FAILED] with 44 errors
+
+        return errors, warnings
 
 
 rules = Rules()
