@@ -110,25 +110,25 @@ def validate_orcid_ID(value, context, extras=None, label=""):
 
     # Check the start of the string (first 18 characters)
     if value[0:18] != orcid_string:
-        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
 
     # Check that the "-" are in the correct places
     if value[22] != "-":
-        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
     if value[27] != "-":
-        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
     if value[32] != "-":
-        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
 
     # Check that the last characters contain only "-" and digits
     PI_orcid_digits = value[-19:]
     PI_orcid_digits_only = PI_orcid_digits.replace("-", "")
     if not PI_orcid_digits_only.isdigit:
-        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
 
     # Check that total the length is correct
     if len(value) != 37:
-        errors.append(f"{label} '{value} needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
 
     return errors
 
@@ -144,10 +144,32 @@ def list_of_names(value, context, extras=None, label=""):
     if type(value) == list:
         for i in value:
             if not re.fullmatch(name_pattern, i):
-                errors.append(f"{label} '{value} needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+                errors.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
 
     if type(value) == str:
         if not re.fullmatch(name_pattern, value):
-            errors.append(f"{label} '{value} needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+            errors.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
 
     return errors
+
+
+def headline(value, context, extras=None, label=""):
+    """
+    A function to verify the format of the Headline
+    """
+    errors = []
+    warnings = []
+
+    if len(value) > 150:
+        warnings.append(f"{label} '{value}' should contain no more than one sentence")
+
+    if value.count(".") >= 2:
+        warnings.append(f"{label} '{value}' should contain no more than one sentence")
+
+    if not value[1].isupper():
+        warnings.append(f"{label} '{value}' should start with a capital letter")
+
+    if len(value) < 10:
+        warnings.append(f"{label} '{value}' should be at least 10 characters")
+
+    return warnings

@@ -5,7 +5,7 @@ required-global-attrs:
       # Version of the standard being followed
       XMP-photoshop:Instructions: regex:Metadata\sfollow\sthe\sNational\sCentre\sfor\sAtmospheric\sScience\sImage\sMetadata\sStandard\sv1.0:\shttps://doi.org/10.5281/zenodo.6368295
       # Description of what is shown in the image
-      XMP-photoshop:Headline: rule-func:string-of-length:10+
+      XMP-photoshop:Headline: rule-func-warning:headline
       XMP-dc:Description: rule-func:string-of-length:10+
       # Date-time details
       XMP-xmp:CreateDate: rule-func:validate-image-date-time
