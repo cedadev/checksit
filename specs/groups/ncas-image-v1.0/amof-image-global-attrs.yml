@@ -25,4 +25,5 @@ required-global-attrs:
       # Principal Investigator’s Details
       XMP-iptcExt:ContributorName: regex-rule-warning:name
       XMP-iptcExt:ContributorIdentifier: rule-func:validate_orcid_ID
+      XMP-iptcExt:ContributorIdentifier: rule-func:url_checker
       XMP-iptcExt:ContributorRole: regex:Project\sPrincipal\sInvestigator
