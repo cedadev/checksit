@@ -3,7 +3,7 @@ required-global-attrs:
   params:
     rules_attrs:
       # Location of a camera or an instrument (photo)
-      XMP-iptcExt:LocationCreatedLocationName: regex-rule:location
+      XMP-iptcExt:LocationCreatedLocationName: regex-rule-warning:location
       XMP-iptcExt:LocationCreatedGPSAltitude: regex-rule:altitude-image
       XMP-iptcExt:LocationCreatedGPSLatitude: regex-rule:latitude
       XMP-iptcExt:LocationCreatedGPSLongitude: regex-rule:longitude
