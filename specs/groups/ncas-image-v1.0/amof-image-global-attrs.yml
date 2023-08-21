@@ -16,10 +16,12 @@ required-global-attrs:
       XMP-photoshop:Credit: regex-warning:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)
       # Source of the image
       XMP-dc:Title: regex-rule:title
+      #XMP-dc:Title: rule-func:title_check
       # Instrument Scientist’s Details
       XMP-dc:Creator: rule-func:list_of_names
       XMP-iptcCore:CreatorWorkEmail: regex-rule:work-email
       XMP-iptcExt:CreatorIdentifier: rule-func:validate_orcid_ID
+      XMP-iptcExt:CreatorIdentifier: rule-func:url_checker
       # Principal Investigator’s Details
       XMP-iptcExt:ContributorName: regex-rule-warning:name
       XMP-iptcExt:ContributorIdentifier: rule-func:validate_orcid_ID

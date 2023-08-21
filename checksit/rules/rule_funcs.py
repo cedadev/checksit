@@ -1,6 +1,7 @@
 import os
 import re
 from datetime import datetime
+import requests
 
 from . import processors
 from ..config import get_config
@@ -157,7 +158,6 @@ def headline(value, context, extras=None, label=""):
     """
     A function to verify the format of the Headline
     """
-    errors = []
     warnings = []
 
     if len(value) > 150:
@@ -173,3 +173,29 @@ def headline(value, context, extras=None, label=""):
         warnings.append(f"{label} '{value}' should be at least 10 characters")
 
     return warnings
+
+
+# def title_check(value, context, extras=None, label=""):
+#     """
+#     A function to check if the title matches the system filename
+#     """
+#     errors = []
+#     import pdb; pdb.set_trace()
+#     if value != os.path.basename(inpt) : #????
+#         errors.append(f"{label} '{value}' should match the system filename")
+
+#     return errors
+
+
+def url_checker(value, context, extras=None, label=""):
+    """
+    A function to check if the url exists
+    """
+    errors = []
+
+    url = requests.get(value)   # get the url
+
+    if url.status_code != 200:           #(200 means it exists and is up and reachable)
+        errors.append(f"{label} '{value}' is not a reachable url")
+
+    return errors
