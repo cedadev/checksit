@@ -175,16 +175,16 @@ def headline(value, context, extras=None, label=""):
     return warnings
 
 
-# def title_check(value, context, extras=None, label=""):
-#     """
-#     A function to check if the title matches the system filename
-#     """
-#     errors = []
-#     import pdb; pdb.set_trace()
-#     if value != os.path.basename(inpt) : #????
-#         errors.append(f"{label} '{value}' should match the system filename")
+def title_check(value, context, extras=None, label=""):
+    """
+    A function to check if the title matches the system filename
+    """
+    errors = []
+    import pdb; pdb.set_trace()
+    if value != os.path.basename(inpt) : #????
+        errors.append(f"{label} '{value}' should match the system filename")
 
-#     return errors
+    return errors
 
 
 def url_checker(value, context, extras=None, label=""):
