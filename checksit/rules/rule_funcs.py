@@ -140,18 +140,18 @@ def list_of_names(value, context, extras=None, label=""):
     """
     name_pattern = r'(\D+), (\D+) ((\D+)|([A-Z]\.))'                # The format names should be written in
 
-    errors = []
+    warnings = []
 
     if type(value) == list:
         for i in value:
             if not re.fullmatch(name_pattern, i):
-                errors.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+                warnings.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
 
     if type(value) == str:
         if not re.fullmatch(name_pattern, value):
-            errors.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+            warnings.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
 
-    return errors
+    return warnings
 
 
 def headline(value, context, extras=None, label=""):

@@ -19,7 +19,7 @@ required-global-attrs:
       XMP-dc:Title: regex-rule:title
       #XMP-dc:Title: rule-func:title_check
       # Instrument Scientist’s Details
-      XMP-dc:Creator: rule-func:list_of_names
+      XMP-dc:Creator: rule-func-warning:list_of_names
       XMP-iptcCore:CreatorWorkEmail: regex-rule:work-email
       XMP-iptcExt:CreatorIdentifier: rule-func:validate_orcid_ID
       XMP-iptcExt:CreatorIdentifier: rule-func-warning:url_checker
