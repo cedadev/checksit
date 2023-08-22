@@ -191,26 +191,27 @@ def url_checker(value, context, extras=None, label=""):
     """
     A function to check if the url exists
     """
-    errors = []
+    warnings = []
 
     url = requests.get(value)   # get the url
 
     if url.status_code != 200:           # (200 means it exists and is up and reachable)
-        errors.append(f"{label} '{value}' is not a reachable url")
+        print(url.status_code)    #delete
+        warnings.append(f"{label} '{value}' is not a reachable url")
 
-    return errors
+    return warnings
 
 def relation_url_checker(value, context, extras=None, label=""):
     """
     A function to check if the url exists in the Relation field
     """
-    errors = []
+    warnings = []
     
     relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
     
     url = requests.get(relation_url)   # get the url
 
     if url.status_code != 200:           # (200 means it exists and is up and reachable)
-        errors.append(f"{label} '{value}' is not a reachable url")
+        warnings.append(f"{label} '{value}' is not a reachable url")
 
-    return errors
+    return warnings

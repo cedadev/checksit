@@ -13,7 +13,7 @@ required-global-attrs:
       # Licensing and acknowledgement details
       XMP-dc:Rights: regex-warning:Use\sof\sthis\simage\sis\scovered\sby\sthe\s\(UK\)\sOpen\sGovernment\sLicence,\shttp://www.nationalarchives.gov.uk/doc/open-government-licence/
       XMP-xmpRights:WebStatement: regex-warning:http://www.nationalarchives.gov.uk/doc/open-government-licence/
-      XMP-xmpRights:WebStatement: rule-func:url_checker
+      XMP-xmpRights:WebStatement: rule-func-warning:url_checker
       XMP-photoshop:Credit: regex-warning:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)
       # Source of the image
       XMP-dc:Title: regex-rule:title
@@ -22,9 +22,9 @@ required-global-attrs:
       XMP-dc:Creator: rule-func:list_of_names
       XMP-iptcCore:CreatorWorkEmail: regex-rule:work-email
       XMP-iptcExt:CreatorIdentifier: rule-func:validate_orcid_ID
-      XMP-iptcExt:CreatorIdentifier: rule-func:url_checker
+      XMP-iptcExt:CreatorIdentifier: rule-func-warning:url_checker
       # Principal Investigator’s Details
       XMP-iptcExt:ContributorName: regex-rule-warning:name
       XMP-iptcExt:ContributorIdentifier: rule-func:validate_orcid_ID
-      XMP-iptcExt:ContributorIdentifier: rule-func:url_checker
+      XMP-iptcExt:ContributorIdentifier: rule-func-warning:url_checker
       XMP-iptcExt:ContributorRole: regex:Project\sPrincipal\sInvestigator

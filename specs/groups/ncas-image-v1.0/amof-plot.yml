@@ -12,4 +12,4 @@ required-global-attrs:
       XMP-iptcExt:TemporalCoverageTo: rule-func:validate-image-date-time
       # (Relation for plots)
       XMP-dc:Relation: regex-warning:((i|I)sBasedOn\shttps://catalogue.ceda.ac.uk/uuid/)[a-z0-9]{32}
-      XMP-dc:Relation: rule-func:relation_url_checker
+      XMP-dc:Relation: rule-func-warning:relation_url_checker
