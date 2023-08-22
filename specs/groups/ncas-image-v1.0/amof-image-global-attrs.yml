@@ -13,6 +13,7 @@ required-global-attrs:
       # Licensing and acknowledgement details
       XMP-dc:Rights: regex-warning:Use\sof\sthis\simage\sis\scovered\sby\sthe\s\(UK\)\sOpen\sGovernment\sLicence,\shttp://www.nationalarchives.gov.uk/doc/open-government-licence/
       XMP-xmpRights:WebStatement: regex-warning:http://www.nationalarchives.gov.uk/doc/open-government-licence/
+      XMP-xmpRights:WebStatement: rule-func:url_checker
       XMP-photoshop:Credit: regex-warning:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)
       # Source of the image
       XMP-dc:Title: regex-rule:title
