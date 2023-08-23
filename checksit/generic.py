@@ -120,7 +120,7 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
         elif is_undefined(dct['global_attributes'].get(attr)):
             errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
         else:
-            rules_check_output = rules.check(rules_attrs[attr], dct['global_attributes'].get(attr), label=f"[global-attributes:******:{attr}]***")
+            rules_check_output = rules.check(rules_attrs[attr], dct['global_attributes'].get(attr), context=dct['inpt'], label=f"[global-attributes:******:{attr}]***")
             warnings.extend(rules_check_output[1])
             errors.extend(rules_check_output[0])
 

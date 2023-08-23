@@ -87,7 +87,7 @@ class ImageParser:
         return attr_dict
 
     def to_dict(self):
-        return {"global_attributes": self.global_attrs}
+        return {"global_attributes": self.global_attrs, "inpt": self.inpt}
 
 
 def read(fpath, verbose=False):

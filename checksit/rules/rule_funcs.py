@@ -180,8 +180,9 @@ def title_check(value, context, extras=None, label=""):
     A function to check if the title matches the system filename
     """
     errors = []
-    import pdb; pdb.set_trace()
-    if value != os.path.basename(inpt) : #????
+    #print("test", os.path.basename(context))     #delete
+    #import pdb; pdb.set_trace()              # delete
+    if value == os.path.basename(context) : #????
         errors.append(f"{label} '{value}' should match the system filename")
 
     return errors
