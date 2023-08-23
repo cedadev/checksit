@@ -201,7 +201,6 @@ class Checker:
         try:
             fp = FileParser()
             file_content = fp.parse_file_header(file_path, verbose=verbose)
-            print(file_content.inpt)
         except Exception as err:
             if log_mode == "compact":
                 print(f"{file_path} | ABORTED | FATAL | Cannot parse input file")
