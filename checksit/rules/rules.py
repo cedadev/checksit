@@ -114,7 +114,7 @@ class Rules:
         else:
             raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
-
+        print("Sarah test", errors)    #delete
         return errors, warnings
 
 

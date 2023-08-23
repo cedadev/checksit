@@ -182,8 +182,8 @@ def title_check(value, context, extras=None, label=""):
     errors = []
     #print("test", os.path.basename(context))     #delete
     #import pdb; pdb.set_trace()              # delete
-    if value == os.path.basename(context) : #????
-        errors.append(f"{label} '{value}' should match the system filename")
+    if value == os.path.basename(context) :
+        errors.append(f"{label} '{value}' should match the name of the file")
 
     return errors
 
