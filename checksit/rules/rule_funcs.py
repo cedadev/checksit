@@ -216,3 +216,33 @@ def relation_url_checker(value, context, extras=None, label=""):
         warnings.append(f"{label} '{value}' is not a reachable url")
 
     return warnings
+
+
+def latitude(value, context, extras=None, label=""):
+    """
+    A function to check if the latitude is within -90 and +90
+    """
+    errors = []
+    
+    latitude = re.findall(r'[0-9]+', value)[0]
+    int_latitude = int(latitude)
+
+    if int_latitude > 90:
+        errors.append(f"{label} '{value}' must be within -90 and +90 ")
+
+    return errors
+
+
+def longitude(value, context, extras=None, label=""):
+    """
+    A function to check if the longitude is within -180 and +180
+    """
+    errors = []
+    
+    longitude = re.findall(r'[0-9]+', value)[0]
+    int_longitude = int(longitude)
+
+    if int_longitude > 180:
+        errors.append(f"{label} '{value}' must be within -180 and +180 ")
+
+    return errors
