@@ -181,9 +181,6 @@ def title_check(value, context, extras=None, label=""):
     """
     errors = []
 
-    #context = context.split("/")[-1]
-    #print("test title", context)
-
     if value != os.path.basename(context) :
         errors.append(f"{label} '{value}' should match the name of the file")
 
