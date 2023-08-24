@@ -19,10 +19,8 @@ required-global-attrs:
       # Instrument Scientist’s Details
       XMP-dc:Creator: rule-func-warning:list_of_names
       XMP-iptcCore:CreatorWorkEmail: regex-rule:work-email
-      XMP-iptcExt:CreatorIdentifier: rule-func:validate_orcid_ID
-      XMP-iptcExt:CreatorIdentifier: rule-func-warning:url_checker
+      XMP-iptcExt:CreatorIdentifier: rule-func:validate_orcid_ID, rule-func-warning:url_checker
       # Principal Investigator’s Details
       XMP-iptcExt:ContributorName: regex-rule-warning:name
-      XMP-iptcExt:ContributorIdentifier: rule-func:validate_orcid_ID
-      XMP-iptcExt:ContributorIdentifier: rule-func-warning:url_checker
+      XMP-iptcExt:ContributorIdentifier: rule-func:validate_orcid_ID, rule-func-warning:url_checker
       XMP-iptcExt:ContributorRole: regex:Project\sPrincipal\sInvestigator
