@@ -59,8 +59,6 @@ class Rules:
 
         rule_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
 
-        #rule_lookup_list = rule_lookup.partition(", ")       #delete
-        #rule_lookup_list = re.findall(r'[0-9]+', rule_lookup)
         rule_lookup_list = rule_lookup.split(", ")
 
         for i in rule_lookup_list:
@@ -120,7 +118,6 @@ class Rules:
             else:
                 raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
-        print("Sarah test", errors)    #delete
         return errors, warnings
 
 
