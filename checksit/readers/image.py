@@ -74,15 +74,9 @@ class ImageParser:
         attr_dict = {}
         for line in content_lines:
             if self.verbose: print(f"WORKING ON LINE: {line}")
-            #print(line)
-            #key_0 = line.split("\":",1)[0].strip()
             key_0 = line.split("=",1)[0].strip()
             key = key_0[1:]    #removes first character - unwanted quotation marks
-            #print(key) #delete
             value = line.split("=",1)[1].strip()
-            #value = line.split("\":",1)[1].strip()
-            #value = value_0.replace('\n', '')  delete
-            #print(value)   #delete
             attr_dict[key] = value
         return attr_dict
 

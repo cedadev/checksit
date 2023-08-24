@@ -180,8 +180,7 @@ def title_check(value, context, extras=None, label=""):
     A function to check if the title matches the system filename
     """
     errors = []
-    #print("test", os.path.basename(context))     #delete
-    #import pdb; pdb.set_trace()              # delete
+
     if value == os.path.basename(context) :
         errors.append(f"{label} '{value}' should match the name of the file")
 
@@ -197,7 +196,6 @@ def url_checker(value, context, extras=None, label=""):
     url = requests.get(value)   # get the url
 
     if url.status_code != 200:           # (200 means it exists and is up and reachable)
-        print(url.status_code)    #delete
         warnings.append(f"{label} '{value}' is not a reachable url")
 
     return warnings
