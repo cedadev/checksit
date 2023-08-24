@@ -166,7 +166,7 @@ def headline(value, context, extras=None, label=""):
     if value.count(".") >= 2:
         warnings.append(f"{label} '{value}' should contain no more than one sentence")
 
-    if not value[1].isupper():
+    if not value[0].isupper():
         warnings.append(f"{label} '{value}' should start with a capital letter")
 
     if len(value) < 10:
