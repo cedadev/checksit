@@ -145,11 +145,11 @@ def list_of_names(value, context, extras=None, label=""):
     if type(value) == list:
         for i in value:
             if not re.fullmatch(name_pattern, i):
-                warnings.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+                warnings.append(f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate")
 
     if type(value) == str:
         if not re.fullmatch(name_pattern, value):
-            warnings.append(f"{label} '{value}' needs to be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)>")
+            warnings.append(f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate")
 
     return warnings
 
@@ -182,7 +182,7 @@ def title_check(value, context, extras=None, label=""):
     errors = []
 
     if value != os.path.basename(context) :
-        errors.append(f"{label} '{value}' should match the name of the file")
+        errors.append(f"{label} '{value}' must match the name of the file")
 
     return errors
 
