@@ -8,7 +8,6 @@ import pandas as pd
 
 from . import processors
 from ..config import get_config
-from pandas import json_normalize
 
 conf = get_config()
 rule_splitter = conf["settings"].get("rule_splitter", "|")
