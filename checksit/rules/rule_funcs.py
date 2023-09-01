@@ -216,13 +216,34 @@ def title_instrument(value, context, extras=None, label=""):
     #if instrument not in data['ncas_instrument'][*]['description']:
     #if instrument not in descriptn:
     if instrument not in data['ncas_instrument']:
-        warnings.append(f"{label} '{value}' should be contained in the instrument controlled vocabulary list")
+        warnings.append(f"{label} '{instrument}' should be contained in the instrument controlled vocabulary list")
 
     # Closing file
     f.close()
 
     return warnings
 
+def title_platform(value, context, extras=None, label=""):
+    """
+    A function to check if the platform in the title is contained in the controlled vocabulary list
+    """
+    warnings = []
+
+    platform = value.split("_")[1]
+
+    # open JSON controlled vocab file:
+    g = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_platform.json', "r")
+ 
+    ## Reading from file:
+    data = json.loads(g.read())
+    
+    if platform not in data['platform']:
+        warnings.append(f"{label} '{platform}' should be contained in the platform controlled vocabulary list")
+
+    # Closing file
+    g.close()
+
+    return warnings
 
 def url_checker(value, context, extras=None, label=""):
     """
