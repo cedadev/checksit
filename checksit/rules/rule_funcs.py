@@ -2,9 +2,12 @@ import os
 import re
 from datetime import datetime
 import requests
+import json
+import pandas as pd
 
 from . import processors
 from ..config import get_config
+from pandas import json_normalize
 
 conf = get_config()
 rule_splitter = conf["settings"].get("rule_splitter", "|")
@@ -185,6 +188,40 @@ def title_check(value, context, extras=None, label=""):
         errors.append(f"{label} '{value}' must match the name of the file")
 
     return errors
+
+
+def title_instrument(value, context, extras=None, label=""):
+    """
+    A function to check if the instrument in the title is contained in the controlled vocabulary list
+    """
+    warnings = []
+
+    instrument = value.partition("_")[0]
+
+    # open JSON controlled vocab file:
+    f = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_ncas_instrument.json', "r")
+ 
+    ## Reading from file:
+    data = json.loads(f.read())
+    
+    #print(type(data))   #delete
+    #descriptn = data.description.map(item,item.description)
+
+    #d = json.loads('./checksit/vocabs/AMF_CVs/2.0.0/AMF_ncas_instrument.json')
+    
+    #df = pd.json_normalize(data)
+    #print(df)  #delete
+    #print(type(df))   #delete
+
+    #if instrument not in data['ncas_instrument'][*]['description']:
+    #if instrument not in descriptn:
+    if instrument not in data['ncas_instrument']:
+        warnings.append(f"{label} '{value}' should be contained in the instrument controlled vocabulary list")
+
+    # Closing file
+    f.close()
+
+    return warnings
 
 
 def url_checker(value, context, extras=None, label=""):
