@@ -196,18 +196,20 @@ def title_check(value, context, extras=None, label=""):
 
 def title_instrument(value, context, extras=None, label=""):
     """
-    A function to check if the instrument in the title is contained in the controlled vocabulary list
+    A function to check if the instrument in the title is contained in the controlled vocabulary lists
     """
     warnings = []
 
     instrument = value.partition("_")[0]
 
-    # open JSON controlled vocab file:
-    f = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_ncas_instrument.json', "r")
+    # open JSON controlled vocab files:
+    n = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_ncas_instrument.json', "r")
+    c = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_community_instrument.json', "r")
  
     ## Reading from file:
-    data = json.loads(f.read())
-    
+    ncas_data = json.loads(n.read())
+    community_data = json.loads(c.read())
+
     #print(type(data))   #delete
     #descriptn = data.description.map(item,item.description)
 
@@ -219,11 +221,12 @@ def title_instrument(value, context, extras=None, label=""):
 
     #if instrument not in data['ncas_instrument'][*]['description']:
     #if instrument not in descriptn:
-    if instrument not in data['ncas_instrument']:
-        warnings.append(f"{label} '{instrument}' should be contained in the instrument controlled vocabulary list")
+    if instrument not in ncas_data['ncas_instrument'] and instrument not in community_data['community_instrument']:
+        warnings.append(f"{label} '{instrument}' should be contained one of the instrument controlled vocabulary lists")
 
     # Closing file
-    f.close()
+    n.close()
+    c.close()
 
     return warnings
 
