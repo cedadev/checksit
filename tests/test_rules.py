@@ -13,7 +13,6 @@ def test_match_file_name():
     assert len(match_file_name(value, context, ["lowercase", "no_extension"])) == 0
 
 def _test_type(_type, value):
-    #return len(r.check(f"type-rule:{_type}", value))
     return r.check(f"type-rule:{_type}", value)
 
 def test_type_rules():
@@ -21,43 +20,43 @@ def test_type_rules():
 
     _type = "number"
     for value in 3.4, -4:
-        assert tt(_type, value) == ([], [])     # previously 0
+        assert tt(_type, value) == ([], [])
         print('sarah test', tt(_type, value))
 
     for value in "3", "3.4", ["hi"]:
-        assert tt(_type, value) != ([], [])     #previously ==1
+        assert tt(_type, value) != ([], [])
 
     _type = "float"
     for value in [3.4]:
-        assert tt(_type, value) == ([], [])     # previously 0
+        assert tt(_type, value) == ([], [])
 
     for value in "3", 3, ["hi"]:
-        assert tt(_type, value) != ([], [])     #previously ==1
+        assert tt(_type, value) != ([], [])
 
     _type = "integer"
     for value in [3]:
-        assert tt(_type, value) == ([], [])     # previously 0
+        assert tt(_type, value) == ([], [])
 
     for value in "3", 3.5, ["hi"]:
-        assert tt(_type, value) != ([], [])     #previously ==1
+        assert tt(_type, value) != ([], [])
 
     _type = "string"
     for value in "3", "hi":
-        assert tt(_type, value) == ([], [])     # previously 0
+        assert tt(_type, value) == ([], [])
 
     for value in 3, 4.5, ["hi"]:
-        assert tt(_type, value) != ([], [])     #previously ==1
+        assert tt(_type, value) != ([], [])
 
 def test_regex_rules():
     rule = "regex-rule:integer"
-    assert r.check(rule, "-1") == ([], [])  # previously []
-    assert r.check(rule, "500") == ([], []) # previously []
-    assert r.check(rule, "1.3") != ([], []) # previously []
+    assert r.check(rule, "-1") == ([], [])
+    assert r.check(rule, "500") == ([], [])
+    assert r.check(rule, "1.3") != ([], [])
 
     rule = "regex-rule:valid-email"
-    assert r.check(rule, "freda.bloggs@amail.com") == ([], []) # previously []
-    assert r.check(rule, "@amail.com") != ([], []) # previously []
-    assert r.check(rule, "freda.bloggs@") != ([], []) # previously []
+    assert r.check(rule, "freda.bloggs@amail.com") == ([], [])
+    assert r.check(rule, "@amail.com") != ([], [])
+    assert r.check(rule, "freda.bloggs@") != ([], [])
 
 #TODO: Add checks for all the published rules 
 #TODO: Add checks for some regular expressions to check they are executed correctly
