@@ -188,7 +188,8 @@ class CDLParser:
     def to_dict(self):
         return {"dimensions": self.dimensions,
                 "variables": self.variables,
-                "global_attributes": self.global_attrs}
+                "global_attributes": self.global_attrs,
+                "inpt": self.inpt}
 
 
 def read(fpath, verbose=False):
