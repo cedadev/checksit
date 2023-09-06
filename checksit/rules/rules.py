@@ -37,7 +37,7 @@ class Rules:
             "name": r'(\D+), (\D+) ?((\D+)|([A-Z]\.))',
             "altitude-image-warning": r'-?\d+\sm',    # should be integers only for images
             "altitude-image": r'-?\d+(\.\d+)?\sm',
-            "work-email": r'[^@\s]+@ncas.ac.uk'
+            "ncas-email": r'[^@\s]+@ncas.ac.uk'
         }
 
     def _map_type_rule(self, type_rule):
