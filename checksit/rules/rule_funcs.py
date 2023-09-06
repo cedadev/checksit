@@ -138,7 +138,7 @@ def list_of_names(value, context, extras=None, label=""):
     """
     A function to verify the names of people when a list of names may be provided
     """
-    name_pattern = r'[A-Za-z_À-ÿ\-\'\ ]+, [A-Za-z_À-ÿ\-\']+ ?([A-Za-z_À-ÿ\-\'\ ]+|([A-Z_À-ÿ]\.))'                # The format names should be written in
+    name_pattern = r'(.)+, (.)+ ?((.)+|((.)\.))'                # The format names should be written in
 
     warnings = []
 
