@@ -4,7 +4,7 @@ required-global-attrs:
     rules_attrs:
       # Location of a camera or an instrument (plots)
       XMP-iptcExt:LocationShownLocationName: regex-rule-warning:location
-      XMP-iptcExt:LocationShownGPSAltitude: regex-rule:altitude-image
+      XMP-iptcExt:LocationShownGPSAltitude: regex-rule-warning:altitude-image-warning, regex-rule:altitude-image
       XMP-iptcExt:LocationShownGPSLatitude: regex-rule:latitude, rule-func:latitude
       XMP-iptcExt:LocationShownGPSLongitude: regex-rule:longitude, rule-func:longitude
       # (For plots only)

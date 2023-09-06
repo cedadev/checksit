@@ -35,7 +35,8 @@ class Rules:
             "title": r'[a-zA-Z0-9\-]+_[a-zA-Z0-9\-]+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?_[a-zA-Z0-9\-]+([a-zA-Z0-9\-\_]+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)',
             "title-data-product": r'[a-zA-Z0-9\-]+_[a-zA-Z0-9\-]+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?_(plot|photo)([a-zA-Z0-9\-\_]+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)',
             "name": r'(\D+), (\D+) ?((\D+)|([A-Z]\.))',
-            "altitude-image": r'-?\d+\sm',    # integers only for images
+            "altitude-image-warning": r'-?\d+\sm',    # should be integers only for images
+            "altitude-image": r'-?\d+(\.\d+)?\sm',
             "work-email": r'[^@\s]+@ncas.ac.uk'
         }
 
