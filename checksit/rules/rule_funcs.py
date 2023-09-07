@@ -112,8 +112,12 @@ def validate_orcid_ID(value, context, extras=None, label=""):
     PI_orcid_digits = value[-19:]
     PI_orcid_digits_only = PI_orcid_digits.replace("-", "")
 
+    # Check that total the length is correct
+    if len(value) != 37:    
+        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+       
     # Check the start of the string (first 18 characters)
-    if (value[0:18] != orcid_string or
+    elif (value[0:18] != orcid_string or
         
         # Check that the "-" are in the correct places
         value[22] != "-" or
@@ -121,10 +125,7 @@ def validate_orcid_ID(value, context, extras=None, label=""):
         value[32] != "-" or
         
         # Check that the last characters contain only "-" and digits
-        not PI_orcid_digits_only.isdigit or
-        
-        # Check that total the length is correct
-        len(value) != 37):
+        not PI_orcid_digits_only.isdigit):
 
         errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
 
