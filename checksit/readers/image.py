@@ -1,34 +1,6 @@
 import subprocess as sp
 import yaml
 
-fields_within_standard = [
-    "XMP-photoshop:Instructions",
-    "XMP-photoshop:Headline",
-    "XMP-dc:Description",
-    "XMP-iptcExt:LocationCreatedLocationName",
-    "XMP-iptcExt:LocationCreatedGPSAltitude",
-    "XMP-iptcExt:LocationCreatedGPSLatitude",
-    "XMP-iptcExt:LocationCreatedGPSLongitude",
-    "XMP-iptcExt:LocationShownLocationName",
-    "XMP-iptcExt:LocationShownGPSAltitude",
-    "XMP-iptcExt:LocationShownGPSLatitude",
-    "XMP-iptcExt:LocationShownGPSLongitude",
-    "XMP-xmp:CreateDate",
-    "XMP-xmp:MetadataDate",
-    "XMP-iptcExt:TemporalCoverageFrom",
-    "XMP-iptcExt:TemporalCoverageTo",
-    "XMP-dc:Rights",
-    "XMP-xmpRights:WebStatement",
-    "XMP-photoshop:Credit",
-    "XMP-dc:Title",
-    "XMP-dc:Relation",
-    "XMP-dc:Creator",
-    "XMP-iptcCore:CreatorWorkEmail",
-    "XMP-iptcExt:CreatorIdentifier",
-    "XMP-iptcExt:ContributorName",
-    "XMP-iptcExt:ContributorIdentifier",
-    "XMP-iptcExt:ContributorRole"]
-
 def get_output(cmd):
     subp = sp.Popen(cmd, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
     return subp.stdout.read().decode("charmap"), subp.stderr.read().decode("charmap")
