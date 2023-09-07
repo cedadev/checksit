@@ -198,12 +198,16 @@ def url_checker(value, context, extras=None, label=""):
 
     return warnings
 
+
 def relation_url_checker(value, context, extras=None, label=""):
     """
     A function to check if the url exists in the Relation field
     """
     warnings = []
     
+    if " " not in value:
+        raise Exception(f"{label} '{value}' should contain a space before the url")
+
     relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
     
     url = requests.get(relation_url)   # get the url
