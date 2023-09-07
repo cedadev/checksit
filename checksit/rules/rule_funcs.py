@@ -201,7 +201,7 @@ def url_checker(value, context, extras=None, label=""):
 
 def relation_url_checker(value, context, extras=None, label=""):
     """
-    A function to check if the url exists in the Relation field
+    A function to check if Relation field is in the correct format, and that the url exists
     """
     errors = []
     
@@ -209,7 +209,7 @@ def relation_url_checker(value, context, extras=None, label=""):
         errors.append(f"{label} '{value}' should contain a space before the url")
     else:
         relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
-        url_checker(relation_url, context=None)
+        url_checker(relation_url, context=None)       # check the url exists using the url_checker() function defined above
 
     return errors
 
