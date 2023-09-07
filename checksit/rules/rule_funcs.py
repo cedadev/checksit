@@ -203,19 +203,15 @@ def relation_url_checker(value, context, extras=None, label=""):
     """
     A function to check if the url exists in the Relation field
     """
-    warnings = []
+    errors = []
     
     if " " not in value:
-        raise Exception(f"{label} '{value}' should contain a space before the url")
+        errors.append(f"{label} '{value}' should contain a space before the url")
+    else:
+        relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
+        url_checker(relation_url, context=None)
 
-    relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
-    
-    url = requests.get(relation_url)   # get the url
-
-    if url.status_code != 200:           # (200 means it exists and is up and reachable)
-        warnings.append(f"{label} '{value}' is not a reachable url")
-
-    return warnings
+    return errors
 
 
 def latitude(value, context, extras=None, label=""):
