@@ -50,7 +50,6 @@ class ImageParser:
         exiftool_return_string = sp.check_output(exiftool_arguments)
         raw_global_attrs = yaml.load(exiftool_return_string, Loader=yaml.SafeLoader)[0]
         for tag_name in raw_global_attrs.keys():
-            if tag_name in fields_within_standard:
                 value_type = type(raw_global_attrs[tag_name])
                 if value_type == list:
                     self.global_attrs[tag_name] = str(raw_global_attrs[tag_name][0])
