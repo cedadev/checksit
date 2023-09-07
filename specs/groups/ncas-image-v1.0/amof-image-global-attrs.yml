@@ -21,6 +21,6 @@ required-global-attrs:
       XMP-iptcCore:CreatorWorkEmail: regex-rule-warning:ncas-email, regex-rule:valid-email
       XMP-iptcExt:CreatorIdentifier: rule-func:validate_orcid_ID, rule-func-warning:url_checker
       # Principal Investigator’s Details
-      XMP-iptcExt:ContributorName: regex-rule-warning:name, regex-rule-warning:name-characters
+      XMP-iptcExt:ContributorName: regex-rule-warning:name-format, regex-rule-warning:name-characters
       XMP-iptcExt:ContributorIdentifier: rule-func:validate_orcid_ID, rule-func-warning:url_checker
       XMP-iptcExt:ContributorRole: regex:Project\sPrincipal\sInvestigator
