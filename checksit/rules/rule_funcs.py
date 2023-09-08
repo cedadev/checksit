@@ -209,17 +209,6 @@ def title_instrument(value, context, extras=None, label=""):
     ncas_data = json.loads(n.read())
     community_data = json.loads(c.read())
 
-    #print(type(data))   #delete
-    #descriptn = data.description.map(item,item.description)
-
-    #d = json.loads('./checksit/vocabs/AMF_CVs/2.0.0/AMF_ncas_instrument.json')
-    
-    #df = pd.json_normalize(data)
-    #print(df)  #delete
-    #print(type(df))   #delete
-
-    #if instrument not in data['ncas_instrument'][*]['description']:
-    #if instrument not in descriptn:
     if instrument not in ncas_data['ncas_instrument'] and instrument not in community_data['community_instrument']:
         warnings.append(f"{label} '{instrument}' should be contained one of the instrument controlled vocabulary lists")
 
