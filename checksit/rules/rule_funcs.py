@@ -203,6 +203,7 @@ def url_checker(value, context, extras=None, label=""):
         warnings.append(f"{label} '{value}' is not a reachable url")
     else:
         url = requests.get(value)   # get the url
+        #print(f'{label}', url.status_code)    #delete
         if url.status_code != 200:           # (200 means it exists and is up and reachable)
             warnings.append(f"{label} '{value}' is not a reachable url")
     finally:
@@ -219,7 +220,8 @@ def relation_url_checker(value, context, extras=None, label=""):
         errors.append(f"{label} '{value}' should contain a space before the url")
     else:
         relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
-        errors.append(url_checker(relation_url, context, extras, label))       # check the url exists using the url_checker() function defined above
+        if url_checker(relation_url, context, extras, label) != []:
+            errors.append(url_checker(relation_url, context, extras, label))       # check the url exists using the url_checker() function defined above
 
     return errors
 
