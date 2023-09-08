@@ -2,7 +2,6 @@ import os
 import re
 from datetime import datetime
 import requests
-import sys
 from urllib.request import urlopen
 
 from . import processors
@@ -202,8 +201,7 @@ def url_checker(value, context, extras=None, label=""):
     except:
         warnings.append(f"{label} '{value}' is not a reachable url")
     else:
-        url = requests.get(value)   # get the url
-        #print(f'{label}', url.status_code)    #delete
+        url = requests.get(value, allow_redirects=False)   # get the url
         if url.status_code != 200:           # (200 means it exists and is up and reachable)
             warnings.append(f"{label} '{value}' is not a reachable url")
     finally:
