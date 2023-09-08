@@ -206,31 +206,7 @@ def url_checker(value, context, extras=None, label=""):
         if url.status_code != 200:           # (200 means it exists and is up and reachable)
             warnings.append(f"{label} '{value}' is not a reachable url")
     finally:
-        print(warnings)
         return warnings
-
-    #url = requests.get(value)   # get the url
-        #if url.status_code != 200:           # (200 means it exists and is up and reachable)
-            #warnings.append(f"{label} '{value}' is not a reachable url")
-
-
-
-    #try: uh=urlopen(value)
-        #return("test2")
-    #except IOError:
-        #print('sarah has Failed to open url.')
-        #sys.exit()
-
-    #try:
-    #url = requests.get(value)   # get the url
-    #except ConnectionError:
-        #print('Sarah Failed to open url.')
-        #warnings.append(f"{label} '{value}' is not a reachable url")
-
-    #if url.status_code != 200:           # (200 means it exists and is up and reachable)
-        #warnings.append(f"{label} '{value}' is not a reachable url")
-
-    #return warnings
 
 
 def relation_url_checker(value, context, extras=None, label=""):
