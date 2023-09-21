@@ -201,10 +201,14 @@ def url_checker(value, context, extras=None, label=""):
     except:
         warnings.append(f"{label} '{value}' is not a reachable url")
     else:
-        url = requests.get(value, allow_redirects=False)   # get the url
-        if url.status_code != 200:           # (200 means it exists and is up and reachable)
+        #url = requests.get(value, allow_redirects=False)   # get the url
+        #if url.status_code != 200:           # (200 means it exists and is up and reachable)
+        print(uh.getcode())
+        if uh.getcode() != 200:           # (200 means it exists and is up and reachable)
             warnings.append(f"{label} '{value}' is not a reachable url")
     finally:
+        #print("test 1",uh)
+        #print("test 2",url)
         return warnings
 
 
