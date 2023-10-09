@@ -4,6 +4,7 @@ from .rules import rules
 
 import re
 import numpy as np
+import datetime as dt
 
 def _get_bounds_var_ids(dct):
     return [var_id for var_id in dct["variables"] if (
@@ -282,9 +283,21 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
     
     # check date format
     # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
-    # note, checks date format, not valid date (e.g. 20233212 would pass)
+    # first checks format, then date validity 
     if not re.match("^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$", file_name_parts[2]):
-        errors.append(f"[file name]: Invalid file name format - bad date formate {file_name_parts[2]}")
+        errors.append(f"[file name]: Invalid file name format - bad date format {file_name_parts[2]}")
+    else:
+        fmts = ("%Y", "%Y%m", "%Y%m%d", "%Y%m%d-%H", "%Y%m%d-%H%M", "%Y%m%d-%H%M%S")
+        valid_date_found = False
+        for f in fmts:
+            try:
+                t = dt.datetime.strptime(file_name_parts[2], f)
+                valid_date_found = True
+                break
+            except ValueError:
+                pass 
+        if not valid_date_found:
+            errors.append(f"[file name]: Invalid file name format - invalid date in file name {file_name_parts[2]}")
 
     # check data product
     if "data_product" in vocab_checks.keys():
