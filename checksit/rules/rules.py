@@ -20,15 +20,38 @@ class Rules:
                  "(not applicable)|(not available)"
 
         self.static_regex_rules = {
-            "integer": r"-?\d+",
-            "valid-email": r"[^@\s]+@[^@\s]+\.[^\s@]+",
-            "valid-url": r"https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+)?",
-            "valid-url-or-na": r"(https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+))|" + _NOT_APPLICABLE_RULES,
-            "match:vN.M": r"v\d\.\d",
-            "datetime": "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
-            "datetime-or-na": 
-                 "(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
-            "number": r"-?\d+(\.\d+)?"
+            "integer": {
+                "regex-rule": r"-?\d+", 
+                "example": "10"
+            },
+            "valid-email": {
+                "regex-rule": r"[^@\s]+@[^@\s]+\.[^\s@]+",
+                "example": ""
+            },
+            "valid-url": {
+                "regex-rule": r"https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+)?",
+                "example": "https://github.com"
+            },
+            "valid-url-or-na": {
+                "regex-rule": r"(https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+))|" + _NOT_APPLICABLE_RULES,
+                "example": "https://github.com"
+            },
+            "match:vN.M": {
+                "regex-rule": r"v\d\.\d",
+                "example": "v1.0"
+            },
+            "datetime": {
+                "regex-rule": "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
+                "example": "2023-11-17T15:00:00"
+            },
+            "datetime-or-na": {
+                 "regex-rule": "(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
+                 "example": "2023-11-17T15:00:00"
+            },
+            "number": {
+                "regex-rule": r"-?\d+(\.\d+)?",
+                "example": "10.5"
+            }
         }
 
     def _map_type_rule(self, type_rule):
@@ -72,10 +95,10 @@ class Rules:
             regex_rule = rule_lookup.split(":", 1)[1]
 
             if regex_rule in self.static_regex_rules:
-                pattern = self.static_regex_rules[regex_rule]
+                pattern = self.static_regex_rules[regex_rule]["regex-rule"]
 
                 if not re.match("^" + pattern + "$", value):
-                    errors.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'.")
+                    errors.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}' - Example valid value '{self.static_regex_rules[regex_rule]['example']}'.")
 
             else:
                 raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
