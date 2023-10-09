@@ -26,7 +26,7 @@ class Rules:
             },
             "valid-email": {
                 "regex-rule": r"[^@\s]+@[^@\s]+\.[^\s@]+",
-                "example": ""
+                "example": "sam@example.com"
             },
             "valid-url": {
                 "regex-rule": r"https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+)?",
