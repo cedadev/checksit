@@ -37,7 +37,7 @@ def show_specs(spec_ids=None, verbose=False):
     for spec_id, spec in specs:
      
         print(f"\n{spec_id}:")
-        print(json.dumps(spec, indent=4))
+        print(json.dumps(spec, indent=4).replace("\\\\", "\\"))
 
 
 class SpecificationChecker:
