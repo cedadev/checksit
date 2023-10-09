@@ -164,9 +164,17 @@ class Checker:
                 errors.extend([f"[{section}] {err}" for err in errs])
 
         if log_mode == "compact":
-            highest = "ERROR" if len(errors) > 0 else "NONE" 
-            endstr = "" if len(errors) > 0 else "\n"
-            print(f"{highest} | {len(errors)} ", end=endstr)
+            if len(errors) > 0:
+                highest = "ERROR"
+                endstr = ""
+            elif len(warnings) > 0:
+                highest = "WARNING"
+                endstr = ""
+            else:
+                highest = "NONE"
+                endstr = "\n"
+            number = len(errors) if highest == "ERROR" else len(warnings)
+            print(f"{highest} | {number} ", end=endstr)
             err_string = " | ".join([err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors])
             if err_string:
                 print(f"| {err_string}") 
@@ -252,12 +260,18 @@ class Checker:
                             make_amof_specs(version_number)
                             if verbose: print("  Downloaded of specs successful")
                         except urllib.error.HTTPError:
-                            print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
-                            print("Aborting...")
+                            if log_mode == "compact":
+                                print(f"{file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}")
+                            else:
+                                print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
+                                print("Aborting...")
                             sys.exit()
                         except PermissionError:
-                            print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
-                            print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
+                            if log_mode == "compact":
+                                print(f"{file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit.")
+                            else:
+                                print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
+                                print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
                             sys.exit()
                         except:
                             raise
