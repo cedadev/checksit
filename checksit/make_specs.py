@@ -58,7 +58,7 @@ def make_amof_specs(version_number):
             elif 'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
                 rule = "regex-rule:datetime"
             elif '<number> m' in compliance:
-                rule = "regex:^\d+\.?\d* m$"
+                rule = "regex:^-?\d+\.?\d* m$"
             else:
                 rule = f"regex-rule:EDIT:{compliance}"
         elif compliance.lower() in ["number","integer","int","float","string","str"]:
@@ -73,7 +73,7 @@ def make_amof_specs(version_number):
             else:
                 # a few extra catches
                 if attr == "institution":
-                    rule = "regex:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)"
+                    rule = "regex:National Centre for Atmospheric Science (NCAS)"
                 elif attr == "platform_type":
                     rule = "rule-func:match-one-of:stationary_platform|moving_platform"
                 elif attr == "featureType":
