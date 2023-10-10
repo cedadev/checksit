@@ -167,13 +167,15 @@ class Checker:
             if len(errors) > 0:
                 highest = "ERROR"
                 endstr = ""
-            elif len(warnings) > 0:
+                number = len(errors)
+            elif len(warnings) > 0 and not ignore_warnings:
                 highest = "WARNING"
                 endstr = ""
+                number = len(warnings)
             else:
                 highest = "NONE"
                 endstr = "\n"
-            number = len(errors) if highest == "ERROR" else len(warnings)
+                number = 0
             print(f"{highest} | {number} ", end=endstr)
             err_string = " | ".join([err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors])
             if err_string:
