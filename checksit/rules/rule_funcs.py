@@ -229,10 +229,11 @@ def latitude(value, context, extras=None, label=""):
     """
     errors = []
     
-    latitude = re.findall(r'[0-9]+', value)[0]
-    int_latitude = int(latitude)
+    latitude = re.findall(r'[0-9]+', value)
+    int_latitude = int(latitude[0])
+    dec_latitude = int(latitude[1])
 
-    if int_latitude > 90:
+    if int_latitude > 90 or (int_latitude == 90 and dec_latitude > 0):
         errors.append(f"{label} '{value}' must be within -90 and +90 ")
 
     return errors
@@ -244,10 +245,11 @@ def longitude(value, context, extras=None, label=""):
     """
     errors = []
     
-    longitude = re.findall(r'[0-9]+', value)[0]
-    int_longitude = int(longitude)
+    longitude = re.findall(r'[0-9]+', value)
+    int_longitude = int(longitude[0])
+    dec_longitude = int(longitude[1])
 
-    if int_longitude > 180:
+    if int_longitude > 180 or (int_longitude == 180 and dec_longitude > 0):
         errors.append(f"{label} '{value}' must be within -180 and +180 ")
 
     return errors
