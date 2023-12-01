@@ -78,7 +78,7 @@ class CDLParser:
                 if split_patterns:
                     splitter = split_patterns.popleft()
             else:
-                line_no_comments = re.split(";\s+//.*$", line)[0].strip().rstrip(";").strip()
+                line_no_comments = re.split(r";\s+//.*$", line)[0].strip().rstrip(";").strip()
                 if not line_no_comments.startswith("//"):
                     current.append(line_no_comments)
         
