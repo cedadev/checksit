@@ -1,0 +1,596 @@
+{
+    "ncas_instrument": {
+        "ncas-radar-wind-profiler-1": {
+            "instrument_id": "ncas-radar-wind-profiler-1",
+            "previous_instrument_ids": [
+                "aber-radar-1290mhz",
+                "man-radar-1290mhz"
+            ],
+            "description": "NCAS Mobile Radar Wind Profiler unit 1"
+        },
+        "ncas-ceilometer-4": {
+            "instrument_id": "ncas-ceilometer-4",
+            "previous_instrument_ids": [],
+            "description": "NCAS Lidar Ceilometer unit 4"
+        },
+        "ncas-o3-lidar-1": {
+            "instrument_id": "ncas-o3-lidar-1",
+            "previous_instrument_ids": [
+                "aber-o3lidar",
+                "man-o3lidar"
+            ],
+            "description": "NCAS Mobile O3 lidar unit 1"
+        },
+        "ncas-radiosonde-1": {
+            "instrument_id": "ncas-radiosonde-1",
+            "previous_instrument_ids": [
+                "man-radiosonde"
+            ],
+            "description": "NCAS Vaisala Sounding Station unit 1"
+        },
+        "ncas-rapidsonde-1": {
+            "instrument_id": "ncas-rapidsonde-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Windsond Sounding Station unit 1"
+        },
+        "ncas-3v-cpi-1": {
+            "instrument_id": "ncas-3v-cpi-1",
+            "previous_instrument_ids": [
+                "man-3v-cpi"
+            ],
+            "description": "NCAS 3 View Cloud Particle Imager unit 1"
+        },
+        "ncas-cpi-1": {
+            "instrument_id": "ncas-cpi-1",
+            "previous_instrument_ids": [
+                "man-cpi"
+            ],
+            "description": "NCAS Cloud Particle Imager unit 1"
+        },
+        "ncas-caps-1": {
+            "instrument_id": "ncas-caps-1",
+            "previous_instrument_ids": [
+                "man-caps"
+            ],
+            "description": "NCAS Cloud & Aerosol Particle Spectrometer unit 1"
+        },
+        "ncas-aerosol-mass-spec-1": {
+            "instrument_id": "ncas-aerosol-mass-spec-1",
+            "previous_instrument_ids": [
+                "man-ams"
+            ],
+            "description": "NCAS Aerosol Mass Spectrometer unit 1"
+        },
+        "ncas-hvps3-1": {
+            "instrument_id": "ncas-hvps3-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS High Volume Precipitation Spectometer unit 1"
+        },
+        "ncas-aps-1": {
+            "instrument_id": "ncas-aps-1",
+            "previous_instrument_ids": [
+                "uom-3321aps-1"
+            ],
+            "description": "NCAS Aerodynamic Particle Sizer unit 1"
+        },
+        "ncas-aps-2": {
+            "instrument_id": "ncas-aps-2",
+            "previous_instrument_ids": [
+                "uom-3321aps-2"
+            ],
+            "description": "NCAS Aerodynamic Particle Sizer unit 2"
+        },
+        "ncas-cpc-3010-1": {
+            "instrument_id": "ncas-cpc-3010-1",
+            "previous_instrument_ids": [
+                "uom-3010cpc-1"
+            ],
+            "description": "NCAS 3010 Condensation Particle Counter unit 1"
+        },
+        "ncas-cpc-3010-2": {
+            "instrument_id": "ncas-cpc-3010-2",
+            "previous_instrument_ids": [
+                "uom-3010cpc-2"
+            ],
+            "description": "NCAS 3010 Condensation Particle Counter unit 2"
+        },
+        "ncas-cpc-3762-1": {
+            "instrument_id": "ncas-cpc-3762-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS 3762 Condensation Particle Counter unit 1"
+        },
+        "ncas-cpc-3762-2": {
+            "instrument_id": "ncas-cpc-3762-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS 3762 Condensation Particle Counter unit 2"
+        },
+        "ncas-cpc-3762-3": {
+            "instrument_id": "ncas-cpc-3762-3",
+            "previous_instrument_ids": [],
+            "description": "NCAS 3762 Condensation Particle Counter unit 3"
+        },
+        "ncas-cpc-3762-4": {
+            "instrument_id": "ncas-cpc-3762-4",
+            "previous_instrument_ids": [],
+            "description": "NCAS 3762 Condensation Particle Counter unit 4"
+        },
+        "ncas-opc-1": {
+            "instrument_id": "ncas-opc-1",
+            "previous_instrument_ids": [
+                "uom-grimm"
+            ],
+            "description": "NCAS Optical Particle Counter unit 1"
+        },
+        "ncas-smps-1": {
+            "instrument_id": "ncas-smps-1",
+            "previous_instrument_ids": [
+                "man-smps-1"
+            ],
+            "description": "NCAS Scanning Mobility Particle Spectrometer unit 1"
+        },
+        "ncas-smps-2": {
+            "instrument_id": "ncas-smps-2",
+            "previous_instrument_ids": [
+                "man-smps-2"
+            ],
+            "description": "NCAS Scanning Mobility Particle Spectrometer unit 2"
+        },
+        "ncas-aws-6": {
+            "instrument_id": "ncas-aws-6",
+            "previous_instrument_ids": [],
+            "description": "NCAS Automatic Weather Station unit 6"
+        },
+        "ncas-ceilometer-2": {
+            "instrument_id": "ncas-ceilometer-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Lidar Ceilometer unit 2"
+        },
+        "ncas-sodar-rass-1": {
+            "instrument_id": "ncas-sodar-rass-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Sodar Rass unit 1"
+        },
+        "ncas-42i-nox-2": {
+            "instrument_id": "ncas-42i-nox-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Thermo 42i NOX Monitor unit 2"
+        },
+        "ncas-43i-so2-1": {
+            "instrument_id": "ncas-43i-so2-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Thermo 43i SO2 Monitor unit 1"
+        },
+        "ncas-49i-o3-2": {
+            "instrument_id": "ncas-49i-o3-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Thermo 49i O3 Monitor unit 2"
+        },
+        "ncas-co2-1": {
+            "instrument_id": "ncas-co2-1",
+            "previous_instrument_ids": [
+                "wao-siemens-oxzilla"
+            ],
+            "description": "NCAS Seimens Oxilla CO2 Gas Monitor unit 1"
+        },
+        "ncas-ghg-gc-ecd-1": {
+            "instrument_id": "ncas-ghg-gc-ecd-1",
+            "previous_instrument_ids": [
+                "wao-ghg-gc-ecd"
+            ],
+            "description": "NCAS Gas Chromatograph with Electron Capture Detector unit 1"
+        },
+        "uea-caps-1": {
+            "instrument_id": "uea-caps-1",
+            "previous_instrument_ids": [],
+            "description": "UEA Cavity Attenuated Phase Shift Spectroscopy unit 1"
+        },
+        "ncas-ghg-gc-fid-1": {
+            "instrument_id": "ncas-ghg-gc-fid-1",
+            "previous_instrument_ids": [
+                "wao-ghg-gc-fid"
+            ],
+            "description": "NCAS Gas Chromatograph with Flame Ionisation Detector unit 1"
+        },
+        "ncas-o2-1": {
+            "instrument_id": "ncas-o2-1",
+            "previous_instrument_ids": [
+                "wao-siemens-oxzilla"
+            ],
+            "description": "NCAS Seimens Oxilla O2 Gas Monitor unit 1"
+        },
+        "ncas-rga3-1": {
+            "instrument_id": "ncas-rga3-1",
+            "previous_instrument_ids": [
+                "wao-rga"
+            ],
+            "description": "NCAS Reduction Gas Analyser unit 1"
+        },
+        "uea-fidas200E-1": {
+            "instrument_id": "uea-fidas200E-1",
+            "previous_instrument_ids": [],
+            "description": "UEA PM Mass Concentration Counter unit 1"
+        },
+        "ncas-ftir-1": {
+            "instrument_id": "ncas-ftir-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS FTIR CH4 N2O CO Monitor unit 1"
+        },
+        "ncas-sonic-4": {
+            "instrument_id": "ncas-sonic-4",
+            "previous_instrument_ids": [],
+            "description": "NCAS Sonic Anemometer unit 4"
+        },
+        "ncas-aws-8": {
+            "instrument_id": "ncas-aws-8",
+            "previous_instrument_ids": [
+                "cv-met-campbell"
+            ],
+            "description": "NCAS Automatic Weather Station unit 8"
+        },
+        "ncas-aws-7": {
+            "instrument_id": "ncas-aws-7",
+            "previous_instrument_ids": [
+                "cv-met-tower",
+                "cv-met-webdaq"
+            ],
+            "description": "NCAS Automatic Weather Station unit 7"
+        },
+        "ncas-43i-so2-2": {
+            "instrument_id": "ncas-43i-so2-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Thermo 43i SO2 Monitor unit 1"
+        },
+        "ncas-49i-o3-1": {
+            "instrument_id": "ncas-49i-o3-1",
+            "previous_instrument_ids": [
+                "cv-tei-o3"
+            ],
+            "description": "NCAS Thermo 49i O3 Monitor unit 1"
+        },
+        "ncas-co-picarro-1": {
+            "instrument_id": "ncas-co-picarro-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Picarro CO Monitor unit 1"
+        },
+        "ncas-halocarbon-gc-1": {
+            "instrument_id": "ncas-halocarbon-gc-1",
+            "previous_instrument_ids": [
+                "cv-gc-ms"
+            ],
+            "description": "NCAS Halocarbon Gas Chromatograph unit 1"
+        },
+        "ncas-noxy-1": {
+            "instrument_id": "ncas-noxy-1",
+            "previous_instrument_ids": [
+                "cv-noxy"
+            ],
+            "description": "NCAS AQD High Sensitivity NOx Monitor unit 1"
+        },
+        "ncas-tgm-tekran-1": {
+            "instrument_id": "ncas-tgm-tekran-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Mercury Monitor unit 1"
+        },
+        "ncas-spectral-radiometer-2": {
+            "instrument_id": "ncas-spectral-radiometer-2",
+            "previous_instrument_ids": [
+                "cv-specrad"
+            ],
+            "description": "NCAS Spectral Radiometer unit 2"
+        },
+        "ncas-dc-gc-fid-3": {
+            "instrument_id": "ncas-dc-gc-fid-3",
+            "previous_instrument_ids": [
+                "cv-dc-gc-fid"
+            ],
+            "description": "NCAS Dual Channel Gas Chromatograph with Flame Ionisation Detector unit 3"
+        },
+        "ncas-49i-o3-3": {
+            "instrument_id": "ncas-49i-o3-3",
+            "previous_instrument_ids": [],
+            "description": "NCAS Thermo 49i O3 Monitor unit 3"
+        },
+        "ncas-teco-nox-1": {
+            "instrument_id": "ncas-teco-nox-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Teco NOx Monitor unit 1"
+        },
+        "ncas-2b-1chan-o3-1": {
+            "instrument_id": "ncas-2b-1chan-o3-1",
+            "previous_instrument_ids": [
+                "york-ozone6"
+            ],
+            "description": "NCAS 1 Channel O3 Monitor unit 1"
+        },
+        "ncas-2b-2chan-o3-1": {
+            "instrument_id": "ncas-2b-2chan-o3-1",
+            "previous_instrument_ids": [
+                "york-ozone7"
+            ],
+            "description": "NCAS 2 Channel O3 Monitor unit 1"
+        },
+        "ncas-49i-o3-4": {
+            "instrument_id": "ncas-49i-o3-4",
+            "previous_instrument_ids": [
+                "york-ozone3"
+            ],
+            "description": "NCAS Thermo 49i O3 Monitor unit 4"
+        },
+        "ncas-aerolaser-co-2": {
+            "instrument_id": "ncas-aerolaser-co-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Aerolaser CO Monitor unit 2"
+        },
+        "ncas-aerolaser-co-1": {
+            "instrument_id": "ncas-aerolaser-co-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Aerolaser CO Monitor unit 1"
+        },
+        "ncas-co-1": {
+            "instrument_id": "ncas-co-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Ametek CO Monitor unit 1"
+        },
+        "ncas-co-2": {
+            "instrument_id": "ncas-co-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Ametek CO Monitor unit 2"
+        },
+        "ncas-fast-nox-1": {
+            "instrument_id": "ncas-fast-nox-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Fast response NOx Monitor unit 1"
+        },
+        "ncas-high-sen-nox-1": {
+            "instrument_id": "ncas-high-sen-nox-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS High Semsitivity NOx Monitor unit 1"
+        },
+        "ncas-dc-gc-fid-1": {
+            "instrument_id": "ncas-dc-gc-fid-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Dual Channel Gas Chromatograph with Flame Ionisation Detector unit 1"
+        },
+        "ncas-dc-gc-fid-2": {
+            "instrument_id": "ncas-dc-gc-fid-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Dual Channel Gas Chromatograph with Flame Ionisation Detector unit 2"
+        },
+        "ncas-gc-ms-tof-1": {
+            "instrument_id": "ncas-gc-ms-tof-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Dual Gas Chromatograph with Time of Flight Mass Spectrometer unit 1"
+        },
+        "ncas-gc-ms-1": {
+            "instrument_id": "ncas-gc-ms-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Gas Chromatograph with Mass Spectrometer unit 1"
+        },
+        "ncas-pan-gc-1": {
+            "instrument_id": "ncas-pan-gc-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Peroxyacetyl Nitrates Gas Chromatograph unit 1"
+        },
+        "ncas-ptrms-1": {
+            "instrument_id": "ncas-ptrms-1",
+            "previous_instrument_ids": [
+                "uea-ptrms"
+            ],
+            "description": "NCAS Proton Transfer Reaction Mass Spectrometer unit 1"
+        },
+        "ncas-42i-nox-1": {
+            "instrument_id": "ncas-42i-nox-1",
+            "previous_instrument_ids": [
+                "leeds-nox"
+            ],
+            "description": "NCAS Thermo 42i NOx Monitor unit 1"
+        },
+        "ncas-49c-o3-1": {
+            "instrument_id": "ncas-49c-o3-1",
+            "previous_instrument_ids": [
+                "leeds-o3"
+            ],
+            "description": "NCAS Thermo 42c O3 Monitor unit 1"
+        },
+        "ncas-dewpoint-hygrometer-1": {
+            "instrument_id": "ncas-dewpoint-hygrometer-1",
+            "previous_instrument_ids": [
+                "leeds-dph"
+            ],
+            "description": "NCAS Dewpoint Hygrometer unit 1"
+        },
+        "ncas-fage-1": {
+            "instrument_id": "ncas-fage-1",
+            "previous_instrument_ids": [
+                "leeds-fage"
+            ],
+            "description": "NCAS FAGE unit 1"
+        },
+        "ncas-filtered-radiometer-1": {
+            "instrument_id": "ncas-filtered-radiometer-1",
+            "previous_instrument_ids": [
+                "leeds-fr-jo1d"
+            ],
+            "description": "NCAS Filtered Radiometer unit 1"
+        },
+        "ncas-spectral-radiometer-1": {
+            "instrument_id": "ncas-spectral-radiometer-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Spectral Radiometer unit 2"
+        },
+        "ncas-micro-fage-1": {
+            "instrument_id": "ncas-micro-fage-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Aircraft FAGE unit 1"
+        },
+        "ncas-aws-2": {
+            "instrument_id": "ncas-aws-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Automatic Weather Station unit 2"
+        },
+        "ncas-mobile-x-band-radar-1": {
+            "instrument_id": "ncas-mobile-x-band-radar-1",
+            "previous_instrument_ids": [
+                "ncas-mobile-xband-radar"
+            ],
+            "description": "NCAS X-Band Mobile Radar unit 1"
+        },
+        "ncas-mobile-ka-band-radar-1": {
+            "instrument_id": "ncas-mobile-ka-band-radar-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Ka-Band Mobile Radar unit 1"
+        },
+        "ncas-sunphotometer-1": {
+            "instrument_id": "ncas-sunphotometer-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Sky-Sun-Lunar Photometer unit 1"
+        },
+        "ncas-aws-3": {
+            "instrument_id": "ncas-aws-3",
+            "previous_instrument_ids": [],
+            "description": "NCAS Automatic Weather Station unit 3"
+        },
+        "ncas-aws-10": {
+            "instrument_id": "ncas-aws-10",
+            "previous_instrument_ids": [],
+            "description": "NCAS Automatic Weather Station unit 10"
+        },
+        "ncas-ceilometer-3": {
+            "instrument_id": "ncas-ceilometer-3",
+            "previous_instrument_ids": [],
+            "description": "NCAS Lidar Ceilometer unit 3"
+        },
+        "ncas-lidar-dop-2": {
+            "instrument_id": "ncas-lidar-dop-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Doppler Aerosol Lidar unit 2"
+        },
+        "ncas-cam-1": {
+            "instrument_id": "ncas-cam-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Camera unit 1"
+        },
+        "ncas-cam-2": {
+            "instrument_id": "ncas-cam-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Camera unit 2"
+        },
+        "ncas-cam-3": {
+            "instrument_id": "ncas-cam-3",
+            "previous_instrument_ids": [
+                "skycam"
+            ],
+            "description": "NCAS Camera unit 3"
+        },
+        "ncas-aws-1": {
+            "instrument_id": "ncas-aws-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Automatic Weather Station unit 1"
+        },
+        "ncas-ceilometer-1": {
+            "instrument_id": "ncas-ceilometer-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Lidar Ceilometer unit 1"
+        },
+        "ncas-energy-balance-1": {
+            "instrument_id": "ncas-energy-balance-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Energy Balance Station unit 1 - NR01 radiation sensor"
+        },
+        "ncas-energy-balance-2": {
+            "instrument_id": "ncas-energy-balance-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Energy Balance Station unit 2 - Kipp&Zonen radiation sensor"
+        },
+        "ncas-flux-1": {
+            "instrument_id": "ncas-flux-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Flux Station unit 1"
+        },
+        "ncas-flux-2": {
+            "instrument_id": "ncas-flux-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Flux Station unit 2"
+        },
+        "ncas-licor-1": {
+            "instrument_id": "ncas-licor-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS LiCor unit 1"
+        },
+        "ncas-licor-2": {
+            "instrument_id": "ncas-licor-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS LiCor unit 2"
+        },
+        "ncas-lidar-dop-1": {
+            "instrument_id": "ncas-lidar-dop-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Doppler Aerosol Lidar unit 1"
+        },
+        "ncas-mrr-1": {
+            "instrument_id": "ncas-mrr-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Micro Rain Radar unit 1"
+        },
+        "ncas-radiosonde-2": {
+            "instrument_id": "ncas-radiosonde-2",
+            "previous_instrument_ids": [
+                "leeds-radiosonde"
+            ],
+            "description": "NCAS Vaisala Sounding Station unit 2"
+        },
+        "ncas-rapidsonde-2": {
+            "instrument_id": "ncas-rapidsonde-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Windsond Sounding Station unit 2"
+        },
+        "ncas-scanning-radiometer-1": {
+            "instrument_id": "ncas-scanning-radiometer-1",
+            "previous_instrument_ids": [
+                "salford-radiometer-1"
+            ],
+            "description": "NCAS Scanning Microwave Radiometer unit 1"
+        },
+        "ncas-scanning-radiometer-2": {
+            "instrument_id": "ncas-scanning-radiometer-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Scanning Microwave Radiometer unit 2"
+        },
+        "ncas-sodar-1": {
+            "instrument_id": "ncas-sodar-1",
+            "previous_instrument_ids": [
+                "leeds-sodar-unit1"
+            ],
+            "description": "NCAS Sodar unit 1"
+        },
+        "ncas-sodar-2": {
+            "instrument_id": "ncas-sodar-2",
+            "previous_instrument_ids": [
+                "leeds-sodar-unit2"
+            ],
+            "description": "NCAS Sodar unit 2"
+        },
+        "ncas-sodar-3": {
+            "instrument_id": "ncas-sodar-3",
+            "previous_instrument_ids": [
+                "leeds-sodar-unit3"
+            ],
+            "description": "NCAS Sodar unit 3"
+        },
+        "ncas-sonic-1": {
+            "instrument_id": "ncas-sonic-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Sonic Anemometer unit 1"
+        },
+        "ncas-sonic-2": {
+            "instrument_id": "ncas-sonic-2",
+            "previous_instrument_ids": [],
+            "description": "NCAS Sonic Anemometer unit 2"
+        },
+        "ncas-lidar-wind-profiler-1": {
+            "instrument_id": "ncas-lidar-wind-profiler-1",
+            "previous_instrument_ids": [],
+            "description": "NCAS Lidar Wind Profiler unit 1"
+        }
+    }
+}

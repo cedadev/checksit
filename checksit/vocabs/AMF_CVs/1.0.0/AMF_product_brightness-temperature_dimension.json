@@ -1,0 +1,8 @@
+{
+    "product_brightness-temperature_dimension": {
+        "radiation_frequency": {
+            "length": "<m>",
+            "units": "s-1"
+        }
+    }
+}

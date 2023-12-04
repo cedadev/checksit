@@ -1,0 +1,89 @@
+{
+    "product_nox-noxy-concentration_variable": {
+        "mole_fraction_of_nitric_oxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Nitric Oxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude",
+            "chemical_species": "NO"
+        },
+        "mole_fraction_of_nitrogen_dioxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "standard_name": "mole_fraction_of_nitrogen_dioxide_in_air",
+            "long_name": "Mole Fraction of Nitrogen Dioxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude",
+            "chemical_species": "NO2"
+        },
+        "mole_fraction_of_nox_expresssed_as_nitrogen_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "standard_name": "mole_fraction_of_nox_expresssed_as_nitrogen_in_air",
+            "long_name": "Mole Fraction of NOx expresssed as nitrogen in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude",
+            "chemical_species": "NOx"
+        },
+        "mole_fraction_of_noy_expresssed_as_nitrogen_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of NOy expresssed as nitrogen in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag_no": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: NO",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "not_used|good_data |bad_data_do_not_use"
+        },
+        "qc_flag_no2": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: NO2",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "not_used|good_data |bad_data_do_not_use"
+        },
+        "qc_flag_nox": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: NOx",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "not_used|good_data |bad_data_do_not_use"
+        },
+        "qc_flag_noy": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: NOy",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "not_used|good_data |bad_data_do_not_use"
+        }
+    }
+}

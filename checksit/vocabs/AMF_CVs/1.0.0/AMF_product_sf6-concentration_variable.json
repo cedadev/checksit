@@ -1,0 +1,25 @@
+{
+    "product_sf6-concentration_variable": {
+        "mole_fraction_of_sulfur_hexafluoride_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Sulfur Hexafluoride in dry air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude",
+            "chemical_species": "SF6"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_unspecified_instrument_performance_issues_contact_data_originator_for_more_information|suspect_data_time_stamp_error"
+        }
+    }
+}

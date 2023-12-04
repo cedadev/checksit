@@ -1,0 +1,23 @@
+{
+    "product_o3-photolysis-frequencies_variable": {
+        "ozone_photolysis_frquencies": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "s-1",
+            "long_name": "Ozone Photolysis Frquencies (J(O(1))(D))",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_unspecified_instrument_performance_issues_contact_data_originator_for_more_information|suspect_data_time_stamp_error"
+        }
+    }
+}
