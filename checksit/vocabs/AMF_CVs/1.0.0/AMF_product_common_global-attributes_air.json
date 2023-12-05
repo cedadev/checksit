@@ -206,9 +206,9 @@
         "deployment_mode": {
             "global_attribute_id": "deployment_mode",
             "description": "Is the instrument delpyed on land, sea, or in the air",
-            "fixed_value": "land, sea air",
-            "compliance_checking_rules": null,
-            "convention_providence": null
+            "fixed_value": "",
+            "compliance_checking_rules": "one of: land, sea, air",
+            "convention_providence": "AMF" 
         },
         "title": {
             "global_attribute_id": "title",
@@ -279,13 +279,6 @@
             "fixed_value": "",
             "compliance_checking_rules": "String: min 4 characters",
             "convention_providence": "CF"
-        },
-        "": {
-            "global_attribute_id": "",
-            "description": "",
-            "fixed_value": null,
-            "compliance_checking_rules": null,
-            "convention_providence": null
         }
     }
 }
