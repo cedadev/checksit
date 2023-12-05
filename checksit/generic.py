@@ -224,7 +224,7 @@ def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
                 elif not str(dct["variables"][variable].get(attr_key)) == attr_value:
                     errors.append(
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, "
-                        f"not {dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}."
+                        f"not {str(dct['variables'][variable].get(attr_key)).encode('unicode_escape').decode('utf-8')}."
                     )
     else:
         if variable not in dct["variables"].keys():

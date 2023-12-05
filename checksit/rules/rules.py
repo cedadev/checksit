@@ -65,7 +65,7 @@ class Rules:
         
         elif rule_lookup.startswith("regex:"):
             pattern = ':'.join(rule_lookup.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
-            if not re.match(f"^{pattern}$", value):
+            if not re.match(f"^{pattern}$", str(value)):
                 errors.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
 
         elif rule_lookup.startswith("regex-rule:"):

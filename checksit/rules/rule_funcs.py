@@ -75,6 +75,10 @@ def string_of_length(value, context, extras=None, label=""):
 
     errors = []
 
+    # values spread over multiple lines are parsed as tuples rather than strings
+    if isinstance(value, tuple):
+        value = "".join(value)
+
     if spec.endswith("+"):
         if len(value) < min_length:
             errors.append(f"{label} '{value}' must be at least {min_length} characters")
