@@ -226,6 +226,9 @@ class Checker:
                         print("\nNCAS-AMOF file detected, finding correct spec files")
                         print("Finding correct AMOF version...")
                     version_number = conventions[conventions.index("NCAS-"):].split("-")[2].replace('"','')
+                    # address inconsistency in version numbering
+                    if version_number == "1.0":
+                        version_number = "1.0.0"
                     spec_folder = f"ncas-amof-{version_number}"
                     if verbose: print(f"  {version_number}")
 
