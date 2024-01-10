@@ -8,7 +8,7 @@ import datetime as dt
 
 # date formate regex
 # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
-date_regex = re.compile("^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$")
+date_regex = re.compile(r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$")
 
 def _get_bounds_var_ids(dct):
     return [var_id for var_id in dct["variables"] if (
@@ -313,7 +313,7 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
 
     # check version number format
     version_component = file_name_parts[-1].split(".nc")[0]
-    if not re.match("^v\d.\d$", version_component):
+    if not re.match(r"^v\d.\d$", version_component):
         errors.append(f"[file name]: Invalid file name format - incorrect file version number {version_component}")
 
     # check number of options - max length of splitted file name
