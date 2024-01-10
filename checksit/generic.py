@@ -6,6 +6,10 @@ import re
 import numpy as np
 import datetime as dt
 
+# date formate regex
+# could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
+date_regex = re.compile("^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$")
+
 def _get_bounds_var_ids(dct):
     return [var_id for var_id in dct["variables"] if (
             var_id.startswith("bounds_") or var_id.startswith("bnds_") or
@@ -284,7 +288,7 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
     # check date format
     # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
     # first checks format, then date validity 
-    if not re.match("^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$", file_name_parts[2]):
+    if not date_regex.match(file_name_parts[2]):
         errors.append(f"[file name]: Invalid file name format - bad date format {file_name_parts[2]}")
     else:
         fmts = ("%Y", "%Y%m", "%Y%m%d", "%Y%m%d-%H", "%Y%m%d-%H%M", "%Y%m%d-%H%M%S")
@@ -308,8 +312,9 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
         raise KeyError(msg)
 
     # check version number format
-    if not re.match("^v\d.\d$", file_name_parts[-1].split(".nc")[0]):
-        errors.append(f"[file name]: Invalid file name format - incorrect file version number {file_name_parts[-1].split('.nc')[0]}")
+    version_component = file_name_parts[-1].split(".nc")[0]
+    if not re.match("^v\d.\d$", version_component):
+        errors.append(f"[file name]: Invalid file name format - incorrect file version number {version_component}")
 
     # check number of options - max length of splitted file name
     if len(file_name_parts) > 8:
