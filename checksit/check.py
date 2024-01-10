@@ -17,6 +17,7 @@ from .config import get_config
 from .make_specs import make_amof_specs
 
 AMOF_CONVENTIONS = ['"CF-1.6, NCAS-AMF-2.0.0"']
+IMAGE_EXTENSIONS = ["png", "jpg", "jpeg"]
 conf = get_config()
 
 
@@ -297,7 +298,7 @@ class Checker:
                 # NCAS-RADAR (coming soon...)
                 # if "NCAS-Radar" in conventions
             
-            elif (file_path.split(".")[-1] in ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG"] and
+            elif (file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS] and
                   "XMP-photoshop:Instructions" in file_content.global_attrs.keys()):
                 conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
                 if "National Centre for Atmospheric Science Image Metadata Standard" in file_content.global_attrs["XMP-photoshop:Instructions"].replace("\n"," "):
@@ -431,7 +432,7 @@ class FileParser:
             reader = badc_csv
         elif ext in ("yml"):
             reader = yml
-        elif ext in ("png", "PNG", "jpg", "JPG", "jpeg", "JPEG"):
+        elif ext.lower() in IMAGE_EXTENSIONS:
             reader = image   
         else:
             raise Exception(f"No known reader for file with extension: {ext}")
