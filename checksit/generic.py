@@ -99,9 +99,6 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
             errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
         else:
             errors.extend(vocabs.check(vocab_attrs[attr], dct["global_attributes"].get(attr), label=f"[global-attributes:******:{attr}]***"))
-            #vocab_check_output = vocabs.check(vocab_attrs[attr], dct["global_attributes"].get(attr), label=f"[global-attributes:******:{attr}]***")
-            #warnings.extend(vocab_check_output[1])
-            #errors.extend(vocab_check_output[0])
 
     for attr in regex_attrs:
         if attr not in dct['global_attributes']:
