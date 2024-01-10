@@ -1,5 +1,7 @@
 # checksit
 
+[![Documentation Status](https://readthedocs.org/projects/checksit/badge/?version=latest)](https://checksit.readthedocs.io/en/latest)
+
 File-checking made simple
 
 ## Installation
@@ -13,6 +15,8 @@ pip install -e .
 
 
 ## Usage
+
+A brief description of how to use checksit is given here. For more detail, visit the [documentation site](https://checksit.readthedocs.io/en/latest).
 
 checksit is comprised of four key components - [check](#checksit-check), [describe](#checksit-describe), [show-specs](#checksit-show-specs), and [summary](#checksit-summary)
 

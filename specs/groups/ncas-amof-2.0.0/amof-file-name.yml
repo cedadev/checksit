@@ -1,0 +1,7 @@
+file-name-format:
+  func: checksit.generic.check_file_name
+  params:
+    vocab_checks:
+      instrument: __vocabs__:AMF_CVs/2.0.0/AMF_ncas_instrument:ncas_instrument:__all__
+      platform: __vocabs__:AMF_CVs/2.0.0/AMF_platform:platform:__all__
+      data_product: __vocabs__:AMF_CVs/2.0.0/AMF_product:product

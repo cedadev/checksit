@@ -58,7 +58,7 @@ def summarise(log_files=None, log_directory=None, show_files=False,
 
     for filename in log_files:
         df = pd.read_csv(filename, sep=sep, index_col=None, header=None, names=headers)
-        df = df.replace({"^\s*|\s*$":""}, regex=True)
+        df = df.replace({r"^\s*|\s*$":""}, regex=True)
         df["logfile"] = os.path.basename(filename)
         count += len(df)
         li.append(df)

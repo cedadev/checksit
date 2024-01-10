@@ -150,7 +150,10 @@ class Checker:
 
         for spec in specs:
             sr = SpecificationChecker(spec)
-            spec_errors, spec_warnings = sr.run_checks(record, skip_spellcheck=skip_spellcheck)
+            if 'amof-file-name' in spec:
+                spec_errors, spec_warnings = sr.run_checks(file_content.inpt.split("/")[-1])
+            else:
+                spec_errors, spec_warnings = sr.run_checks(record, skip_spellcheck=skip_spellcheck)
             errors.extend(spec_errors)
             warnings.extend(spec_warnings)
 
@@ -164,9 +167,19 @@ class Checker:
                 errors.extend([f"[{section}] {err}" for err in errs])
 
         if log_mode == "compact":
-            highest = "ERROR" if len(errors) > 0 else "NONE" 
-            endstr = "" if len(errors) > 0 else "\n"
-            print(f"{highest} | {len(errors)} ", end=endstr)
+            if len(errors) > 0:
+                highest = "ERROR"
+                endstr = ""
+                number = len(errors)
+            elif len(warnings) > 0 and not ignore_warnings:
+                highest = "WARNING"
+                endstr = ""
+                number = len(warnings)
+            else:
+                highest = "NONE"
+                endstr = "\n"
+                number = 0
+            print(f"{highest} | {number} ", end=endstr)
             err_string = " | ".join([err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors])
             if err_string:
                 print(f"| {err_string}") 
@@ -256,12 +269,18 @@ class Checker:
                             make_amof_specs(version_number)
                             if verbose: print("  Downloaded of specs successful")
                         except urllib.error.HTTPError:
-                            print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
-                            print("Aborting...")
+                            if log_mode == "compact":
+                                print(f"{file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}")
+                            else:
+                                print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
+                                print("Aborting...")
                             sys.exit()
                         except PermissionError:
-                            print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
-                            print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
+                            if log_mode == "compact":
+                                print(f"{file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit.")
+                            else:
+                                print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
+                                print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
                             sys.exit()
                         except:
                             raise
@@ -271,7 +290,7 @@ class Checker:
                     deploy_spec = f'{spec_folder}/amof-common-{deployment_mode}'
                     product = file_path.split('/')[-1].split('_')[3]
                     product_spec = f'{spec_folder}/amof-{product}'
-                    specs = [deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
+                    specs = [f'{spec_folder}/amof-file-name', deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
                     # don't need to do template check
                     template = "off"
 

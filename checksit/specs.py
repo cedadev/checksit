@@ -25,17 +25,18 @@ def load_specs(spec_ids=None):
 def show_specs(spec_ids=None, verbose=False):
     
     all_specs = load_specs(spec_ids)
-   
+    spec_ids_names = tuple([(spec_id.split("/")[-1]) for spec_id in spec_ids])
+
     if not spec_ids:
         specs = all_specs
     else:
-        specs = [(spec_id, spec) for (spec_id, spec) in all_specs.items() if spec_id in spec_ids]
+        specs = [(spec_ids[spec_ids_names.index(spec_id)], spec) for (spec_id, spec) in all_specs.items() if spec_id in spec_ids_names]
 
     print("Specifications:")
     for spec_id, spec in specs:
      
         print(f"\n{spec_id}:")
-        print(json.dumps(spec, indent=4))
+        print(json.dumps(spec, indent=4).replace("\\\\", "\\"))
 
 
 class SpecificationChecker:

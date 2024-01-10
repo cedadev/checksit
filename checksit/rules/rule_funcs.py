@@ -74,7 +74,7 @@ def string_of_length(value, context, extras=None, label=""):
     Matches string of length...
     """
     spec = extras[0]
-    min_length = int(re.match("^(\d+)\+?", spec).groups()[0])
+    min_length = int(re.match(r"^(\d+)\+?", spec).groups()[0])
 
     errors = []
 
