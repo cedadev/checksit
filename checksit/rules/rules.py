@@ -25,9 +25,9 @@ class Rules:
             "valid-url": r"https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+)?",
             "valid-url-or-na": r"(https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+))|" + _NOT_APPLICABLE_RULES,
             "match:vN.M": r"v\d\.\d",
-            "datetime": "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
+            "datetime": r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
             "datetime-or-na": 
-                 "(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
+                 r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
             "number": r"-?\d+(\.\d+)?"
         }
 

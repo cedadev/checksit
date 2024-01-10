@@ -51,14 +51,14 @@ def make_amof_specs(version_number):
         elif compliance.lower() == "valid url _or_ n/a":
             rule = "regex-rule:valid-url-or-na"
         elif "match: " in compliance.lower():
-            if 'YYYY-MM-DDThh:mm:ss\.\d+ _or_ N/A' in compliance:
+            if r'YYYY-MM-DDThh:mm:ss\.\d+ _or_ N/A' in compliance:
                 rule = "regex-rule:datetime-or-na"
             elif 'vN.M' in compliance:
                 rule = "regex-rule:match:vN.M"
-            elif 'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
+            elif r'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
                 rule = "regex-rule:datetime"
             elif '<number> m' in compliance:
-                rule = "regex:^\d+\.?\d* m$"
+                rule = r"regex:^-?\d+\.?\d* m$"
             else:
                 rule = f"regex-rule:EDIT:{compliance}"
         elif compliance.lower() in ["number","integer","int","float","string","str"]:
@@ -73,7 +73,7 @@ def make_amof_specs(version_number):
             else:
                 # a few extra catches
                 if attr == "institution":
-                    rule = "regex:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)"
+                    rule = "regex:National Centre for Atmospheric Science (NCAS)"
                 elif attr == "platform_type":
                     rule = "rule-func:match-one-of:stationary_platform|moving_platform"
                 elif attr == "featureType":
@@ -88,9 +88,9 @@ def make_amof_specs(version_number):
             rule = f"rule-func:match-one-of:{options}"
         else:
             rule = f"UNKNOWN compliance: {compliance}"
-        rule = rule.replace('(','\(')
-        rule = rule.replace(')','\)')
-        rule = [ rule.replace(' ','\s') if "regex:" in rule else rule ][0]
+        rule = rule.replace('(',r'\(')
+        rule = rule.replace(')',r'\)')
+        rule = [ rule.replace(' ',r'\s') if "regex:" in rule else rule ][0]
         attr_rules[attr] = rule
 
 
@@ -205,11 +205,11 @@ def make_amof_specs(version_number):
                     elif compliance.lower() == "valid url _or_ n/a":
                         rule = "regex-rule:valid-url-or-na"
                     elif "match: " in compliance.lower():
-                        if 'YYYY-MM-DDThh:mm:ss\.\d+ _or_ N/A' in compliance:
+                        if r'YYYY-MM-DDThh:mm:ss\.\d+ _or_ N/A' in compliance:
                             rule = "regex-rule:datetime-or-na"
                         elif 'vN.M' in compliance:
                             rule = "regex-rule:match:vN.M"
-                        elif 'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
+                        elif r'YYYY-MM-DDThh:mm:ss\.\d+' in compliance:
                             rule = "regex-rule:datetime"
                         else:
                             rule = f"regex-rule:EDIT:{compliance}"
@@ -232,9 +232,9 @@ def make_amof_specs(version_number):
                         rule = f"rule-func:match-one-of:{options}"
                     else:
                         rule = f"UNKNOWN compliance: {compliance}"
-                    rule = rule.replace('(','\(')
-                    rule = rule.replace(')','\)')
-                    rule = [ rule.replace(' ','\s') if "regex:" in rule else rule ][0]
+                    rule = rule.replace('(',r'\(')
+                    rule = rule.replace(')',r'\)')
+                    rule = [ rule.replace(' ',r'\s') if "regex:" in rule else rule ][0]
                     attr_rules[attr] = rule
             prod_attrs_exist = True
         else:

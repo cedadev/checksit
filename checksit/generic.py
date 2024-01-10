@@ -4,6 +4,11 @@ from .rules import rules
 
 import re
 import numpy as np
+import datetime as dt
+
+# date formate regex
+# could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
+date_regex = re.compile(r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$")
 
 def _get_bounds_var_ids(dct):
     return [var_id for var_id in dct["variables"] if (
@@ -249,5 +254,70 @@ def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, "
                         f"not {dct['variables'][variable].get(attr_key)}."
                     )
+
+    return errors, warnings
+
+
+def check_file_name(file_name, vocab_checks=None, **kwargs):
+    """
+    Checks format of file name
+
+    Works for NCAS-GENERAL, would work for NCAS-RADAR if radar scan type is added as data product
+    """
+    vocab_checks = vocab_checks or {}
+    errors = []
+    warnings = []
+    file_name_parts = file_name.split("_")
+
+    # check instrument name
+    if "instrument" in vocab_checks.keys():
+        if vocabs.check(vocab_checks["instrument"], file_name_parts[0], label="_") != []:
+            errors.append(f"[file name]: Invalid file name format - unknown instrument {file_name_parts[0]}")
+    else:
+        msg = "No instrument vocab defined in specs"
+        raise KeyError(msg)
+
+    # check platform
+    if "platform" in vocab_checks.keys():
+        if vocabs.check(vocab_checks["platform"], file_name_parts[1], label="_") != []:
+            errors.append(f"[file name]: Invalid file name format - unknown platform {file_name_parts[1]}")
+    else:
+        msg = "No platform vocab defined in specs"
+        raise KeyError(msg)
+    
+    # check date format
+    # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
+    # first checks format, then date validity 
+    if not date_regex.match(file_name_parts[2]):
+        errors.append(f"[file name]: Invalid file name format - bad date format {file_name_parts[2]}")
+    else:
+        fmts = ("%Y", "%Y%m", "%Y%m%d", "%Y%m%d-%H", "%Y%m%d-%H%M", "%Y%m%d-%H%M%S")
+        valid_date_found = False
+        for f in fmts:
+            try:
+                t = dt.datetime.strptime(file_name_parts[2], f)
+                valid_date_found = True
+                break
+            except ValueError:
+                pass 
+        if not valid_date_found:
+            errors.append(f"[file name]: Invalid file name format - invalid date in file name {file_name_parts[2]}")
+
+    # check data product
+    if "data_product" in vocab_checks.keys():
+        if vocabs.check(vocab_checks["data_product"], file_name_parts[3], label="_") != []:
+            errors.append(f"[file name]: Invalid file name format - unknown data product {file_name_parts[3]}")
+    else:
+        msg = "No data product vocab defined in specs"
+        raise KeyError(msg)
+
+    # check version number format
+    version_component = file_name_parts[-1].split(".nc")[0]
+    if not re.match(r"^v\d.\d$", version_component):
+        errors.append(f"[file name]: Invalid file name format - incorrect file version number {version_component}")
+
+    # check number of options - max length of splitted file name
+    if len(file_name_parts) > 8:
+        errors.append(f"[file name]: Invalid file name format - too many options in file name")
 
     return errors, warnings

@@ -150,7 +150,10 @@ class Checker:
 
         for spec in specs:
             sr = SpecificationChecker(spec)
-            spec_errors, spec_warnings = sr.run_checks(record, skip_spellcheck=skip_spellcheck)
+            if 'amof-file-name' in spec:
+                spec_errors, spec_warnings = sr.run_checks(file_content.inpt.split("/")[-1])
+            else:
+                spec_errors, spec_warnings = sr.run_checks(record, skip_spellcheck=skip_spellcheck)
             errors.extend(spec_errors)
             warnings.extend(spec_warnings)
 
@@ -284,7 +287,7 @@ class Checker:
                     deploy_spec = f'{spec_folder}/amof-common-{deployment_mode}'
                     product = file_path.split('/')[-1].split('_')[3]
                     product_spec = f'{spec_folder}/amof-{product}'
-                    specs = [deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
+                    specs = [f'{spec_folder}/amof-file-name', deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
                     # don't need to do template check
                     template = "off"
 
