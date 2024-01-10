@@ -298,7 +298,7 @@ class Checker:
                 # NCAS-RADAR (coming soon...)
                 # if "NCAS-Radar" in conventions
             
-            elif (file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS] and
+            elif (file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS and
                   "XMP-photoshop:Instructions" in file_content.global_attrs.keys()):
                 conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
                 if "National Centre for Atmospheric Science Image Metadata Standard" in file_content.global_attrs["XMP-photoshop:Instructions"].replace("\n"," "):
