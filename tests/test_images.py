@@ -1,12 +1,7 @@
 import pytest
 from click.testing import CliRunner
-from checksit import cli, check
-import os
+from checksit import cli
 
-
-def test_whatsgoingon():
-    content = check.test("tests/test_images/ncas-cam-9_cao_20160510-134927_photo_v1.0.jpg")
-    assert content.__dir__() == 1  # fail
 
 # photos from ncas named instruments
 @pytest.mark.parametrize(
@@ -31,6 +26,7 @@ def test_ncas_photo_checks(photo, error_level, number_errors):
     assert error_level == level_found
     assert number_errors == errors_found
 
+
 # plots from non-ncas named instruments
 @pytest.mark.parametrize(
     "plot, error_level, number_errors",
@@ -54,6 +50,7 @@ def test_other_plot_checks(plot, error_level, number_errors):
     errors_found = int(errors_found)
     assert error_level == level_found
     assert number_errors == errors_found
+
 
 # check error messages
 @pytest.mark.parametrize(

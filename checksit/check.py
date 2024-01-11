@@ -459,7 +459,3 @@ class FileParser:
 def check_file(file_path, **kwargs):
     ch = Checker(**kwargs)
     return ch.check_file(file_path, **kwargs)
-
-def test(file_path):
-    fp = FileParser()
-    return fp.parse_file_header(file_path)
