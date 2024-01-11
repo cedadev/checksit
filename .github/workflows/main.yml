@@ -29,6 +29,9 @@ jobs:
         ./configure
         make all install
         ln -sf /opt/lib/* $LD_LIBRARY_PATH
+    - name: Install exiftool
+      run: |
+        sudo apt install libimage-exiftool-perl -y
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
