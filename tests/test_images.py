@@ -20,7 +20,7 @@ import os
 def test_ncas_photo_checks(photo, error_level, number_errors):
     runner = CliRunner()
     photo_file = f"tests/test_images/{photo}"
-    assert photo_file == ("tests/test_images/" + photo)
+    assert photo_file == "tests/test_images/ncas-cam-9_cao_20160510-134927_photo_v1.0.jpg"
     #result = runner.invoke(cli.check, ["-p", "-l", "compact", f"tests/test_images/{photo}"])
     #level_found, errors_found = [i.strip() for i in result.output.split("|")[2:4]]
     #errors_found = int(errors_found)
