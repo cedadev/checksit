@@ -6,7 +6,7 @@ import os
 # quick test to make sure python is where I think it is
 def test_where():
     loc = (os.listdir("tests"))
-    assert loc == 1
+    assert "test_images" in loc
 
 
 # photos from ncas named instruments
