@@ -19,7 +19,7 @@ from checksit import cli
 )
 def test_ncas_photo_checks(photo, error_level, number_errors):
     runner = CliRunner()
-    result = runner.invoke(cli.check, ["-l", "compact", f"tests/test_images/{photo}"])
+    result = runner.invoke(cli.check, ["-p", "-l", "compact", f"tests/test_images/{photo}"])
     level_found, errors_found = [i.strip() for i in result.output.split("|")[2:4]]
     errors_found = int(errors_found)
     assert error_level == level_found
@@ -43,12 +43,13 @@ def test_ncas_photo_checks(photo, error_level, number_errors):
 def test_other_plot_checks(plot, error_level, number_errors):
     runner = CliRunner()
     specs = "ncas-image-v1.0/amof-image-global-attrs,ncas-image-v1.0/amof-plot"
-    result = runner.invoke(cli.check, ["-l", "compact", "-t", "off", "--specs", specs, f"tests/test_images/{plot}"])
+    result = runner.invoke(cli.check, ["-p", "-l", "compact", "-t", "off", "--specs", specs, f"tests/test_images/{plot}"])
     level_found, errors_found = [i.strip() for i in result.output.split("|")[2:4]]
     errors_found = int(errors_found)
     assert error_level == level_found
     assert number_errors == errors_found
 
+# check error messages
 @pytest.mark.parametrize(
     "plot, error_message",
     [
@@ -69,9 +70,8 @@ def test_other_plot_checks(plot, error_level, number_errors):
 def test_check_errors(plot, error_message):
     runner = CliRunner()
     specs = "ncas-image-v1.0/amof-image-global-attrs,ncas-image-v1.0/amof-plot"
-    result = runner.invoke(cli.check, ["-l", "compact", "-t", "off", "--specs", specs, f"tests/test_images/{plot}"])
+    result = runner.invoke(cli.check, ["-p", "-l", "compact", "-t", "off", "--specs", specs, f"tests/test_images/{plot}"])
     message_found = result.output.split("|")[4].strip()
     assert error_message == message_found
 
 
-#[global-attributes:******:XMP-dc:Title]*** Value 'nerc-mstrf-radar-mst_capel-dewi_20230809_st300_wind.png' does not match regex rule: 'title'.
