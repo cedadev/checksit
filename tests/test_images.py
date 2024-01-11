@@ -3,12 +3,6 @@ from click.testing import CliRunner
 from checksit import cli
 import os
 
-# quick test to make sure python is where I think it is
-def test_where():
-    loc = (os.listdir("tests"))
-    assert "test_images" in loc
-
-
 # photos from ncas named instruments
 @pytest.mark.parametrize(
     "photo, error_level, number_errors",
@@ -25,6 +19,8 @@ def test_where():
 )
 def test_ncas_photo_checks(photo, error_level, number_errors):
     runner = CliRunner()
+    photo_file = f"tests/test_images/{photo}"
+    assert photo_file == ("tests/test_images/" + photo)
     result = runner.invoke(cli.check, ["-p", "-l", "compact", f"tests/test_images/{photo}"])
     level_found, errors_found = [i.strip() for i in result.output.split("|")[2:4]]
     errors_found = int(errors_found)
