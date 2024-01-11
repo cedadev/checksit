@@ -1,7 +1,12 @@
 import pytest
 from click.testing import CliRunner
-from checksit import cli
+from checksit import cli, check
 import os
+
+
+def test_whatsgoingon():
+    content = check.test("tests/test_images/ncas-cam-9_cao_20160510-134927_photo_v1.0.jpg")
+    assert content.__dir__() == 1  # fail
 
 # photos from ncas named instruments
 @pytest.mark.parametrize(
