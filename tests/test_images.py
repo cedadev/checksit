@@ -5,8 +5,8 @@ import os
 
 # quick test to make sure python is where I think it is
 def test_where():
-    print(os.listdir("tests"))
-    assert 1 == 1
+    loc = (os.listdir("tests"))
+    assert loc == 1
 
 
 # photos from ncas named instruments
