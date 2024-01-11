@@ -28,4 +28,4 @@ jobs:
         if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
     - name: Test with pytest
       run: |
-        python -m pytest -v tests/test_readers.py
+        python -m pytest -v tests/test_readers.py tests/test_images.py
