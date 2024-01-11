@@ -37,7 +37,7 @@ jobs:
         if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
     - name: Install checksit
       run: |
-        pip install --no-deps .
+        ls
     - name: Test with pytest
       run: |
         export UDUNITS2_XML_PATH=/opt/share/udunits/udunits2.xml
