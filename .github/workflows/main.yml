@@ -35,10 +35,9 @@ jobs:
         pip install flake8 black pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
-    - name: Install checksit
-      run: |
-        ls
     - name: Test with pytest
       run: |
         export UDUNITS2_XML_PATH=/opt/share/udunits/udunits2.xml
+        ls
+        ls tests/test_images
         python -m pytest -v tests/test_readers.py tests/test_images.py
