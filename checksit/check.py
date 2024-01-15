@@ -10,13 +10,14 @@ import urllib.error
 
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
-from .readers import pp, badc_csv, cdl, yml
+from .readers import pp, badc_csv, cdl, yml, image
 from .specs import SpecificationChecker
 from .utils import get_file_base, extension, UNDEFINED
 from .config import get_config
 from .make_specs import make_amof_specs
 
 AMOF_CONVENTIONS = ['"CF-1.6, NCAS-AMF-2.0.0"']
+IMAGE_EXTENSIONS = ["png", "jpg", "jpeg"]
 conf = get_config()
 
 
@@ -229,12 +230,16 @@ class Checker:
 
         # tmpl = self.parse_file_header(template, auto_cache=auto_cache, verbose=verbose)
 
-        ### Check for AMOF netCDF file and gather specs ###
-        if template == "auto" and file_path.split('.')[-1] == 'nc':
-            # Look for AMOF Convention string in Conventions global attr, if it exists
-            if ':Conventions' in file_content.cdl:
-                conventions = file_content.cdl.split(':Conventions =')[1].split(';')[0].strip()
-                if "NCAS-AMOF" in conventions or "NCAS-GENERAL" in conventions or "NCAS-AMF" in conventions:
+        ### Check for NCAS data files and gather specs ###
+        # if template and specs are "default" values, check to see if
+        # file is an ncas file (assuming file name starts with instrument name)
+        if (template == "auto" and specs == None and
+            file_path.split("/")[-1].startswith("ncas-")):
+            # find appropriate specs depending on convention
+            if file_path.split(".")[-1] == "nc" and ":Conventions" in file_content.cdl:
+                conventions = file_content.cdl.split(":Conventions =")[1].split(";")[0].strip()
+                # NCAS-GENERAL file
+                if any(name in conventions for name in ["NCAS-GENERAL", "NCAS-AMF", "NCAS-AMOF"]):
                     if verbose:
                         print("\nNCAS-AMOF file detected, finding correct spec files")
                         print("Finding correct AMOF version...")
@@ -245,7 +250,7 @@ class Checker:
                     # check specs exist for that version
                     specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
                     if not os.path.exists(specs_dir):
-                        if verbose: print(f"Specs for version {version_number} not found, attempting download...")
+                        if verbose: print(f"Specs for version NCAS-GENERAL-{version_number} not found, attempting download...")
                         try:
                             vocabs_dir = os.path.join(conf["settings"].get("vocabs_dir", "./checksit/vocabs"), f"AMF_CVs/{version_number}")
                             cvs = urllib.request.urlopen(f"https://github.com/ncasuk/AMF_CVs/tree/v{version_number}/AMF_CVs")
@@ -280,7 +285,6 @@ class Checker:
                             sys.exit()
                         except:
                             raise
-                            
 
                     # get deployment mode and data product, to then get specs
                     deployment_mode = file_content.cdl.split(':deployment_mode =')[1].split(';')[0].strip().strip('"')
@@ -290,6 +294,30 @@ class Checker:
                     specs = [f'{spec_folder}/amof-file-name', deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
                     # don't need to do template check
                     template = "off"
+
+                # NCAS-RADAR (coming soon...)
+                # if "NCAS-Radar" in conventions
+            
+            elif (file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS and
+                  "XMP-photoshop:Instructions" in file_content.global_attrs.keys()):
+                conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
+                if "National Centre for Atmospheric Science Image Metadata Standard" in file_content.global_attrs["XMP-photoshop:Instructions"].replace("\n"," "):
+                    if verbose:
+                        print("\nNCAS-IMAGE file detected, finding correct spec files")
+                        print("Finding correct IMAGE version...")
+                    version_number = conventions.replace("\n"," ").split("Metadata Standard ")[1].split(":")[0]
+                    spec_folder = f"ncas-image-{version_number}"
+                    if verbose: print(f"  {version_number}")
+                    specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
+                    if not os.path.exists(specs_dir):
+                        print(f"[ERROR] specs for NCAS-IMAGE {version_number} can not be found.")
+                        print("Aborting...")
+                        sys.exit()
+                    product = file_path.split('/')[-1].split('_')[3]
+                    product_spec = f"{spec_folder}/amof-{product}"
+                    specs = [product_spec, f"{spec_folder}/amof-image-global-attrs"]
+                    template = "off"
+
 
 
         if template == "off":
@@ -404,6 +432,8 @@ class FileParser:
             reader = badc_csv
         elif ext in ("yml"):
             reader = yml
+        elif ext.lower() in IMAGE_EXTENSIONS:
+            reader = image   
         else:
             raise Exception(f"No known reader for file with extension: {ext}")
 

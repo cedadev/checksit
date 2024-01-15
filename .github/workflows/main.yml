@@ -20,12 +20,28 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install udunits
+      run: |
+        cd /opt
+        curl -O https://downloads.unidata.ucar.edu/udunits/2.2.28/udunits-2.2.28.tar.gz
+        tar -xzvf udunits-2.2.28.tar.gz
+        cd udunits-2.2.28
+        ./configure
+        make all install
+        ln -sf /opt/lib/* $LD_LIBRARY_PATH
+    - name: Install exiftool
+      run: |
+        sudo apt install libimage-exiftool-perl -y
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install flake8 black pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
+    - name: Look for exiftool
+      run: |
+        which exiftool
     - name: Test with pytest
       run: |
-        python -m pytest -v tests/test_readers.py
+        export UDUNITS2_XML_PATH=/opt/share/udunits/udunits2.xml
+        python -m pytest -v tests/test_readers.py tests/test_images.py

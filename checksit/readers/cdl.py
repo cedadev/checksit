@@ -2,6 +2,7 @@ from collections import deque
 import re
 import yaml
 import subprocess as sp
+import sys
 
 from ..cvs import vocabs, vocabs_prefix
 
@@ -40,7 +41,8 @@ class CDLParser:
 
         for s in self.CDL_SPLITTERS:
             if s not in cdl_lines:
-                raise Exception(f"Invalid file or CDL contents provided: '{inpt[:100]}...'")
+                print(f"Please check your command - invalid file or CDL contents provided: '{inpt[:100]}...'")
+                sys.exit(1)
  
         sections = self._get_sections(cdl_lines, split_patterns=self.CDL_SPLITTERS, start_at=1)
 
@@ -188,7 +190,8 @@ class CDLParser:
     def to_dict(self):
         return {"dimensions": self.dimensions,
                 "variables": self.variables,
-                "global_attributes": self.global_attrs}
+                "global_attributes": self.global_attrs,
+                "inpt": self.inpt}
 
 
 def read(fpath, verbose=False):
