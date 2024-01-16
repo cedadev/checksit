@@ -110,7 +110,7 @@ def test_datetime_or_na_rule(rules):
 def test_number_rule(rules):
     assert re.fullmatch(rules['number'], '123.45')
     assert re.fullmatch(rules['number'], '-123.45')
-    assert re.fullmatch(rules['number'], '-123.')
+    assert not re.fullmatch(rules['number'], '-123.')
     assert not re.fullmatch(rules['number'], 'abc')
     assert not re.fullmatch(rules['number'], '')
     assert not re.fullmatch(rules['number'], '123.45abc')
