@@ -78,6 +78,7 @@ def test_validate_orcid_ID():
     # Test that the function correctly handles valid ORCID IDs
     assert validate_orcid_ID('https://orcid.org/0000-0002-1825-0097', {}, label='Test') == []
     assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456', {}, label='Test') == []
+    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-345X', {}, label='Test') == []
 
     # Test that the function correctly handles ORCID IDs with incorrect lengths
     assert validate_orcid_ID('https://orcid.org/0000-0002-1825-009', {}, label='Test') == ["Test 'https://orcid.org/0000-0002-1825-009' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
@@ -85,7 +86,6 @@ def test_validate_orcid_ID():
 
     # Test that the function correctly handles ORCID IDs with incorrect formats
     assert validate_orcid_ID('https://orcid.org/0000-0002-1825-009Z', {}, label='Test') == ["Test 'https://orcid.org/0000-0002-1825-009Z' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
-    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-345X', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-345X' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
     assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456-', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456-' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
     assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456X', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456X' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
 
@@ -382,3 +382,36 @@ def test_map_type_rule():
     assert r._map_type_rule('str') == str
     with pytest.raises(KeyError):
         r._map_type_rule('nonexistent')
+
+def test_check():
+    rules_instance = r
+
+    # Test that the function correctly handles rule-func
+    assert rules_instance.check("rule-func:string_of_length:3", "abc", {}, label="Test") == ([], [])
+    assert rules_instance.check("rule-func:string_of_length:3", "abcd", {}, label="Test") == (["Test 'abcd' must be exactly 3 characters"], [])
+
+    # Test that the function correctly handles rule-func-warning
+    assert rules_instance.check("rule-func-warning:string_of_length:3", "abc", {}, label="Test") == ([], [])
+    assert rules_instance.check("rule-func-warning:string_of_length:3", "abcd", {}, label="Test") == ([], ["Test 'abcd' must be exactly 3 characters"])
+
+    # Test that the function correctly handles type-rule
+    assert rules_instance.check("type-rule:int", 123, {}, label="Test") == ([], [])
+    assert rules_instance.check("type-rule:int", "abc", {}, label="Test") == (["Test Value 'abc' is not of required type: 'int'."], [])
+
+    # Test that the function correctly handles regex-warning
+    assert rules_instance.check("regex-warning:^[a-z]+$", "abc", {}, label="Test") == ([], [])
+    assert rules_instance.check("regex-warning:^[a-z]+$", "ABC", {}, label="Test") == ([], ["Test Value 'ABC' does not match regular expression: '^[a-z]+$'."])
+
+    # Test that the function correctly handles regex
+    assert rules_instance.check("regex:^[a-z]+$", "abc", {}, label="Test") == ([], [])
+    assert rules_instance.check("regex:^[a-z]+$", "ABC", {}, label="Test") == (["Test Value 'ABC' does not match regular expression: '^[a-z]+$'."], [])
+
+    # Test that the function correctly handles regex-rule-warning
+    rules_instance.static_regex_rules = {"lowercase": "^[a-z]+$"}
+    assert rules_instance.check("regex-rule-warning:lowercase", "abc", {}, label="Test") == ([], [])
+    assert rules_instance.check("regex-rule-warning:lowercase", "ABC", {}, label="Test") == ([], ["Test Value 'ABC' does not match regex rule: 'lowercase'."])
+
+    # Test that the function correctly handles regex-rule
+    rules_instance.static_regex_rules = {"lowercase": "^[a-z]+$"}
+    assert rules_instance.check("regex-rule:lowercase", "abc", {}, label="Test") == ([], [])
+    assert rules_instance.check("regex-rule:lowercase", "ABC", {}, label="Test") == (["Test Value 'ABC' does not match regex rule: 'lowercase'."], [])
