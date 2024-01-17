@@ -66,57 +66,39 @@ class Rules:
 
         for i in rule_lookup_list:
 
-            if i.startswith("rule-func:"):
-                rule_comps = i.split(":")
-                rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
-                extras = rule_comps[2:]
-                errors.extend(rule_func(value, context, extras, label=label))
+            if i.split(":")[0].endswith("-warning"):
+                output = warnings
+            else:
+                output = errors
 
-            elif i.startswith("rule-func-warning:"):
+            if i.startswith("rule-func"):
                 rule_comps = i.split(":")
                 rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
                 extras = rule_comps[2:]
-                warnings.extend(rule_func(value, context, extras, label=label))
+                output.extend(rule_func(value, context, extras, label=label))
 
             elif i.startswith("type-rule"):
                 type_rule = i.split(":")[1]
 
                 if not isinstance(value, self._map_type_rule(type_rule)):
-                    errors.append(f"{label} Value '{value}' is not of required type: '{type_rule}'.")
-                
-            elif i.startswith("regex-warning:"):
-                pattern = ':'.join(i.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
-                if not re.match(f"^{pattern}$", value):
-                    warnings.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
+                    output.append(f"{label} Value '{value}' is not of required type: '{type_rule}'.")
 
-            elif i.startswith("regex:"):
-                pattern = ':'.join(i.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
-                if not re.match(f"^{pattern}$", value):
-                    errors.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
-
-            elif i.startswith("regex-rule-warning:"):
+            elif i.startswith("regex-rule"):
                 regex_rule = i.split(":", 1)[1]
 
                 if regex_rule in self.static_regex_rules:
                     pattern = self.static_regex_rules[regex_rule]
 
                     if not re.match("^" + pattern + "$", value):
-                        warnings.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'.")
+                        output.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'.")
 
                 else:
                     raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
 
-            elif i.startswith("regex-rule:"):
-                regex_rule = i.split(":", 1)[1]
-
-                if regex_rule in self.static_regex_rules:
-                    pattern = self.static_regex_rules[regex_rule]
-
-                    if not re.match("^" + pattern + "$", value):
-                        errors.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'.")
-
-                else:
-                    raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
+            elif i.startswith("regex"):
+                pattern = ':'.join(i.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
+                if not re.match(f"^{pattern}$", value):
+                    output.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
             
             else:
                 raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
