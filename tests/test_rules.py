@@ -86,6 +86,7 @@ def test_validate_orcid_ID():
 
     # Test that the function correctly handles ORCID IDs with incorrect formats
     assert validate_orcid_ID('https://orcid.org/0000-0002-1825-009Z', {}, label='Test') == ["Test 'https://orcid.org/0000-0002-1825-009Z' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-34X5', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-34X5' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
     assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456-', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456-' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
     assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456X', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456X' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
 

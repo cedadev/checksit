@@ -131,8 +131,11 @@ def validate_orcid_ID(value, context, extras=None, label=""):
         value[27] != "-" or
         value[32] != "-" or
         
-        # Check that the last characters contain only "-" and digits
-        not PI_orcid_digits_only.isdigit()):
+        # Check that the last characters contain only "-" and digits (plus 'X' for last digit)
+        not (
+            PI_orcid_digits_only.isdigit() or (PI_orcid_digits_only[0:15].isdigit() and PI_orcid_digits_only[15] == "X")
+        )
+    ):
 
         errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
 
