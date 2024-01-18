@@ -93,15 +93,15 @@ class Rules:
                         output.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'.")
 
                 else:
-                    raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
+                    raise Exception(f"Regex rule not found with rule ID: {i}.")
 
             elif i.startswith("regex"):
-                pattern = ':'.join(i.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
+                pattern = i.split(":", 1)[1]  # in case pattern has colons in it, e.g. a URL
                 if not re.match(f"^{pattern}$", value):
                     output.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
-            
+
             else:
-                raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
+                raise Exception(f"Rule not found with rule ID: {i}.")
 
         return errors, warnings
 
