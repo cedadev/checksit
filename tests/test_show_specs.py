@@ -21,3 +21,14 @@ def test_show_specs_all(capsys):
         '            ]\n        }\n    }\n}\n'
         )
     assert captured.out == expected_output
+
+
+def test_show_specs_none_specified(capsys):
+    # When no spec is specified, all specs in specs/groups are shown
+    show_specs([])
+    captured_empty = capsys.readouterr()
+
+    show_specs(["ceda-base"])
+    captured_ceda_base = capsys.readouterr()
+
+    assert captured_empty.out == captured_ceda_base.out
