@@ -13,7 +13,9 @@ def test_match_file_name():
     context = {"file_path": file_path}
     assert len(match_file_name(value, context)) == 1
     assert len(match_file_name(value, context, ["lowercase"])) == 1
+    assert len(match_file_name(value, context, ["uppercase"])) == 1
     assert len(match_file_name(value, context, ["lowercase", "no_extension"])) == 0
+    assert len(match_file_name(value, context, ["uppercase", "no_extension"])) == 1
 
 
 def test_string_of_length():
