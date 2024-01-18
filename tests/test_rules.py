@@ -414,3 +414,12 @@ def test_check():
     # Test that the function correctly handles regex-rule
     assert rules_instance.check("regex-rule:integer", "123", {}, label="Test") == ([], [])
     assert rules_instance.check("regex-rule:integer", "123.45", {}, label="Test") == (["Test Value '123.45' does not match regex rule: 'integer'."], [])
+
+    # Test that correct exceptions are raised when the rule or regex is not found
+    with pytest.raises(Exception) as e_info:
+        rules_instance.check("rules-func:nonexistent", "abc", {}, label="Test")
+    assert str(e_info.value) == "Rule not found with rule ID: rules-func:nonexistent."
+
+    with pytest.raises(Exception) as e_info:
+        rules_instance.check("regex-rule:nonexistent", "abc", {}, label="Test")
+    assert str(e_info.value) == "Regex rule not found with rule ID: regex-rule:nonexistent."
