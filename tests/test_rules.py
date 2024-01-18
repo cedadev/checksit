@@ -408,11 +408,9 @@ def test_check():
     assert rules_instance.check("regex:^[a-z]+$", "ABC", {}, label="Test") == (["Test Value 'ABC' does not match regular expression: '^[a-z]+$'."], [])
 
     # Test that the function correctly handles regex-rule-warning
-    rules_instance.static_regex_rules = {"lowercase": "^[a-z]+$"}
-    assert rules_instance.check("regex-rule-warning:lowercase", "abc", {}, label="Test") == ([], [])
-    assert rules_instance.check("regex-rule-warning:lowercase", "ABC", {}, label="Test") == ([], ["Test Value 'ABC' does not match regex rule: 'lowercase'."])
+    assert rules_instance.check("regex-rule-warning:integer", "123", {}, label="Test") == ([], [])
+    assert rules_instance.check("regex-rule-warning:integer", "123.45", {}, label="Test") == ([], ["Test Value '123.45' does not match regex rule: 'integer'."])
 
     # Test that the function correctly handles regex-rule
-    rules_instance.static_regex_rules = {"lowercase": "^[a-z]+$"}
-    assert rules_instance.check("regex-rule:lowercase", "abc", {}, label="Test") == ([], [])
-    assert rules_instance.check("regex-rule:lowercase", "ABC", {}, label="Test") == (["Test Value 'ABC' does not match regex rule: 'lowercase'."], [])
+    assert rules_instance.check("regex-rule:integer", "123", {}, label="Test") == ([], [])
+    assert rules_instance.check("regex-rule:integer", "123.45", {}, label="Test") == (["Test Value '123.45' does not match regex rule: 'integer'."], [])
