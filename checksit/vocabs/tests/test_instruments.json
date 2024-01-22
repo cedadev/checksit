@@ -1,0 +1,10 @@
+{
+    "test_instruments": {
+        "inst1": {
+            "instrument_id": "inst1"
+        },
+        "inst2": {
+            "instrument_id": "inst2"
+        }
+    }
+}
