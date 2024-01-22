@@ -2,10 +2,15 @@ import os
 import re
 from datetime import datetime
 import requests
+import json
+import pandas as pd
 from urllib.request import urlopen
+import json
+import pandas as pd
 
 from . import processors
 from ..config import get_config
+from pandas import json_normalize
 
 conf = get_config()
 rule_splitter = conf["settings"].get("rule_splitter", "|")
@@ -190,6 +195,53 @@ def title_check(value, context, extras=None, label=""):
 
     return errors
 
+
+def title_instrument(value, context, extras=None, label=""):
+    """
+    A function to check if the instrument in the title is contained in the controlled vocabulary lists
+    """
+    warnings = []
+
+    instrument = value.partition("_")[0]
+
+    # open JSON controlled vocab files:
+    n = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_ncas_instrument.json', "r")
+    c = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_community_instrument.json', "r")
+ 
+    ## Reading from file:
+    ncas_data = json.loads(n.read())
+    community_data = json.loads(c.read())
+
+    if instrument not in ncas_data['ncas_instrument'] and instrument not in community_data['community_instrument']:
+        warnings.append(f"{label} '{instrument}' should be contained one of the instrument controlled vocabulary lists")
+
+    # Closing file
+    n.close()
+    c.close()
+
+    return warnings
+
+def title_platform(value, context, extras=None, label=""):
+    """
+    A function to check if the platform in the title is contained in the controlled vocabulary list
+    """
+    warnings = []
+
+    platform = value.split("_")[1]
+
+    # open JSON controlled vocab file:
+    g = open ('./checksit/vocabs/AMF_CVs/2.0.0/AMF_platform.json', "r")
+ 
+    ## Reading from file:
+    data = json.loads(g.read())
+    
+    if platform not in data['platform']:
+        warnings.append(f"{label} '{platform}' should be contained in the platform controlled vocabulary list")
+
+    # Closing file
+    g.close()
+
+    return warnings
 
 def url_checker(value, context, extras=None, label=""):
     """
