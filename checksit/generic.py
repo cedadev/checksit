@@ -222,8 +222,8 @@ def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
                     attr_value = np.array(attr_value, dtype=np.int8)
                     if not np.all(dct["variables"][variable].get(attr_key) == attr_value):
                         errors.append(
-                            f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, "
-                            f"not {dct['variables'][variable].get(attr_key) if skip_spellcheck else ''}."
+                            f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
+                            f"not '{dct['variables'][variable].get(attr_key)}'."
                         )
                 #elif attr_key == 'flag_meanings':
                 #    print(attr_value)
