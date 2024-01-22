@@ -292,6 +292,12 @@ def test_check_file_name():
     assert errors == ["[file name]: Invalid file name format - too many options in file name"]
     assert warnings == []
 
+    # Test that the function correctly handles multiple errors
+    file_name = "inst3_plat3_20220101_prod1_v1.0.nc"
+    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    assert errors == ["[file name]: Invalid file name format - unknown instrument inst3","[file name]: Invalid file name format - unknown platform plat3"]
+    assert warnings == []
+
     # Test that the function correctly handles valid file names
     file_name = "inst1_plat1_20220101_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks)
