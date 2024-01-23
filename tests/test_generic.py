@@ -1,4 +1,3 @@
-#from checksit.generic import one_spelling_mistake, two_spelling_mistakes, search_close_match, check_var_attrs, check_global_attrs, check_var_exists, check_dim_exists, check_var
 import checksit.generic as cg
 import numpy as np
 
