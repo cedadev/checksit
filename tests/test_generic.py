@@ -150,7 +150,7 @@ def test_check_global_attrs():
         "attr2": r"\d{4}-\d{2}-\d{2}"
     }
     errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:******:attr2]: 'value2' does not match regex pattern '\d{4}-\d{2}-\d{2}'."]
+    assert errors == [r"[global-attributes:******:attr2]: 'value2' does not match regex pattern '\d{4}-\d{2}-\d{2}'."]
     assert warnings == []
 
     # Test function handles correct values with regex checks correctly
