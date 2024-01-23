@@ -74,40 +74,128 @@ def test_check_global_attrs():
     # Test that the function correctly identifies missing attributes
     dct = {
         "global_attributes": {
-            "attr1": "value1",
-            "attr2": "value2"
-        }
+            "attr1": "",
+            "attr2": "value2",
+            "attr3": "inst1"
+        },
+        "inpt": "filename"
     }
-    defined_attrs = ["attr1", "attr3"]
+    defined_attrs = ["attr2", "attr4"]
     errors, warnings = cg.check_global_attrs(dct, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr3]: Attribute 'attr3' does not exist. "]
+    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
     assert warnings == []
 
     # Test that the function correctly handles empty attributes
-    dct = {
-        "global_attributes": {
-            "attr1": "",
-            "attr2": "value2"
-        }
-    }
     defined_attrs = ["attr1", "attr2"]
     errors, warnings = cg.check_global_attrs(dct, defined_attrs)
     assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
     assert warnings == []
 
-    # Test that the function correctly handles attributes with all values defined
-    dct = {
-        "global_attributes": {
-            "attr1": "value1",
-            "attr2": "value2"
-        }
-    }
+    # Test that the function correctly handles defined_attrs when all attributes are defined
+    defined_attrs = ["attr2", "attr3"]
     errors, warnings = cg.check_global_attrs(dct, defined_attrs)
+    assert errors == []
+    assert warnings == []
+
+    # Test function handles non-existent attributes with vocab checks correctly
+    vocab_attrs = {
+        "attr4": "__vocabs__:tests/test_products:test_products"
+    }
+    errors, warnings = cg.check_global_attrs(dct, vocab_attrs = vocab_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
+    assert warnings == []
+
+    # Test function handles undefined attributes with vocab checks correctly 
+    vocab_attrs = {
+        "attr1": "__vocabs__:tests/test_platforms:test_platforms:__all__"
+    }
+    errors, warnings = cg.check_global_attrs(dct, vocab_attrs = vocab_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
+    assert warnings == []
+
+    # Test function handles incorrect values with vocab checks correctly
+    vocab_attrs = {
+        "attr2": "__vocabs__:tests/test_platforms:test_platforms:__all__"
+    }
+    errors, warnings = cg.check_global_attrs(dct, vocab_attrs = vocab_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:******:attr2]*** 'value2' not in vocab options: ['plat1', 'plat2'] (using: '__vocabs__:tests/test_platforms:test_platforms:__all__')"]
+    assert warnings == []
+
+    # Test function handles correct values with vocab checks correctly
+    vocab_attrs = {
+        "attr3": "__vocabs__:tests/test_instruments:test_instruments:__all__"
+    }
+    errors, warnings = cg.check_global_attrs(dct, vocab_attrs = vocab_attrs, skip_spellcheck=True)
+    assert errors == []
+    assert warnings == []
+
+    # Test function handles non-existent attributes with regex checks correctly
+    regex_attrs = {
+        "attr4": r"\d{4}-\d{2}-\d{2}"
+    }
+    errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
+    assert warnings == []
+
+    # Test function handles undefined attributes with regex checks correctly 
+    regex_attrs = {
+        "attr1": r"\d{4}-\d{2}-\d{2}"
+    }
+    errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
+    assert warnings == []
+
+    # Test function handles incorrect values with regex checks correctly
+    regex_attrs = {
+        "attr2": r"\d{4}-\d{2}-\d{2}"
+    }
+    errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:******:attr2]: 'value2' does not match regex pattern '\d{4}-\d{2}-\d{2}'."]
+    assert warnings == []
+
+    # Test function handles correct values with regex checks correctly
+    regex_attrs = {
+        "attr3": r"inst\d"
+    }
+    errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
+    assert errors == []
+    assert warnings == []
+
+    # Test function handles non-existent attributes with rules checks correctly
+    rules_attrs = {
+        "attr4": "rule-func:string-of-length:5"
+    }
+    errors, warnings = cg.check_global_attrs(dct, rules_attrs = rules_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
+    assert warnings == []
+
+    # Test function handles undefined attributes with rules checks correctly 
+    rules_attrs = {
+        "attr1": "rule-func:string-of-length:5"
+    }
+    errors, warnings = cg.check_global_attrs(dct, rules_attrs = rules_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
+    assert warnings == []
+
+    # Test function handles incorrect values with rules checks correctly
+    rules_attrs = {
+        "attr2": "rule-func:string-of-length:5"
+    }
+    errors, warnings = cg.check_global_attrs(dct, rules_attrs = rules_attrs, skip_spellcheck=True)
+    assert errors == ["[global-attributes:******:attr2]*** 'value2' must be exactly 5 characters"]
+    assert warnings == []
+
+    # Test function handles correct values with rules checks correctly
+    rules_attrs = {
+        "attr3": "rule-func:string-of-length:5"
+    }
+    errors, warnings = cg.check_global_attrs(dct, rules_attrs = rules_attrs, skip_spellcheck=True)
     assert errors == []
     assert warnings == []
 
     # Test that the function correctly handles an empty dct
     dct = {"global_attributes": {}}
+    defined_attrs = ["attr1", "attr2"]
     errors, warnings = cg.check_global_attrs(dct, defined_attrs)
     assert errors == ["[global-attributes:**************:attr1]: Attribute 'attr1' does not exist. ", "[global-attributes:**************:attr2]: Attribute 'attr2' does not exist. "]
     assert warnings == []
