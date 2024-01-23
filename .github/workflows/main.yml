@@ -38,9 +38,6 @@ jobs:
         pip install flake8 black pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
-    - name: Look for exiftool
-      run: |
-        which exiftool
     - name: Test with pytest
       run: |
         export UDUNITS2_XML_PATH=/opt/share/udunits/udunits2.xml
