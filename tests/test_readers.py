@@ -36,3 +36,14 @@ def test_cdl_reader_multiline_parser_2():
     d = resp.to_dict()
 
 
+def test_cdl_reader_netcdf():
+    ncfile = os.path.join(TESTDATA_DIR, "netcdf/test_netcdf.nc")
+    resp = read_cdl(ncfile)
+
+    d = resp.to_dict()
+    assert sorted(d.keys()) == sorted(["global_attributes", "dimensions", "variables", "inpt"])
+    assert list(d["global_attributes"].keys()) == ["test_attribute_name"]
+    assert d["global_attributes"]["test_attribute_name"] == "test_attribute_value"
+    assert list(d["variables"].keys()) == ["T"]
+    assert sorted(d["dimensions"].keys()) == sorted(["x", "y", "z"])
+    assert d["inpt"] == ncfile
