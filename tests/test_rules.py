@@ -4,204 +4,204 @@ import pytest
 from numbers import Number
 
 from checksit.rules import rules as r
-from checksit.rules.rule_funcs import match_file_name, string_of_length, match_one_of, match_one_or_more_of, validate_image_date_time, validate_orcid_ID, list_of_names, headline, title_check, url_checker, relation_url_checker, latitude, longitude
+import checksit.rules.rule_funcs as crf
 
 # rule_funcs.py
 def test_match_file_name():
     file_path = "happy_netcdf"
     value = "happy_NetCDF.nc"
     context = {"file_path": file_path}
-    assert len(match_file_name(value, context)) == 1
-    assert len(match_file_name(value, context, ["lowercase"])) == 1
-    assert len(match_file_name(value, context, ["uppercase"])) == 1
-    assert len(match_file_name(value, context, ["lowercase", "no_extension"])) == 0
-    assert len(match_file_name(value, context, ["uppercase", "no_extension"])) == 1
+    assert len(crf.match_file_name(value, context)) == 1
+    assert len(crf.match_file_name(value, context, ["lowercase"])) == 1
+    assert len(crf.match_file_name(value, context, ["uppercase"])) == 1
+    assert len(crf.match_file_name(value, context, ["lowercase", "no_extension"])) == 0
+    assert len(crf.match_file_name(value, context, ["uppercase", "no_extension"])) == 1
 
 
 def test_string_of_length():
     # Test that the function correctly handles strings of the minimum length
-    assert string_of_length('abc', {}, ['3'], 'Test') == []
-    assert string_of_length('abcd', {}, ['3+'], 'Test') == []
+    assert crf.string_of_length('abc', {}, ['3'], 'Test') == []
+    assert crf.string_of_length('abcd', {}, ['3+'], 'Test') == []
 
     # Test that the function correctly handles strings shorter than the minimum length
-    assert string_of_length('ab', {}, ['3'], 'Test') == ["Test 'ab' must be exactly 3 characters"]
-    assert string_of_length('ab', {}, ['3+'], 'Test') == ["Test 'ab' must be at least 3 characters"]
+    assert crf.string_of_length('ab', {}, ['3'], 'Test') == ["Test 'ab' must be exactly 3 characters"]
+    assert crf.string_of_length('ab', {}, ['3+'], 'Test') == ["Test 'ab' must be at least 3 characters"]
 
     # Test that the function correctly handles strings longer than the minimum length
-    assert string_of_length('abcd', {}, ['3'], 'Test') == ["Test 'abcd' must be exactly 3 characters"]
-    assert string_of_length('abcd', {}, ['3+'], 'Test') == []
+    assert crf.string_of_length('abcd', {}, ['3'], 'Test') == ["Test 'abcd' must be exactly 3 characters"]
+    assert crf.string_of_length('abcd', {}, ['3+'], 'Test') == []
 
     # Test that the function correctly handles empty strings
-    assert string_of_length('', {}, ['0'], 'Test') == []
-    assert string_of_length('', {}, ['1'], 'Test') == ["Test '' must be exactly 1 characters"]
-    assert string_of_length('', {}, ['1+'], 'Test') == ["Test '' must be at least 1 characters"]
+    assert crf.string_of_length('', {}, ['0'], 'Test') == []
+    assert crf.string_of_length('', {}, ['1'], 'Test') == ["Test '' must be exactly 1 characters"]
+    assert crf.string_of_length('', {}, ['1+'], 'Test') == ["Test '' must be at least 1 characters"]
 
 
 def test_match_one_of():
     # Test that the function correctly handles valid inputs
-    assert match_one_of('apple', {}, ['apple|banana|orange'], 'Test') == []
+    assert crf.match_one_of('apple', {}, ['apple|banana|orange'], 'Test') == []
 
     # Test that the function correctly handles invalid inputs
-    assert match_one_of('kiwi', {}, ['apple|banana|orange'], 'Test') == ["Test 'kiwi' must be one of: '['apple', 'banana', 'orange']'"]
+    assert crf.match_one_of('kiwi', {}, ['apple|banana|orange'], 'Test') == ["Test 'kiwi' must be one of: '['apple', 'banana', 'orange']'"]
 
     # Test that the function correctly handles empty strings
-    assert match_one_of('', {}, ['apple|banana|orange'], 'Test') == ["Test '' must be one of: '['apple', 'banana', 'orange']'"]
+    assert crf.match_one_of('', {}, ['apple|banana|orange'], 'Test') == ["Test '' must be one of: '['apple', 'banana', 'orange']'"]
 
 
 def test_match_one_or_more_of():
     # Test that the function correctly handles valid inputs
-    assert match_one_or_more_of('apple,banana', {}, ['apple|banana|orange'], 'Test') == []
-    assert match_one_or_more_of('apple', {}, ['apple|banana|orange'], 'Test') == []
+    assert crf.match_one_or_more_of('apple,banana', {}, ['apple|banana|orange'], 'Test') == []
+    assert crf.match_one_or_more_of('apple', {}, ['apple|banana|orange'], 'Test') == []
 
     # Test that the function correctly handles invalid inputs
-    assert match_one_or_more_of('apple,kiwi', {}, ['apple|banana|orange'], 'Test') == ["Test 'apple,kiwi' must be one or more of: '['apple', 'banana', 'orange']'"]
-    assert match_one_or_more_of('kiwi', {}, ['apple|banana|orange'], 'Test') == ["Test 'kiwi' must be one or more of: '['apple', 'banana', 'orange']'"]
+    assert crf.match_one_or_more_of('apple,kiwi', {}, ['apple|banana|orange'], 'Test') == ["Test 'apple,kiwi' must be one or more of: '['apple', 'banana', 'orange']'"]
+    assert crf.match_one_or_more_of('kiwi', {}, ['apple|banana|orange'], 'Test') == ["Test 'kiwi' must be one or more of: '['apple', 'banana', 'orange']'"]
 
     # Test that the function correctly handles empty strings
-    assert match_one_or_more_of('', {}, ['apple|banana|orange'], 'Test') == ["Test '' must be one or more of: '['apple', 'banana', 'orange']'"]
+    assert crf.match_one_or_more_of('', {}, ['apple|banana|orange'], 'Test') == ["Test '' must be one or more of: '['apple', 'banana', 'orange']'"]
 
 
 def test_validate_image_date_time():
     # Test that the function correctly handles valid date-time strings
-    assert validate_image_date_time('2022:01:01 12:00:00', {}, label = 'Test') == []
-    assert validate_image_date_time('2022:01:01 12:00:00.000000', {}, label = 'Test') == []
+    assert crf.validate_image_date_time('2022:01:01 12:00:00', {}, label = 'Test') == []
+    assert crf.validate_image_date_time('2022:01:01 12:00:00.000000', {}, label = 'Test') == []
 
     # Test that the function correctly handles invalid date-time strings
-    assert validate_image_date_time('2022-01-01 12:00:00', {}, label = 'Test') == ["Test '2022-01-01 12:00:00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
-    assert validate_image_date_time('2022:01:01 12:00', {}, label = 'Test') == ["Test '2022:01:01 12:00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
-    assert validate_image_date_time('2022:01:01', {}, label = 'Test') == ["Test '2022:01:01' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
-    assert validate_image_date_time('2022:01:01 12:00:00.00', {}, label = 'Test') == ["Test '2022:01:01 12:00:00.00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
+    assert crf.validate_image_date_time('2022-01-01 12:00:00', {}, label = 'Test') == ["Test '2022-01-01 12:00:00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
+    assert crf.validate_image_date_time('2022:01:01 12:00', {}, label = 'Test') == ["Test '2022:01:01 12:00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
+    assert crf.validate_image_date_time('2022:01:01', {}, label = 'Test') == ["Test '2022:01:01' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
+    assert crf.validate_image_date_time('2022:01:01 12:00:00.00', {}, label = 'Test') == ["Test '2022:01:01 12:00:00.00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
 
     # Test that the function correctly handles empty strings
-    assert validate_image_date_time('', {}, label = 'Test') == ["Test '' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
+    assert crf.validate_image_date_time('', {}, label = 'Test') == ["Test '' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"]
 
 
 def test_validate_orcid_ID():
     # Test that the function correctly handles valid ORCID IDs
-    assert validate_orcid_ID('https://orcid.org/0000-0002-1825-0097', {}, label='Test') == []
-    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456', {}, label='Test') == []
-    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-345X', {}, label='Test') == []
+    assert crf.validate_orcid_ID('https://orcid.org/0000-0002-1825-0097', {}, label='Test') == []
+    assert crf.validate_orcid_ID('https://orcid.org/1234-5678-9012-3456', {}, label='Test') == []
+    assert crf.validate_orcid_ID('https://orcid.org/1234-5678-9012-345X', {}, label='Test') == []
 
     # Test that the function correctly handles ORCID IDs with incorrect lengths
-    assert validate_orcid_ID('https://orcid.org/0000-0002-1825-009', {}, label='Test') == ["Test 'https://orcid.org/0000-0002-1825-009' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
-    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-34567', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-34567' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert crf.validate_orcid_ID('https://orcid.org/0000-0002-1825-009', {}, label='Test') == ["Test 'https://orcid.org/0000-0002-1825-009' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert crf.validate_orcid_ID('https://orcid.org/1234-5678-9012-34567', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-34567' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
 
     # Test that the function correctly handles ORCID IDs with incorrect formats
-    assert validate_orcid_ID('https://orcid.org/0000-0002-1825-009Z', {}, label='Test') == ["Test 'https://orcid.org/0000-0002-1825-009Z' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
-    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-34X5', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-34X5' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
-    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456-', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456-' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
-    assert validate_orcid_ID('https://orcid.org/1234-5678-9012-3456X', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456X' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert crf.validate_orcid_ID('https://orcid.org/0000-0002-1825-009Z', {}, label='Test') == ["Test 'https://orcid.org/0000-0002-1825-009Z' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert crf.validate_orcid_ID('https://orcid.org/1234-5678-9012-34X5', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-34X5' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert crf.validate_orcid_ID('https://orcid.org/1234-5678-9012-3456-', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456-' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert crf.validate_orcid_ID('https://orcid.org/1234-5678-9012-3456X', {}, label='Test') == ["Test 'https://orcid.org/1234-5678-9012-3456X' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
 
     # Test that the function correctly handles empty strings
-    assert validate_orcid_ID('', {}, label='Test') == ["Test '' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
+    assert crf.validate_orcid_ID('', {}, label='Test') == ["Test '' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"]
 
 
 def test_list_of_names():
     # Test that the function correctly handles valid names
-    assert list_of_names('Doe, John', {}, label='Test') == []
-    assert list_of_names('Doe, John J.', {}, label='Test') == []
-    assert list_of_names(['Doe, John', 'Smith, Jane'], {}, label='Test') == []
+    assert crf.list_of_names('Doe, John', {}, label='Test') == []
+    assert crf.list_of_names('Doe, John J.', {}, label='Test') == []
+    assert crf.list_of_names(['Doe, John', 'Smith, Jane'], {}, label='Test') == []
 
     # Test that the function correctly handles names with incorrect formats
-    assert list_of_names('John Doe', {}, label='Test') == ["Test 'John Doe' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"]
-    assert list_of_names('Doe John', {}, label='Test') == ["Test 'Doe John' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"]
-    assert list_of_names(['Doe, John', 'Jane Smith'], {}, label='Test') == ["Test '['Doe, John', 'Jane Smith']' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"]
+    assert crf.list_of_names('John Doe', {}, label='Test') == ["Test 'John Doe' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"]
+    assert crf.list_of_names('Doe John', {}, label='Test') == ["Test 'Doe John' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"]
+    assert crf.list_of_names(['Doe, John', 'Jane Smith'], {}, label='Test') == ["Test '['Doe, John', 'Jane Smith']' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"]
 
     # Test that the function correctly handles names with invalid characters
-    assert list_of_names('Doe, J0hn', {}, label='Test') == ["Test 'Doe, J0hn' - please use characters A-Z, a-z, À-ÿ where appropriate"]
-    assert list_of_names('Doe, John!', {}, label='Test') == ["Test 'Doe, John!' - please use characters A-Z, a-z, À-ÿ where appropriate"]
-    assert list_of_names(['Doe, John', 'Smith, J@ne'], {}, label='Test') == ["Test '['Doe, John', 'Smith, J@ne']' - please use characters A-Z, a-z, À-ÿ where appropriate"]
+    assert crf.list_of_names('Doe, J0hn', {}, label='Test') == ["Test 'Doe, J0hn' - please use characters A-Z, a-z, À-ÿ where appropriate"]
+    assert crf.list_of_names('Doe, John!', {}, label='Test') == ["Test 'Doe, John!' - please use characters A-Z, a-z, À-ÿ where appropriate"]
+    assert crf.list_of_names(['Doe, John', 'Smith, J@ne'], {}, label='Test') == ["Test '['Doe, John', 'Smith, J@ne']' - please use characters A-Z, a-z, À-ÿ where appropriate"]
 
     # Test that the function correctly handles empty strings
-    assert list_of_names('', {}, label='Test') == ["Test '' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate", "Test '' - please use characters A-Z, a-z, À-ÿ where appropriate"]
-    assert list_of_names([], {}, label='Test') == []
+    assert crf.list_of_names('', {}, label='Test') == ["Test '' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate", "Test '' - please use characters A-Z, a-z, À-ÿ where appropriate"]
+    assert crf.list_of_names([], {}, label='Test') == []
 
 
 def test_headline():
     # Test that the function correctly handles valid headlines
-    assert headline('This is a valid headline.', {}, label='Test') == []
-    assert headline('This headline is exactly 150 characters long ' + 'a' * 105, {}, label='Test') == []
-    assert headline('This headline is exactly 10 characters.', {}, label='Test') == []
+    assert crf.headline('This is a valid headline.', {}, label='Test') == []
+    assert crf.headline('This headline is exactly 150 characters long ' + 'a' * 105, {}, label='Test') == []
+    assert crf.headline('This headline is exactly 10 characters.', {}, label='Test') == []
 
     # Test that the function correctly handles headlines longer than 150 characters
-    assert headline('This headline is longer than 150 characters.' + 'a' * 120, {}, label='Test') == ["Test 'This headline is longer than 150 characters." + "a" * 120 + "' should contain no more than one sentence"]
+    assert crf.headline('This headline is longer than 150 characters.' + 'a' * 120, {}, label='Test') == ["Test 'This headline is longer than 150 characters." + "a" * 120 + "' should contain no more than one sentence"]
 
     # Test that the function correctly handles headlines with more than one sentence
-    assert headline('This is a headline. It has two sentences.', {}, label='Test') == ["Test 'This is a headline. It has two sentences.' should contain no more than one sentence"]
+    assert crf.headline('This is a headline. It has two sentences.', {}, label='Test') == ["Test 'This is a headline. It has two sentences.' should contain no more than one sentence"]
 
     # Test that the function correctly handles headlines that do not start with a capital letter
-    assert headline('this headline does not start with a capital letter.', {}, label='Test') == ["Test 'this headline does not start with a capital letter.' should start with a capital letter"]
+    assert crf.headline('this headline does not start with a capital letter.', {}, label='Test') == ["Test 'this headline does not start with a capital letter.' should start with a capital letter"]
 
     # Test that the function correctly handles headlines shorter than 10 characters
-    assert headline('Too short', {}, label='Test') == ["Test 'Too short' should be at least 10 characters"]
+    assert crf.headline('Too short', {}, label='Test') == ["Test 'Too short' should be at least 10 characters"]
 
     # Test that the function correctly handles empty strings
-    assert headline('', {}, label='Test') == ["Test '' should not be empty"]
+    assert crf.headline('', {}, label='Test') == ["Test '' should not be empty"]
 
 
 def test_title_check():
     # Test that the function correctly handles titles that match the filename
-    assert title_check('happy_netcdf', "/path/to/file/happy_netcdf", label='Test') == []
-    assert title_check('happy_NetCDF.nc', "/path/to/file/happy_NetCDF.nc", label='Test') == []
+    assert crf.title_check('happy_netcdf', "/path/to/file/happy_netcdf", label='Test') == []
+    assert crf.title_check('happy_NetCDF.nc', "/path/to/file/happy_NetCDF.nc", label='Test') == []
 
     # Test that the function correctly handles titles that do not match the filename
-    assert title_check('sad_netcdf', "/path/to/file/happy_netcdf", label='Test') == ["Test 'sad_netcdf' must match the name of the file"]
-    assert title_check('happy_NetCDF.nc', "/path/to/file/sad_NetCDF.nc", label='Test') == ["Test 'happy_NetCDF.nc' must match the name of the file"]
+    assert crf.title_check('sad_netcdf', "/path/to/file/happy_netcdf", label='Test') == ["Test 'sad_netcdf' must match the name of the file"]
+    assert crf.title_check('happy_NetCDF.nc', "/path/to/file/sad_NetCDF.nc", label='Test') == ["Test 'happy_NetCDF.nc' must match the name of the file"]
 
     # Test that the function correctly handles empty titles
-    assert title_check('', "/path/to/file/happy_netcdf", label='Test') == ["Test '' must match the name of the file"]
+    assert crf.title_check('', "/path/to/file/happy_netcdf", label='Test') == ["Test '' must match the name of the file"]
 
 
 def test_url_checker():
     # Test that the function correctly handles a reachable URL
-    assert url_checker("https://www.example.com", {}, label="Test") == []
+    assert crf.url_checker("https://www.example.com", {}, label="Test") == []
 
     # Test that the function correctly handles an unreachable URL
-    assert url_checker("https://www.nonexistenturl.com", {}, label="Test") == ["Test 'https://www.nonexistenturl.com' is not a reachable url"]
+    assert crf.url_checker("https://www.nonexistenturl.com", {}, label="Test") == ["Test 'https://www.nonexistenturl.com' is not a reachable url"]
 
     # Test that the function correctly handles an existing but unreachable URL
-    assert url_checker("https://www.example.com/nonexistentpage", {}, label="Test") == ["Test 'https://www.example.com/nonexistentpage' is not a reachable url"]
+    assert crf.url_checker("https://www.example.com/nonexistentpage", {}, label="Test") == ["Test 'https://www.example.com/nonexistentpage' is not a reachable url"]
 
     # Test that the function correctly handles an empty URL
-    assert url_checker("", {}, label="Test") == ["Test '' is not a reachable url"]
+    assert crf.url_checker("", {}, label="Test") == ["Test '' is not a reachable url"]
 
 
 def test_relation_url_checker():
     # Test that the function correctly handles valid inputs
-    assert relation_url_checker('relation https://example.com', {}, label='Test') == []
+    assert crf.relation_url_checker('relation https://example.com', {}, label='Test') == []
 
     # Test that the function correctly handles inputs without a space
-    assert relation_url_checker('relationhttps://example.com', {}, label='Test') == ["Test 'relationhttps://example.com' should contain a space before the url"]
+    assert crf.relation_url_checker('relationhttps://example.com', {}, label='Test') == ["Test 'relationhttps://example.com' should contain a space before the url"]
 
     # Test that the function correctly handles inputs with an invalid URL
-    assert relation_url_checker('relation https://', {}, label='Test') == ["Test 'https://' is not a reachable url"]
+    assert crf.relation_url_checker('relation https://', {}, label='Test') == ["Test 'https://' is not a reachable url"]
 
     # Test that the function correctly handles empty strings
-    assert relation_url_checker('', {}, label='Test') == ["Test '' should contain a space before the url"]
+    assert crf.relation_url_checker('', {}, label='Test') == ["Test '' should contain a space before the url"]
 
 
 def test_latitude():
     # Test that the function correctly handles valid latitudes
-    assert latitude('45.1234', {}, label='Test') == []
-    assert latitude('-90.0000', {}, label='Test') == []
-    assert latitude('90.0000', {}, label='Test') == []
+    assert crf.latitude('45.1234', {}, label='Test') == []
+    assert crf.latitude('-90.0000', {}, label='Test') == []
+    assert crf.latitude('90.0000', {}, label='Test') == []
 
     # Test that the function correctly handles invalid latitudes
-    assert latitude('90.0001', {}, label='Test') == ["Test '90.0001' must be within -90 and +90 "]
-    assert latitude('-90.0001', {}, label='Test') == ["Test '-90.0001' must be within -90 and +90 "]
-    assert latitude('100.0000', {}, label='Test') == ["Test '100.0000' must be within -90 and +90 "]
+    assert crf.latitude('90.0001', {}, label='Test') == ["Test '90.0001' must be within -90 and +90 "]
+    assert crf.latitude('-90.0001', {}, label='Test') == ["Test '-90.0001' must be within -90 and +90 "]
+    assert crf.latitude('100.0000', {}, label='Test') == ["Test '100.0000' must be within -90 and +90 "]
 
 
 def test_longitude():
     # Test that the function correctly handles valid longitudes
-    assert longitude('45.1234', {}, label='Test') == []
-    assert longitude('-180.0000', {}, label='Test') == []
-    assert longitude('180.0000', {}, label='Test') == []
+    assert crf.longitude('45.1234', {}, label='Test') == []
+    assert crf.longitude('-180.0000', {}, label='Test') == []
+    assert crf.longitude('180.0000', {}, label='Test') == []
 
     # Test that the function correctly handles invalid longitudes
-    assert longitude('180.0001', {}, label='Test') == ["Test '180.0001' must be within -180 and +180 "]
-    assert longitude('-180.0001', {}, label='Test') == ["Test '-180.0001' must be within -180 and +180 "]
-    assert longitude('200.0000', {}, label='Test') == ["Test '200.0000' must be within -180 and +180 "]
+    assert crf.longitude('180.0001', {}, label='Test') == ["Test '180.0001' must be within -180 and +180 "]
+    assert crf.longitude('-180.0001', {}, label='Test') == ["Test '-180.0001' must be within -180 and +180 "]
+    assert crf.longitude('200.0000', {}, label='Test') == ["Test '200.0000' must be within -180 and +180 "]
 
 
 # rules.py
