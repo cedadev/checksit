@@ -1,6 +1,6 @@
-import pytest
-import json
 from checksit.specs import show_specs
+from click.testing import CliRunner
+from checksit import cli
 
 
 def test_show_specs_all(capsys):
@@ -32,3 +32,18 @@ def test_show_specs_none_specified(capsys):
     captured_ceda_base = capsys.readouterr()
 
     assert captured_empty.out == captured_ceda_base.out
+
+
+def test_show_specs_cli():
+    runner = CliRunner()
+    result = runner.invoke(cli.show_specs, ["tests/test"])
+    expected_output = (
+        'Specifications:\n\ntests/test:\n{\n    "var-requires": {\n'
+        '        "func": "checksit.generic.check_var_attrs",\n        "params": {\n'
+        '            "defined_attrs": [\n                "long_name"\n            ]\n'
+        '        }\n    },\n    "required-global-attrs": {\n'
+        '        "func": "checksit.generic.check_dim_exists",\n        "params": {\n'
+        '            "dimensions": [\n                "time"\n'
+        '            ]\n        }\n    }\n}\n'
+        )
+    assert result.stdout == expected_output
