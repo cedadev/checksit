@@ -301,8 +301,20 @@ def test_check_var():
     assert errors == ["[variable**************:var2]: Attribute 'attr3' does not exist. "]
     assert warnings == []
 
+    variable = "var2:__OPTIONAL__"
+    defined_attrs = ["long_name:Variable 2", "units:kg", "attr3:value 3"]
+    errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
+    assert errors == ["[variable**************:var2]: Attribute 'attr3' does not exist. "]
+    assert warnings == []
+
     # Test that the function correctly identifies incorrect attributes
     variable = "var2"
+    defined_attrs = ["long_name:Variable 2", "units:s"]
+    errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
+    assert errors == ["[variable**************:var2]: Attribute 'units' must have definition s, not kg."]
+    assert warnings == []
+
+    variable = "var2:__OPTIONAL__"
     defined_attrs = ["long_name:Variable 2", "units:s"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
     assert errors == ["[variable**************:var2]: Attribute 'units' must have definition s, not kg."]
