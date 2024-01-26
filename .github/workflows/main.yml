@@ -41,4 +41,4 @@ jobs:
     - name: Test with pytest
       run: |
         export UDUNITS2_XML_PATH=/opt/share/udunits/udunits2.xml
-        python -m pytest -v tests/test_readers.py tests/test_rules.py tests/test_show_specs.py tests/test_images.py tests/test_generic.py tests/test_utils.py tests/test_ncas_file_proc.py
+        python -m pytest -v tests/test_readers.py tests/test_rules.py tests/test_show_specs.py tests/test_images.py tests/test_generic.py tests/test_utils.py tests/test_ncas_file_proc.py tests/test_cvs.py
