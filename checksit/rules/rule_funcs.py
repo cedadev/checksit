@@ -253,3 +253,17 @@ def longitude(value, context, extras=None, label=""):
         errors.append(f"{label} '{value}' must be within -180 and +180 ")
 
     return errors
+
+
+def ceda_platform(value, context, extras=None, label=""):
+    """
+    A function to check if the platform is in the CEDA catalogue API
+    """
+    errors = []
+    api_result = requests.get(f"http://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}")
+    legit_platform = (api_result.json()['results'][0]['relatedTo']['short_code'] == "plat")
+
+    if not legit_platform:
+        errors.append(f"{label} '{value}' is not a valid platform in the CEDA catalogue")
+    
+    return errors
