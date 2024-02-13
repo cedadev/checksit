@@ -2,6 +2,7 @@ import os
 import re
 import json
 from collections import deque
+import requests
 
 
 from .config import get_config
@@ -23,10 +24,27 @@ class Vocabs:
         vocab_file = os.path.join(vocabs_dir, f"{vocab_id}.json")
         self._vocabs[vocab_id] = json.load(open(vocab_file))
 
+    def _load_from_url(self, vocab_id):
+        # Loads a specific vocabulary from a URL
+        vocab_id_url = vocab_id.replace("__URL__","https://")
+        if vocab_id_url.startswith("https://raw.githubusercontent.com") and "/__latest__/" in vocab_id_url:
+            vocab_id_url_base = vocab_id_url.split("/__latest__")[0]
+            vocab_id_url_base = vocab_id_url_base.replace("raw.githubusercontent.com","github.com")
+            latest_version = requests.get(f"{vocab_id_url_base}/releases/latest").url.split("/")[-1]
+            vocab_id_url = vocab_id_url.replace("__latest__", latest_version)
+        res = requests.get(vocab_id_url.replace("__URL__","https://"))
+        if res.status_code == 200:
+            self._vocabs[vocab_id] = res.json()
+        else:
+            print(f"[WARNING] Failed to load vocab: {vocab_id}")
+
     def __getitem__(self, vocab_id):
         # Enables dictionary access to individual vocabulary items
         if vocab_id not in self._vocabs:
-            self._load(vocab_id)
+            if vocab_id.startswith("__URL__"):
+                self._load_from_url(vocab_id)
+            else:
+                self._load(vocab_id)
 
         return self._vocabs[vocab_id] 
 
