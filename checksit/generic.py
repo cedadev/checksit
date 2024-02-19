@@ -13,7 +13,7 @@ date_regex = re.compile(r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\
 def _get_bounds_var_ids(dct):
     return [var_id for var_id in dct["variables"] if (
             var_id.startswith("bounds_") or var_id.startswith("bnds_") or
-            var_id.endswith("_bounds") or var_id.endswith("_bnds"))] 
+            var_id.endswith("_bounds") or var_id.endswith("_bnds"))]
 
 
 def one_spelling_mistake(word):
@@ -29,7 +29,7 @@ def one_spelling_mistake(word):
     inserts    = [L + c + R               for L, R in splits for c in letters]
     return set(deletes + transposes + replaces + inserts)
 
-def two_spelling_mistakes(word): 
+def two_spelling_mistakes(word):
     """
     All edits that are two edits away from `word`.
     From https://norvig.com/spell-correct.html
@@ -56,14 +56,14 @@ def check_var_attrs(dct, defined_attrs, ignore_bounds=True, skip_spellcheck=Fals
     bounds_vars = _get_bounds_var_ids(dct)
 
     for var_id, var_dict in dct["variables"].items():
-        if var_id in bounds_vars: continue 
+        if var_id in bounds_vars: continue
 
         for attr in defined_attrs:
             if is_undefined(var_dict.get(attr)):
                 errors.append(f"[variable**************:{var_id}]: Attribute '{attr}' must have a valid definition.")
 
     return errors, warnings
- 
+
 
 def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=None, rules_attrs=None, skip_spellcheck=False):
     """
@@ -112,7 +112,7 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
             errors.append(
                 f"[global-attributes:******:{attr}]: '{dct['global_attributes'].get(attr, UNDEFINED)}' "
                 f"does not match regex pattern '{regex_attrs[attr]}'."
-            ) 
+            )
 
     for attr in rules_attrs:
         if attr not in dct['global_attributes']:
@@ -182,7 +182,7 @@ def check_dim_exists(dct, dimensions, skip_spellcheck=False):
                     f"{search_close_match(dim, dct['dimensions'].keys()) if not skip_spellcheck else ''}"
                 )
 
-    return errors, warnings 
+    return errors, warnings
 
 
 def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
@@ -242,7 +242,7 @@ def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
         else:
             for attr in defined_attrs:
                 attr_key = attr.split(':')[0]
-                attr_value = ':'.join(attr.split(':')[1:]) 
+                attr_value = ':'.join(attr.split(':')[1:])
                 if attr_key not in dct["variables"][variable]:
                     errors.append(
                         f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. "
@@ -282,15 +282,15 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
 
     # check platform
     if "platform" in rule_checks.keys():
-        if rules.check(rule_checks["platform"], file_name_parts[1], label="_") != ([], []):
-            errors.append(f"[file name]: Invalid file name format - unknown platform {file_name_parts[1]}")
+        if rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -") != ([], []):
+            errors, warnings = rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -")
     else:
         msg = "No platform rule defined in specs"
         raise KeyError(msg)
-    
+
     # check date format
     # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
-    # first checks format, then date validity 
+    # first checks format, then date validity
     if not date_regex.match(file_name_parts[2]):
         errors.append(f"[file name]: Invalid file name format - bad date format {file_name_parts[2]}")
     else:
@@ -302,7 +302,7 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
                 valid_date_found = True
                 break
             except ValueError:
-                pass 
+                pass
         if not valid_date_found:
             errors.append(f"[file name]: Invalid file name format - invalid date in file name {file_name_parts[2]}")
 

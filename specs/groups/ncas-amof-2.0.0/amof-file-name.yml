@@ -5,4 +5,4 @@ file-name-format:
       instrument: __URL__raw.githubusercontent.com/ncasuk/ncas-data-instrument-vocabs/__latest__/AMF_CVs/AMF_ncas_instrument.json:ncas_instrument:__all__
       data_product: __vocabs__:AMF_CVs/2.0.0/AMF_product:product
     rule_checks:
-      platform: rule-func:ceda-platform
+      platform: rule-func:ceda-platform, rule-func-warning:ncas-platform

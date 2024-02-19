@@ -4,7 +4,7 @@ required-global-attrs:
     vocab_attrs:
       source: __URL__raw.githubusercontent.com/ncasuk/ncas-data-instrument-vocabs/__latest__/AMF_CVs/AMF_ncas_instrument.json:ncas_instrument:__all__:description
     rules_attrs:
-      platform: rule-func:ceda-platform
+      platform: rule-func:ceda-platform, rule-func-warning:ncas-platform
       Conventions: regex:CF-1.6,\sNCAS-AMF-2.0.0
       instrument_manufacturer: rule-func:string-of-length:2+
       instrument_model: rule-func:string-of-length:3+

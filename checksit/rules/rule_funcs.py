@@ -85,7 +85,7 @@ def string_of_length(value, context, extras=None, label=""):
         errors.append(f"{label} '{value}' must be exactly {min_length} characters")
 
     return errors
-    
+
 
 def validate_image_date_time(value, context, extras=None, label=""):
     """
@@ -98,7 +98,7 @@ def validate_image_date_time(value, context, extras=None, label=""):
             errors.append(f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s")
     except ValueError:
         errors.append(f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s")
-    
+
     return errors
 
 
@@ -107,24 +107,24 @@ def validate_orcid_ID(value, context, extras=None, label=""):
     A function to verify the format of an orcid ID
     """
     orcid_string = "https://orcid.org/"                                     # required format of start of the string
-    
+
     errors = []
-    
+
     PI_orcid_digits = value[-19:]
     PI_orcid_digits_only = PI_orcid_digits.replace("-", "")
 
     # Check that total the length is correct
-    if len(value) != 37:    
+    if len(value) != 37:
         errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
-       
+
     # Check the start of the string (first 18 characters)
     elif (value[0:18] != orcid_string or
-        
+
         # Check that the "-" are in the correct places
         value[22] != "-" or
         value[27] != "-" or
         value[32] != "-" or
-        
+
         # Check that the last characters contain only "-" and digits
         not PI_orcid_digits_only.isdigit):
 
@@ -148,7 +148,7 @@ def list_of_names(value, context, extras=None, label=""):
                 warnings.append(f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate")
             if not re.fullmatch(character_name_pattern, i):
                 warnings.append(f"{label} '{value}' - please use characters A-Z, a-z, À-ÿ where appropriate")
-    
+
     if type(value) == str:
         if not re.fullmatch(name_pattern, value):
             warnings.append(f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate")
@@ -212,7 +212,7 @@ def relation_url_checker(value, context, extras=None, label=""):
     A function to check if Relation field is in the correct format, and that the url exists
     """
     errors = []
-    
+
     if " " not in value:
         errors.append(f"{label} '{value}' should contain a space before the url")
     else:
@@ -228,7 +228,7 @@ def latitude(value, context, extras=None, label=""):
     A function to check if the latitude is within -90 and +90
     """
     errors = []
-    
+
     latitude = re.findall(r'[0-9]+', value)
     int_latitude = int(latitude[0])
     dec_latitude = int(latitude[1])
@@ -244,7 +244,7 @@ def longitude(value, context, extras=None, label=""):
     A function to check if the longitude is within -180 and +180
     """
     errors = []
-    
+
     longitude = re.findall(r'[0-9]+', value)
     int_longitude = int(longitude[0])
     dec_longitude = int(longitude[1])
@@ -261,9 +261,29 @@ def ceda_platform(value, context, extras=None, label=""):
     """
     errors = []
     api_result = requests.get(f"http://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}")
-    legit_platform = (api_result.json()['results'][0]['relatedTo']['short_code'] == "plat")
+    if (len(api_result.json()['results']) == 1) and (api_result.json()['results'][0]['relatedTo']['short_code'] == "plat"):
+        legit_platform = True
+    else:
+        legit_platform = False
 
     if not legit_platform:
         errors.append(f"{label} '{value}' is not a valid platform in the CEDA catalogue")
-    
+
+    return errors
+
+
+def ncas_platform(value, context, extras=None, label=""):
+    """
+    A function to check if the platform is in the NCAS platform list
+    """
+    errors = []
+
+    latest_version = requests.get("https://github.com/ncasuk/ncas-data-platform-vocabs/releases/latest").url.split("/")[-1]
+
+    result = requests.get(f"https://raw.githubusercontent.com/ncasuk/ncas-data-platform-vocabs/{latest_version}/AMF_CVs/AMF_platform.json")
+    ncas_platforms = result.json()['platform'].keys()
+
+    if value not in ncas_platforms:
+        errors.append(f"{label} '{value}' is not a valid NCAS platform")
+
     return errors
