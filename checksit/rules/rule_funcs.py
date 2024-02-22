@@ -42,7 +42,8 @@ def match_file_name(value, context, extras=None, label=""):
 
 def match_one_of(value, context, extras=None, label=""):
     """
-    Matches only one of...
+    value matches one of options defined in extras
+    default rule splitter is '|' and defined in checksit.ini file
     """
     options = [x.strip() for x in extras[0].split(rule_splitter)]
     errors = []
@@ -55,7 +56,7 @@ def match_one_of(value, context, extras=None, label=""):
 
 def match_one_or_more_of(value, context, extras=None, label=""):
     """
-    Matches one of more of...
+    String value or list value must match one of more of list given in extras
     """
     def as_set(x, sep): return set([i.strip() for i in x.split(sep)])
     options = as_set(extras[0], rule_splitter)
@@ -93,10 +94,15 @@ def validate_image_date_time(value, context, extras=None, label=""):
     """
     errors = []
 
-    try:
-        if value != datetime.strptime(value, "%Y:%m:%d %H:%M:%S").strftime("%Y:%m:%d %H:%M:%S") and value != datetime.strptime(value, "%Y:%m:%d #%H:%M:%S.%f").strftime("%Y:%m:%d %H:%M:%S.%f"):
-            errors.append(f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s")
-    except ValueError:
+    match = False
+    for f in ["%Y:%m:%d %H:%M:%S", "%Y:%m:%d %H:%M:%S.%f"]:
+        if match == False:
+            try:
+                match = (value == datetime.strptime(value, f).strftime(f))
+            except ValueError:
+                pass
+
+    if not match:
         errors.append(f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s")
     
     return errors
@@ -125,8 +131,11 @@ def validate_orcid_ID(value, context, extras=None, label=""):
         value[27] != "-" or
         value[32] != "-" or
         
-        # Check that the last characters contain only "-" and digits
-        not PI_orcid_digits_only.isdigit):
+        # Check that the last characters contain only "-" and digits (plus 'X' for last digit)
+        not (
+            PI_orcid_digits_only.isdigit() or (PI_orcid_digits_only[0:15].isdigit() and PI_orcid_digits_only[15] == "X")
+        )
+    ):
 
         errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
 
@@ -164,17 +173,21 @@ def headline(value, context, extras=None, label=""):
     """
     warnings = []
 
-    if len(value) > 150:
-        warnings.append(f"{label} '{value}' should contain no more than one sentence")
+    if value == "":
+        warnings.append(f"{label} '{value}' should not be empty")
 
-    if value.count(".") >= 2:
-        warnings.append(f"{label} '{value}' should contain no more than one sentence")
+    else:
+        if len(value) > 150:
+            warnings.append(f"{label} '{value}' should contain no more than one sentence")
 
-    if not value[0].isupper():
-        warnings.append(f"{label} '{value}' should start with a capital letter")
+        if value.count(".") >= 2:
+            warnings.append(f"{label} '{value}' should contain no more than one sentence")
 
-    if len(value) < 10:
-        warnings.append(f"{label} '{value}' should be at least 10 characters")
+        if not value[0].isupper():
+            warnings.append(f"{label} '{value}' should start with a capital letter")
+
+        if len(value) < 10:
+            warnings.append(f"{label} '{value}' should be at least 10 characters")
 
     return warnings
 
@@ -218,7 +231,7 @@ def relation_url_checker(value, context, extras=None, label=""):
     else:
         relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
         if url_checker(relation_url, context, extras, label) != []:
-            errors.append(url_checker(relation_url, context, extras, label))       # check the url exists using the url_checker() function defined above
+            errors.extend(url_checker(relation_url, context, extras, label))       # check the url exists using the url_checker() function defined above
 
     return errors
 

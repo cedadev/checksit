@@ -1,22 +1,22 @@
-from checksit.cvs import vocabs, vc
+from checksit.cvs import vocabs
+import pytest
 
 
-lookups = {
-    'vocabs:ukcp18:variables:season_year':
-        {'dimensions': ['time'], 'units': '1', 'dtype': 'int', 'long_name': 'season_year'},
-    'vocabs:ukcp18:collection': 
-        ['land-cpm', 'land-derived', 'land-gcm', 'land-indices', 'land-prob', 'land-rcm', 'land-rcm-gwl', 'marine-sim'],
-    'vocabs:cf-netcdf:Conventions':
-        ["CF-1.5", "CF-1.6"]
-}
+def test_lookup():
+    assert vocabs.lookup('__vocabs__:tests/test_instruments:test_instruments') == {'inst1': {"instrument_id": "inst1"}, "inst2": {"instrument_id": "inst2"}}
+    assert vocabs.lookup('__vocabs__:tests/test_instruments:test_instruments:__all__') == ["inst1", "inst2"]
+    assert vocabs.lookup('__vocabs__:tests/test_instruments:test_instruments:inst1') == {"instrument_id": "inst1"}
+    assert vocabs.lookup('__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id') == ["inst1", "inst2"]
+    with pytest.raises(ValueError):
+        vocabs.lookup('__vocabs__:tests/test_instruments:test_instruments:__all__:__all__')
 
-
-for lookup, exp_value in lookups.items():
-    value = vocabs.lookup(lookup)
-    assert exp_value == value
-
-
-for lookup, exp_value in lookups.items():
-    value = vc._lookup(lookup)
-    assert exp_value == value
-
+def test_check():
+    assert vocabs.check('__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id', 'inst1', label = "Test") == []
+    assert vocabs.check(
+        "__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id", "inst3", label="Test",
+    ) == [
+        "Test 'inst3' not in vocab options: ['inst1', 'inst2'] (using: '__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id')"
+    ]
+    assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1', {"platform_id": "plat1"}, label = "Test") == ["Test does not have attribute 'description'"]
+    assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id', "plat1", label = "Test") == []
+    assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id', "plat2", label = "Test") == ["Test 'plat2' does not equal required vocab value: 'plat1' (using: '__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id')"]
