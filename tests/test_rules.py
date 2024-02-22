@@ -204,6 +204,25 @@ def test_longitude():
     assert crf.longitude('200.0000', {}, label='Test') == ["Test '200.0000' must be within -180 and +180 "]
 
 
+def test_ceda_platform():
+    # Test function returns no errors for all NCAS platforms
+    for plat in ["bt-tower-t35", "cao", "cao-sparsholt", "cdao", "cdao-frongoch", "cvao", "faam", "iao", "wao"]:
+        assert crf.ceda_platform(plat, {}) == []
+    # Test function returns no errors for a non-NCAS platform
+    assert crf.ceda_platform("netheravon", {}) == []
+    # Test function returns error for example platform
+    assert crf.ceda_platform("example", {}, label='Test') == ["Test 'example' is not a valid platform in the CEDA catalogue"]
+
+
+def test_ncas_platform():
+    # Test function returns no errors for all NCAS platforms
+    for plat in ["bt-tower-t35", "cao", "cao-sparsholt", "cdao", "cdao-frongoch", "cvao", "faam", "iao", "wao"]:
+        assert crf.ncas_platform(plat, {}) == []
+    # Test function returns error for a non-NCAS platform
+    assert crf.ncas_platform("netheravon", {}, label='Test') == ["Test 'netheravon' is not a valid NCAS platform"]
+    # Test function returns error for example platform
+    assert crf.ncas_platform("example", {}, label='Test') == ["Test 'example' is not a valid NCAS platform"]
+
 # rules.py
 def _test_type(_type, value):
     return r.check(f"type-rule:{_type}", value)
