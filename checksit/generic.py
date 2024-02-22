@@ -283,7 +283,11 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
     # check platform
     if "platform" in rule_checks.keys():
         if rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -") != ([], []):
-            errors, warnings = rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -")
+            rule_errors, rule_warnings = rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -")
+            if rule_errors != []:
+                errors.extend(rule_errors)
+            if rule_warnings != []:
+                warnings.extend(rule_warnings)
     else:
         msg = "No platform rule defined in specs"
         raise KeyError(msg)
