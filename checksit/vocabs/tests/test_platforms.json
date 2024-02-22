@@ -1,0 +1,12 @@
+{
+    "test_platforms": {
+        "plat1": {
+            "platform_id": "plat1",
+            "description": "test platform 1"
+        },
+        "plat2": {
+            "platform_id": "plat2",
+            "description": "test platform 2"
+        }
+    }
+}
