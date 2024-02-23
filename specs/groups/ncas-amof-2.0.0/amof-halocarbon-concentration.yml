@@ -534,8 +534,8 @@ var-requires36:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CCl4
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires37:
   func: checksit.generic.check_var
   params:
@@ -546,8 +546,8 @@ var-requires37:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CHBr3
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires38:
   func: checksit.generic.check_var
   params:
@@ -558,8 +558,8 @@ var-requires38:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2I2
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires39:
   func: checksit.generic.check_var
   params:
@@ -570,8 +570,8 @@ var-requires39:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2ICl
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires40:
   func: checksit.generic.check_var
   params:
@@ -582,8 +582,8 @@ var-requires40:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CHBrCl2
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires41:
   func: checksit.generic.check_var
   params:
@@ -594,8 +594,8 @@ var-requires41:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2Br2
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires42:
   func: checksit.generic.check_var
   params:
@@ -606,8 +606,8 @@ var-requires42:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CHCl3
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires43:
   func: checksit.generic.check_var
   params:
@@ -618,8 +618,8 @@ var-requires43:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH3I
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires44:
   func: checksit.generic.check_var
   params:
@@ -630,5 +630,5 @@ var-requires44:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2BrCl
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information. bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
