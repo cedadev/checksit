@@ -14,18 +14,18 @@ def map_data_type(dtype):
         'byte':'byte',
     }
     return data_map[dtype]
-    
-    
+
+
 
 # main function
 
-def make_amof_specs(version_number): 
+def make_amof_specs(version_number):
     ###############
     # DIRECTORIES #
     ###############
-    
-    cvs_dir = f"./checksit/vocabs/AMF_CVs/{version_number}"
-    out_dir = f"./specs/groups/ncas-amof-{version_number}"
+
+    cvs_dir = f"vocabs/AMF_CVs/{version_number}"
+    out_dir = f"../specs/groups/ncas-amof-{version_number}"
 
 
     ################
@@ -103,7 +103,7 @@ def make_amof_specs(version_number):
         f.write('    rules_attrs:\n')
         for attr, rule in attr_rules.items():
             if rule.split(':')[0] in ['regex','regex-rule','type-rule','rule-func']:
-                f.write(f'      {attr}: {rule}\n') 
+                f.write(f'      {attr}: {rule}\n')
 
     ####################
     # DEPLOYMENT MODES #
@@ -125,7 +125,7 @@ def make_amof_specs(version_number):
                     if attr == 'type':
                         attr_value = map_data_type(attr_value)
                     deploy_vars[variable].append(f'{attr}:{attr_value}')
-         
+
 
 
         spec_file_name = f'{out_dir}/amof-common-{mode}.yml'
@@ -145,7 +145,7 @@ def make_amof_specs(version_number):
                      '  params:\n    dimensions:\n'))
             for dim in deploy_dims:
                 f.write(f'      - {dim}\n')
-    
+
     ##############
     ## PRODUCTS ##
     ##############
@@ -183,11 +183,11 @@ def make_amof_specs(version_number):
         else:
             prod_dims_exist = False
 
-    
+
         if exists(f'{cvs_dir}/AMF_product_{product}_global-attributes.json'):
             with open(f'{cvs_dir}/AMF_product_{product}_global-attributes.json') as f:
                 data = json.load(f)[f'product_{product}_global-attributes']
-            
+
                 attr_rules = {}
 
                 for attr in data.keys():
@@ -240,12 +240,13 @@ def make_amof_specs(version_number):
         else:
             prod_attrs_exist = False
 
-        
+
 
         spec_file_name = f'{out_dir}/amof-{product}.yml'
         with open(spec_file_name, 'w') as f:
             if prod_vars_exist:
                 for i, var in enumerate(product_info.items()):
+                    qc_flags = False
                     f.write(f'var-requires{i}:\n')
                     f.write(('  func: checksit.generic.check_var\n'
                              '  params:\n    variable:\n'
@@ -253,8 +254,13 @@ def make_amof_specs(version_number):
                     for attr in var[1]:
                         attr_key = attr.split(':')[0]
                         attr_value = ':'.join(attr.split(':')[1:])
-                        f.write(f'      - {attr_key}:{attr_value}\n')
-    
+                        if attr_key not in ["flag_values", "flag_meanings"]:
+                            f.write(f'      - {attr_key}:{attr_value}\n')
+                        else:
+                            qc_flags = True
+                    if qc_flags:
+                        f.write(f'    attr_rules:\n      - rule-func:check-qc-flags\n')
+
             if prod_dims_exist:
                 f.write(('dims-requires:\n  func: checksit.generic.check_dim_exists\n'
                          '  params:\n    dimensions:\n'))
@@ -270,10 +276,10 @@ def make_amof_specs(version_number):
                 f.write('    rules_attrs:\n')
                 for attr, rule in attr_rules.items():
                     if rule.split(':')[0] in ['regex','regex-rule','type-rule','rule-func']:
-                        f.write(f'      {attr}: {rule}\n') 
+                        f.write(f'      {attr}: {rule}\n')
 
 
 if __name__ == "__main__":
     import sys
     version_number = sys.argv[1]
-    make_amof_specs(version_number) 
+    make_amof_specs(version_number)
