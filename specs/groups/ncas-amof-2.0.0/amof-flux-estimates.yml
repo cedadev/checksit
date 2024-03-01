@@ -172,8 +172,8 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew U
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -184,8 +184,8 @@ var-requires12:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew V
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -196,8 +196,8 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew W
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -208,8 +208,8 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew Ts
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -220,8 +220,8 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis U
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -232,8 +232,8 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis V
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -244,8 +244,8 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis W
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -256,8 +256,8 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis Ts
-      - flag_values:0b,1b, 2b
-      - flag_meanings:bad_data good_data suspect_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -268,8 +268,8 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WU
-      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b
-      - flag_meanings:not_used good_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data bad_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -280,8 +280,8 @@ var-requires20:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WV
-      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b
-      - flag_meanings:not_used good_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data bad_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -292,8 +292,8 @@ var-requires21:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WTs
-      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b
-      - flag_meanings:not_used good_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data suspect_data bad_data
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires22:
   func: checksit.generic.check_var
   params:
@@ -304,8 +304,8 @@ var-requires22:
       - dimension:time
       - units:1
       - long_name:Quality flag: WU
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:bad_data good_data _good_for_reasearch suspect_data_good_for_general_use suspect_data_requires_further_checking_but_may_be_ok_for_general_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires23:
   func: checksit.generic.check_var
   params:
@@ -316,8 +316,8 @@ var-requires23:
       - dimension:time
       - units:1
       - long_name:Quality flag: WV
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:bad_data good_data _good_for_reasearch suspect_data_good_for_general_use suspect_data_requires_further_checking_but_may_be_ok_for_general_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires24:
   func: checksit.generic.check_var
   params:
@@ -328,8 +328,8 @@ var-requires24:
       - dimension:time
       - units:1
       - long_name:Quality flag: WTs
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:bad_data good_data _good_for_reasearch suspect_data_good_for_general_use suspect_data_requires_further_checking_but_may_be_ok_for_general_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires25:
   func: checksit.generic.check_var
   params:
@@ -340,5 +340,5 @@ var-requires25:
       - dimension:time
       - units:1
       - long_name:Quality flag: General Turbulent Characteristic of W Class
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:bad_data good_data _good_for_reasearch suspect_data_good_for_general_use suspect_data_requires_further_checking_but_may_be_ok_for_general_use
+    attr_rules:
+      - rule-func:check-qc-flags

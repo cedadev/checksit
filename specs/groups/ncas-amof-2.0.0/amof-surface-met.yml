@@ -212,8 +212,8 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Temperature
-      - flag_values:0b,1b,2b,3b
-      - flag_meanings:not_used good_data bad_data_temperature_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -224,8 +224,8 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Relative Humidity
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_relative_humidity_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -236,8 +236,8 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Pressure
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_pressure_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -248,8 +248,8 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind Speed
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data suspect_data_measured_wind_speed_==_0_m_s-1 bad_data_wind_speed_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -260,8 +260,8 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind From Direction
-      - flag_values:0b,1b, 2b, 3b, 4b,
-      - flag_meanings:not_used good_data suspect_data_measured_wind_speed_==_0_m_s-1 bad_data_wind_direction_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -272,8 +272,8 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Radiation
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data bad_data_longwave_radiation_outside_sensor_operational_range bad_data_shortwave_radiation_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -284,8 +284,8 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Precipitation
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data bad_data_rainfall_rate_outside_sensor_operational_range bad_data_accumulated_rain_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -296,8 +296,8 @@ var-requires20:
       - dimension:time
       - units:1
       - long_name:Data Quality Flag: Downwelling Total Irradiance
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data bad_data_longwave_radiation_outside_sensor_operational_range bad_data_shortwave_radiation_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -308,5 +308,5 @@ var-requires21:
       - dimension:time
       - units:1
       - long_name:Data Quality Flag: Net Total Irradiance
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data bad_data_longwave_radiation_outside_sensor_operational_range bad_data_shortwave_radiation_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags

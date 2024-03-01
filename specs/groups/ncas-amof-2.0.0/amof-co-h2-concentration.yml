@@ -132,8 +132,8 @@ var-requires8:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CO
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_data_not_quality_controlled bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -144,5 +144,5 @@ var-requires9:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: H2
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_data_not_quality_controlled bad_data_do_not_use
+    attr_rules:
+      - rule-func:check-qc-flags
