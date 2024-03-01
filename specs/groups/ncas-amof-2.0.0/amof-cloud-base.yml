@@ -176,8 +176,8 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Cloud Base
-      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b
-      - flag_meanings:not_used good_data suspect_data_no_signifcant_backscatter suspect_data_full_obscuration_determined_but_no_cloud_base_detected suspect_data_some_obscuration_detected_but_determined_to_be_transparent bad_data_raw_data_missing suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

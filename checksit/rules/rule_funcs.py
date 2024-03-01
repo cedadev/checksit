@@ -3,6 +3,7 @@ import re
 from datetime import datetime
 import requests
 from urllib.request import urlopen
+import numpy as np
 
 from . import processors
 from ..config import get_config
@@ -130,7 +131,7 @@ def validate_orcid_ID(value, context, extras=None, label=""):
         value[22] != "-" or
         value[27] != "-" or
         value[32] != "-" or
-        
+
         # Check that the last characters contain only "-" and digits (plus 'X' for last digit)
         not (
             PI_orcid_digits_only.isdigit() or (PI_orcid_digits_only[0:15].isdigit() and PI_orcid_digits_only[15] == "X")
@@ -298,5 +299,38 @@ def ncas_platform(value, context, extras=None, label=""):
 
     if value not in ncas_platforms:
         errors.append(f"{label} '{value}' is not a valid NCAS platform")
+    
+    return errors
+
+        
+def check_qc_flags(value, context, extras=None, label=""):
+    """
+    A function to check flag_values and flag_meanings
+    value - flag_values
+    context - flag_meanings
+    """
+    errors = []
+
+    meanings = context.split(" ")
+
+    # check flag_values are correctly formatted (should be array of bytes)
+    if not (isinstance(value, np.ndarray) or isinstance(value, tuple)):
+        errors.append(f"{label} QC flag_values must be an array or tuple of byte values, not {type(value)}.")
+
+    # check there are at least two values and they start with 0 and 1
+    if not len(value) > 2:
+        errors.append(f"{label} There must be at least two QC flag values.")
+    elif not (np.all(value[:2] == [0, 1]) or np.all(value[:2] == (0, 1))):
+        errors.append(f"{label} First two QC flag_values must be '[0, 1]'.")
+
+    # check there are at least two meanings and the first two are correct
+    if not len(meanings) > 2:
+        errors.append(f"{label} There must be at least two QC flag meanings (space separated).")
+    elif not np.all(meanings[:2] == ["not_used", "good_data"]):
+        errors.append(f"{label} First two QC flag_meanings must be 'not_used' and 'good_data'.")
+
+    # check number of values is same as number of meanings
+    if not len(value) == len(meanings):
+        errors.append(f"{label} Number of flag_values must equal number of flag_meanings.")
 
     return errors

@@ -185,7 +185,7 @@ def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     return errors, warnings
 
 
-def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
+def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False):
     """
     Check variable exists and has attributes defined.
     """
@@ -220,7 +220,7 @@ def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
                     attr_value = attr_value.strip(',')
                     attr_value = [ int(i.strip('b')) for i in attr_value.split(',') ]
                     attr_value = np.array(attr_value, dtype=np.int8)
-                    if not np.all(dct["variables"][variable].get(attr_key) == attr_value):
+                    if not ((len(dct["variables"][variable].get(attr_key)) == len(attr_value)) and np.all(dct["variables"][variable].get(attr_key) == attr_value)):
                         errors.append(
                             f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                             f"not '{dct['variables'][variable].get(attr_key)}'."
@@ -233,6 +233,13 @@ def check_var(dct, variable, defined_attrs, skip_spellcheck=False):
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, "
                         f"not {dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}."
                     )
+            for rule_to_check in attr_rules:
+                if rule_to_check == "rule-func:check-qc-flags":
+                    rule_errors, rule_warnings = rules.check(rule_to_check, dct['variables'][variable].get("flag_values"), context=dct['variables'][variable].get("flag_meanings"), label=f"[variable******:{variable}]: ")
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
+
+
     else:
         if variable not in dct["variables"].keys():
             errors.append(
