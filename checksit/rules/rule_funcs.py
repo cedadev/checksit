@@ -269,6 +269,40 @@ def longitude(value, context, extras=None, label=""):
     return errors
 
 
+def ceda_platform(value, context, extras=None, label=""):
+    """
+    A function to check if the platform is in the CEDA catalogue API
+    """
+    errors = []
+    api_result = requests.get(f"http://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}")
+    if (len(api_result.json()['results']) == 1) and (api_result.json()['results'][0]['relatedTo']['short_code'] == "plat"):
+        legit_platform = True
+    else:
+        legit_platform = False
+
+    if not legit_platform:
+        errors.append(f"{label} '{value}' is not a valid platform in the CEDA catalogue")
+
+    return errors
+
+
+def ncas_platform(value, context, extras=None, label=""):
+    """
+    A function to check if the platform is in the NCAS platform list
+    """
+    errors = []
+
+    latest_version = requests.get("https://github.com/ncasuk/ncas-data-platform-vocabs/releases/latest").url.split("/")[-1]
+
+    result = requests.get(f"https://raw.githubusercontent.com/ncasuk/ncas-data-platform-vocabs/{latest_version}/AMF_CVs/AMF_platform.json")
+    ncas_platforms = result.json()['platform'].keys()
+
+    if value not in ncas_platforms:
+        errors.append(f"{label} '{value}' is not a valid NCAS platform")
+    
+    return errors
+
+        
 def check_qc_flags(value, context, extras=None, label=""):
     """
     A function to check flag_values and flag_meanings

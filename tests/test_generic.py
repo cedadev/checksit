@@ -104,7 +104,7 @@ def test_check_global_attrs():
     assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
     assert warnings == []
 
-    # Test function handles undefined attributes with vocab checks correctly 
+    # Test function handles undefined attributes with vocab checks correctly
     vocab_attrs = {
         "attr1": "__vocabs__:tests/test_platforms:test_platforms:__all__"
     }
@@ -136,7 +136,7 @@ def test_check_global_attrs():
     assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
     assert warnings == []
 
-    # Test function handles undefined attributes with regex checks correctly 
+    # Test function handles undefined attributes with regex checks correctly
     regex_attrs = {
         "attr1": r"\d{4}-\d{2}-\d{2}"
     }
@@ -168,7 +168,7 @@ def test_check_global_attrs():
     assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
     assert warnings == []
 
-    # Test function handles undefined attributes with rules checks correctly 
+    # Test function handles undefined attributes with rules checks correctly
     rules_attrs = {
         "attr1": "rule-func:string-of-length:5"
     }
@@ -347,68 +347,70 @@ def test_check_file_name():
     # Test that the function correctly identifies invalid instrument name
     vocab_checks = {
         "instrument": "__vocabs__:tests/test_instruments:test_instruments:__all__",
-        "platform": "__vocabs__:tests/test_platforms:test_platforms:__all__",
         "data_product": "__vocabs__:tests/test_products:test_products"
     }
+    rule_checks = {
+        "platform": "rule-func:match-one-of:plat1|plat2"
+    }
     file_name = "inst3_plat1_20220101_prod1_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == ["[file name]: Invalid file name format - unknown instrument inst3"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid platform name
     file_name = "inst1_plat3_20220101_prod1_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown platform plat3"]
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
+    assert errors == ["[file name]: Invalid file name format - 'plat3' must be one of: '['plat1', 'plat2']'"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid date format
     file_name = "inst1_plat1_2022010_prod1_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == ["[file name]: Invalid file name format - bad date format 2022010"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid date
     file_name = "inst1_plat1_20221301_prod1_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == ["[file name]: Invalid file name format - invalid date in file name 20221301"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid data product
     file_name = "inst1_plat1_20220101_prod3_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == ["[file name]: Invalid file name format - unknown data product prod3"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid version number format
     file_name = "inst1_plat1_20220101_prod1_v10.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == ["[file name]: Invalid file name format - incorrect file version number v10"]
     assert warnings == []
 
     # Test that the function correctly identifies too many options in file name
     file_name = "inst1_plat1_20220101_prod1_option1_option2_option3_option4_option5_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == ["[file name]: Invalid file name format - too many options in file name"]
     assert warnings == []
 
     # Test that the function correctly handles multiple errors
     file_name = "inst3_plat3_20220101_prod1_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown instrument inst3","[file name]: Invalid file name format - unknown platform plat3"]
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
+    assert errors == ["[file name]: Invalid file name format - unknown instrument inst3","[file name]: Invalid file name format - 'plat3' must be one of: '['plat1', 'plat2']'"]
     assert warnings == []
 
     # Test that the function correctly handles valid file names
     file_name = "inst1_plat1_20220101_prod1_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == []
     assert warnings == []
 
     file_name = "inst1_plat1_20220101_prod1_opt1_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == []
     assert warnings == []
 
     file_name = "inst1_plat1_20220101_prod1_opt1_opt2_opt3_v1.0.nc"
-    errors, warnings = cg.check_file_name(file_name, vocab_checks)
+    errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == []
     assert warnings == []

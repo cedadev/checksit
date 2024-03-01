@@ -267,13 +267,14 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
     return errors, warnings
 
 
-def check_file_name(file_name, vocab_checks=None, **kwargs):
+def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
     """
     Checks format of file name
 
     Works for NCAS-GENERAL, would work for NCAS-RADAR if radar scan type is added as data product
     """
     vocab_checks = vocab_checks or {}
+    rule_checks = rule_checks or {}
     errors = []
     warnings = []
     file_name_parts = file_name.split("_")
@@ -287,11 +288,15 @@ def check_file_name(file_name, vocab_checks=None, **kwargs):
         raise KeyError(msg)
 
     # check platform
-    if "platform" in vocab_checks.keys():
-        if vocabs.check(vocab_checks["platform"], file_name_parts[1], label="_") != []:
-            errors.append(f"[file name]: Invalid file name format - unknown platform {file_name_parts[1]}")
+    if "platform" in rule_checks.keys():
+        if rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -") != ([], []):
+            rule_errors, rule_warnings = rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -")
+            if rule_errors != []:
+                errors.extend(rule_errors)
+            if rule_warnings != []:
+                warnings.extend(rule_warnings)
     else:
-        msg = "No platform vocab defined in specs"
+        msg = "No platform rule defined in specs"
         raise KeyError(msg)
 
     # check date format
