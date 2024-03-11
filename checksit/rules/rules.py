@@ -84,6 +84,10 @@ class Rules:
                 "regex-rule": r'-?\d+\sm',    # should be integers only for images
                 "example": "123 m"
             },
+            "altitude-image": {
+                "regex-rule": r'-?\d+(\.\d+)?\sm',
+                "example": "123.45 m"
+            },
             "ncas-email": {
                 "regex-rule": r'[^@\s]+@ncas.ac.uk',
                 "example": "sam.jones@ncas.ac.uk"
@@ -139,7 +143,7 @@ class Rules:
                     pattern = self.static_regex_rules[regex_rule]["regex-rule"]
 
                     if not re.match("^" + pattern + "$", value):
-                        output.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'  - Example valid value '{self.static_regex_rules[regex_rule]['example']}'.")
+                        output.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}' - Example valid value '{self.static_regex_rules[regex_rule]['example']}'.")
 
                 else:
                     raise Exception(f"Regex rule not found with rule ID: {i}.")
