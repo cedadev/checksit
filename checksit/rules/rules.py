@@ -53,31 +53,40 @@ class Rules:
                 "example": "10.5"
             },
             "location": {
-                "regex-rule": r'(.)+(\,\ )(.)+'
+                "regex-rule": r'(.)+(\,\ )(.)+',
+                "example": "Chilbolton Atmospheric Observatory, Chilbolton, Hampshire, UK"
             },
             "latitude-image": {
-                "regex-rule": r'[\+|\-]?[0-9]{1,2}\.[0-9]{0,6}'
+                "regex-rule": r'[\+|\-]?[0-9]{1,2}\.[0-9]{0,6}',
+                "example": "12.345678"
             },
             "longitude-image": {
-                "regex-rule": r'[\+|\-]?1?[0-9]{1,2}\.[0-9]{0,6}'
+                "regex-rule": r'[\+|\-]?1?[0-9]{1,2}\.[0-9]{0,6}',
+                "example": "123.456789"
             },
             "title": {
-                "regex-rule": r'(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?(_.+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)'
+                "regex-rule": r'(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?(_.+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)',
+                "example": "ncas-cam-9_cao_20210623-215001_v1.0.jpg"
             },
             "title-data-product": {
-                "regex-rule": r'(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?_(plot|photo)((.)+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)'
+                "regex-rule": r'(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?_(plot|photo)((.)+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)',
+                "example": "ncas-cam-9_cao_20210623-215001_photo_v1.0.jpg"
             },
             "name-format": {
-                "regex-rule": r'([^,])+, ([^,])+( ?[^,]+|((.)\.))'
+                "regex-rule": r'([^,])+, ([^,])+( ?[^,]+|((.)\.))',
+                "example": "Jones, Sam"
             },
             "name-characters": {
-                "regex-rule": r'[A-Za-z_À-ÿ\-\'\ \.\,]+'
+                "regex-rule": r'[A-Za-z_À-ÿ\-\'\ \.\,]+',
+                "example": "Jones, Sam"
             },
             "altitude-image-warning": {
-                "regex-rule": r'-?\d+\sm'    # should be integers only for images
+                "regex-rule": r'-?\d+\sm',    # should be integers only for images
+                "example": "123 m"
             },
             "ncas-email": {
-                "regex-rule": r'[^@\s]+@ncas.ac.uk'
+                "regex-rule": r'[^@\s]+@ncas.ac.uk',
+                "example": "sam.jones@ncas.ac.uk"
             }
         }
 
