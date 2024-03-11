@@ -230,8 +230,8 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                 #    print(dct["variables"][variable].get(attr_key))
                 elif not str(dct["variables"][variable].get(attr_key)) == attr_value:
                     errors.append(
-                        f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, "
-                        f"not {dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}."
+                        f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
+                        f"not '{dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}'."
                     )
             for rule_to_check in attr_rules:
                 if rule_to_check == "rule-func:check-qc-flags":
@@ -260,8 +260,8 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                     pass
                 elif not dct["variables"][variable].get(attr_key) == attr_value:
                     errors.append(
-                        f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition {attr_value}, "
-                        f"not {dct['variables'][variable].get(attr_key)}."
+                        f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
+                        f"not '{dct['variables'][variable].get(attr_key)}'."
                     )
 
     return errors, warnings
@@ -282,7 +282,7 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
     # check instrument name
     if "instrument" in vocab_checks.keys():
         if vocabs.check(vocab_checks["instrument"], file_name_parts[0], label="_") != []:
-            errors.append(f"[file name]: Invalid file name format - unknown instrument {file_name_parts[0]}")
+            errors.append(f"[file name]: Invalid file name format - unknown instrument '{file_name_parts[0]}'")
     else:
         msg = "No instrument vocab defined in specs"
         raise KeyError(msg)
@@ -303,7 +303,7 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
     # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
     # first checks format, then date validity
     if not date_regex.match(file_name_parts[2]):
-        errors.append(f"[file name]: Invalid file name format - bad date format {file_name_parts[2]}")
+        errors.append(f"[file name]: Invalid file name format - bad date format '{file_name_parts[2]}'")
     else:
         fmts = ("%Y", "%Y%m", "%Y%m%d", "%Y%m%d-%H", "%Y%m%d-%H%M", "%Y%m%d-%H%M%S")
         valid_date_found = False
@@ -315,12 +315,12 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
             except ValueError:
                 pass
         if not valid_date_found:
-            errors.append(f"[file name]: Invalid file name format - invalid date in file name {file_name_parts[2]}")
+            errors.append(f"[file name]: Invalid file name format - invalid date in file name '{file_name_parts[2]}'")
 
     # check data product
     if "data_product" in vocab_checks.keys():
         if vocabs.check(vocab_checks["data_product"], file_name_parts[3], label="_") != []:
-            errors.append(f"[file name]: Invalid file name format - unknown data product {file_name_parts[3]}")
+            errors.append(f"[file name]: Invalid file name format - unknown data product '{file_name_parts[3]}'")
     else:
         msg = "No data product vocab defined in specs"
         raise KeyError(msg)
@@ -328,7 +328,7 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
     # check version number format
     version_component = file_name_parts[-1].split(".nc")[0]
     if not re.match(r"^v\d.\d$", version_component):
-        errors.append(f"[file name]: Invalid file name format - incorrect file version number {version_component}")
+        errors.append(f"[file name]: Invalid file name format - incorrect file version number '{version_component}'")
 
     # check number of options - max length of splitted file name
     if len(file_name_parts) > 8:
