@@ -159,8 +159,8 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Data Quality flag
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_bad_data_to_be_defined suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

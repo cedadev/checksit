@@ -40,8 +40,8 @@ var-requires2:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Surface Temperature
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data bad_data_temperature_outside_sensor_operational_range bad_data_gate_index_exceeds_number_of_measurement_gates_in_use suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -52,8 +52,8 @@ var-requires3:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Surface Relative Humidity
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_relative_humidity_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -64,8 +64,8 @@ var-requires4:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Surface Pressure
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_pressure_outside_sensor_operational_range suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -76,8 +76,8 @@ var-requires5:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Precipitation
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_precipitation_detected suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -88,8 +88,8 @@ var-requires6:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 1 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -100,8 +100,8 @@ var-requires7:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 2 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -112,8 +112,8 @@ var-requires8:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 3 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -124,8 +124,8 @@ var-requires9:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 4 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -136,8 +136,8 @@ var-requires10:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 5 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -148,8 +148,8 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 6 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -160,8 +160,8 @@ var-requires12:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 7 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -172,8 +172,8 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 8 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -184,8 +184,8 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 9 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -196,8 +196,8 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 10 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -208,8 +208,8 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 11 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -220,8 +220,8 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 12 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -232,8 +232,8 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 13 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -244,8 +244,8 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 14 failed
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_channel_failure suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -256,8 +256,8 @@ var-requires20:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Thermal stability of temperature receiver bank
-      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b
-      - flag_meanings:not_used good_data_temperature_stability_in_the_range_0_to_5mK suspect_data_temperature_stability_in_the_range_5_to_10mK suspect_data_temperature_stability_in_the_range_10_to_50mK suspect_data_temperature_stability_in_the_range_50_to_100mK suspect_data_temperature_stability_in_the_range_100_to_500mK bad_data_temperature_stability_>500mK suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -268,8 +268,8 @@ var-requires21:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Thermal stability of moisture receiver bank
-      - flag_values:0b,1b, 2b, 3b, 4b, 5b, 6b, 7b
-      - flag_meanings:not_used good_data_temperature_stability_in_the_range_0_to_5mK suspect_data_temperature_stability_in_the_range_5_to_10mK suspect_data_temperature_stability_in_the_range_10_to_50mK suspect_data_temperature_stability_in_the_range_50_to_100mK suspect_data_temperature_stability_in_the_range_100_to_500mK bad_data_temperature_stability_>500mK suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

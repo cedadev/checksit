@@ -22,5 +22,5 @@ var-requires1:
       - dimension:time
       - units:1
       - long_name:Data Quality flag
-      - flag_values:0b,1b, 2b
-      - flag_meanings:not_used good_data bad_data_do not_use
+    attr_rules:
+      - rule-func:check-qc-flags

@@ -6,7 +6,6 @@ import importlib
 
 from .config import get_config
 
-
 conf = get_config()
 specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), "groups")
 
@@ -20,23 +19,22 @@ def load_specs(spec_ids=None):
     spec_files = [f"{specs_dir}/{spec_id}.yml" for spec_id in spec_ids] or \
                  glob.glob(f"{specs_dir}/*.yml")
 
-    return _parse_specs(spec_files) 
-     
+    return _parse_specs(spec_files)
+
 
 def show_specs(spec_ids=None, verbose=False):
-    
     all_specs = load_specs(spec_ids)
-   
+    spec_ids_names = tuple([(spec_id.split("/")[-1]) for spec_id in spec_ids])
+
     if not spec_ids:
-        specs = all_specs
+        specs = all_specs.items()
     else:
-        specs = [(spec_id, spec) for (spec_id, spec) in all_specs.items() if spec_id in spec_ids]
+        specs = [(spec_ids[spec_ids_names.index(spec_id)], spec) for (spec_id, spec) in all_specs.items() if spec_id in spec_ids_names]
 
     print("Specifications:")
     for spec_id, spec in specs:
-     
         print(f"\n{spec_id}:")
-        print(json.dumps(spec, indent=4))
+        print(json.dumps(spec, indent=4).replace("\\\\", "\\"))
 
 
 class SpecificationChecker:
@@ -68,6 +66,6 @@ class SpecificationChecker:
                                                record, check_dict, skip_spellcheck=skip_spellcheck
                                            )
             errors.extend(check_errors)
-            warnings.extend(check_warnings) 
+            warnings.extend(check_warnings)
 
         return errors, warnings

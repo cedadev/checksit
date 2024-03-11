@@ -68,8 +68,8 @@ var-requires4:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: NO3
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_bad_data_to_be_defined suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -80,8 +80,8 @@ var-requires5:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: SO4
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_bad_data_to_be_defined suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -92,8 +92,8 @@ var-requires6:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: NH3
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_bad_data_to_be_defined suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -104,5 +104,5 @@ var-requires7:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Organics
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data suspect_data_bad_data_to_be_defined suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags

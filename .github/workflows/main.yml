@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
 
     steps:
     - uses: actions/checkout@main
@@ -20,6 +20,19 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install udunits
+      run: |
+        cd /opt
+        curl -O https://downloads.unidata.ucar.edu/udunits/2.2.28/udunits-2.2.28.tar.gz
+        tar -xzvf udunits-2.2.28.tar.gz
+        cd udunits-2.2.28
+        ./configure
+        make all install
+        ln -sf /opt/lib/* $LD_LIBRARY_PATH
+    - name: Install exiftool and netcdf
+      run: |
+        sudo apt install libimage-exiftool-perl -y
+        sudo apt-get install -y netcdf-bin
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -28,4 +41,5 @@ jobs:
         if [ -f requirements_dev.txt ]; then pip install -r requirements_dev.txt; fi
     - name: Test with pytest
       run: |
-        python -m pytest -v tests/test_readers.py
+        export UDUNITS2_XML_PATH=/opt/share/udunits/udunits2.xml
+        python -m pytest -v tests/test_readers.py tests/test_rules.py tests/test_show_specs.py tests/test_images.py tests/test_generic.py tests/test_utils.py tests/test_ncas_file_proc.py tests/test_cvs.py

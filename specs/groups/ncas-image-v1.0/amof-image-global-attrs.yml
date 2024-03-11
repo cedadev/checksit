@@ -1,0 +1,26 @@
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    rules_attrs:
+      # Version of the standard being followed
+      XMP-photoshop:Instructions: regex:Metadata\sfollow\sthe\sNational\sCentre\sfor\sAtmospheric\sScience\sImage\sMetadata\sStandard\sv1.0:\shttps://doi.org/10.5281/zenodo.6368295
+      # Description of what is shown in the image
+      XMP-photoshop:Headline: rule-func-warning:headline
+      XMP-dc:Description: rule-func:string-of-length:10+
+      # Date-time details
+      XMP-xmp:CreateDate: rule-func:validate-image-date-time
+      XMP-xmp:MetadataDate: rule-func:validate-image-date-time
+      # Licensing and acknowledgement details
+      XMP-dc:Rights: regex-warning:Use\sof\sthis\simage\sis\scovered\sby\sthe\s\(UK\)\sOpen\sGovernment\sLicence,\shttp://www.nationalarchives.gov.uk/doc/open-government-licence/
+      XMP-xmpRights:WebStatement: regex-warning:http://www.nationalarchives.gov.uk/doc/open-government-licence/
+      XMP-photoshop:Credit: regex-warning:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)
+      # Source of the image
+      XMP-dc:Title: regex-rule:title, regex-rule-warning:title-data-product, rule-func:title_check
+      # Instrument Scientist’s Details
+      XMP-dc:Creator: rule-func-warning:list_of_names
+      XMP-iptcCore:CreatorWorkEmail: regex-rule-warning:ncas-email, regex-rule:valid-email
+      XMP-iptcExt:CreatorIdentifier: rule-func:validate_orcid_ID, rule-func-warning:url_checker
+      # Principal Investigator’s Details
+      XMP-iptcExt:ContributorName: regex-rule-warning:name-format, regex-rule-warning:name-characters
+      XMP-iptcExt:ContributorIdentifier: rule-func:validate_orcid_ID, rule-func-warning:url_checker
+      XMP-iptcExt:ContributorRole: regex:Project\sPrincipal\sInvestigator

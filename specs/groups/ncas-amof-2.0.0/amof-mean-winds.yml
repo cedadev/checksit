@@ -225,8 +225,8 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Sonic Temperature
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(-30C_to_50C) suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -237,8 +237,8 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind Speed
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(0_to_50m_s-1) suspect_data_measured_wind_speed_==_0 suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -249,8 +249,8 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind Direction
-      - flag_values:0b,1b, 2b, 3b, 4b
-      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(0_to_360_degrees) suspect_data_measured_wind_speed_==_0 suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -261,8 +261,8 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Eastward Wind Component (U)
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(-50m_s-1_to_50m_s-1) suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -273,8 +273,8 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Northward Wind Component (V)
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(-50m_s-1_to_50m_s-1) suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -285,5 +285,5 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Upward Air Velocity Component (W)
-      - flag_values:0b,1b, 2b, 3b
-      - flag_meanings:not_used good_data bad_data_value_outside_operational_range_(-50m_s-1_to_50m_s-1) suspect_data_time_stamp_error
+    attr_rules:
+      - rule-func:check-qc-flags

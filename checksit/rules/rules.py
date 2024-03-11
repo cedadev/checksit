@@ -21,7 +21,7 @@ class Rules:
 
         self.static_regex_rules = {
             "integer": {
-                "regex-rule": r"-?\d+", 
+                "regex-rule": r"-?\d+",
                 "example": "10"
             },
             "valid-email": {
@@ -41,16 +41,43 @@ class Rules:
                 "example": "v1.0"
             },
             "datetime": {
-                "regex-rule": "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
+                "regex-rule": r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
                 "example": "2023-11-17T15:00:00"
             },
             "datetime-or-na": {
-                 "regex-rule": "(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
+                 "regex-rule": r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|" + _NOT_APPLICABLE_RULES,
                  "example": "2023-11-17T15:00:00"
             },
             "number": {
                 "regex-rule": r"-?\d+(\.\d+)?",
                 "example": "10.5"
+            },
+            "location": {
+                "regex-rule": r'(.)+(\,\ )(.)+'
+            },
+            "latitude-image": {
+                "regex-rule": r'[\+|\-]?[0-9]{1,2}\.[0-9]{0,6}'
+            },
+            "longitude-image": {
+                "regex-rule": r'[\+|\-]?1?[0-9]{1,2}\.[0-9]{0,6}'
+            },
+            "title": {
+                "regex-rule": r'(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?(_.+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)'
+            },
+            "title-data-product": {
+                "regex-rule": r'(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?_(plot|photo)((.)+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)'
+            },
+            "name-format": {
+                "regex-rule": r'([^,])+, ([^,])+( ?[^,]+|((.)\.))'
+            },
+            "name-characters": {
+                "regex-rule": r'[A-Za-z_À-ÿ\-\'\ \.\,]+'
+            },
+            "altitude-image-warning": {
+                "regex-rule": r'-?\d+\sm'    # should be integers only for images
+            },
+            "ncas-email": {
+                "regex-rule": r'[^@\s]+@ncas.ac.uk'
             }
         }
 
@@ -71,42 +98,52 @@ class Rules:
 
         # Return a list of errors - empty list if no errors
         errors = []
+        warnings = []
 
         rule_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
 
-        if rule_lookup.startswith("rule-func:"):
-            rule_comps = rule_lookup.split(":")
-            rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
-            extras = rule_comps[2:]
-            errors.extend(rule_func(value, context, extras, label=label))
+        rule_lookup_list = rule_lookup.split(", ")
 
-        elif rule_lookup.startswith("type-rule"):
-            type_rule = rule_lookup.split(":")[1]
+        for i in rule_lookup_list:
 
-            if not isinstance(value, self._map_type_rule(type_rule)):
-                errors.append(f"{label} Value '{value}' is not of required type: '{type_rule}'.")
-        
-        elif rule_lookup.startswith("regex:"):
-            pattern = ':'.join(rule_lookup.split(":")[1:])  # in case pattern has colons in it, e.g. a URL 
-            if not re.match(f"^{pattern}$", value):
-                errors.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
+            if i.split(":")[0].endswith("-warning"):
+                output = warnings
+            else:
+                output = errors
 
-        elif rule_lookup.startswith("regex-rule:"):
-            regex_rule = rule_lookup.split(":", 1)[1]
+            if i.startswith("rule-func"):
+                rule_comps = i.split(":")
+                rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
+                extras = rule_comps[2:]
+                output.extend(rule_func(value, context, extras, label=label))
 
-            if regex_rule in self.static_regex_rules:
-                pattern = self.static_regex_rules[regex_rule]["regex-rule"]
+            elif i.startswith("type-rule"):
+                type_rule = i.split(":")[1]
 
-                if not re.match("^" + pattern + "$", value):
-                    errors.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}' - Example valid value '{self.static_regex_rules[regex_rule]['example']}'.")
+                if not isinstance(value, self._map_type_rule(type_rule)):
+                    output.append(f"{label} Value '{value}' is not of required type: '{type_rule}'.")
+
+            elif i.startswith("regex-rule"):
+                regex_rule = i.split(":", 1)[1]
+
+                if regex_rule in self.static_regex_rules:
+                    pattern = self.static_regex_rules[regex_rule]["regex-rule"]
+
+                    if not re.match("^" + pattern + "$", value):
+                        output.append(f"{label} Value '{value}' does not match regex rule: '{regex_rule}'  - Example valid value '{self.static_regex_rules[regex_rule]['example']}'.")
+
+                else:
+                    raise Exception(f"Regex rule not found with rule ID: {i}.")
+
+            elif i.startswith("regex"):
+                pattern = i.split(":", 1)[1]  # in case pattern has colons in it, e.g. a URL
+                if not re.match(f"^{pattern}$", value):
+                    output.append(f"{label} Value '{value}' does not match regular expression: '{pattern}'.")
 
             else:
-                raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
+                raise Exception(f"Rule not found with rule ID: {i}.")
 
-        else:
-            raise Exception(f"Rule not found with rule ID: {rule_lookup}.")
-
-        return errors
+        return errors, warnings
 
 
 rules = Rules()
