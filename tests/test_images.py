@@ -59,7 +59,7 @@ def test_other_plot_checks(plot, error_level, number_errors):
         ("nerc-mstrf-radar-mst_capel-dewi_20230809_st300_wind.png",
             (
                 "[global-attributes:******:XMP-dc:Title]*** Value 'nerc-mstrf-radar-mst_capel-dewi_20230809_st300_wind.png'"
-                " does not match regex rule: 'title'."
+                " does not match regex rule: 'title' - Example valid value 'ncas-cam-9_cao_20210623-215001_v1.0.jpg'."
             ),
         ),
         ("nerc-mstrf-met-sensors_capel-dewi_20160906_campbell-sci.png",
