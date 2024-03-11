@@ -33,7 +33,7 @@ class Rules:
                 "example": "https://github.com"
             },
             "valid-url-or-na": {
-                "regex-rule": r"(https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+))|" + _NOT_APPLICABLE_RULES,
+                "regex-rule": r"(https?://[^\s]+\.[^\s]*[^\s\.](/[^\s]+)?)|" + _NOT_APPLICABLE_RULES,
                 "example": "https://github.com"
             },
             "match:vN.M": {
