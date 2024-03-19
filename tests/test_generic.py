@@ -311,13 +311,13 @@ def test_check_var():
     variable = "var2"
     defined_attrs = ["long_name:Variable 2", "units:s"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var2]: Attribute 'units' must have definition s, not kg."]
+    assert errors == ["[variable**************:var2]: Attribute 'units' must have definition 's', not 'kg'."]
     assert warnings == []
 
     variable = "var2:__OPTIONAL__"
     defined_attrs = ["long_name:Variable 2", "units:s"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var2]: Attribute 'units' must have definition s, not kg."]
+    assert errors == ["[variable**************:var2]: Attribute 'units' must have definition 's', not 'kg'."]
     assert warnings == []
 
     # Test that the function correctly handles badly formatted flag_values
@@ -354,7 +354,7 @@ def test_check_file_name():
     }
     file_name = "inst3_plat1_20220101_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown instrument inst3"]
+    assert errors == ["[file name]: Invalid file name format - unknown instrument 'inst3'"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid platform name
@@ -366,25 +366,25 @@ def test_check_file_name():
     # Test that the function correctly identifies invalid date format
     file_name = "inst1_plat1_2022010_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - bad date format 2022010"]
+    assert errors == ["[file name]: Invalid file name format - bad date format '2022010'"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid date
     file_name = "inst1_plat1_20221301_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - invalid date in file name 20221301"]
+    assert errors == ["[file name]: Invalid file name format - invalid date in file name '20221301'"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid data product
     file_name = "inst1_plat1_20220101_prod3_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown data product prod3"]
+    assert errors == ["[file name]: Invalid file name format - unknown data product 'prod3'"]
     assert warnings == []
 
     # Test that the function correctly identifies invalid version number format
     file_name = "inst1_plat1_20220101_prod1_v10.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - incorrect file version number v10"]
+    assert errors == ["[file name]: Invalid file name format - incorrect file version number 'v10'"]
     assert warnings == []
 
     # Test that the function correctly identifies too many options in file name
@@ -396,7 +396,7 @@ def test_check_file_name():
     # Test that the function correctly handles multiple errors
     file_name = "inst3_plat3_20220101_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown instrument inst3","[file name]: Invalid file name format - 'plat3' must be one of: '['plat1', 'plat2']'"]
+    assert errors == ["[file name]: Invalid file name format - unknown instrument 'inst3'","[file name]: Invalid file name format - 'plat3' must be one of: '['plat1', 'plat2']'"]
     assert warnings == []
 
     # Test that the function correctly handles valid file names

@@ -299,10 +299,10 @@ def ncas_platform(value, context, extras=None, label=""):
 
     if value not in ncas_platforms:
         errors.append(f"{label} '{value}' is not a valid NCAS platform")
-    
+
     return errors
 
-        
+
 def check_qc_flags(value, context, extras=None, label=""):
     """
     A function to check flag_values and flag_meanings
@@ -315,7 +315,7 @@ def check_qc_flags(value, context, extras=None, label=""):
 
     # check flag_values are correctly formatted (should be array of bytes)
     if not (isinstance(value, np.ndarray) or isinstance(value, tuple)):
-        errors.append(f"{label} QC flag_values must be an array or tuple of byte values, not {type(value)}.")
+        errors.append(f"{label} QC flag_values must be an array or tuple of byte values, not '{type(value)}'.")
 
     # check there are at least two values and they start with 0 and 1
     if not len(value) > 2:
