@@ -251,12 +251,14 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
                 elif attr_rule.startswith("rule-func:same-type-as"):
                     var_checking_against = attr_rule.split(":")[-1]
-                    errors.extend(rules.check(
+                    rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
                         context = dct["variables"][var_checking_against].get("type"),
                         label = f"[variables:******:{attr_key}]***",
-                    ))
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
                 elif attr_rule.strip() == ("rule-func:check-qc-flags"):
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
@@ -267,11 +269,14 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
                 else:
-                    errors.extend(rules.check(
+                    rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
                         label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
-                    ))
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
+
 
 
     else:
@@ -313,12 +318,14 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
                 elif attr_rule.startswith("rule-func:same-type-as"):
                     var_checking_against = attr_rule.split(":")[-1]
-                    errors.extend(rules.check(
+                    rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
                         context = dct["variables"][var_checking_against].get("type"),
                         label = f"[variables:******:{attr_key}]***",
-                    ))
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
                 elif attr_rule.strip() == "rule-func:check-qc-flags":
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
@@ -329,11 +336,13 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
                 else:
-                    errors.extend(rules.check(
+                    rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
                         label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
-                    ))
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
 
     return errors, warnings
 
