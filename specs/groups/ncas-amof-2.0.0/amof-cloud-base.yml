@@ -176,8 +176,8 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Cloud Base
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

@@ -1125,8 +1125,8 @@ var-requires74:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew U
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires75:
   func: checksit.generic.check_var
   params:
@@ -1137,8 +1137,8 @@ var-requires75:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew V
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires76:
   func: checksit.generic.check_var
   params:
@@ -1149,8 +1149,8 @@ var-requires76:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew W
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires77:
   func: checksit.generic.check_var
   params:
@@ -1161,8 +1161,8 @@ var-requires77:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew Ts
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires78:
   func: checksit.generic.check_var
   params:
@@ -1173,8 +1173,8 @@ var-requires78:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis U
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires79:
   func: checksit.generic.check_var
   params:
@@ -1185,8 +1185,8 @@ var-requires79:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis V
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires80:
   func: checksit.generic.check_var
   params:
@@ -1197,8 +1197,8 @@ var-requires80:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis W
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires81:
   func: checksit.generic.check_var
   params:
@@ -1209,8 +1209,8 @@ var-requires81:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis Ts
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires82:
   func: checksit.generic.check_var
   params:
@@ -1221,8 +1221,8 @@ var-requires82:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WU
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires83:
   func: checksit.generic.check_var
   params:
@@ -1233,8 +1233,8 @@ var-requires83:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WV
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires84:
   func: checksit.generic.check_var
   params:
@@ -1245,8 +1245,8 @@ var-requires84:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WTs
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires85:
   func: checksit.generic.check_var
   params:
@@ -1257,8 +1257,8 @@ var-requires85:
       - dimension:time
       - units:1
       - long_name:Quality flag: WU
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires86:
   func: checksit.generic.check_var
   params:
@@ -1268,8 +1268,8 @@ var-requires86:
       - type:byte
       - dimension:time
       - units:1
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

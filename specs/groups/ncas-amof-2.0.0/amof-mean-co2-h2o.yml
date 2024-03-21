@@ -198,8 +198,8 @@ var-requires12:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Temperature
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -210,8 +210,8 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Pressure
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -222,8 +222,8 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Carbon Dioxide concentration
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -234,5 +234,5 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Water Vapor concentration
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

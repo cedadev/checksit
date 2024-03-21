@@ -128,8 +128,8 @@ var-requires8:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: N2O
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -140,5 +140,5 @@ var-requires9:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: SF6
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

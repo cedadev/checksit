@@ -185,12 +185,14 @@ def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     return errors, warnings
 
 
-def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False):
+def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=False):
     """
     Check variable exists and has attributes defined.
     """
     errors = []
     warnings = []
+
+    rules_attrs = rules_attrs or {}
 
     if isinstance(variable, list):
         variable = variable[0]
@@ -233,11 +235,43 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                         f"not '{dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}'."
                     )
-            for rule_to_check in attr_rules:
-                if rule_to_check == "rule-func:check-qc-flags":
-                    rule_errors, rule_warnings = rules.check(rule_to_check, dct['variables'][variable].get("flag_values"), context=dct['variables'][variable].get("flag_meanings"), label=f"[variable******:{variable}]: ")
+
+            for attr in rules_attrs:
+                if isinstance(attr, dict) and len(attr.keys()) == 1:
+                    for key, value in attr.items():
+                        attr = f"{key}:{value}"
+                attr_key = attr.split(":")[0]
+                attr_rule = ":".join(attr.split(":")[1:])
+                if attr_key not in dct["variables"][variable]:
+                    errors.append(
+                        f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                        f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                    )
+                elif is_undefined(dct["variables"][variable].get(attr_key)):
+                    errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
+                elif attr_rule.startswith("rule-func:same-type-as"):
+                    var_checking_against = attr_rule.split(":")[-1]
+                    errors.extend(rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        context = dct["variables"][var_checking_against].get("type"),
+                        label = f"[variables:******:{attr_key}]***",
+                    ))
+                elif attr_rule.strip() == ("rule-func:check-qc-flags"):
+                    rule_errors, rule_warnings = rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get("flag_values"),
+                        context = dct["variables"][variable].get("flag_meanings"),
+                        label = f"[variable******:{variable}]: ",
+                    )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
+                else:
+                    errors.extend(rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                    ))
 
 
     else:
@@ -263,6 +297,43 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                         f"not '{dct['variables'][variable].get(attr_key)}'."
                     )
+
+            for attr in rules_attrs:
+                if isinstance(attr, dict) and len(attr.keys()) == 1:
+                    for key, value in attr.items():
+                        attr = f"{key}:{value}"
+                attr_key = attr.split(":")[0]
+                attr_rule = ":".join(attr.split(":")[1:])
+                if attr_key not in dct["variables"][variable]:
+                    errors.append(
+                        f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                        f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                    )
+                elif is_undefined(dct["variables"][variable].get(attr_key)):
+                    errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
+                elif attr_rule.startswith("rule-func:same-type-as"):
+                    var_checking_against = attr_rule.split(":")[-1]
+                    errors.extend(rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        context = dct["variables"][var_checking_against].get("type"),
+                        label = f"[variables:******:{attr_key}]***",
+                    ))
+                elif attr_rule.strip() == "rule-func:check-qc-flags":
+                    rule_errors, rule_warnings = rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get("flag_values"),
+                        context = dct["variables"][variable].get("flag_meanings"),
+                        label = f"[variable******:{variable}]: ",
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
+                else:
+                    errors.extend(rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                    ))
 
     return errors, warnings
 
