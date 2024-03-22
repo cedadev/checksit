@@ -282,7 +282,7 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
     else:
         if variable not in dct["variables"].keys():
             errors.append(
-                f"[variable**************:{variable}]: Optional variable does not exist in file. "
+                f"[variable**************:{variable}]: Variable does not exist in file. "
                 f"{search_close_match(variable, dct['variables'].keys()) if not skip_spellcheck else ''}"
             )
         else:
