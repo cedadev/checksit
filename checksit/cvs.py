@@ -75,25 +75,6 @@ class Vocabs:
 
         return obj
 
-#     def OLD_lookup(self, lookup):
-# Used to have a special "__key__" lookup. not needed now.
-#         # Parses a lookup string (from a template) and then looks up the vocabulary
-#         # to return an item or a list of items
-#         lookup = re.sub("^__vocabs__:", "", lookup)
-#         self._load_vocab(lookup)
-#         comps = deque(lookup.split(":"))
-#         item = self.vocabs
-
-#         while comps:
-#             comp = comps.popleft()
-#             if comp == "__key__":
-#                 item = item.keys()
-#             elif isinstance(item, list):
-#                 item = [i[comp] for i in item if i.get(comp)]
-#             else:
-#                 item = item[comp]
-
-#         return item
 
     def check(self, vocab_lookup, value, label="", lookup=True):
         # Return a list of errors - empty list if no errors

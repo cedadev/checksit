@@ -90,25 +90,10 @@ class Checker:
     def _compare_dicts(self, record, template, label, mappings=None, ignore_attrs=None):
         mappings = mappings or self.mappings
         errors = []
-        # list_types = [] #"variables" #- no longer used - as comparisons need key/values
 
         do_sort = False
         if label in ("dimensions", "global_attributes"):
             do_sort = True
-
-        # if label in list_types:
-        #     tmpl = template[label]
-        #     rec = record[label]
-
-        #     if len(tmpl) != len(rec):
-        #         errors.append(f"[ERROR] Number of '{label}' items differs between template ({len(tmpl)}) and record ({len(rec)})")
-        #     else:
-        #         for i in range(len(tmpl)):
-        #             t = tmpl[i]
-        #             r = rec[i]
-        #             for key in t:
-        #                 errors.extend(self.compare_items(r, t, key, label=label, mappings=mappings, ignore_attrs=ignore_attrs))
-        # else:
 
         # Recursively check dicts
         tmpl = template[label]
@@ -218,17 +203,6 @@ class Checker:
                 sys.exit(1)
             else:
                 raise Exception(err)
-
-        # if template == "auto":
-        #     template = self._template_from_config(file_path, verbose)
-        # elif not os.path.isfile(template):
-        #     if log_mode == "compact":
-        #         print(f"{file_path} | ABORTED | FATAL | Cannot find template file specified")
-        #         sys.exit(1)
-        #     else:
-        #         raise Exception(f"Cannot find specified template file: {template}")
-
-        # tmpl = self.parse_file_header(template, auto_cache=auto_cache, verbose=verbose)
 
         ### Check for NCAS data files and gather specs ###
         # if template and specs are "default" values, check to see if

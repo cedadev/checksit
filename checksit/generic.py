@@ -225,9 +225,6 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                             f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                             f"not '{dct['variables'][variable].get(attr_key)}'."
                         )
-                #elif attr_key == 'flag_meanings':
-                #    print(attr_value)
-                #    print(dct["variables"][variable].get(attr_key))
                 elif not str(dct["variables"][variable].get(attr_key)) == attr_value:
                     errors.append(
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
