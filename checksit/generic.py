@@ -8,12 +8,22 @@ import datetime as dt
 
 # date formate regex
 # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
-date_regex = re.compile(r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$")
+DATE_REGEX = re.compile(
+    r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$"
+)
+
 
 def _get_bounds_var_ids(dct):
-    return [var_id for var_id in dct["variables"] if (
-            var_id.startswith("bounds_") or var_id.startswith("bnds_") or
-            var_id.endswith("_bounds") or var_id.endswith("_bnds"))]
+    return [
+        var_id
+        for var_id in dct["variables"]
+        if (
+            var_id.startswith("bounds_")
+            or var_id.startswith("bnds_")
+            or var_id.endswith("_bounds")
+            or var_id.endswith("_bnds")
+        )
+    ]
 
 
 def one_spelling_mistake(word):
@@ -21,20 +31,26 @@ def one_spelling_mistake(word):
     All edits that are one edit away from `word`.
     Adapted from https://norvig.com/spell-correct.html
     """
-    letters    = 'abcdefghijklmnopqrstuvwxyz0123456789._-'
-    splits     = [(word[:i], word[i:])    for i in range(1,len(word) + 1)]  # 1 in range requires first letter to be correct
-    deletes    = [L + R[1:]               for L, R in splits if R]
-    transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R)>1]
-    replaces   = [L + c + R[1:]           for L, R in splits if R for c in letters]
-    inserts    = [L + c + R               for L, R in splits for c in letters]
+    letters = "abcdefghijklmnopqrstuvwxyz0123456789._-"
+    splits = [
+        (word[:i], word[i:]) for i in range(1, len(word) + 1)
+    ]  # 1 in range requires first letter to be correct
+    deletes = [L + R[1:] for L, R in splits if R]
+    transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R) > 1]
+    replaces = [L + c + R[1:] for L, R in splits if R for c in letters]
+    inserts = [L + c + R for L, R in splits for c in letters]
     return set(deletes + transposes + replaces + inserts)
+
 
 def two_spelling_mistakes(word):
     """
     All edits that are two edits away from `word`.
     From https://norvig.com/spell-correct.html
     """
-    return set([ e2 for e1 in one_spelling_mistake(word) for e2 in one_spelling_mistake(e1) ])
+    return set(
+        [e2 for e1 in one_spelling_mistake(word) for e2 in one_spelling_mistake(e1)]
+    )
+
 
 def search_close_match(search_for, search_in):
     possible_close_edits = two_spelling_mistakes(search_for.lower())
@@ -56,16 +72,26 @@ def check_var_attrs(dct, defined_attrs, ignore_bounds=True, skip_spellcheck=Fals
     bounds_vars = _get_bounds_var_ids(dct)
 
     for var_id, var_dict in dct["variables"].items():
-        if var_id in bounds_vars: continue
+        if var_id in bounds_vars:
+            continue
 
         for attr in defined_attrs:
             if is_undefined(var_dict.get(attr)):
-                errors.append(f"[variable**************:{var_id}]: Attribute '{attr}' must have a valid definition.")
+                errors.append(
+                    f"[variable**************:{var_id}]: Attribute '{attr}' must have a valid definition."
+                )
 
     return errors, warnings
 
 
-def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=None, rules_attrs=None, skip_spellcheck=False):
+def check_global_attrs(
+    dct,
+    defined_attrs=None,
+    vocab_attrs=None,
+    regex_attrs=None,
+    rules_attrs=None,
+    skip_spellcheck=False,
+):
     """
     Check that required global attributes are correct.
 
@@ -81,52 +107,70 @@ def check_global_attrs(dct, defined_attrs=None, vocab_attrs=None, regex_attrs=No
     warnings = []
 
     for attr in defined_attrs:
-        if attr not in dct['global_attributes']:
+        if attr not in dct["global_attributes"]:
             errors.append(
                 f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
             )
-        elif is_undefined(dct['global_attributes'].get(attr)):
-            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
+        elif is_undefined(dct["global_attributes"].get(attr)):
+            errors.append(
+                f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'."
+            )
 
     for attr in vocab_attrs:
-        if attr not in dct['global_attributes']:
+        if attr not in dct["global_attributes"]:
             errors.append(
                 f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
             )
-        elif is_undefined(dct['global_attributes'].get(attr)):
-            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
+        elif is_undefined(dct["global_attributes"].get(attr)):
+            errors.append(
+                f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'."
+            )
         else:
-            errors.extend(vocabs.check(vocab_attrs[attr], dct["global_attributes"].get(attr), label=f"[global-attributes:******:{attr}]***"))
+            errors.extend(
+                vocabs.check(
+                    vocab_attrs[attr],
+                    dct["global_attributes"].get(attr),
+                    label=f"[global-attributes:******:{attr}]***",
+                )
+            )
 
     for attr in regex_attrs:
-        if attr not in dct['global_attributes']:
+        if attr not in dct["global_attributes"]:
             errors.append(
                 f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
             )
-        elif is_undefined(dct['global_attributes'].get(attr)):
-            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
-        elif not re.match(regex_attrs[attr], dct['global_attributes'].get(attr)):
+        elif is_undefined(dct["global_attributes"].get(attr)):
+            errors.append(
+                f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'."
+            )
+        elif not re.match(regex_attrs[attr], dct["global_attributes"].get(attr)):
             errors.append(
                 f"[global-attributes:******:{attr}]: '{dct['global_attributes'].get(attr, UNDEFINED)}' "
                 f"does not match regex pattern '{regex_attrs[attr]}'."
             )
 
     for attr in rules_attrs:
-        if attr not in dct['global_attributes']:
+        if attr not in dct["global_attributes"]:
             errors.append(
                 f"[global-attributes:**************:{attr}]: Attribute '{attr}' does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
             )
-        elif is_undefined(dct['global_attributes'].get(attr)):
-            errors.append(f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'.")
+        elif is_undefined(dct["global_attributes"].get(attr)):
+            errors.append(
+                f"[global-attributes:**************:{attr}]: No value defined for attribute '{attr}'."
+            )
         else:
-            rules_check_output = rules.check(rules_attrs[attr], dct['global_attributes'].get(attr), context=dct['inpt'], label=f"[global-attributes:******:{attr}]***")
+            rules_check_output = rules.check(
+                rules_attrs[attr],
+                dct["global_attributes"].get(attr),
+                context=dct["inpt"],
+                label=f"[global-attributes:******:{attr}]***",
+            )
             warnings.extend(rules_check_output[1])
             errors.extend(rules_check_output[0])
-
 
     return errors, warnings
 
@@ -141,8 +185,8 @@ def check_var_exists(dct, variables, skip_spellcheck=False):
     warnings = []
 
     for var in variables:
-        if ':__OPTIONAL__' in var:
-            var = var.split(':')[0]
+        if ":__OPTIONAL__" in var:
+            var = var.split(":")[0]
             if var not in dct["variables"].keys():
                 warnings.append(
                     f"[variable**************:{var}]: Optional variable does not exist in file. "
@@ -168,8 +212,8 @@ def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     warnings = []
 
     for dim in dimensions:
-        if ':__OPTIONAL__' in dim:
-            dim = dim.split(':')[0]
+        if ":__OPTIONAL__" in dim:
+            dim = dim.split(":")[0]
             if dim not in dct["dimensions"].keys():
                 warnings.append(
                     f"[dimension**************:{dim}]: Optional dimension does not exist in file. "
@@ -194,8 +238,8 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
 
     if isinstance(variable, list):
         variable = variable[0]
-    if ':__OPTIONAL__' in variable:
-        variable = variable.split(':')[0]
+    if ":__OPTIONAL__" in variable:
+        variable = variable.split(":")[0]
         if variable not in dct["variables"].keys():
             warnings.append(
                 f"[variable**************:{variable}]: Optional variable does not exist in file. "
@@ -204,23 +248,31 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
         else:
             for attr in defined_attrs:
                 if isinstance(attr, dict) and len(attr.keys()) == 1:
-                    for key,value in attr.items():
-                        attr = f'{key}: {value}'
-                attr_key = attr.split(':')[0]
-                attr_value = ':'.join(attr.split(':')[1:])
+                    for key, value in attr.items():
+                        attr = f"{key}: {value}"
+                attr_key = attr.split(":")[0]
+                attr_value = ":".join(attr.split(":")[1:])
                 if attr_key not in dct["variables"][variable]:
                     errors.append(
                         f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. "
                         f"{search_close_match(attr_key, dct['variables'][variable]) if not skip_spellcheck else ''}"
                     )
-                elif '<derived from file>' in attr_value:
+                elif "<derived from file>" in attr_value:
                     # work this out
                     pass
-                elif attr_key == 'flag_values':
-                    attr_value = attr_value.strip(',')
-                    attr_value = [ int(i.strip('b')) for i in attr_value.split(',') ]
+                elif attr_key == "flag_values":
+                    attr_value = attr_value.strip(",")
+                    attr_value = [int(i.strip("b")) for i in attr_value.split(",")]
                     attr_value = np.array(attr_value, dtype=np.int8)
-                    if not ((len(dct["variables"][variable].get(attr_key)) == len(attr_value)) and np.all(dct["variables"][variable].get(attr_key) == attr_value)):
+                    if not (
+                        (
+                            len(dct["variables"][variable].get(attr_key))
+                            == len(attr_value)
+                        )
+                        and np.all(
+                            dct["variables"][variable].get(attr_key) == attr_value
+                        )
+                    ):
                         errors.append(
                             f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                             f"not '{dct['variables'][variable].get(attr_key)}'."
@@ -232,10 +284,14 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                     )
             for rule_to_check in attr_rules:
                 if rule_to_check == "rule-func:check-qc-flags":
-                    rule_errors, rule_warnings = rules.check(rule_to_check, dct['variables'][variable].get("flag_values"), context=dct['variables'][variable].get("flag_meanings"), label=f"[variable******:{variable}]: ")
+                    rule_errors, rule_warnings = rules.check(
+                        rule_to_check,
+                        dct["variables"][variable].get("flag_values"),
+                        context=dct["variables"][variable].get("flag_meanings"),
+                        label=f"[variable******:{variable}]: ",
+                    )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
-
 
     else:
         if variable not in dct["variables"].keys():
@@ -245,14 +301,14 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
             )
         else:
             for attr in defined_attrs:
-                attr_key = attr.split(':')[0]
-                attr_value = ':'.join(attr.split(':')[1:])
+                attr_key = attr.split(":")[0]
+                attr_value = ":".join(attr.split(":")[1:])
                 if attr_key not in dct["variables"][variable]:
                     errors.append(
                         f"[variable**************:{variable}]: Attribute '{attr_key}' does not exist. "
                         f"{search_close_match(attr_key, dct['variables'][variable]) if not skip_spellcheck else ''}"
                     )
-                elif '<' in attr_value:
+                elif "<" in attr_value:
                     # work this out
                     pass
                 elif not dct["variables"][variable].get(attr_key) == attr_value:
@@ -278,16 +334,29 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
 
     # check instrument name
     if "instrument" in vocab_checks.keys():
-        if vocabs.check(vocab_checks["instrument"], file_name_parts[0], label="_") != []:
-            errors.append(f"[file name]: Invalid file name format - unknown instrument '{file_name_parts[0]}'")
+        if (
+            vocabs.check(vocab_checks["instrument"], file_name_parts[0], label="_")
+            != []
+        ):
+            errors.append(
+                f"[file name]: Invalid file name format - unknown instrument '{file_name_parts[0]}'"
+            )
     else:
         msg = "No instrument vocab defined in specs"
         raise KeyError(msg)
 
     # check platform
     if "platform" in rule_checks.keys():
-        if rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -") != ([], []):
-            rule_errors, rule_warnings = rules.check(rule_checks["platform"], file_name_parts[1], label="[file name]: Invalid file name format -")
+        if rules.check(
+            rule_checks["platform"],
+            file_name_parts[1],
+            label="[file name]: Invalid file name format -",
+        ) != ([], []):
+            rule_errors, rule_warnings = rules.check(
+                rule_checks["platform"],
+                file_name_parts[1],
+                label="[file name]: Invalid file name format -",
+            )
             if rule_errors != []:
                 errors.extend(rule_errors)
             if rule_warnings != []:
@@ -299,8 +368,10 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
     # check date format
     # could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
     # first checks format, then date validity
-    if not date_regex.match(file_name_parts[2]):
-        errors.append(f"[file name]: Invalid file name format - bad date format '{file_name_parts[2]}'")
+    if not DATE_REGEX.match(file_name_parts[2]):
+        errors.append(
+            f"[file name]: Invalid file name format - bad date format '{file_name_parts[2]}'"
+        )
     else:
         fmts = ("%Y", "%Y%m", "%Y%m%d", "%Y%m%d-%H", "%Y%m%d-%H%M", "%Y%m%d-%H%M%S")
         valid_date_found = False
@@ -312,12 +383,19 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
             except ValueError:
                 pass
         if not valid_date_found:
-            errors.append(f"[file name]: Invalid file name format - invalid date in file name '{file_name_parts[2]}'")
+            errors.append(
+                f"[file name]: Invalid file name format - invalid date in file name '{file_name_parts[2]}'"
+            )
 
     # check data product
     if "data_product" in vocab_checks.keys():
-        if vocabs.check(vocab_checks["data_product"], file_name_parts[3], label="_") != []:
-            errors.append(f"[file name]: Invalid file name format - unknown data product '{file_name_parts[3]}'")
+        if (
+            vocabs.check(vocab_checks["data_product"], file_name_parts[3], label="_")
+            != []
+        ):
+            errors.append(
+                f"[file name]: Invalid file name format - unknown data product '{file_name_parts[3]}'"
+            )
     else:
         msg = "No data product vocab defined in specs"
         raise KeyError(msg)
@@ -325,10 +403,14 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
     # check version number format
     version_component = file_name_parts[-1].split(".nc")[0]
     if not re.match(r"^v\d.\d$", version_component):
-        errors.append(f"[file name]: Invalid file name format - incorrect file version number '{version_component}'")
+        errors.append(
+            f"[file name]: Invalid file name format - incorrect file version number '{version_component}'"
+        )
 
     # check number of options - max length of splitted file name
     if len(file_name_parts) > 8:
-        errors.append(f"[file name]: Invalid file name format - too many options in file name")
+        errors.append(
+            f"[file name]: Invalid file name format - too many options in file name"
+        )
 
     return errors, warnings

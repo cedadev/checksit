@@ -17,7 +17,8 @@ def get_max_column_count(files, sep):
         with open(f) as reader:
             for line in reader:
                 c = line.count(sep)
-                if c > count: count = c
+                if c > count:
+                    count = c
 
     return count
 
@@ -30,8 +31,9 @@ def do_exclude(err, exclude_patterns):
     return False
 
 
-def summarise(log_files=None, log_directory=None, show_files=False,
-              exclude=None, verbose=False):
+def summarise(
+    log_files=None, log_directory=None, show_files=False, exclude=None, verbose=False
+):
     log_files = log_files or find_log_files(log_directory)
     exclude_patterns = exclude or []
 
@@ -39,7 +41,7 @@ def summarise(log_files=None, log_directory=None, show_files=False,
         print("[ERROR] No log files found!")
         return
 
-    if verbose: 
+    if verbose:
         print(f"[INFO] Reading {len(log_files)} files:")
         print(f"\t{log_files[0]} ...to... {log_files[-1]}")
 
@@ -49,7 +51,7 @@ def summarise(log_files=None, log_directory=None, show_files=False,
     print(f"[INFO] Max cols: {n_cols}")
 
     known_cols = ["filepath", "template", "highest_error", "error_count"]
-    err_cols = [f"err_{i:02d}" for i in range(n_cols-len(known_cols)+1)]
+    err_cols = [f"err_{i:02d}" for i in range(n_cols - len(known_cols) + 1)]
     headers = known_cols + err_cols
     print(f"Headers: {headers}")
 
@@ -58,7 +60,7 @@ def summarise(log_files=None, log_directory=None, show_files=False,
 
     for filename in log_files:
         df = pd.read_csv(filename, sep=sep, index_col=None, header=None, names=headers)
-        df = df.replace({r"^\s*|\s*$":""}, regex=True)
+        df = df.replace({r"^\s*|\s*$": ""}, regex=True)
         df["logfile"] = os.path.basename(filename)
         count += len(df)
         li.append(df)
@@ -75,7 +77,8 @@ def summarise(log_files=None, log_directory=None, show_files=False,
     for err_col in err_cols:
         for err in df[err_col].unique():
             err = err.strip()
-            if not err or do_exclude(err, exclude_patterns): continue
+            if not err or do_exclude(err, exclude_patterns):
+                continue
 
             filepaths = sorted(df[df[err_col] == err]["filepath"])
             errors_by_type[err].extend(filepaths)
@@ -91,11 +94,10 @@ def summarise(log_files=None, log_directory=None, show_files=False,
         filepaths = all_errors[err]
         print(f"\t\t{err} [found in {len(filepaths)} file(s)]")
 
-    if show_files: 
+    if show_files:
         print("\n------- File paths --------\n")
 
         for err in all_errors:
-            print(f"\t\t{err}") 
+            print(f"\t\t{err}")
             for filepath in all_errors[err]:
                 print(f"\t\t\t{filepath}")
-
