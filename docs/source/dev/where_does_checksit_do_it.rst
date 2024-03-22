@@ -46,6 +46,19 @@ specifies ``platform`` should match one of the values found under the ``platform
 
 requires ``source`` to match any of the ``description`` tags nested under the ``ncas_instrument`` key in ``checksit/vocabs/AMF_CVs/2.0.0/AMF_ncas_instrument.json``. In these cases, ``__all__`` acts similarly to the wildcard ``*`` in bash, but only one instance of ``__all__`` is allowed.
 
+URL vocabs
+^^^^^^^^^^
+
+Vocabularies can also be hosted online, instead of being included in the ``checksit`` package. This is particularly beneficial for vocabularies that may be updated regularly, meaning the latest changes do not need to be downloaded and ``checksit`` does not need to be updated every time the vocabulary is updated. These vocabularies should be accessible online as a JSON file in the same format as if it was in the ``checksit/vocabs`` folder.
+
+URL vocabs are referred to using ``__URL__`` in place of ``__vocabs__``, and the ``https://`` at the start of the URL should be omitted, for example
+
+.. code-block::
+
+   instrument: __URL__raw.githubusercontent.com/ncasuk/ncas-data-instrument-vocabs/__latest__/AMF_CVs/AMF_ncas_instrument.json:ncas_instrument:__all__
+
+In this example, ``checksit`` will replace ``__latest__`` with the tag name of the latest tagged release on GitHub. This will also happen for any URL that starts with ``raw.githubusercontent.com`` and contains ``__latest__``.
+
 rules checks
 ------------
 
@@ -72,11 +85,31 @@ rules checks
    * - "match:vN.M"
      - ``r"v\d\.\d"``
    * - "datetime"
-     - ``"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?"``
+     - ``r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?"``
    * - "datetime-or-na"
-     - ``"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(.\d+)?)" + _NOT_APPLICABLE_RULES``
+     - ``r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(.\d+)?)" + _NOT_APPLICABLE_RULES``
    * - "number"
      - ``r"-?\d+(\.\d+)?"``
+   * - "location"
+     - ``r"(.)+(\,\ )(.)+"``
+   * - "latitude-image"
+     - ``r"[\+|\-]?[0-9]{1,2}\.[0-9]{0,6}"``
+   * - "longitude-image"
+     - ``r"[\+|\-]?1?[0-9]{1,2}\.[0-9]{0,6}"``
+   * - "title"
+     - ``r"(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?(_.+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)"``
+   * - "title-data-product"
+     - ``r"(.)+_(.)+_([1-2][0-9][0-9][0-9])([0][0-9]|[1][0-2])?([0-2][0-9]|[3][0-1])?-?([0-1][0-9]|[2][0-3])?([0-5][0-9])?([0-5][0-9])?_(plot|photo)((.)+)?_v([0-9]+)\.([0-9]+)\.(png|PNG|jpg|JPG|jpeg|JPEG)"``
+   * - "name-format"
+     - ``r"([^,])+, ([^,])+( ?[^,]+|((.)\.))"``
+   * - "name-characters"
+     - ``r"[A-Za-z_À-ÿ\-\'\ \.\,]+"``
+   * - "altitude-image-warning"
+     - ``r"-?\d+\sm"``
+   * - "altitude-image"
+     - ``r"-?\d+(\.\d+)?\sm"``
+   * - "ncas-email"
+     - ``r"[^@\s]+@ncas.ac.uk"``
 
 
 where ``NOT_APPLICABLE_RULES`` cover phrases such as "Not Available", "Not applicable", "N/A" and others similar.
