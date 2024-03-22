@@ -119,7 +119,7 @@ class Rules:
 
         rule_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
 
-        rule_lookup_list = rule_lookup.split(", ")
+        rule_lookup_list = rule_lookup.split("||")
 
         for i in rule_lookup_list:
 
