@@ -1,0 +1,21 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - latitude
+    defined_attrs:
+      - type:double
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - longitude
+    defined_attrs:
+      - type:double
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - altitude
+    defined_attrs:
+      - type:double

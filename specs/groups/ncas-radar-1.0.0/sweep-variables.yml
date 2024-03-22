@@ -1,0 +1,41 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sweep_number
+    defined_attrs:
+      - type:int
+      - dimension:sweep
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sweep_mode
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:sweep, string_length[^,]*
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - fixed_angle
+    defined_attrs:
+      - type:float
+      - dimension:sweep
+var-optional0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sweep_start_ray_index:__OPTIONAL__
+    defined_attrs:
+      - type:int
+      - dimension:sweep
+var-optional1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sweep_end_ray_index:__OPTIONAL__
+    defined_attrs:
+      - type:int
+      - dimension:sweep

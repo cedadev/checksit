@@ -1,0 +1,46 @@
+required-gloabl-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    defined_attrs:
+        - Conventions
+        - title
+        - institution
+        - references
+        - history
+        - comment
+        - instrument_manufacturer
+        - instrument_model
+        - instrument_serial_number
+        - instrument_software
+        - instrument_software_version
+        - creator_name
+        - processing_software_version
+        - product_version
+        - processing_level
+        - project
+        - project_principal_investigator
+        - licence
+        - acknowledgement
+        - geospatial_bounds
+        - platform_altitude
+        - location_keywords
+        - processing_software_url
+    vocab_attrs:
+        source: __URL__raw.githubusercontent.com/ncasuk/ncas-data-instrument-vocabs/__latest__/AMF_CVs/AMF_ncas_instrument.json:ncas_instrument:__all__:description
+        instrument_name: __URL__raw.githubusercontent.com/ncasuk/ncas-data-instrument-vocabs/__latest__/AMF_CVs/AMF_ncas_instrument.json:ncas_instrument:__all__
+    rules_attrs:
+        platform_is_mobile: rule-func:match-one-of:true|false
+        instrument_pid: regex-rule:valid-url-or-na
+        creator_email: regex-rule:valid-email
+        creator_url: regex-rule:valid-url||rule-func-warning:validate-orcid-ID
+        processing_level: rule-func:match-one-of:1|2|3
+        last_revised_date: regex-rule:datetime
+        project_principal_investigator_email: regex-rule:valid-email
+        project_principal_investigator_url: regex-rule:valid-url||rule-func-warning:validate-orcid-ID
+        platform: rule-func:ceda-platform||rule-func-warning:ncas-platform
+        deployment_mode: rule-func:match-one-of:land|sea|air
+        time_coverage_start: regex-rule:datetimeZ
+        time_coverage_end: regex-rule:datetimeZ
+    regex_attrs:
+        product_version: ^v\d+\.\d+\.\d+$
+
