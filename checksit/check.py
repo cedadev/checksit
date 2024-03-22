@@ -187,7 +187,97 @@ class Checker:
                     print(f"\t{count:02d}. {warning}")
 
             if compliant:
-                print("[INFO] File is compliant!")            
+                print("[INFO] File is compliant!")   
+
+
+    def _get_ncas_specs(self, file_path, file_content, log_mode="standard", verbose=False):
+        template = "auto"
+        specs = None
+        # find appropriate specs depending on convention
+        if file_path.split(".")[-1] == "nc" and ":Conventions" in file_content.cdl:
+            conventions = file_content.cdl.split(":Conventions =")[1].split(";")[0].strip()
+            # NCAS-GENERAL file
+            if any(name in conventions for name in ["NCAS-GENERAL", "NCAS-AMF", "NCAS-AMOF"]):
+                if verbose:
+                    print("\nNCAS-AMOF file detected, finding correct spec files")
+                    print("Finding correct AMOF version...")
+                version_number = conventions[conventions.index("NCAS-"):].split("-")[2].replace('"','')
+                spec_folder = f"ncas-amof-{version_number}"
+                if verbose: print(f"  {version_number}")
+
+                # check specs exist for that version
+                specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
+                if not os.path.exists(specs_dir):
+                    if verbose: print(f"Specs for version NCAS-GENERAL-{version_number} not found, attempting download...")
+                    try:
+                        vocabs_dir = os.path.join(conf["settings"].get("vocabs_dir", "./checksit/vocabs"), f"AMF_CVs/{version_number}")
+                        cvs = urllib.request.urlopen(f"https://github.com/ncasuk/AMF_CVs/tree/v{version_number}/AMF_CVs")
+                        data = cvs.readlines()
+                        if not os.path.exists(specs_dir):
+                            os.mkdir(specs_dir)
+                        if not os.path.exists(vocabs_dir):
+                            os.mkdir(vocabs_dir)
+                        for line in data:
+                            if f'href="/ncasuk/AMF_CVs/blob/v{version_number}/AMF_CVs' in line.decode():
+                                json_file = line.decode().split('href="')[1].split('">')[0]
+                                if json_file.startswith("/ncasuk/AMF_CVs/blob/"):
+                                    cv = urllib.request.urlopen(f"https://raw.githubusercontent.com{json_file.replace('/blob','')}")
+                                    json_file_name = json_file.split("/")[-1]
+                                    with open(f"{vocabs_dir}/{json_file_name}", "w") as f:
+                                        _ = f.write(cv.read().decode())
+                        make_amof_specs(version_number)
+                        if verbose: print("  Downloaded of specs successful")
+                    except urllib.error.HTTPError:
+                        if log_mode == "compact":
+                            print(f"{file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}")
+                        else:
+                            print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
+                            print("Aborting...")
+                        sys.exit()
+                    except PermissionError:
+                        if log_mode == "compact":
+                            print(f"{file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit.")
+                        else:
+                            print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
+                            print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
+                        sys.exit()
+                    except:
+                        raise
+
+                # get deployment mode and data product, to then get specs
+                deployment_mode = file_content.cdl.split(':deployment_mode =')[1].split(';')[0].strip().strip('"')
+                deploy_spec = f'{spec_folder}/amof-common-{deployment_mode}'
+                product = file_path.split('/')[-1].split('_')[3]
+                product_spec = f'{spec_folder}/amof-{product}'
+                specs = [f'{spec_folder}/amof-file-name', deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
+                # don't need to do template check
+                template = "off"
+
+            # NCAS-RADAR (coming soon...)
+            # if "NCAS-Radar" in conventions
+        
+        elif (file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS and
+                "XMP-photoshop:Instructions" in file_content.global_attrs.keys()):
+            conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
+            if "National Centre for Atmospheric Science Image Metadata Standard" in file_content.global_attrs["XMP-photoshop:Instructions"].replace("\n"," "):
+                if verbose:
+                    print("\nNCAS-IMAGE file detected, finding correct spec files")
+                    print("Finding correct IMAGE version...")
+                version_number = conventions.replace("\n"," ").split("Metadata Standard ")[1].split(":")[0]
+                spec_folder = f"ncas-image-{version_number}"
+                if verbose: print(f"  {version_number}")
+                specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
+                if not os.path.exists(specs_dir):
+                    print(f"[ERROR] specs for NCAS-IMAGE {version_number} can not be found.")
+                    print("Aborting...")
+                    sys.exit()
+                product = file_path.split('/')[-1].split('_')[3]
+                product_spec = f"{spec_folder}/amof-{product}"
+                specs = [product_spec, f"{spec_folder}/amof-image-global-attrs"]
+                template = "off"
+
+        return template, specs
+
 
 
     def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, specs=None,
@@ -209,90 +299,7 @@ class Checker:
         # file is an ncas file (assuming file name starts with instrument name)
         if (template == "auto" and specs == None and
             file_path.split("/")[-1].startswith("ncas-")):
-            # find appropriate specs depending on convention
-            if file_path.split(".")[-1] == "nc" and ":Conventions" in file_content.cdl:
-                conventions = file_content.cdl.split(":Conventions =")[1].split(";")[0].strip()
-                # NCAS-GENERAL file
-                if any(name in conventions for name in ["NCAS-GENERAL", "NCAS-AMF", "NCAS-AMOF"]):
-                    if verbose:
-                        print("\nNCAS-AMOF file detected, finding correct spec files")
-                        print("Finding correct AMOF version...")
-                    version_number = conventions[conventions.index("NCAS-"):].split("-")[2].replace('"','')
-                    spec_folder = f"ncas-amof-{version_number}"
-                    if verbose: print(f"  {version_number}")
-
-                    # check specs exist for that version
-                    specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
-                    if not os.path.exists(specs_dir):
-                        if verbose: print(f"Specs for version NCAS-GENERAL-{version_number} not found, attempting download...")
-                        try:
-                            vocabs_dir = os.path.join(conf["settings"].get("vocabs_dir", "./checksit/vocabs"), f"AMF_CVs/{version_number}")
-                            cvs = urllib.request.urlopen(f"https://github.com/ncasuk/AMF_CVs/tree/v{version_number}/AMF_CVs")
-                            data = cvs.readlines()
-                            if not os.path.exists(specs_dir):
-                                os.mkdir(specs_dir)
-                            if not os.path.exists(vocabs_dir):
-                                os.mkdir(vocabs_dir)
-                            for line in data:
-                                if f'href="/ncasuk/AMF_CVs/blob/v{version_number}/AMF_CVs' in line.decode():
-                                    json_file = line.decode().split('href="')[1].split('">')[0]
-                                    if json_file.startswith("/ncasuk/AMF_CVs/blob/"):
-                                        cv = urllib.request.urlopen(f"https://raw.githubusercontent.com{json_file.replace('/blob','')}")
-                                        json_file_name = json_file.split("/")[-1]
-                                        with open(f"{vocabs_dir}/{json_file_name}", "w") as f:
-                                            _ = f.write(cv.read().decode())
-                            make_amof_specs(version_number)
-                            if verbose: print("  Downloaded of specs successful")
-                        except urllib.error.HTTPError:
-                            if log_mode == "compact":
-                                print(f"{file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}")
-                            else:
-                                print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
-                                print("Aborting...")
-                            sys.exit()
-                        except PermissionError:
-                            if log_mode == "compact":
-                                print(f"{file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit.")
-                            else:
-                                print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
-                                print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
-                            sys.exit()
-                        except:
-                            raise
-
-                    # get deployment mode and data product, to then get specs
-                    deployment_mode = file_content.cdl.split(':deployment_mode =')[1].split(';')[0].strip().strip('"')
-                    deploy_spec = f'{spec_folder}/amof-common-{deployment_mode}'
-                    product = file_path.split('/')[-1].split('_')[3]
-                    product_spec = f'{spec_folder}/amof-{product}'
-                    specs = [f'{spec_folder}/amof-file-name', deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
-                    # don't need to do template check
-                    template = "off"
-
-                # NCAS-RADAR (coming soon...)
-                # if "NCAS-Radar" in conventions
-            
-            elif (file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS and
-                  "XMP-photoshop:Instructions" in file_content.global_attrs.keys()):
-                conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
-                if "National Centre for Atmospheric Science Image Metadata Standard" in file_content.global_attrs["XMP-photoshop:Instructions"].replace("\n"," "):
-                    if verbose:
-                        print("\nNCAS-IMAGE file detected, finding correct spec files")
-                        print("Finding correct IMAGE version...")
-                    version_number = conventions.replace("\n"," ").split("Metadata Standard ")[1].split(":")[0]
-                    spec_folder = f"ncas-image-{version_number}"
-                    if verbose: print(f"  {version_number}")
-                    specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
-                    if not os.path.exists(specs_dir):
-                        print(f"[ERROR] specs for NCAS-IMAGE {version_number} can not be found.")
-                        print("Aborting...")
-                        sys.exit()
-                    product = file_path.split('/')[-1].split('_')[3]
-                    product_spec = f"{spec_folder}/amof-{product}"
-                    specs = [product_spec, f"{spec_folder}/amof-image-global-attrs"]
-                    template = "off"
-
-
+            template, specs = self._get_ncas_specs(file_path, file_content, log_mode=log_mode, verbose=verbose)
 
         if template == "off":
             tmpl = template
