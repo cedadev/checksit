@@ -10,11 +10,11 @@ Automatic use of spec files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If the file is a netCDF file with the ``Conventions`` global attribute containing one of ``NCAS-GENERAL``,
- ``NCAS-AMOF`` or ``NCAS-AMF`` it its value, the file is identified as needing to conform to the
- ``NCAS-GENERAL`` data standard. ``checksit`` then identifies which version of the standard is being
- used, using the numbers that follow the standard identifier in the Conventions attribute.
- The data product and deployment mode are obtained from the file, and specs for product and deployment
- are added to specs for global attributes and file naming for that version of the standard.
+``NCAS-AMOF`` or ``NCAS-AMF`` it its value, the file is identified as needing to conform to the
+``NCAS-GENERAL`` data standard. ``checksit`` then identifies which version of the standard is being
+used, using the numbers that follow the standard identifier in the Conventions attribute.
+The data product and deployment mode are obtained from the file, and specs for product and deployment
+are added to specs for global attributes and file naming for that version of the standard.
 
 Downloading of new versions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
