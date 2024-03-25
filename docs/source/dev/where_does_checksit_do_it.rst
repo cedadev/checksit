@@ -149,8 +149,8 @@ others similar.
 
 
 * ``rule-func``\ : checks the value against a pre-defined function, which are defined in
-``checksit/rules/rule_funcs.py``. Rule functions defined in this file include, for example
-``match_one_of``\ , where a value mush match one option from a list, and ``string_of_length``\ ,
-where a string must be of a defined length or longer (e.g. ``5`` or ``5+``\ ).
+  ``checksit/rules/rule_funcs.py``. Rule functions defined in this file include, for example
+  ``match_one_of``\ , where a value mush match one option from a list, and ``string_of_length``\ ,
+  where a string must be of a defined length or longer (e.g. ``5`` or ``5+``\ ).
 
 
