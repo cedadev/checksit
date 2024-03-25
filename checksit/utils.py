@@ -33,11 +33,10 @@ def get_public_funcs(module):
         if item[0] != "_":
             prop = getattr(module, item)
             if inspect.isfunction(prop):
-                funcs.append(prop) 
+                funcs.append(prop)
 
     return funcs
 
 
 def is_undefined(x):
     return not x and x != 0
-

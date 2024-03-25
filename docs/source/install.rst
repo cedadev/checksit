@@ -4,7 +4,8 @@ Installation
 Source
 ------
 
-Download the latest and development versions directly from GitHub into your home directory, and change directory into the repository
+Download the latest and development versions directly from GitHub into your home directory,
+and change directory into the repository
 
 .. code-block::
 

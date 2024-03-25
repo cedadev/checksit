@@ -11,13 +11,19 @@ specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), "groups")
 
 
 def _parse_specs(spec_files):
-    return dict([(os.path.basename(f)[:-4], yaml.load(open(f), Loader=yaml.SafeLoader)) for f in spec_files])
+    return dict(
+        [
+            (os.path.basename(f)[:-4], yaml.load(open(f), Loader=yaml.SafeLoader))
+            for f in spec_files
+        ]
+    )
 
 
 def load_specs(spec_ids=None):
     spec_ids = spec_ids or []
-    spec_files = [f"{specs_dir}/{spec_id}.yml" for spec_id in spec_ids] or \
-                 glob.glob(f"{specs_dir}/*.yml")
+    spec_files = [f"{specs_dir}/{spec_id}.yml" for spec_id in spec_ids] or glob.glob(
+        f"{specs_dir}/*.yml"
+    )
 
     return _parse_specs(spec_files)
 
@@ -29,7 +35,11 @@ def show_specs(spec_ids=None, verbose=False):
     if not spec_ids:
         specs = all_specs.items()
     else:
-        specs = [(spec_ids[spec_ids_names.index(spec_id)], spec) for (spec_id, spec) in all_specs.items() if spec_id in spec_ids_names]
+        specs = [
+            (spec_ids[spec_ids_names.index(spec_id)], spec)
+            for (spec_id, spec) in all_specs.items()
+            if spec_id in spec_ids_names
+        ]
 
     print("Specifications:")
     for spec_id, spec in specs:
@@ -63,8 +73,8 @@ class SpecificationChecker:
 
         for check_id, check_dict in self.spec.items():
             check_errors, check_warnings = self._run_check(
-                                               record, check_dict, skip_spellcheck=skip_spellcheck
-                                           )
+                record, check_dict, skip_spellcheck=skip_spellcheck
+            )
             errors.extend(check_errors)
             warnings.extend(check_warnings)
 
