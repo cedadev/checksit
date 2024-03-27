@@ -12,7 +12,7 @@ def get_output(cmd):
 
 
 class CDLParser:
-    
+
     CDL_SPLITTERS = ("dimensions:", "variables:", "data:", "}")
 
     def __init__(self, inpt, verbose=False):
@@ -22,14 +22,14 @@ class CDLParser:
         self._check_format()
 
     def _parse(self, inpt):
-        if self.verbose: print(f"[INFO] Parsing input: {inpt[:100]}...")        
+        if self.verbose: print(f"[INFO] Parsing input: {inpt[:100]}...")
         if inpt.endswith(".nc"):
             self.cdl = get_output(f"ncdump -h {inpt}")
         elif inpt.endswith(".cdl"):
             self.cdl = open(inpt).read()
         else:
             self.cdl = inpt
-       
+
         cdl_lines = self.cdl.strip().split("\n")
 
         # Add "data:" and "}" to the CDL if they are not present - to aid parsing
@@ -43,7 +43,7 @@ class CDLParser:
             if s not in cdl_lines:
                 print(f"Please check your command - invalid file or CDL contents provided: '{inpt[:100]}...'")
                 sys.exit(1)
- 
+
         sections = self._get_sections(cdl_lines, split_patterns=self.CDL_SPLITTERS, start_at=1)
 
         # Re-split section 1 to separate variables from global attrs
@@ -57,7 +57,7 @@ class CDLParser:
 
         min_chars = 10
         if len(source) < min_chars:
-           self.fmt_errors.append(f"[FORMAT:global_attributes:source] Must be at least {min_chars} characters, not {source}") 
+           self.fmt_errors.append(f"[FORMAT:global_attributes:source] Must be at least {min_chars} characters, not {source}")
 
     def _get_sections(self, lines, split_patterns, start_at):
         split_patterns = deque(split_patterns)
@@ -81,7 +81,7 @@ class CDLParser:
                 line_no_comments = re.split(r";\s+//.*$", line)[0].strip().rstrip(";").strip()
                 if not line_no_comments.startswith("//"):
                     current.append(line_no_comments)
-        
+
         return sections
 
     def _split_vars_globals(self, content):
@@ -127,11 +127,15 @@ class CDLParser:
                 variables[vocab_var_id] = vocabs.lookup(vocab_lookup)
             elif not var_id or not line.startswith(f"{var_id}:") and last_line.strip()[-1] != ",":
                 # Add current collected variable to list if it exists
-                if current: 
+                if current:
                     variables[var_id] = current.copy()
 
                 var_id, dtype, dimensions = self._parse_var_dtype_dims(line)
-                current = {"type": dtype, "dimension": ', '.join(dimensions)}
+                if dimensions == [""]:
+                    dimensions = "--none--"
+                else:
+                    dimensions = ", ".join(dimensions)
+                current = {"type": dtype, "dimension": dimensions}
             else:
 #                key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
                 # Send last key and last value (from last iteration of loop) and line to get new value
@@ -166,9 +170,9 @@ class CDLParser:
 
         for line in content:
             if self.verbose: print(f"WORKING ON LINE: {line}")
-            
+
             # Cater for continuation lines for arrays of strings, etc
-#            if "=" in line: 
+#            if "=" in line:
                 # A new (key, value) pair is found
 #                key, value = [x.strip() for x in line.lstrip(":").split("=", 1)]
 #            else:
@@ -184,7 +188,7 @@ class CDLParser:
         return resp
 
     def to_yaml(self):
-        return yaml.dump(self.to_dict(), Dumper=yaml.SafeDumper, 
+        return yaml.dump(self.to_dict(), Dumper=yaml.SafeDumper,
                          default_flow_style=False, sort_keys=False)
 
     def to_dict(self):
