@@ -5,6 +5,8 @@ var-requires0:
       - latitude
     defined_attrs:
       - type:double
+    rules_attrs:
+      - dimension: rule-func:match-one-of:--none--|time
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -12,6 +14,8 @@ var-requires1:
       - longitude
     defined_attrs:
       - type:double
+    rules_attrs:
+      - dimension: rule-func:match-one-of:--none--|time
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -19,3 +23,5 @@ var-requires2:
       - altitude
     defined_attrs:
       - type:double
+    rules_attrs:
+      - dimension: rule-func:match-one-of:--none--|time
