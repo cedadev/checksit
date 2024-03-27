@@ -4,9 +4,9 @@ required-global-attrs:
     rules_attrs:
       # Location of a camera or an instrument (photo)
       XMP-iptcExt:LocationCreatedLocationName: regex-rule-warning:location
-      XMP-iptcExt:LocationCreatedGPSAltitude: regex-rule-warning:altitude-image-warning, regex-rule:altitude-image
-      XMP-iptcExt:LocationCreatedGPSLatitude: regex-rule:latitude-image, rule-func:latitude
-      XMP-iptcExt:LocationCreatedGPSLongitude: regex-rule:longitude-image, rule-func:longitude
+      XMP-iptcExt:LocationCreatedGPSAltitude: regex-rule-warning:altitude-image-warning||regex-rule:altitude-image
+      XMP-iptcExt:LocationCreatedGPSLatitude: regex-rule:latitude-image||rule-func:latitude
+      XMP-iptcExt:LocationCreatedGPSLongitude: regex-rule:longitude-image||rule-func:longitude
       # (Relation for photos)
       XMP-dc:Relation: regex-warning:(((i|I)sPartOf\shttps://catalogue.ceda.ac.uk/uuid/)|((i|I)sFormatOf\shttps://catalogue.ceda.ac.uk/uuid/))[a-z0-9]{32}
       XMP-dc:Relation: rule-func-warning:relation_url_checker
