@@ -415,3 +415,64 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
         errors.append(f"[file name]: Invalid file name format - too many options in file name")
 
     return errors, warnings
+
+def check_radar_moment_variables(dct, exist_attrs=None, rule_attrs=None, one_of_attrs=None, skip_spellcheck=False):
+    """
+    Finds moment variables in radar file, runs checks against all those variables
+    """
+    exist_attrs = exist_attrs or []
+    rule_attrs = rule_attrs or {}
+    one_of_attrs = one_of_attrs or []
+
+    errors = []
+    warnings = []
+
+    moment_variables = []
+    for radarvariable, radarattributes in dct["variables"].items():
+        if isinstance(radarattributes, dict) and "coordinates" in radarattributes.keys():
+            moment_variables.append(radarvariable)
+
+    for variable in moment_variables:
+        for attr in exist_attrs:
+            if attr not in dct["variables"][variable]:
+                errors.append(
+                    f"[variable**************:{variable}]: Attribute '{attr}' does not exist. "
+                    f"{search_close_match(attr, dct["variables"][variable]) if not skip_spellcheck else ''}"
+                )
+        for attr in rule_attrs:
+            if isinstance(attr, dict) and len(attr.keys()) == 1:
+                for key, value in attr.items():
+                    attr = f"{key}:{value}"
+            attr_key = attr.split(":")[0]
+            attr_rule = ":".join(attr.split(":")[1:])
+            if attr_key not in dct["variables"][variable]:
+                errors.append(
+                    f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                    f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                )
+            elif is_undefined(dct["variables"][variable].get(attr_key)):
+                errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
+            else:
+                rule_errors, rule_warnings = rules.check(
+                    attr_rule,
+                    dct["variables"][variable].get(attr_key),
+                    label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                )
+                errors.extend(rule_errors)
+                warnings.extend(rule_warnings)
+        for attrs in one_of_attrs:
+            attr_options = attrs.split("|")
+            matches = 0
+            for attr in attr_options:
+                if attr in dct['variables'][variable]:
+                    matches += 1
+            if matches == 0:
+                errors.append(
+f"[variable:**************:{variable}]: One attribute of '{attr_options}' must be defined."
+                )
+            elif matches > 1:
+                errors.append(
+f"[variable:**************:{variable}]: Only one of '{attr_options}' should be defined, {matches} found."
+                )
+
+    return errors, warnings
