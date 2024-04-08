@@ -2,7 +2,6 @@ required-gloabl-attrs:
   func: checksit.generic.check_global_attrs
   params:
     defined_attrs:
-        - Conventions
         - title
         - institution
         - references
@@ -15,8 +14,6 @@ required-gloabl-attrs:
         - instrument_software_version
         - creator_name
         - processing_software_version
-        - product_version
-        - processing_level
         - project
         - project_principal_investigator
         - licence
@@ -42,5 +39,6 @@ required-gloabl-attrs:
         time_coverage_start: regex-rule:datetimeZ
         time_coverage_end: regex-rule:datetimeZ
     regex_attrs:
+        Conventions: CfRadial-1.4 NCAS-Radar-1.0 instrument_parameters radar-parameters radar-calibration
         product_version: ^v\d+\.\d+\.\d+$
 
