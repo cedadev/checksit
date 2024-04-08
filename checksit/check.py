@@ -23,9 +23,19 @@ conf = get_config()
 
 class Checker:
 
-    def __init__(self, template="auto", mappings=None, extra_rules=None, specs=None, ignore_attrs=None, 
-                auto_cache=False, verbose=False, log_mode="standard", ignore_warnings=False,
-                skip_spellcheck=False):
+    def __init__(
+        self,
+        template="auto",
+        mappings=None,
+        extra_rules=None,
+        specs=None,
+        ignore_attrs=None,
+        auto_cache=False,
+        verbose=False,
+        log_mode="standard",
+        ignore_warnings=False,
+        skip_spellcheck=False,
+    ):
         self.template = template
         self.mappings = mappings or {}
         self.extra_rules = extra_rules or {}
@@ -43,8 +53,9 @@ class Checker:
         self._check_context["size"] = os.path.getsize(file_path)
         self._check_context["template"] = template
 
-    def _compare_items(self, rec, tmpl, key, label, mappings=None, 
-                      extra_rules=None, ignore_attrs=None):
+    def _compare_items(
+        self, rec, tmpl, key, label, mappings=None, extra_rules=None, ignore_attrs=None
+    ):
 
         mappings = mappings or self.mappings
         extra_rules = extra_rules or self.extra_rules
@@ -61,54 +72,67 @@ class Checker:
         rec_key = mappings.get(key, key)
 
         if isinstance(tmpl[key], dict):
-            errors.extend(self._compare_dicts(rec, tmpl, key, mappings=mappings, ignore_attrs=ignore_attrs))
+            errors.extend(
+                self._compare_dicts(
+                    rec, tmpl, key, mappings=mappings, ignore_attrs=ignore_attrs
+                )
+            )
         else:
             tmpl_value = str(tmpl[key])
 
             if label_key in conf["settings"]["excludes"]:
                 pass
             elif key.startswith(f"{vocabs_prefix}:"):
-                errors.extend(vocabs.check(tmpl[key], rec.get(rec_key, UNDEFINED), label=label_key))
+                errors.extend(
+                    vocabs.check(
+                        tmpl[key], rec.get(rec_key, UNDEFINED), label=label_key
+                    )
+                )
             elif tmpl_value.startswith(f"{vocabs_prefix}:"):
-                errors.extend(vocabs.check(tmpl[key], rec.get(rec_key, UNDEFINED), label=label_key))
+                errors.extend(
+                    vocabs.check(
+                        tmpl[key], rec.get(rec_key, UNDEFINED), label=label_key
+                    )
+                )
             # Rule defined in template value
             elif tmpl_value.startswith(f"{rules_prefix}:"):
-                errors.extend(rules.check(tmpl[key], rec.get(rec_key, UNDEFINED), 
-                              context=self._check_context, label=label_key))
+                errors.extend(
+                    rules.check(
+                        tmpl[key],
+                        rec.get(rec_key, UNDEFINED),
+                        context=self._check_context,
+                        label=label_key,
+                    )
+                )
             # Rule defined in `extra_rules` dictionary
             elif [rule for rule in extra_rules if rule.startswith(label_key)]:
-                rule_key = [rule for rule in extra_rules if rule.startswith(label_key)][0]
+                rule_key = [rule for rule in extra_rules if rule.startswith(label_key)][
+                    0
+                ]
                 rule = extra_rules[rule_key]
-                errors.extend(rules.check(rule, rec.get(rec_key, UNDEFINED), 
-                              context=self._check_context, label=label_key))
+                errors.extend(
+                    rules.check(
+                        rule,
+                        rec.get(rec_key, UNDEFINED),
+                        context=self._check_context,
+                        label=label_key,
+                    )
+                )
             # Else...
             elif tmpl[key] != rec.get(rec_key, UNDEFINED):
-                errors.append(f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'")
+                errors.append(
+                    f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'"
+                )
 
         return errors
 
     def _compare_dicts(self, record, template, label, mappings=None, ignore_attrs=None):
         mappings = mappings or self.mappings
         errors = []
-        # list_types = [] #"variables" #- no longer used - as comparisons need key/values
 
         do_sort = False
         if label in ("dimensions", "global_attributes"):
             do_sort = True
-
-        # if label in list_types:
-        #     tmpl = template[label]
-        #     rec = record[label]
-
-        #     if len(tmpl) != len(rec):
-        #         errors.append(f"[ERROR] Number of '{label}' items differs between template ({len(tmpl)}) and record ({len(rec)})")
-        #     else:
-        #         for i in range(len(tmpl)):
-        #             t = tmpl[i]
-        #             r = rec[i]
-        #             for key in t:
-        #                 errors.extend(self.compare_items(r, t, key, label=label, mappings=mappings, ignore_attrs=ignore_attrs))
-        # else:
 
         # Recursively check dicts
         tmpl = template[label]
@@ -118,21 +142,40 @@ class Checker:
             rec = record[rec_key]
 
             keys = tmpl.keys()
-            if do_sort: keys = sorted(keys)
+            if do_sort:
+                keys = sorted(keys)
 
             for key in keys:
-                errors.extend(self._compare_items(rec, tmpl, key, label=label, mappings=mappings, 
-                              ignore_attrs=ignore_attrs))
+                errors.extend(
+                    self._compare_items(
+                        rec,
+                        tmpl,
+                        key,
+                        label=label,
+                        mappings=mappings,
+                        ignore_attrs=ignore_attrs,
+                    )
+                )
 
         else:
             errors.append(f"Expected item '{label}' not found in data file.")
 
         return errors
-                        
-    def _check_file(self, file_content, template, mappings=None, extra_rules=None, specs=None,
-                        ignore_attrs=None, log_mode="standard", fmt_errors=None,
-                        ignore_warnings=False, skip_spellcheck=False):
- 
+
+    def _check_file(
+        self,
+        file_content,
+        template,
+        mappings=None,
+        extra_rules=None,
+        specs=None,
+        ignore_attrs=None,
+        log_mode="standard",
+        fmt_errors=None,
+        ignore_warnings=False,
+        skip_spellcheck=False,
+    ):
+
         if hasattr(file_content, "to_dict"):
             record = file_content.to_dict()
 
@@ -151,10 +194,14 @@ class Checker:
 
         for spec in specs:
             sr = SpecificationChecker(spec)
-            if 'amof-file-name' in spec:
-                spec_errors, spec_warnings = sr.run_checks(file_content.inpt.split("/")[-1])
+            if "amof-file-name" in spec:
+                spec_errors, spec_warnings = sr.run_checks(
+                    file_content.inpt.split("/")[-1]
+                )
             else:
-                spec_errors, spec_warnings = sr.run_checks(record, skip_spellcheck=skip_spellcheck)
+                spec_errors, spec_warnings = sr.run_checks(
+                    record, skip_spellcheck=skip_spellcheck
+                )
             errors.extend(spec_errors)
             warnings.extend(spec_warnings)
 
@@ -164,7 +211,13 @@ class Checker:
             sections = "dimensions", "variables", "global_attributes"
 
             for section in sections:
-                errs = self._compare_dicts(record, template, section, mappings=mappings, ignore_attrs=ignore_attrs)
+                errs = self._compare_dicts(
+                    record,
+                    template,
+                    section,
+                    mappings=mappings,
+                    ignore_attrs=ignore_attrs,
+                )
                 errors.extend([f"[{section}] {err}" for err in errs])
 
         if log_mode == "compact":
@@ -181,9 +234,11 @@ class Checker:
                 endstr = "\n"
                 number = 0
             print(f"{highest} | {number} ", end=endstr)
-            err_string = " | ".join([err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors])
+            err_string = " | ".join(
+                [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors]
+            )
             if err_string:
-                print(f"| {err_string}") 
+                print(f"| {err_string}")
 
         else:
             if errors:
@@ -202,12 +257,180 @@ class Checker:
                     print(f"\t{count:02d}. {warning}")
 
             if compliant:
-                print("[INFO] File is compliant!")            
+                print("[INFO] File is compliant!")
 
+    def _get_ncas_specs(
+        self, file_path, file_content, log_mode="standard", verbose=False
+    ):
+        template = "auto"
+        specs = None
+        # find appropriate specs depending on convention
+        if file_path.split(".")[-1] == "nc" and ":Conventions" in file_content.cdl:
+            conventions = (
+                file_content.cdl.split(":Conventions =")[1].split(";")[0].strip()
+            )
+            # NCAS-GENERAL file
+            if any(
+                name in conventions
+                for name in ["NCAS-GENERAL", "NCAS-AMF", "NCAS-AMOF"]
+            ):
+                if verbose:
+                    print("\nNCAS-AMOF file detected, finding correct spec files")
+                    print("Finding correct AMOF version...")
+                version_number = (
+                    conventions[conventions.index("NCAS-") :]
+                    .split("-")[2]
+                    .replace('"', "")
+                )
+                spec_folder = f"ncas-amof-{version_number}"
+                if verbose:
+                    print(f"  {version_number}")
 
-    def check_file(self, file_path, template="auto", mappings=None, extra_rules=None, specs=None,
-                ignore_attrs=None, auto_cache=False, verbose=False, log_mode="standard",
-                ignore_warnings=False, skip_spellcheck=False):
+                # check specs exist for that version
+                specs_dir = os.path.join(
+                    conf["settings"].get("specs_dir", "./specs"),
+                    f"groups/{spec_folder}",
+                )
+                if not os.path.exists(specs_dir):
+                    if verbose:
+                        print(
+                            f"Specs for version NCAS-GENERAL-{version_number} not found, attempting download..."
+                        )
+                    try:
+                        vocabs_dir = os.path.join(
+                            conf["settings"].get("vocabs_dir", "./checksit/vocabs"),
+                            f"AMF_CVs/{version_number}",
+                        )
+                        cvs = urllib.request.urlopen(
+                            f"https://github.com/ncasuk/AMF_CVs/tree/v{version_number}/AMF_CVs"
+                        )
+                        data = cvs.readlines()
+                        if not os.path.exists(specs_dir):
+                            os.mkdir(specs_dir)
+                        if not os.path.exists(vocabs_dir):
+                            os.mkdir(vocabs_dir)
+                        for line in data:
+                            if (
+                                f'href="/ncasuk/AMF_CVs/blob/v{version_number}/AMF_CVs'
+                                in line.decode()
+                            ):
+                                json_file = (
+                                    line.decode().split('href="')[1].split('">')[0]
+                                )
+                                if json_file.startswith("/ncasuk/AMF_CVs/blob/"):
+                                    cv = urllib.request.urlopen(
+                                        f"https://raw.githubusercontent.com{json_file.replace('/blob','')}"
+                                    )
+                                    json_file_name = json_file.split("/")[-1]
+                                    with open(
+                                        f"{vocabs_dir}/{json_file_name}", "w"
+                                    ) as f:
+                                        _ = f.write(cv.read().decode())
+                        make_amof_specs(version_number)
+                        if verbose:
+                            print("  Downloaded of specs successful")
+                    except urllib.error.HTTPError:
+                        if log_mode == "compact":
+                            print(
+                                f"{file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}"
+                            )
+                        else:
+                            print(
+                                f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}."
+                            )
+                            print("Aborting...")
+                        sys.exit()
+                    except PermissionError:
+                        if log_mode == "compact":
+                            print(
+                                f"{file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit."
+                            )
+                        else:
+                            print(
+                                f"[ERROR]: Permission Error when trying to create folders or files within checksit."
+                            )
+                            print(
+                                f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}."
+                            )
+                        sys.exit()
+                    except:
+                        raise
+
+                # get deployment mode and data product, to then get specs
+                deployment_mode = (
+                    file_content.cdl.split(":deployment_mode =")[1]
+                    .split(";")[0]
+                    .strip()
+                    .strip('"')
+                )
+                deploy_spec = f"{spec_folder}/amof-common-{deployment_mode}"
+                product = file_path.split("/")[-1].split("_")[3]
+                product_spec = f"{spec_folder}/amof-{product}"
+                specs = [
+                    f"{spec_folder}/amof-file-name",
+                    deploy_spec,
+                    product_spec,
+                    f"{spec_folder}/amof-global-attrs",
+                ]
+                # don't need to do template check
+                template = "off"
+
+            # NCAS-RADAR (coming soon...)
+            # if "NCAS-Radar" in conventions
+
+        elif (
+            file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS
+            and "XMP-photoshop:Instructions" in file_content.global_attrs.keys()
+        ):
+            conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
+            if (
+                "National Centre for Atmospheric Science Image Metadata Standard"
+                in file_content.global_attrs["XMP-photoshop:Instructions"].replace(
+                    "\n", " "
+                )
+            ):
+                if verbose:
+                    print("\nNCAS-IMAGE file detected, finding correct spec files")
+                    print("Finding correct IMAGE version...")
+                version_number = (
+                    conventions.replace("\n", " ")
+                    .split("Metadata Standard ")[1]
+                    .split(":")[0]
+                )
+                spec_folder = f"ncas-image-{version_number}"
+                if verbose:
+                    print(f"  {version_number}")
+                specs_dir = os.path.join(
+                    conf["settings"].get("specs_dir", "./specs"),
+                    f"groups/{spec_folder}",
+                )
+                if not os.path.exists(specs_dir):
+                    print(
+                        f"[ERROR] specs for NCAS-IMAGE {version_number} can not be found."
+                    )
+                    print("Aborting...")
+                    sys.exit()
+                product = file_path.split("/")[-1].split("_")[3]
+                product_spec = f"{spec_folder}/amof-{product}"
+                specs = [product_spec, f"{spec_folder}/amof-image-global-attrs"]
+                template = "off"
+
+        return template, specs
+
+    def check_file(
+        self,
+        file_path,
+        template="auto",
+        mappings=None,
+        extra_rules=None,
+        specs=None,
+        ignore_attrs=None,
+        auto_cache=False,
+        verbose=False,
+        log_mode="standard",
+        ignore_warnings=False,
+        skip_spellcheck=False,
+    ):
 
         try:
             fp = FileParser()
@@ -219,112 +442,25 @@ class Checker:
             else:
                 raise Exception(err)
 
-        # if template == "auto":
-        #     template = self._template_from_config(file_path, verbose)
-        # elif not os.path.isfile(template):
-        #     if log_mode == "compact":
-        #         print(f"{file_path} | ABORTED | FATAL | Cannot find template file specified")
-        #         sys.exit(1)
-        #     else:
-        #         raise Exception(f"Cannot find specified template file: {template}")
-
-        # tmpl = self.parse_file_header(template, auto_cache=auto_cache, verbose=verbose)
-
         ### Check for NCAS data files and gather specs ###
         # if template and specs are "default" values, check to see if
         # file is an ncas file (assuming file name starts with instrument name)
-        if (template == "auto" and specs == None and
-            file_path.split("/")[-1].startswith("ncas-")):
-            # find appropriate specs depending on convention
-            if file_path.split(".")[-1] == "nc" and ":Conventions" in file_content.cdl:
-                conventions = file_content.cdl.split(":Conventions =")[1].split(";")[0].strip()
-                # NCAS-GENERAL file
-                if any(name in conventions for name in ["NCAS-GENERAL", "NCAS-AMF", "NCAS-AMOF"]):
-                    if verbose:
-                        print("\nNCAS-AMOF file detected, finding correct spec files")
-                        print("Finding correct AMOF version...")
-                    version_number = conventions[conventions.index("NCAS-"):].split("-")[2].replace('"','')
-                    spec_folder = f"ncas-amof-{version_number}"
-                    if verbose: print(f"  {version_number}")
-
-                    # check specs exist for that version
-                    specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
-                    if not os.path.exists(specs_dir):
-                        if verbose: print(f"Specs for version NCAS-GENERAL-{version_number} not found, attempting download...")
-                        try:
-                            vocabs_dir = os.path.join(conf["settings"].get("vocabs_dir", "./checksit/vocabs"), f"AMF_CVs/{version_number}")
-                            cvs = urllib.request.urlopen(f"https://github.com/ncasuk/AMF_CVs/tree/v{version_number}/AMF_CVs")
-                            data = cvs.readlines()
-                            if not os.path.exists(specs_dir):
-                                os.mkdir(specs_dir)
-                            if not os.path.exists(vocabs_dir):
-                                os.mkdir(vocabs_dir)
-                            for line in data:
-                                if f'href="/ncasuk/AMF_CVs/blob/v{version_number}/AMF_CVs' in line.decode():
-                                    json_file = line.decode().split('href="')[1].split('">')[0]
-                                    if json_file.startswith("/ncasuk/AMF_CVs/blob/"):
-                                        cv = urllib.request.urlopen(f"https://raw.githubusercontent.com{json_file.replace('/blob','')}")
-                                        json_file_name = json_file.split("/")[-1]
-                                        with open(f"{vocabs_dir}/{json_file_name}", "w") as f:
-                                            _ = f.write(cv.read().decode())
-                            make_amof_specs(version_number)
-                            if verbose: print("  Downloaded of specs successful")
-                        except urllib.error.HTTPError:
-                            if log_mode == "compact":
-                                print(f"{file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}")
-                            else:
-                                print(f"[ERROR]: Cannot download data for NCAS-AMOF-{version_number}.")
-                                print("Aborting...")
-                            sys.exit()
-                        except PermissionError:
-                            if log_mode == "compact":
-                                print(f"{file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit.")
-                            else:
-                                print(f"[ERROR]: Permission Error when trying to create folders or files within checksit.")
-                                print(f"Please talk to your Admin about installing data for NCAS-AMOF-{version_number}.")
-                            sys.exit()
-                        except:
-                            raise
-
-                    # get deployment mode and data product, to then get specs
-                    deployment_mode = file_content.cdl.split(':deployment_mode =')[1].split(';')[0].strip().strip('"')
-                    deploy_spec = f'{spec_folder}/amof-common-{deployment_mode}'
-                    product = file_path.split('/')[-1].split('_')[3]
-                    product_spec = f'{spec_folder}/amof-{product}'
-                    specs = [f'{spec_folder}/amof-file-name', deploy_spec, product_spec, f'{spec_folder}/amof-global-attrs']
-                    # don't need to do template check
-                    template = "off"
-
-                # NCAS-RADAR (coming soon...)
-                # if "NCAS-Radar" in conventions
-            
-            elif (file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS and
-                  "XMP-photoshop:Instructions" in file_content.global_attrs.keys()):
-                conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
-                if "National Centre for Atmospheric Science Image Metadata Standard" in file_content.global_attrs["XMP-photoshop:Instructions"].replace("\n"," "):
-                    if verbose:
-                        print("\nNCAS-IMAGE file detected, finding correct spec files")
-                        print("Finding correct IMAGE version...")
-                    version_number = conventions.replace("\n"," ").split("Metadata Standard ")[1].split(":")[0]
-                    spec_folder = f"ncas-image-{version_number}"
-                    if verbose: print(f"  {version_number}")
-                    specs_dir = os.path.join(conf["settings"].get("specs_dir", "./specs"), f"groups/{spec_folder}")
-                    if not os.path.exists(specs_dir):
-                        print(f"[ERROR] specs for NCAS-IMAGE {version_number} can not be found.")
-                        print("Aborting...")
-                        sys.exit()
-                    product = file_path.split('/')[-1].split('_')[3]
-                    product_spec = f"{spec_folder}/amof-{product}"
-                    specs = [product_spec, f"{spec_folder}/amof-image-global-attrs"]
-                    template = "off"
-
-
+        if (
+            template == "auto"
+            and specs == None
+            and file_path.split("/")[-1].startswith("ncas-")
+        ):
+            template, specs = self._get_ncas_specs(
+                file_path, file_content, log_mode=log_mode, verbose=verbose
+            )
 
         if template == "off":
             tmpl = template
             tmpl_input = "OFF"
         else:
-            tm = TemplateManager(auto_cache=auto_cache, verbose=verbose, log_mode=log_mode)
+            tm = TemplateManager(
+                auto_cache=auto_cache, verbose=verbose, log_mode=log_mode
+            )
             tmpl = tm.get(file_path, template=template)
             tmpl_input = tmpl.inpt
 
@@ -341,11 +477,21 @@ class Checker:
         if log_mode == "compact":
             print(f"{file_path} | {tmpl_input} | ", end="")
         else:
-            print(f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {specs}\n\tDatafile: {file_content.inpt}")
+            print(
+                f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {specs}\n\tDatafile: {file_content.inpt}"
+            )
 
-        self._check_file(file_content, template=tmpl, mappings=mappings, extra_rules=extra_rules, 
-                        specs=specs, ignore_attrs=ignore_attrs, log_mode=log_mode,
-                        ignore_warnings=ignore_warnings, skip_spellcheck=skip_spellcheck)
+        self._check_file(
+            file_content,
+            template=tmpl,
+            mappings=mappings,
+            extra_rules=extra_rules,
+            specs=specs,
+            ignore_attrs=ignore_attrs,
+            log_mode=log_mode,
+            ignore_warnings=ignore_warnings,
+            skip_spellcheck=skip_spellcheck,
+        )
 
 
 class TemplateManager:
@@ -360,13 +506,17 @@ class TemplateManager:
             template = self._get_template_from_config(file_path)
         elif not os.path.isfile(template):
             if self.log_mode == "compact":
-                print(f"{file_path} | ABORTED | FATAL | Cannot find template file specified")
+                print(
+                    f"{file_path} | ABORTED | FATAL | Cannot find template file specified"
+                )
                 sys.exit(1)
             else:
                 raise Exception(f"Cannot find specified template file: {template}")
 
         fp = FileParser()
-        tmpl = fp.parse_file_header(template, auto_cache=self.auto_cache, verbose=self.verbose)
+        tmpl = fp.parse_file_header(
+            template, auto_cache=self.auto_cache, verbose=self.verbose
+        )
         return tmpl
 
     def _get_template_from_config(self, file_path):
@@ -377,17 +527,19 @@ class TemplateManager:
             config = conf[f"dataset:{dset}"]
 
             if "regex_path" in config and re.search(config["regex_path"], file_path):
-                return self._get_template_by_dataset(file_path, config) 
-            elif "regex_file" in config and re.match(config["regex_file"], os.path.basename(file_path)):
+                return self._get_template_by_dataset(file_path, config)
+            elif "regex_file" in config and re.match(
+                config["regex_file"], os.path.basename(file_path)
+            ):
                 return self._get_template_by_dataset(file_path, config)
         else:
-            return self._get_template_from_cache(file_path) 
+            return self._get_template_from_cache(file_path)
 
     def _get_template_by_dataset(self, file_path, config):
         if "template" in config:
             return config["template"]
         elif "template_cache" in config:
-            return self._get_template_from_cache(file_path, config["template_cache"]) 
+            return self._get_template_from_cache(file_path, config["template_cache"])
         else:
             raise Exception("No rule for finding the template")
 
@@ -397,20 +549,23 @@ class TemplateManager:
 
         tmpl_base = get_file_base(file_path)
 
-        if self.verbose: print(f"[INFO] Searching for exact match for: {tmpl_base}")
+        if self.verbose:
+            print(f"[INFO] Searching for exact match for: {tmpl_base}")
         matches = glob.glob(f"{template_cache}/{tmpl_base}_*.cdl")
 
         if matches:
-            match = matches[0] 
-            if self.verbose: print(f"[INFO] Found exact match: {match}")
+            match = matches[0]
+            if self.verbose:
+                print(f"[INFO] Found exact match: {match}")
         else:
-            if self.verbose: print("[WARNING] Failed to find exact match, so trying nearest...")
+            if self.verbose:
+                print("[WARNING] Failed to find exact match, so trying nearest...")
             templates = os.listdir(template_cache)
             matches = difflib.get_close_matches(tmpl_base, templates)
 
             if matches:
                 match = os.path.join(template_cache, matches[0])
-            else: 
+            else:
                 match = conf["settings"].get("default_template")
 
         if not match:
@@ -433,7 +588,7 @@ class FileParser:
         elif ext in ("yml"):
             reader = yml
         elif ext.lower() in IMAGE_EXTENSIONS:
-            reader = image   
+            reader = image
         else:
             raise Exception(f"No known reader for file with extension: {ext}")
 
@@ -441,7 +596,9 @@ class FileParser:
 
         if auto_cache:
             base = os.path.splitext(os.path.basename(file_path))[0]
-            output_path = os.path.join(conf["settings"]["default_template_cache_dir"], base)
+            output_path = os.path.join(
+                conf["settings"]["default_template_cache_dir"], base
+            )
 
             if reader == cdl:
                 # Special case for NetCDF files using CDL
@@ -450,9 +607,14 @@ class FileParser:
             else:
                 # All others use YAML
                 with open(f"{output_path}.yml", "w") as writer:
-                    yaml.dump(content.to_dict(), writer, Dumper=yaml.SafeDumper, 
-                            default_flow_style=False, sort_keys=False)
-                
+                    yaml.dump(
+                        content.to_dict(),
+                        writer,
+                        Dumper=yaml.SafeDumper,
+                        default_flow_style=False,
+                        sort_keys=False,
+                    )
+
         return content
 
 

@@ -59,7 +59,10 @@ def match_one_or_more_of(value, context, extras=None, label=""):
     """
     String value or list value must match one of more of list given in extras
     """
-    def as_set(x, sep): return set([i.strip() for i in x.split(sep)])
+
+    def as_set(x, sep):
+        return set([i.strip() for i in x.split(sep)])
+
     options = as_set(extras[0], rule_splitter)
     values = as_set(value, ",")
 
@@ -99,12 +102,14 @@ def validate_image_date_time(value, context, extras=None, label=""):
     for f in ["%Y:%m:%d %H:%M:%S", "%Y:%m:%d %H:%M:%S.%f"]:
         if match == False:
             try:
-                match = (value == datetime.strptime(value, f).strftime(f))
+                match = value == datetime.strptime(value, f).strftime(f)
             except ValueError:
                 pass
 
     if not match:
-        errors.append(f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s")
+        errors.append(
+            f"{label} '{value}' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"
+        )
 
     return errors
 
@@ -113,7 +118,7 @@ def validate_orcid_ID(value, context, extras=None, label=""):
     """
     A function to verify the format of an orcid ID
     """
-    orcid_string = "https://orcid.org/"                                     # required format of start of the string
+    orcid_string = "https://orcid.org/"  # required format of start of the string
 
     errors = []
 
@@ -122,23 +127,31 @@ def validate_orcid_ID(value, context, extras=None, label=""):
 
     # Check that total the length is correct
     if len(value) != 37:
-        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(
+            f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+        )
 
     # Check the start of the string (first 18 characters)
-    elif (value[0:18] != orcid_string or
-
+    elif (
+        value[0:18] != orcid_string
+        or
         # Check that the "-" are in the correct places
-        value[22] != "-" or
-        value[27] != "-" or
-        value[32] != "-" or
-
+        value[22] != "-"
+        or value[27] != "-"
+        or value[32] != "-"
+        or
         # Check that the last characters contain only "-" and digits (plus 'X' for last digit)
         not (
-            PI_orcid_digits_only.isdigit() or (PI_orcid_digits_only[0:15].isdigit() and PI_orcid_digits_only[15] == "X")
+            PI_orcid_digits_only.isdigit()
+            or (
+                PI_orcid_digits_only[0:15].isdigit() and PI_orcid_digits_only[15] == "X"
+            )
         )
     ):
 
-        errors.append(f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX")
+        errors.append(
+            f"{label} '{value}' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+        )
 
     return errors
 
@@ -147,23 +160,33 @@ def list_of_names(value, context, extras=None, label=""):
     """
     A function to verify the names of people when a list of names may be provided
     """
-    name_pattern = r'(.)+, (.)+ ?((.)+|((.)\.))'                # The format names should be written in
-    character_name_pattern = r'[A-Za-z_À-ÿ\-\'\ \.\,]+'
+    name_pattern = (
+        r"(.)+, (.)+ ?((.)+|((.)\.))"  # The format names should be written in
+    )
+    character_name_pattern = r"[A-Za-z_À-ÿ\-\'\ \.\,]+"
 
     warnings = []
 
     if type(value) == list:
         for i in value:
             if not re.fullmatch(name_pattern, i):
-                warnings.append(f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate")
+                warnings.append(
+                    f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"
+                )
             if not re.fullmatch(character_name_pattern, i):
-                warnings.append(f"{label} '{value}' - please use characters A-Z, a-z, À-ÿ where appropriate")
+                warnings.append(
+                    f"{label} '{value}' - please use characters A-Z, a-z, À-ÿ where appropriate"
+                )
 
     if type(value) == str:
         if not re.fullmatch(name_pattern, value):
-            warnings.append(f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate")
+            warnings.append(
+                f"{label} '{value}' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"
+            )
         if not re.fullmatch(character_name_pattern, value):
-            warnings.append(f"{label} '{value}' - please use characters A-Z, a-z, À-ÿ where appropriate")
+            warnings.append(
+                f"{label} '{value}' - please use characters A-Z, a-z, À-ÿ where appropriate"
+            )
 
     return warnings
 
@@ -179,10 +202,14 @@ def headline(value, context, extras=None, label=""):
 
     else:
         if len(value) > 150:
-            warnings.append(f"{label} '{value}' should contain no more than one sentence")
+            warnings.append(
+                f"{label} '{value}' should contain no more than one sentence"
+            )
 
         if value.count(".") >= 2:
-            warnings.append(f"{label} '{value}' should contain no more than one sentence")
+            warnings.append(
+                f"{label} '{value}' should contain no more than one sentence"
+            )
 
         if not value[0].isupper():
             warnings.append(f"{label} '{value}' should start with a capital letter")
@@ -199,7 +226,7 @@ def title_check(value, context, extras=None, label=""):
     """
     errors = []
 
-    if value != os.path.basename(context) :
+    if value != os.path.basename(context):
         errors.append(f"{label} '{value}' must match the name of the file")
 
     return errors
@@ -211,11 +238,12 @@ def url_checker(value, context, extras=None, label=""):
     """
     warnings = []
 
-    try: url=urlopen(value)
+    try:
+        url = urlopen(value)
     except:
         warnings.append(f"{label} '{value}' is not a reachable url")
     else:
-        if url.getcode() != 200:           # (200 means it exists and is up and reachable)
+        if url.getcode() != 200:  # (200 means it exists and is up and reachable)
             warnings.append(f"{label} '{value}' is not a reachable url")
     finally:
         return warnings
@@ -230,9 +258,13 @@ def relation_url_checker(value, context, extras=None, label=""):
     if " " not in value:
         errors.append(f"{label} '{value}' should contain a space before the url")
     else:
-        relation_url = value.partition(" ")[2]        # extract only the url part of the relation string
+        relation_url = value.partition(" ")[
+            2
+        ]  # extract only the url part of the relation string
         if url_checker(relation_url, context, extras, label) != []:
-            errors.extend(url_checker(relation_url, context, extras, label))       # check the url exists using the url_checker() function defined above
+            errors.extend(
+                url_checker(relation_url, context, extras, label)
+            )  # check the url exists using the url_checker() function defined above
 
     return errors
 
@@ -243,7 +275,7 @@ def latitude(value, context, extras=None, label=""):
     """
     errors = []
 
-    latitude = re.findall(r'[0-9]+', value)
+    latitude = re.findall(r"[0-9]+", value)
     int_latitude = int(latitude[0])
     dec_latitude = int(latitude[1])
 
@@ -259,7 +291,7 @@ def longitude(value, context, extras=None, label=""):
     """
     errors = []
 
-    longitude = re.findall(r'[0-9]+', value)
+    longitude = re.findall(r"[0-9]+", value)
     int_longitude = int(longitude[0])
     dec_longitude = int(longitude[1])
 
@@ -274,14 +306,20 @@ def ceda_platform(value, context, extras=None, label=""):
     A function to check if the platform is in the CEDA catalogue API
     """
     errors = []
-    api_result = requests.get(f"http://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}")
-    if (len(api_result.json()['results']) == 1) and (api_result.json()['results'][0]['relatedTo']['short_code'] == "plat"):
+    api_result = requests.get(
+        f"http://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}"
+    )
+    if (len(api_result.json()["results"]) == 1) and (
+        api_result.json()["results"][0]["relatedTo"]["short_code"] == "plat"
+    ):
         legit_platform = True
     else:
         legit_platform = False
 
     if not legit_platform:
-        errors.append(f"{label} '{value}' is not a valid platform in the CEDA catalogue")
+        errors.append(
+            f"{label} '{value}' is not a valid platform in the CEDA catalogue"
+        )
 
     return errors
 
@@ -292,10 +330,14 @@ def ncas_platform(value, context, extras=None, label=""):
     """
     errors = []
 
-    latest_version = requests.get("https://github.com/ncasuk/ncas-data-platform-vocabs/releases/latest").url.split("/")[-1]
+    latest_version = requests.get(
+        "https://github.com/ncasuk/ncas-data-platform-vocabs/releases/latest"
+    ).url.split("/")[-1]
 
-    result = requests.get(f"https://raw.githubusercontent.com/ncasuk/ncas-data-platform-vocabs/{latest_version}/AMF_CVs/AMF_platform.json")
-    ncas_platforms = result.json()['platform'].keys()
+    result = requests.get(
+        f"https://raw.githubusercontent.com/ncasuk/ncas-data-platform-vocabs/{latest_version}/AMF_CVs/AMF_platform.json"
+    )
+    ncas_platforms = result.json()["platform"].keys()
 
     if value not in ncas_platforms:
         errors.append(f"{label} '{value}' is not a valid NCAS platform")
@@ -315,7 +357,9 @@ def check_qc_flags(value, context, extras=None, label=""):
 
     # check flag_values are correctly formatted (should be array of bytes)
     if not (isinstance(value, np.ndarray) or isinstance(value, tuple)):
-        errors.append(f"{label} QC flag_values must be an array or tuple of byte values, not '{type(value)}'.")
+        errors.append(
+            f"{label} QC flag_values must be an array or tuple of byte values, not '{type(value)}'."
+        )
 
     # check there are at least two values and they start with 0 and 1
     if not len(value) > 2:
@@ -325,12 +369,18 @@ def check_qc_flags(value, context, extras=None, label=""):
 
     # check there are at least two meanings and the first two are correct
     if not len(meanings) > 2:
-        errors.append(f"{label} There must be at least two QC flag meanings (space separated).")
+        errors.append(
+            f"{label} There must be at least two QC flag meanings (space separated)."
+        )
     elif not np.all(meanings[:2] == ["not_used", "good_data"]):
-        errors.append(f"{label} First two QC flag_meanings must be 'not_used' and 'good_data'.")
+        errors.append(
+            f"{label} First two QC flag_meanings must be 'not_used' and 'good_data'."
+        )
 
     # check number of values is same as number of meanings
     if not len(value) == len(meanings):
-        errors.append(f"{label} Number of flag_values must equal number of flag_meanings.")
+        errors.append(
+            f"{label} Number of flag_values must equal number of flag_meanings."
+        )
 
     return errors
