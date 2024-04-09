@@ -39,6 +39,6 @@ required-gloabl-attrs:
         time_coverage_start: regex-rule:datetimeZ
         time_coverage_end: regex-rule:datetimeZ
     regex_attrs:
-        Conventions: CfRadial-1.4 NCAS-Radar-1.0 instrument_parameters radar-parameters radar-calibration
+        Conventions: ^(NCAS-Radar-1\.0|CfRadial-1\.4) (NCAS-Radar-1\.0|CfRadial-1\.4) instrument_parameters radar_parameters radar_calibration$
         product_version: ^v\d+\.\d+\.\d+$
 
