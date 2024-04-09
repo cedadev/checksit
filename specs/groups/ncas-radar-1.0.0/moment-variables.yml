@@ -4,7 +4,6 @@ var-requires:
     exist_attrs:
       - units
       - long_name
-      - _FillValue
     rule_attrs:
       - coordinates: rule-func:match-one-of:elevation azimuth range|elevation azimuth range heading roll pitch rotation tilt
     one_of_attrs:
