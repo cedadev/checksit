@@ -27,7 +27,7 @@ the parameters that are needed for the function which have values defined in the
 ``skip_spellcheck`` variable, which should have the default value of ``False`` (alternatively,
 ``**kwargs`` could be included in the function parameters instead of ``skip_spellcheck`` if the
 spellchecking functionality is not required). The ``skip_spellcheck`` parameter is added to the specs
-by ``checksit``\ , and does not need to be included in the spec YAML files. 
+by ``checksit``\ , and does not need to be included in the spec YAML files.
 
 The spellchecking functionality aims to spot if a file might have a spelling error in. For example, if
 a spec states that there should be a variable called ``time`` in the file, but one is not found, it
@@ -41,7 +41,7 @@ vocabs checks
 ``checksit`` allows for templates and specs to define checks against known vocabularies. These vocabs
 are stored as JSON files within ``checksit/vocabs``\ , and can be grouped into folders within this
 directory. This folder is referenced through ``checksit`` as ``__vocabs__``. Defining a vocab check
-could look like 
+could look like
 
 .. code-block::
 
@@ -60,7 +60,7 @@ An option is also included for a vocab match of one value out of many. For examp
    platform: __vocabs__:AMF_CVs/2.0.0/AMF_platform:platform:__all__
 
 specifies ``platform`` should match one of the values found under the ``platform`` key in
-``checksit/vocabs/AMF_CVs/2.0.0/AMF_platform.json``\ , and 
+``checksit/vocabs/AMF_CVs/2.0.0/AMF_platform.json``\ , and
 
 .. code-block::
 
@@ -99,7 +99,7 @@ checks, managed by the ``Rules`` class in ``checksit/rules/rules.py``. There are
 
 * ``type-rule``\ : checks the value is of the correct type, e.g. integer, float or string
 * ``regex``\ : checks the value matches a given regular expression
-* ``regex-rule``: checks the value matches a pre-defined regex. These are: 
+* ``regex-rule``: checks the value matches a pre-defined regex. These are:
 
 .. list-table::
    :header-rows: 1
@@ -150,7 +150,7 @@ others similar.
 
 * ``rule-func``\ : checks the value against a pre-defined function, which are defined in
   ``checksit/rules/rule_funcs.py``. Rule functions defined in this file include, for example
-  ``match_one_of``\ , where a value mush match one option from a list, and ``string_of_length``\ ,
+  ``match_one_of``\ , where a value must match one option from a list, and ``string_of_length``\ ,
   where a string must be of a defined length or longer (e.g. ``5`` or ``5+``\ ).
 
 
