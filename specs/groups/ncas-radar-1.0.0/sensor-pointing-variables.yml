@@ -21,4 +21,4 @@ var-requires1:
       - units:degrees
       - standard_name:ray_elevation_angle
       - long_name:elevation_angle_from_horizontal_plane
-      - axis:radial_elevaton_coordinate
+      - axis:radial_elevation_coordinate
