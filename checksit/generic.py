@@ -437,7 +437,7 @@ def check_radar_moment_variables(dct, exist_attrs=None, rule_attrs=None, one_of_
             if attr not in dct["variables"][variable]:
                 errors.append(
                     f"[variable**************:{variable}]: Attribute '{attr}' does not exist. "
-                    f"{search_close_match(attr, dct["variables"][variable]) if not skip_spellcheck else ''}"
+                    f"{search_close_match(attr, dct['variables'][variable]) if not skip_spellcheck else ''}"
                 )
         for attr in rule_attrs:
             if isinstance(attr, dict) and len(attr.keys()) == 1:
