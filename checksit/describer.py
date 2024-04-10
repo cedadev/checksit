@@ -17,7 +17,6 @@ def describe(check_ids=None, verbose=False):
 
     print("Functional check descriptions:")
     for check_id, check_func in check_funcs:
-     
+
         print(f"\n{check_id}:\n\tFunction: {check_func.__name__}\n\tDescription:")
         print("\n\t".join([line for line in check_func.__doc__.split("\n")]))
-
