@@ -160,7 +160,7 @@ def check_var_exists(dct, variables, skip_spellcheck=False):
 
 def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     """
-    Check that variables exist
+    Check that dimensions exist
 
     E.g. check-dim-exists:dimensions:time|latitude
     """
@@ -182,6 +182,35 @@ def check_dim_exists(dct, dimensions, skip_spellcheck=False):
                     f"{search_close_match(dim, dct['dimensions'].keys()) if not skip_spellcheck else ''}"
                 )
 
+    return errors, warnings
+
+
+def check_dim_regex(dct, regex_dims, skip_spellcheck=False):
+    """
+    Check dimension exists matching regex
+
+    E.g. check-dime-regex:regex-dims:^string_length[^,]*$
+    """
+    errors = []
+    warnings = []
+    for regex_dim in regex_dims:
+        if regex_dim.endswith(":__OPTIONAL__"):
+            regex_dim = ":".join(regex_dim.split(":")[:-1])
+            r = re.compile(regex_dim)
+            matches = list(filter(r.match, dct["dimensions"].keys()))
+            #if not re.match(regex_dim, dct["dimensions"].keys()):
+            if len(matches) == 0:
+                warnings.append(
+                    f"[dimension**************:{regex_dim}]: No dimension matching optional regex check in file. "
+                )
+        else:
+            r = re.compile(regex_dim)
+            matches = list(filter(r.match, dct["dimensions"].keys()))
+            #if not re.match(regex_dim, dct["dimensions"].keys()):
+            if len(matches) == 0:
+                errors.append(
+                    f"[dimension**************:{regex_dim}]: No dimension matching regex check in file. "
+                )
     return errors, warnings
 
 
