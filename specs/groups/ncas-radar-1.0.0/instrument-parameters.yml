@@ -1,0 +1,166 @@
+dims-optional:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - frequency:__OPTIONAL__
+      - n_prts:__OPTIONAL__
+
+var-optional0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - frequency:__OPTIONAL__
+    defined_attrs:
+      - dimension:frequency
+      - type:float
+      - units:s-1
+
+var-optional1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - follow_mode:__OPTIONAL__
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:^sweep, string_length[^,]*$
+
+var-optional2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - pulse_width:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+      - units:seconds
+
+var-requries3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - rx_range_resolution:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+    rules_attrs:
+      - units: rule-func:match-one-of:meters|metres
+
+var-optional4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - prt_mode:__OPTIONAL__
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:^sweep, string_length[^,]*$
+
+var-optional5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - prt:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+      - units:seconds
+
+var-optional6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - prt_ratio:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+
+var-optional7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - prt_sequence:__OPTIONAL__
+    defined_attrs:
+      - dimension:time, n_prts
+      - type:float
+      - units:seconds
+
+var-optional8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - polarization_mode:__OPTIONAL__
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:^sweep, string_length[^,]*$
+
+var-optional9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - polarization_sequence:__OPTIONAL__
+    defined_attrs:
+      - dimension:sweep, n_prts
+      - type:char
+
+var-optional10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - nyquist_velocity:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+    rules_attrs:
+      - units: rule-func:match-one-of:m/s|m s-1
+
+var-optional11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - unambiguous_range:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+    rules_attrs:
+      - units: rule-func:match-one-of:meters|metres
+
+var-optional12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - n_samples:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:int
+
+var-optional13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_measured_sky_noise:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+      - units:dBm
+
+var-optional14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_measured_cold_noise:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+      - units:dBm
+
+var-optional15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_measured_hot_noise:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+      - units:dBm

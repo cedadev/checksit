@@ -1,0 +1,26 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - time
+    defined_attrs:
+      - type:double
+      - dimension:time
+      - standard_name:time
+    rules_attrs:
+      - long_name: rule-func:match-one-of:time_in_seconds_since_volume_start|time_since_time_reference
+      - units: regex:seconds since \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - range
+    defined_attrs:
+      - type:float
+      - standard_name:projection_range_coordinate
+      - axis:radial_range_coordinate
+    rules_attrs:
+      - dimension: rule-func:match-one-of:range|sweep, range
+      - units: rule-func:match-one-of:metres|meters
+      - long_name: rule-func:string-of-length:5+
+      - spacing_is_constant: rule-func:match-one-of:true|false

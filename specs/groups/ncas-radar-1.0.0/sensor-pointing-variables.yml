@@ -1,0 +1,24 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - azimuth
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degrees
+      - standard_name:ray_azimuth_angle
+      - long_name:azimuth_angle_from_true_north
+      - axis:radial_azimuth_coordinate
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - elevation
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degrees
+      - standard_name:ray_elevation_angle
+      - long_name:elevation_angle_from_horizontal_plane
+      - axis:radial_elevation_coordinate

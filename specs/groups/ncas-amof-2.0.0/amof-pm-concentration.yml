@@ -144,8 +144,8 @@ var-requires9:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: PM1
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -156,8 +156,8 @@ var-requires10:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: PM2.5
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -168,8 +168,8 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: PM4
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -180,8 +180,8 @@ var-requires12:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: PM10
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -192,8 +192,8 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Total PM
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -204,8 +204,8 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Total Number
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -216,8 +216,8 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Temperature
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -228,8 +228,8 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Relative Humidity
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -240,5 +240,5 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Pressure
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

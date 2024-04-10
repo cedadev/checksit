@@ -278,7 +278,7 @@ def test_check_var():
     variable = "var3"
     defined_attrs = ["long_name:Variable 3", "units:s"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var3]: Optional variable does not exist in file. "]
+    assert errors == ["[variable**************:var3]: Variable does not exist in file. "]
     assert warnings == []
 
     # Test that the function correctly handles optional variables
@@ -339,7 +339,7 @@ def test_check_var():
     variable = "var2"
     dct = {"variables": {}}
     errors, warnings = cg.check_var(dct, variable, defined_attrs)
-    assert errors == ["[variable**************:var2]: Optional variable does not exist in file. "]
+    assert errors == ["[variable**************:var2]: Variable does not exist in file. "]
     assert warnings == []
 
 

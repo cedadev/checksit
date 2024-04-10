@@ -1,0 +1,43 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - time_coverage_start
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:string_length[^,]*
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - time_coverage_end
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:string_length[^,]*
+var-optional0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - platform_type:__OPTIONAL__
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:string_length[^,]*
+var-optional1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - time_reference:__OPTIONAL__
+    defined_attrs:
+      - type:char
+    rules_attrs:
+      - dimension: regex:string_length[^,]*
+var-optional2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - volume_number:__OPTIONAL__
+    defined_attrs:
+      - type:int

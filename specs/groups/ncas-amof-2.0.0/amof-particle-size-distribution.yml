@@ -145,8 +145,8 @@ var-requires10:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Temperature
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -157,8 +157,8 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Pressure
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -169,8 +169,8 @@ var-requires12:
       - dimension:time, index
       - units:1
       - long_name:Data Quality flag: Instrument Counts
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -181,8 +181,8 @@ var-requires13:
       - dimension:time, index
       - units:1
       - long_name:Data Quality flag: Ambient Particle Number per Channel
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

@@ -1,0 +1,70 @@
+var-optional0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_antenna_gain_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:--none--
+      - type:float
+      - units:dB
+
+var-optional1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_antenna_gain_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:--none--
+      - type:float
+      - units:dB
+
+var-optional2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_beam_width_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:--none--
+      - type:float
+      - units:degrees
+
+var-optional3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_beam_width_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:--none--
+      - type:float
+      - units:degrees
+
+var-optional4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_receiver_bandwidth:__OPTIONAL__
+    defined_attrs:
+      - dimension:--none--
+      - type:float
+      - units:s-1
+
+var-optional5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_measured_transmit_power_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+      - units:dBm
+
+var-optional6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - radar_measured_transmit_power_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:float
+      - units:dBm
+
