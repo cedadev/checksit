@@ -242,7 +242,6 @@ def check_dim_regex(dct, regex_dims, skip_spellcheck=False):
             regex_dim = ":".join(regex_dim.split(":")[:-1])
             r = re.compile(regex_dim)
             matches = list(filter(r.match, dct["dimensions"].keys()))
-            #if not re.match(regex_dim, dct["dimensions"].keys()):
             if len(matches) == 0:
                 warnings.append(
                     f"[dimension**************:{regex_dim}]: No dimension matching optional regex check in file. "
@@ -250,7 +249,6 @@ def check_dim_regex(dct, regex_dims, skip_spellcheck=False):
         else:
             r = re.compile(regex_dim)
             matches = list(filter(r.match, dct["dimensions"].keys()))
-            #if not re.match(regex_dim, dct["dimensions"].keys()):
             if len(matches) == 0:
                 errors.append(
                     f"[dimension**************:{regex_dim}]: No dimension matching regex check in file. "
@@ -326,14 +324,16 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                         f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
                     )
                 elif is_undefined(dct["variables"][variable].get(attr_key)):
-                    errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
+                    errors.append(
+                        f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
+                    )
                 elif attr_rule.startswith("rule-func:same-type-as"):
                     var_checking_against = attr_rule.split(":")[-1]
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
-                        context = dct["variables"][var_checking_against].get("type"),
-                        label = f"[variables:******:{attr_key}]***",
+                        context=dct["variables"][var_checking_against].get("type"),
+                        label=f"[variables:******:{attr_key}]***",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
@@ -341,8 +341,8 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get("flag_values"),
-                        context = dct["variables"][variable].get("flag_meanings"),
-                        label = f"[variable******:{variable}]: ",
+                        context=dct["variables"][variable].get("flag_meanings"),
+                        label=f"[variable******:{variable}]: ",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
@@ -350,11 +350,10 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
-                        label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                        label=f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
-
 
     else:
         if variable not in dct["variables"].keys():
@@ -392,14 +391,16 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                         f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
                     )
                 elif is_undefined(dct["variables"][variable].get(attr_key)):
-                    errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
+                    errors.append(
+                        f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
+                    )
                 elif attr_rule.startswith("rule-func:same-type-as"):
                     var_checking_against = attr_rule.split(":")[-1]
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
-                        context = dct["variables"][var_checking_against].get("type"),
-                        label = f"[variables:******:{attr_key}]***",
+                        context=dct["variables"][var_checking_against].get("type"),
+                        label=f"[variables:******:{attr_key}]***",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
@@ -407,8 +408,8 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get("flag_values"),
-                        context = dct["variables"][variable].get("flag_meanings"),
-                        label = f"[variable******:{variable}]: ",
+                        context=dct["variables"][variable].get("flag_meanings"),
+                        label=f"[variable******:{variable}]: ",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
@@ -416,7 +417,7 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                     rule_errors, rule_warnings = rules.check(
                         attr_rule,
                         dct["variables"][variable].get(attr_key),
-                        label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                        label=f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
@@ -519,7 +520,10 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
 
     return errors, warnings
 
-def check_radar_moment_variables(dct, exist_attrs=None, rule_attrs=None, one_of_attrs=None, skip_spellcheck=False):
+
+def check_radar_moment_variables(
+    dct, exist_attrs=None, rule_attrs=None, one_of_attrs=None, skip_spellcheck=False
+):
     """
     Finds moment variables in radar file, runs checks against all those variables
     """
@@ -532,7 +536,10 @@ def check_radar_moment_variables(dct, exist_attrs=None, rule_attrs=None, one_of_
 
     moment_variables = []
     for radarvariable, radarattributes in dct["variables"].items():
-        if isinstance(radarattributes, dict) and "coordinates" in radarattributes.keys():
+        if (
+            isinstance(radarattributes, dict)
+            and "coordinates" in radarattributes.keys()
+        ):
             moment_variables.append(radarvariable)
 
     for variable in moment_variables:
@@ -554,12 +561,14 @@ def check_radar_moment_variables(dct, exist_attrs=None, rule_attrs=None, one_of_
                     f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
                 )
             elif is_undefined(dct["variables"][variable].get(attr_key)):
-                errors.append(f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'.")
+                errors.append(
+                    f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
+                )
             else:
                 rule_errors, rule_warnings = rules.check(
                     attr_rule,
                     dct["variables"][variable].get(attr_key),
-                    label = f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                    label=f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
                 )
                 errors.extend(rule_errors)
                 warnings.extend(rule_warnings)
@@ -567,15 +576,15 @@ def check_radar_moment_variables(dct, exist_attrs=None, rule_attrs=None, one_of_
             attr_options = attrs.split("|")
             matches = 0
             for attr in attr_options:
-                if attr in dct['variables'][variable]:
+                if attr in dct["variables"][variable]:
                     matches += 1
             if matches == 0:
                 errors.append(
-f"[variable:**************:{variable}]: One attribute of '{attr_options}' must be defined."
+                    f"[variable:**************:{variable}]: One attribute of '{attr_options}' must be defined."
                 )
             elif matches > 1:
                 errors.append(
-f"[variable:**************:{variable}]: Only one of '{attr_options}' should be defined, {matches} found."
+                    f"[variable:**************:{variable}]: Only one of '{attr_options}' should be defined, {matches} found."
                 )
 
     return errors, warnings
