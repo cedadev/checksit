@@ -375,8 +375,31 @@ class Checker:
                 # don't need to do template check
                 template = "off"
 
-            # NCAS-RADAR (coming soon...)
-            # if "NCAS-Radar" in conventions
+            # NCAS-Radar
+            elif "NCAS-Radar" in conventions:
+                version_number = (
+                    conventions[conventions.index("NCAS-") :]
+                    .split("-")[2]
+                    .split(" ")[0]
+                    .replace('"', "")
+                )
+                if version_number.count(".") == 1:
+                    version_number = f"{version_number}.0"
+                template = "off"
+                spec_names = [
+                    "coordinate-variables",
+                    "dimensions",
+                    "global-attrs",
+                    "global-variables",
+                    "instrument-parameters",
+                    "location-variables",
+                    "moment-variables",
+                    "radar-calibration",
+                    "radar-parameters",
+                    "sensor-pointing-variables",
+                    "sweep-variables",
+                ]
+                specs = [f"ncas-radar-{version_number}/{spec}" for spec in spec_names]
 
         elif (
             file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS
