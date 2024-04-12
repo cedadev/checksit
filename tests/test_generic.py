@@ -266,6 +266,54 @@ def test_check_dim_exists():
     assert warnings == []
 
 
+def test_check_dim_regex():
+    dct = {
+        "dimensions": {
+            "first_dim": {},
+            "second_dim": {},
+        }
+    }
+    # Test function correctly identifies no matching dimension
+    dim_regex = [r"^third_.*$"]
+    errors, warnings = cg.check_dim_regex(dct, dim_regex)
+    assert errors == ["[dimension**************:^third_.*$]: No dimension matching regex check in file. "]
+    assert warnings == []
+
+    # Test function correctly identifies no matching optional dimensions
+    dim_regex = [r"^third_.*$:__OPTIONAL__"]
+    errors, warnings = cg.check_dim_regex(dct, dim_regex)
+    assert errors == []
+    assert warnings == ["[dimension**************:^third_.*$]: No dimension matching optional regex check in file. "]
+
+    # Test function correctly identifies one and multiple matching dimensions
+    dim_regex = [r"first_.*$"]
+    errors, warnings = cg.check_dim_regex(dct, dim_regex)
+    assert errors == []
+    assert warnings == []
+
+    dim_regex = [r"^[^_]*_dim$"]
+    errors, warnings = cg.check_dim_regex(dct, dim_regex)
+    assert errors == []
+    assert warnings == []
+
+    # Test function correctly idenfies one and multiple matching optional dimensions
+    dim_regex = [r"second_.*$:__OPTIONAL__"]
+    errors, warnings = cg.check_dim_regex(dct, dim_regex)
+    assert errors == []
+    assert warnings == []
+
+    dim_regex = [r"^[^_]*_dim$:__OPTIONAL__"]
+    errors, warnings = cg.check_dim_regex(dct, dim_regex)
+    assert errors == []
+    assert warnings == []
+
+    # Test function correctly handles multiple regex checks
+    dim_regex = [r"first_.*$", r"^third_.*$:__OPTIONAL__"]
+    errors, warnings = cg.check_dim_regex(dct, dim_regex)
+    assert errors == []
+    assert warnings == ["[dimension**************:^third_.*$]: No dimension matching optional regex check in file. "]
+
+
 def test_check_var():
     # Test that the function correctly identifies missing variables
     dct = {
@@ -413,4 +461,40 @@ def test_check_file_name():
     file_name = "inst1_plat1_20220101_prod1_opt1_opt2_opt3_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
     assert errors == []
+    assert warnings == []
+
+
+def test_check_radar_moment_variables():
+    dct = {
+        "variables": {
+            "var1": {  # moment variable
+                "coordinates": "some coordinates",
+                "attribute1": "attribute1_value",
+                "attribute2": "attribute2_value",
+                "attribute3": "attribute3_value",
+            },
+            "var2": {  # moment variable
+                "coordinates": "some other coordinates",
+                "attribute1": "attribute1_value",
+                "attribute2": "not_attribute2_value",
+            },
+            "var3": {  # not moment variable
+                "attribute1": "attribute1_value",
+            },
+        },
+    }
+    # Test for existence of some attributes in moment variables
+    exist_attrs = ["attribute1", "attribute2", "attribute3"]
+    errors, warnings = cg.check_radar_moment_variables(dct, exist_attrs = exist_attrs, skip_spellcheck = True)
+    assert errors == ["[variable**************:var2]: Attribute 'attribute3' does not exist. "]
+    assert warnings == []
+
+    # Test rule attrs and one_of_attrs
+    rule_attrs = ["attribute1:regex:attribute1_value", "attribute2:regex:attribute2_value"]
+    one_of_attrs = ["attribute3|attribute4"]
+    errors, warnings = cg.check_radar_moment_variables(dct, rule_attrs = rule_attrs, one_of_attrs = one_of_attrs)
+    assert errors == [
+        "[variables:******:var2] Value of attribute 'attribute2' - Value 'not_attribute2_value' does not match regular expression: 'attribute2_value'.",
+        "[variable:**************:var2]: One attribute of '['attribute3', 'attribute4']' must be defined."
+    ]
     assert warnings == []
