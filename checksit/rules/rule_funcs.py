@@ -362,13 +362,13 @@ def check_qc_flags(value, context, extras=None, label=""):
         )
 
     # check there are at least two values and they start with 0 and 1
-    if not len(value) > 2:
+    if not len(value) >= 2:
         errors.append(f"{label} There must be at least two QC flag values.")
     elif not (np.all(value[:2] == [0, 1]) or np.all(value[:2] == (0, 1))):
         errors.append(f"{label} First two QC flag_values must be '[0, 1]'.")
 
     # check there are at least two meanings and the first two are correct
-    if not len(meanings) > 2:
+    if not len(meanings) >= 2:
         errors.append(
             f"{label} There must be at least two QC flag meanings (space separated)."
         )
