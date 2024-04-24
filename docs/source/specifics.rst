@@ -37,3 +37,25 @@ is the same as
 .. code-block::
 
    checksit check -t off -s ncas-image-1.0.0/amof-image-global-attrs,ncas-image-1.0.0/amof-photo ncas-cam-9_cao_20231117_photo_v1.0.nc
+
+NCAS-Radar
+----------
+
+The NCAS-Radar standard is also recognised by ``checksit``\ , with the correct specs identified and
+used if no template or spec options are specified. Unlike the NCAS-GENERAL and NCAS-IMAGE standards,
+NCAS-Radar does not have specific data product specs, instead there are a number of different spec
+files covering different areas of the standard. These spec files are:
+
+.. code-block::
+
+  coordinate-variables
+  dimensions
+  global-attrs
+  global-variables
+  instrument-parameters
+  location-variables
+  moment-variables
+  radar-calibration
+  radar-parameters
+  sensor-pointing-variables
+  sweep-variables

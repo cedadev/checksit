@@ -118,6 +118,8 @@ checks, managed by the ``Rules`` class in ``checksit/rules/rules.py``. There are
      - ``r"v\d\.\d"``
    * - "datetime"
      - ``r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?"``
+   * - "datetimeZ"
+     - ``r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z"``
    * - "datetime-or-na"
      - ``r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(.\d+)?)" + _NOT_APPLICABLE_RULES``
    * - "number"

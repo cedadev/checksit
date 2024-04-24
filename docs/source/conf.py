@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'checksit'
-copyright = '2023, Ag Stephens, Hugo Ricketts, Joshua Hampton'
+copyright = '2024, Ag Stephens, Hugo Ricketts, Joshua Hampton'
 author = 'Ag Stephens, Hugo Ricketts, Joshua Hampton'
 release = '0.1'
 
