@@ -17,6 +17,8 @@ from .config import get_config
 from .make_specs import make_amof_specs
 
 AMOF_CONVENTIONS = ['"CF-1.6, NCAS-AMF-2.0.0"']
+GENERAL_CONVENTION_PREFIXES = ["NCAS-AMF", "NCAS-AMOF", "NCAS-GENERAL"]
+RADAR_CONVENTION_PREFIXES = ["NCAS-RADAR"]
 IMAGE_EXTENSIONS = ["png", "jpg", "jpeg"]
 conf = get_config()
 
@@ -271,8 +273,8 @@ class Checker:
             )
             # NCAS-GENERAL file
             if any(
-                name in conventions
-                for name in ["NCAS-GENERAL", "NCAS-AMF", "NCAS-AMOF"]
+                name in conventions.upper()
+                for name in GENERAL_CONVENTION_PREFIXES
             ):
                 if verbose:
                     print("\nNCAS-AMOF file detected, finding correct spec files")
@@ -376,7 +378,10 @@ class Checker:
                 template = "off"
 
             # NCAS-Radar
-            elif "NCAS-Radar" in conventions:
+            elif any(
+                name in conventions.upper()
+                for name in RADAR_CONVENTION_PREFIXES
+            ):
                 version_number = (
                     conventions[conventions.index("NCAS-") :]
                     .split("-")[2]
