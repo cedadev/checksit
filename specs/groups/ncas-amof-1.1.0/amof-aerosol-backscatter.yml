@@ -1,0 +1,228 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - altitude:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m
+      - standard_name:altitude
+      - long_name:Geometric height above geoid (WGS84).
+      - _FillValue:-1e+20
+      - axis:Z
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - attenuated_aerosol_backscatter_coefficient:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m-1 sr-1
+      - long_name:Attenuated Aerosol Backscatter Coefficient
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - range_squared_corrected_backscatter_power:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:1
+      - long_name:Range Squared Corrected Backscatter Power (ln(arbitrary raw data unit))
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - laser_pulse_energy:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:%
+      - long_name:Laser Pulse Energy (% of maximum)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - laser_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - long_name:Laser Temperature
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_zenith_angle:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - standard_name:sensor_zenith_angle
+      - long_name:Sensor Zenith Angle (from vertical)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_azimuth_angle:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - standard_name:sensor_azimuth_angle
+      - long_name:Sensor Azimuth Angle (clockwise from true North)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - profile_pulses:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Number of pulses in each profile
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: sum
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - profile_scaling:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:%
+      - long_name:Scaling of range profile (default = 100%)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - window_contamination:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mV
+      - long_name:Window Contamination (mV as measured by ADC: 0 - 2500)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - window_transmittance:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:%
+      - long_name:Window Transmittance, % of nominal value
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - background_light:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mV
+      - long_name:Background Light (mV as measured by ADC: 0 - 2500)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - backscatter_sum:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:sr-1
+      - long_name:Sum of detected and normalized backscatter
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index:__OPTIONAL__
+
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    vocab_attrs:
+    rules_attrs:
+      laser_wavelength: flag_values: rule-func:string-of-length:3+
+      nominal_laser_pulse_energy: flag_values: rule-func:string-of-length:3+
+      pulse_repetition_frequency: flag_values: rule-func:string-of-length:3+
+      lens_diameter: flag_values: rule-func:string-of-length:3+
+      beam_divergence: flag_values: rule-func:string-of-length:3+
+      pulse_length: flag_values: rule-func:string-of-length:3+
+      sampling_frequency: flag_values: rule-func:string-of-length:3+

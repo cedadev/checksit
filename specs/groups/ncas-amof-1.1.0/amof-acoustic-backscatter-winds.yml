@@ -1,0 +1,234 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - altitude:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m
+      - standard_name:altitude
+      - long_name:Geometric height above geoid (WGS84).
+      - _FillValue:-1e+20
+      - axis:Z
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sound_intensity_level_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:dB
+      - standard_name:sound_intensity_level_in_air
+      - long_name:Sound Intensity Level in Air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_speed:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - standard_name:wind_speed
+      - long_name:Wind Speed
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:degree
+      - standard_name:wind_from_direction
+      - long_name:Wind From Direction
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - standard_name:eastward_wind
+      - long_name:Eastward Wind Component (U)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - standard_name:northward_wind
+      - long_name:Northward Wind Component (V)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - standard_name:upward_air_velocity
+      - long_name:Upward Air Velocity (W)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_eastward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:Divergence of Eastward Wind Component (Sigma U)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_northward_wind:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:Divergence of Northward Wind Component (Sigma V)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - divergence_of_upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index
+      - units:m s-1
+      - long_name:Divergence of Upward Air Velocity (Sigma W)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: standard_deviation
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_mean_winds:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Mean Winds
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_wind_component_eastward:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Eastward Wind Component (U)
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_wind_component_northward:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Northward Wind Component (V)
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_wind_component_upward_air_velocity:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Upward Air Velocity (W)
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_backscatter:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Backscatter
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_background_noise:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index
+      - units:1
+      - long_name:Data Quality flag: Background Noise
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index:__OPTIONAL__

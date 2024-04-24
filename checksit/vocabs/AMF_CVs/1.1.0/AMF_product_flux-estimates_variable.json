@@ -1,0 +1,244 @@
+{
+    "product_flux-estimates_variable": {
+        "start_of_run": {
+            "type": "float64",
+            "dimension": "time",
+            "units": "seconds since 1970-01-01 00:00:00",
+            "long_name": "Start of run (seconds since 1970-01-01 00:00:00)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "run_length": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "s",
+            "long_name": "Length of run",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "number_of_samples_in_run": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Number of samples in run",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "buoyancy_flux": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "J m-2 s-1",
+            "long_name": "Buoyancy Flux (<w'Ts'>)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "kinematic_humidity_flux": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg kg-1 m s-1",
+            "long_name": "Kinematic Humidity Flux (<w'Q'>)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "kinematic_sonic_temperature_flux": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "K m s-1",
+            "long_name": "Kinematic Sonic Temperature Flux (<w'Ts'>)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "upward_sensible_heat_flux_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "W m-2",
+            "standard_name": "upward_sensible_heat_flux_in_air",
+            "long_name": "Sensible heat flux",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "upward_latent_heat_flux_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "W m-2",
+            "standard_name": "upward_latent_heat_flux_in_air",
+            "long_name": "Latent heat flux",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "momentum_flux_u": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-1 s-2",
+            "long_name": "Momentum flux (-rho.<w'u'>)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "momentum_flux_v": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-1 s-2",
+            "long_name": "Momentum flux (-rho.<w'v'>)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "bowen_ratio": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Bowen Ratio (sensible\\latent)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag_skew_u": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Skew U",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_skew_v": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Skew V",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_skew_w": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Skew W",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_skew_ts": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Skew Ts",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_kurtosis_u": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Kurtosis U",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_kurtosis_v": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Kurtosis V",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_kurtosis_w": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Kurtosis W",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_kurtosis_ts": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Kurtosis Ts",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "bad_data|good_data |suspect_data"
+        },
+        "qc_flag_sstclass_wu": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Steady State Class WU",
+            "flag_values": "0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b",
+            "flag_meanings": "not_used|good_data |suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|bad_data"
+        },
+        "qc_flag_sstclass_wv": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Steady State Class WV",
+            "flag_values": "0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b",
+            "flag_meanings": "not_used|good_data |suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|bad_data"
+        },
+        "qc_flag_sstclass_wts": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: Steady State Class WTs",
+            "flag_values": "0b,1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b",
+            "flag_meanings": "not_used|good_data |suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|suspect_data|bad_data"
+        },
+        "qc_flag_quality_wu": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: WU",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "bad_data|good_data _good_for_reasearch|suspect_data_good_for_general_use|suspect_data_requires_further_checking_but_may_be_ok_for_general_use"
+        },
+        "qc_flag_quality_wv": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: WV",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "bad_data|good_data _good_for_reasearch|suspect_data_good_for_general_use|suspect_data_requires_further_checking_but_may_be_ok_for_general_use"
+        },
+        "qc_flag_quality_wts": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: WTs",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "bad_data|good_data _good_for_reasearch|suspect_data_good_for_general_use|suspect_data_requires_further_checking_but_may_be_ok_for_general_use"
+        },
+        "qc_flag_quality_itc_class": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Quality flag: General Turbulent Characteristic of W Class",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "bad_data|good_data _good_for_reasearch|suspect_data_good_for_general_use|suspect_data_requires_further_checking_but_may_be_ok_for_general_use"
+        }
+    }
+}

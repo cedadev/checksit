@@ -1,0 +1,12 @@
+{
+    "product_aerosol-backscatter-radial-winds_dimension": {
+        "index_of_angle": {
+            "length": "<i>",
+            "units": "1"
+        },
+        "index_of_range": {
+            "length": "<r>",
+            "units": "1"
+        }
+    }
+}

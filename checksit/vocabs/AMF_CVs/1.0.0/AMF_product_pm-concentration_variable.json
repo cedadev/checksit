@@ -1,0 +1,122 @@
+{
+    "product_pm-concentration_variable": {
+        "mass_concentration_of_pm1_ambient_aerosol_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug m-3",
+            "standard_name": "mass_concentration_of_pm1_ambient_aerosol_in_air",
+            "long_name": "Mass Concentration of PM1 Ambient Aerosol in Air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude"
+        },
+        "mass_concentration_of_pm2p5_ambient_aerosol_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug m-3",
+            "standard_name": "mass_concentration_of_pm2p5_ambient_aerosol_in_air",
+            "long_name": "Mass Concentration of PM2.5 Ambient Aerosol in Air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude"
+        },
+        "mass_concentration_of_pm4_ambient_aerosol_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug m-3",
+            "long_name": "Mass Concentration of PM4 Ambient Aerosol in Air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude"
+        },
+        "mass_concentration_of_pm10_ambient_aerosol_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug m-3",
+            "standard_name": "mass_concentration_of_pm10_ambient_aerosol_in_air",
+            "long_name": "Mass Concentration of PM10 Ambient Aerosol in Air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude"
+        },
+        "mass_concentration_of_total_pm_ambient_aerosol_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug m-3",
+            "long_name": "Mass Concentration of Total PM Ambient Aerosol Particles in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude"
+        },
+        "number_concentration_of_ambient_aerosol_particles_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "cm-3",
+            "standard_name": "number_concentration_of_ambient_aerosol_particles_in_air",
+            "long_name": "Number Concentration of Ambient Aerosol Particles in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag_pm1": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: PM1",
+            "flag_values": "0b, 1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data|bad_data_pm1_outside_sensor_operational_range|suspect_data_time_stamp_error"
+        },
+        "qc_flag_pm2p5": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: PM2.5",
+            "flag_values": "0b, 1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data|bad_data_pm2.5_outside_sensor_operational_range|suspect_data_time_stamp_error"
+        },
+        "qc_flag_pm4": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: PM4",
+            "flag_values": "0b, 1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data|bad_data_pm4_outside_sensor_operational_range|suspect_data_time_stamp_error"
+        },
+        "qc_flag_pm10": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: PM10",
+            "flag_values": "0b, 1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data|bad_data_pm10_outside_sensor_operational_range|suspect_data_time_stamp_error"
+        },
+        "qc_flag_total_pm": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Total PM",
+            "flag_values": "0b, 1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data|bad_data_total_pm_outside_sensor_operational_range|suspect_data_time_stamp_error"
+        },
+        "qc_flag_total_number": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Total Number",
+            "flag_values": "0b, 1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data|bad_data_total_number_outside_sensor_operational_range|suspect_data_time_stamp_error"
+        }
+    }
+}

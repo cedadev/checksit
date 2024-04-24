@@ -1,0 +1,188 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - range:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index_of_range
+      - units:m
+      - long_name:Distance of measurement volume centre point from instrument.
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_azimuth_angle:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - standard_name:sensor_azimuth_angle
+      - long_name:Scanning head azimuth angle
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_view_angle:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - standard_name:sensor_view_angle
+      - long_name:Scanning head elevation angle
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_azimuth_angle_earth_frame:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - long_name:Scanning head azimuth angle Earth Frame
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sensor_view_angle_earth_frame:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - long_name:Scanning head elevation angle Earth Frame
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - attenuated_aerosol_backscatter_coefficient_co:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index_of_range
+      - units:m-1 sr-1
+      - long_name:Attenuated backscatter coefficient (Planar Polarised)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - signal_to_noise_ratio_plus_1_co:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index_of_range
+      - units:1
+      - long_name:Signal to Noise Ratio: SNR+1 (Planar Polarised)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - attenuated_aerosol_backscatter_coefficient_cr:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index_of_range
+      - units:m-1 sr-1
+      - long_name:Attenuated backscatter coefficient (Cross Polarised)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - signal_to_noise_ratio_plus_1_cr:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index_of_range
+      - units:1
+      - long_name:Signal to Noise Ratio: SNR+1 (Cross Polarised)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - depolarisation_ratio:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, index_of_range
+      - units:1
+      - long_name:Depolarisation Ratio
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_attenuated_aerosol_backscatter_coefficient_co:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index_of_range
+      - units:1
+      - long_name:Data Quality flag:  Attenuated backscatter coefficient (Planar Polarised)
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_attenuated_aerosol_backscatter_coefficient_cr:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index_of_range
+      - units:1
+      - long_name:Data Quality flag:  Attenuated backscatter coefficient (Cross Polarised)
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_depolarisation_ratio:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time, index_of_range
+      - units:1
+      - long_name:Data Quality flag:  Depolarisation R
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - index_of_range:__OPTIONAL__

@@ -1,0 +1,194 @@
+{
+    "product_halocarbon-concentration_variable": {
+        "mole_fraction_of_carbon_tetrachloride_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "standard_name": "mole_fraction_of_carbon_tetrachloride_in_air",
+            "long_name": "Mole Fraction of Carbon Tetrachloride in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CCl4"
+        },
+        "mole_fraction_of_bromoform_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Bromoform in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CHBr3"
+        },
+        "mole_fraction_of_diiodomethane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Diiodomethane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH2I2"
+        },
+        "mole_fraction_of_chloroiodomethane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Chloroiodomethane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH2ICl"
+        },
+        "mole_fraction_of_bromodichloromethane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Bromodichloromethane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CHBrCl2"
+        },
+        "mole_fraction_of_dibromomethane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Dibromomethane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH2Br2"
+        },
+        "mole_fraction_of_chloroform_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Chloroform in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CHCl3"
+        },
+        "mole_fraction_of_methyl_iodide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Methyl Iodide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH3I"
+        },
+        "mole_fraction_of_bromochloromethane_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of Bromochloromethane in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CH2BrCl"
+        },
+        "qc_flag_ccl4": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CCl4",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_chbr3": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CHBr3",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_ch2i2": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CH2I2",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_ch2icl": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CH2ICl",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_chbrcl2": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CHBrCl2",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_ch2br2": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CH2Br2",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_chcl3": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CHCl3",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_ch3i": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CH3I",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        },
+        "qc_flag_ch2brcl": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CH2BrCl",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_gas_concentration_below_calculated_detaction_limit_contact_data_originator_for_more_information.|bad_data_do_not_use"
+        }
+    }
+}

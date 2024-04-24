@@ -1,0 +1,12 @@
+{
+    "product_precipitation_dimension": {
+        "diameter": {
+            "length": "22",
+            "units": "mm"
+        },
+        "fallspeed": {
+            "length": "20",
+            "units": "m s-1"
+        }
+    }
+}

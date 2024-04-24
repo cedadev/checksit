@@ -1,0 +1,228 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - air_pressure:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:hPa
+      - standard_name:air_pressure
+      - long_name:Air Pressure
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - air_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - standard_name:air_temperature
+      - long_name:Air Temperature
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - relative_humidity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:%
+      - standard_name:relative_humidity
+      - long_name:Relative Humidity
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_speed:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m s-1
+      - standard_name:wind_speed
+      - long_name:Wind Speed
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - wind_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:degree
+      - standard_name:wind_from_direction
+      - long_name:Wind From Direction
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - thickness_of_rainfall_amount:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mm
+      - standard_name:thickness_of_rainfall_amount
+      - long_name:Rain Accumulated in Averaging Period
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: sum
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - rainfall_rate:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mm hr-1
+      - standard_name:rainfall_rate
+      - long_name:Rainfall Rate
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - downwelling_longwave_flux_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:W m-2
+      - standard_name:downwelling_longwave_flux_in_air
+      - long_name:Downwelling Longwave Radiation
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - downwelling_shortwave_flux_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:W m-2
+      - standard_name:downwelling_shortwave_flux_in_air
+      - long_name:Downwelling Shortwave Radiation
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Temperature
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_relative_humidity:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Relative Humidity
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_pressure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Pressure
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_wind_speed:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Wind Speed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_wind_from_direction:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Wind From Direction
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_radiation:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Radiation
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_precipitation:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Precipitation
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

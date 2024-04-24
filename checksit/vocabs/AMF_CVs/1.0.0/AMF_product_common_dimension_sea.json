@@ -1,0 +1,16 @@
+{
+    "product_common_dimension_sea": {
+        "time": {
+            "length": "<n>",
+            "units": "seconds since 1970-01-01 00:00:00"
+        },
+        "latitude": {
+            "length": "<n>",
+            "units": "degrees_north"
+        },
+        "longitude": {
+            "length": "<n>",
+            "units": "degrees_east"
+        }
+    }
+}

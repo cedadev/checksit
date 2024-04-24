@@ -1,0 +1,68 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_concentration_of_hydroxyl_radical_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m-3
+      - long_name:Number Concentration of Hydroxyl Radical in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_concentration_of_hydroperoxyl_radical_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m-3
+      - long_name:Number Concentration of Hydroperoxyl Radical in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - sum_of _hydroxyl_and_hydroperoxyl_radical_concentration_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m-3
+      - long_name:Sum of  Hydroxyl and Hydroperoxyl Radical Concentration in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - hydroxyl_radical_reactivity_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:s-1
+      - long_name:Hydroxyl Radical Reactivity in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

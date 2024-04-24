@@ -1,0 +1,47 @@
+{
+    "product_co-h2-concentration_variable": {
+        "mole_fraction_of_carbon_monoxide_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "standard_name": "mole_fraction_of_carbon_monoxide_in_air",
+            "long_name": "Mole Fraction of Carbon Monoxide in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude",
+            "chemical_species": "CO"
+        },
+        "mole_fraction_of_molecular_hydrogen_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "practical_units": "?",
+            "long_name": "Mole Fraction of molecular Hydrogen in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ?",
+            "coordinates": "latitude longitude",
+            "chemical_species": "H2"
+        },
+        "qc_flag_co": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: CO",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        },
+        "qc_flag_h2": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: H2",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        }
+    }
+}
