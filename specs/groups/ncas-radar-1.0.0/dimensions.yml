@@ -1,0 +1,13 @@
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - time
+      - range
+      - sweep
+
+dim-requires1:
+  func: checksit.generic.check_dim_regex
+  params:
+    regex_dims:
+      - ^string_length[^,]*$

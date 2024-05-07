@@ -204,7 +204,7 @@ def check_var_exists(dct, variables, skip_spellcheck=False):
 
 def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     """
-    Check that variables exist
+    Check that dimensions exist
 
     E.g. check-dim-exists:dimensions:time|latitude
     """
@@ -229,12 +229,41 @@ def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     return errors, warnings
 
 
-def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False):
+def check_dim_regex(dct, regex_dims, skip_spellcheck=False):
+    """
+    Check dimension exists matching regex
+
+    E.g. check-dime-regex:regex-dims:^string_length[^,]*$
+    """
+    errors = []
+    warnings = []
+    for regex_dim in regex_dims:
+        if regex_dim.endswith(":__OPTIONAL__"):
+            regex_dim = ":".join(regex_dim.split(":")[:-1])
+            r = re.compile(regex_dim)
+            matches = list(filter(r.match, dct["dimensions"].keys()))
+            if len(matches) == 0:
+                warnings.append(
+                    f"[dimension**************:{regex_dim}]: No dimension matching optional regex check in file. "
+                )
+        else:
+            r = re.compile(regex_dim)
+            matches = list(filter(r.match, dct["dimensions"].keys()))
+            if len(matches) == 0:
+                errors.append(
+                    f"[dimension**************:{regex_dim}]: No dimension matching regex check in file. "
+                )
+    return errors, warnings
+
+
+def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=False):
     """
     Check variable exists and has attributes defined.
     """
     errors = []
     warnings = []
+
+    rules_attrs = rules_attrs or {}
 
     if isinstance(variable, list):
         variable = variable[0]
@@ -282,13 +311,46 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                         f"not '{dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}'."
                     )
-            for rule_to_check in attr_rules:
-                if rule_to_check == "rule-func:check-qc-flags":
+
+            for attr in rules_attrs:
+                if isinstance(attr, dict) and len(attr.keys()) == 1:
+                    for key, value in attr.items():
+                        attr = f"{key}:{value}"
+                attr_key = attr.split(":")[0]
+                attr_rule = ":".join(attr.split(":")[1:])
+                if attr_key not in dct["variables"][variable]:
+                    errors.append(
+                        f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                        f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                    )
+                elif is_undefined(dct["variables"][variable].get(attr_key)):
+                    errors.append(
+                        f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
+                    )
+                elif attr_rule.startswith("rule-func:same-type-as"):
+                    var_checking_against = attr_rule.split(":")[-1]
                     rule_errors, rule_warnings = rules.check(
-                        rule_to_check,
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        context=dct["variables"][var_checking_against].get("type"),
+                        label=f"[variables:******:{attr_key}]***",
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
+                elif attr_rule.strip() == ("rule-func:check-qc-flags"):
+                    rule_errors, rule_warnings = rules.check(
+                        attr_rule,
                         dct["variables"][variable].get("flag_values"),
                         context=dct["variables"][variable].get("flag_meanings"),
                         label=f"[variable******:{variable}]: ",
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
+                else:
+                    rule_errors, rule_warnings = rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        label=f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
@@ -296,7 +358,7 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
     else:
         if variable not in dct["variables"].keys():
             errors.append(
-                f"[variable**************:{variable}]: Optional variable does not exist in file. "
+                f"[variable**************:{variable}]: Variable does not exist in file. "
                 f"{search_close_match(variable, dct['variables'].keys()) if not skip_spellcheck else ''}"
             )
         else:
@@ -316,6 +378,49 @@ def check_var(dct, variable, defined_attrs, attr_rules=[], skip_spellcheck=False
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                         f"not '{dct['variables'][variable].get(attr_key)}'."
                     )
+
+            for attr in rules_attrs:
+                if isinstance(attr, dict) and len(attr.keys()) == 1:
+                    for key, value in attr.items():
+                        attr = f"{key}:{value}"
+                attr_key = attr.split(":")[0]
+                attr_rule = ":".join(attr.split(":")[1:])
+                if attr_key not in dct["variables"][variable]:
+                    errors.append(
+                        f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                        f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                    )
+                elif is_undefined(dct["variables"][variable].get(attr_key)):
+                    errors.append(
+                        f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
+                    )
+                elif attr_rule.startswith("rule-func:same-type-as"):
+                    var_checking_against = attr_rule.split(":")[-1]
+                    rule_errors, rule_warnings = rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        context=dct["variables"][var_checking_against].get("type"),
+                        label=f"[variables:******:{attr_key}]***",
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
+                elif attr_rule.strip() == "rule-func:check-qc-flags":
+                    rule_errors, rule_warnings = rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get("flag_values"),
+                        context=dct["variables"][variable].get("flag_meanings"),
+                        label=f"[variable******:{variable}]: ",
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
+                else:
+                    rule_errors, rule_warnings = rules.check(
+                        attr_rule,
+                        dct["variables"][variable].get(attr_key),
+                        label=f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                    )
+                    errors.extend(rule_errors)
+                    warnings.extend(rule_warnings)
 
     return errors, warnings
 
@@ -412,5 +517,74 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
         errors.append(
             f"[file name]: Invalid file name format - too many options in file name"
         )
+
+    return errors, warnings
+
+
+def check_radar_moment_variables(
+    dct, exist_attrs=None, rule_attrs=None, one_of_attrs=None, skip_spellcheck=False
+):
+    """
+    Finds moment variables in radar file, runs checks against all those variables
+    """
+    exist_attrs = exist_attrs or []
+    rule_attrs = rule_attrs or {}
+    one_of_attrs = one_of_attrs or []
+
+    errors = []
+    warnings = []
+
+    moment_variables = []
+    for radarvariable, radarattributes in dct["variables"].items():
+        if (
+            isinstance(radarattributes, dict)
+            and "coordinates" in radarattributes.keys()
+        ):
+            moment_variables.append(radarvariable)
+
+    for variable in moment_variables:
+        for attr in exist_attrs:
+            if attr not in dct["variables"][variable]:
+                errors.append(
+                    f"[variable**************:{variable}]: Attribute '{attr}' does not exist. "
+                    f"{search_close_match(attr, dct['variables'][variable]) if not skip_spellcheck else ''}"
+                )
+        for attr in rule_attrs:
+            if isinstance(attr, dict) and len(attr.keys()) == 1:
+                for key, value in attr.items():
+                    attr = f"{key}:{value}"
+            attr_key = attr.split(":")[0]
+            attr_rule = ":".join(attr.split(":")[1:])
+            if attr_key not in dct["variables"][variable]:
+                errors.append(
+                    f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                    f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                )
+            elif is_undefined(dct["variables"][variable].get(attr_key)):
+                errors.append(
+                    f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
+                )
+            else:
+                rule_errors, rule_warnings = rules.check(
+                    attr_rule,
+                    dct["variables"][variable].get(attr_key),
+                    label=f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                )
+                errors.extend(rule_errors)
+                warnings.extend(rule_warnings)
+        for attrs in one_of_attrs:
+            attr_options = attrs.split("|")
+            matches = 0
+            for attr in attr_options:
+                if attr in dct["variables"][variable]:
+                    matches += 1
+            if matches == 0:
+                errors.append(
+                    f"[variable:**************:{variable}]: One attribute of '{attr_options}' must be defined."
+                )
+            elif matches > 1:
+                errors.append(
+                    f"[variable:**************:{variable}]: Only one of '{attr_options}' should be defined, {matches} found."
+                )
 
     return errors, warnings

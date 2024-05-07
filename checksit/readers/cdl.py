@@ -152,7 +152,11 @@ class CDLParser:
                     variables[var_id] = current.copy()
 
                 var_id, dtype, dimensions = self._parse_var_dtype_dims(line)
-                current = {"type": dtype, "dimension": ", ".join(dimensions)}
+                if dimensions == [""]:
+                    dimensions = "--none--"
+                else:
+                    dimensions = ", ".join(dimensions)
+                current = {"type": dtype, "dimension": dimensions}
             else:
                 #                key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
                 # Send last key and last value (from last iteration of loop) and line to get new value

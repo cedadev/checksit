@@ -44,6 +44,7 @@ def test_cdl_reader_netcdf():
     assert sorted(d.keys()) == sorted(["global_attributes", "dimensions", "variables", "inpt"])
     assert list(d["global_attributes"].keys()) == ["test_attribute_name"]
     assert d["global_attributes"]["test_attribute_name"] == "test_attribute_value"
-    assert list(d["variables"].keys()) == ["T"]
+    assert list(d["variables"].keys()) == ["T", "P"]
     assert sorted(d["dimensions"].keys()) == sorted(["x", "y", "z"])
+    assert d["variables"]["P"]["dimension"] == "--none--"
     assert d["inpt"] == ncfile

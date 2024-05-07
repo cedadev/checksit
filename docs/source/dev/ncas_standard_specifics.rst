@@ -27,6 +27,13 @@ function within ``checksit/make_specs.py``. However, if ``checksit`` cannot find
 version, or does not have permission to write into the ``specs/groups`` folder, then an error is
 raised.
 
+NCAS-Radar
+----------
+
+Similarly to the NCAS-GENERAL standard above, if ``NCAS-Radar`` is in the ``Conventions`` global attribute
+of a netCDF file, then ``checksit`` will use specs defined for the identifed version of the ``NCAS-Radar``
+data standard.
+
 NCAS-IMAGE
 ----------
 

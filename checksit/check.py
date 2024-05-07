@@ -17,6 +17,8 @@ from .config import get_config
 from .make_specs import make_amof_specs
 
 AMOF_CONVENTIONS = ['"CF-1.6, NCAS-AMF-2.0.0"']
+GENERAL_CONVENTION_PREFIXES = ["NCAS-AMF", "NCAS-AMOF", "NCAS-GENERAL"]
+RADAR_CONVENTION_PREFIXES = ["NCAS-RADAR"]
 IMAGE_EXTENSIONS = ["png", "jpg", "jpeg"]
 conf = get_config()
 
@@ -271,8 +273,8 @@ class Checker:
             )
             # NCAS-GENERAL file
             if any(
-                name in conventions
-                for name in ["NCAS-GENERAL", "NCAS-AMF", "NCAS-AMOF"]
+                name in conventions.upper()
+                for name in GENERAL_CONVENTION_PREFIXES
             ):
                 if verbose:
                     print("\nNCAS-AMOF file detected, finding correct spec files")
@@ -375,8 +377,34 @@ class Checker:
                 # don't need to do template check
                 template = "off"
 
-            # NCAS-RADAR (coming soon...)
-            # if "NCAS-Radar" in conventions
+            # NCAS-Radar
+            elif any(
+                name in conventions.upper()
+                for name in RADAR_CONVENTION_PREFIXES
+            ):
+                version_number = (
+                    conventions[conventions.index("NCAS-") :]
+                    .split("-")[2]
+                    .split(" ")[0]
+                    .replace('"', "")
+                )
+                if version_number.count(".") == 1:
+                    version_number = f"{version_number}.0"
+                template = "off"
+                spec_names = [
+                    "coordinate-variables",
+                    "dimensions",
+                    "global-attrs",
+                    "global-variables",
+                    "instrument-parameters",
+                    "location-variables",
+                    "moment-variables",
+                    "radar-calibration",
+                    "radar-parameters",
+                    "sensor-pointing-variables",
+                    "sweep-variables",
+                ]
+                specs = [f"ncas-radar-{version_number}/{spec}" for spec in spec_names]
 
         elif (
             file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS

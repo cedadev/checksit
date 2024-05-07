@@ -307,6 +307,13 @@ def test_datetime_rule(rules):
     assert not re.fullmatch(rules['datetime']['regex-rule'], '2022-01-01T00:00')
     assert not re.fullmatch(rules['datetime']['regex-rule'], '2022-01-01')
 
+def test_datetimeZ_rule(rules):
+    assert re.fullmatch(rules['datetimeZ']['regex-rule'], '2023-11-17T15:00:00Z')
+    assert re.fullmatch(rules['datetimeZ']['regex-rule'], '2023-11-17T15:00:00.000Z')
+    assert not re.fullmatch(rules['datetimeZ']['regex-rule'], '2023-11-17T15:00:00')
+    assert not re.fullmatch(rules['datetimeZ']['regex-rule'], '2023-11-17 15:00:00Z')
+    assert not re.fullmatch(rules['datetimeZ']['regex-rule'], '2023-11-17T15:00Z')
+
 def test_datetime_or_na_rule(rules):
     assert re.fullmatch(rules['datetime-or-na']['regex-rule'], '2022-01-01T00:00:00')
     assert re.fullmatch(rules['datetime-or-na']['regex-rule'], '2022-01-01T00:00:00.123')

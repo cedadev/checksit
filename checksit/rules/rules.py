@@ -42,6 +42,10 @@ class Rules:
                 "regex-rule": r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?",
                 "example": "2023-11-17T15:00:00",
             },
+            "datetimeZ": {
+                "regex-rule": r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z",
+                "example": "2023-11-17T15:00:00Z"
+            },
             "datetime-or-na": {
                 "regex-rule": r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?)|"
                 + _NOT_APPLICABLE_RULES,
@@ -111,7 +115,7 @@ class Rules:
 
         rule_lookup = re.sub(f"^{rules_prefix}:", "", rule_lookup)
 
-        rule_lookup_list = rule_lookup.split(", ")
+        rule_lookup_list = rule_lookup.split("||")
 
         for i in rule_lookup_list:
 

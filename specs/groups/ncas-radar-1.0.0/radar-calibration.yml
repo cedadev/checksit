@@ -1,0 +1,501 @@
+dims-optional:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - r_calib:__OPTIONAL__
+
+var-optional1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_index:__OPTIONAL__
+    defined_attrs:
+      - dimension:time
+      - type:byte
+
+var-optional2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_time:__OPTIONAL__
+    defined_attrs:
+      - type:char
+      - units:UTC
+    rules_attrs:
+      - dimension: regex:^r_calib, string_length[^,]*$
+
+var-optional3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_pulse_width:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:seconds
+
+var-optional4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_antenna_gain_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_antenna_gain_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_xmit_power_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_xmit_power_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_two_way_waveguide_loss_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_two_way_waveguide_loss_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_two_way_radome_loss_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_two_way_radome_loss_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_mismatch_loss:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_mismatch_loss_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_mismatch_loss_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_radar_constant_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_radar_constant_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_probert_jones_correction:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional18:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_dielectric_factor_used:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+
+var-optional19:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_noise_hc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional20:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_noise_vc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional21:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_noise_hx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional22:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_noise_vx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional23:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_gain_hc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional24:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_gain_vc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional25:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_gain_hx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional26:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_gain_vx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional27:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_base_1km_hc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBZ
+
+var-optional28:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_base_1km_vc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBZ
+
+var-optional29:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_base_1km_hx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBZ
+
+var-optional30:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_base_1km_vx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBZ
+
+var-optional31:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_sun_power_hc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional32:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_sun_power_vc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional33:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_sun_power_hx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional34:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_sun_power_vx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional35:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_noise_source_power_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional36:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_noise_source_power_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional37:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_power_measure_loss_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional38:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_power_measure_loss_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional39:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_coupler_forward_loss_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional40:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_coupler_forward_loss_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional41:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_zdr_correction:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional42:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_ldr_correction_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional43:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_ldr_correction_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dB
+
+var-optional44:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_system_phidp:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:degrees
+
+var-optional45:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_test_power_h:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional46:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_test_power_v:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+      - units:dBm
+
+var-optional47:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_slope_hc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+
+var-optional48:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_slope_vc:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+
+var-optional49:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_slope_hx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+
+var-optional50:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - r_calib_receiver_slope_vx:__OPTIONAL__
+    defined_attrs:
+      - dimension:r_calib
+      - type:float
+

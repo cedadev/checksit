@@ -164,5 +164,5 @@ var-requires10:
       - dimension:time
       - units:1
       - long_name:Data Quality flag
-    attr_rules:
-      - rule-func:check-qc-flags
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
