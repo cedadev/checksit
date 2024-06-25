@@ -192,6 +192,5 @@ dims-requires:
 required-global-attrs:
   func: checksit.generic.check_global_attrs
   params:
-    vocab_attrs:
     rules_attrs:
-      measurement_technique: flag_values: rule-func:string-of-length:3+
+      measurement_technique: rule-func:string-of-length:3+

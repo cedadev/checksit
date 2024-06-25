@@ -170,12 +170,11 @@ dims-requires:
 required-global-attrs:
   func: checksit.generic.check_global_attrs
   params:
-    vocab_attrs:
     rules_attrs:
-      measurement_technique: flag_values: rule-func:string-of-length:3+
-      dma_inner_radius: flag_values: rule-func:string-of-length:3+
-      dma_outer_radius: flag_values: rule-func:string-of-length:3+
-      dma_length: flag_values: rule-func:string-of-length:3+
-      impactor_orifice_diameter: flag_values: rule-func:string-of-length:3+
-      lower_channel_cuf_off: flag_values: rule-func:string-of-length:3+
-      upper_channel_cut_off: flag_values: rule-func:string-of-length:3+
+      measurement_technique: rule-func:string-of-length:3+
+      dma_inner_radius: rule-func:string-of-length:3+
+      dma_outer_radius: rule-func:string-of-length:3+
+      dma_length: rule-func:string-of-length:3+
+      impactor_orifice_diameter: rule-func:string-of-length:3+
+      lower_channel_cuf_off: rule-func:string-of-length:3+
+      upper_channel_cut_off: rule-func:string-of-length:3+
