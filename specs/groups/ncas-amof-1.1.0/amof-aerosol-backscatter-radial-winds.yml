@@ -63,7 +63,7 @@ var-requires4:
       - type:float
       - dimension:time, index_of_angle
       - units:degree
-      - long_name:Scanning head elevation angle in the Earth frame of refeence
+      - long_name:Scanning head elevation angle in the Earth frame of reference
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
