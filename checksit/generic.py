@@ -376,7 +376,7 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                 elif "<" in attr_value:
                     # work this out
                     pass
-                elif not dct["variables"][variable].get(attr_key) == attr_value:
+                elif not str(dct["variables"][variable].get(attr_key)) == attr_value:
                     errors.append(
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                         f"not '{dct['variables'][variable].get(attr_key)}'."
