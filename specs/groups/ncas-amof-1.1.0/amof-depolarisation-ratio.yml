@@ -63,11 +63,12 @@ var-requires4:
       - type:float
       - dimension:time, index_of_angle
       - units:degree
-      - long_name:Scanning head elevation angle in the Earth frame of refeence
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - long_name: rule-func:match-one-of:Scanning head elevation angle in the Earth frame of refeence|Scanning head elevation angle in the Earth frame of reference
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -193,8 +194,8 @@ required-global-attrs:
       laser_wavelength: rule-func:string-of-length:3+
       laser_pulse_energy: rule-func:string-of-length:3+
       pulse_repetition_frequency: rule-func:string-of-length:3+
-      pulses_per_ray: rule-func:string-of-length:3+
-      rays_per_point: rule-func:string-of-length:3+
+      pulses_per_ray: rule-func:string-of-length:1+
+      rays_per_point: rule-func:string-of-length:1+
       lens_diameter: rule-func:string-of-length:3+
       beam_divergence: rule-func:string-of-length:3+
       pulse_length: rule-func:string-of-length:3+

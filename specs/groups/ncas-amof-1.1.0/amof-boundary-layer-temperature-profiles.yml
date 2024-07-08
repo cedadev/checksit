@@ -24,12 +24,13 @@ var-requires1:
       - dimension:time, index
       - units:K
       - standard_name:air_temperature
-      - long_name:AIr Temperature
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    rules_attrs:
+      - long_name: rule-func:match-one-of:AIr Temperature|Air Temperature
 var-requires2:
   func: checksit.generic.check_var
   params:

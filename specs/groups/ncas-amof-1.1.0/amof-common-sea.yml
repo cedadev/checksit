@@ -6,13 +6,14 @@ var-requires0:
     defined_attrs:
       - type:double
       - dimension:time
-      - units:seconds since 1970-01-01 00:00:00
       - standard_name:time
       - long_name:Time (seconds since 1970-01-01)
       - axis:T
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - calendar:standard
+    rules_attrs:
+      - long_name: rule-func:match-one-of:Time (seconds since 1970-01-01)|Time (seconds since 1970-01-01 00:00:00)
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -396,12 +397,13 @@ var-requires27:
     variable:
       - second
     defined_attrs:
-      - type:double
       - dimension:time
       - units:1
       - long_name:Second
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    rules_attrs:
+      - type: rule-func:match-one-of:double|float
 
 dims-requires:
   func: checksit.generic.check_dim_exists
