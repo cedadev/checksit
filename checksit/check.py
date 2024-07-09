@@ -229,7 +229,7 @@ class Checker:
                 number = len(errors)
             elif len(warnings) > 0 and not ignore_warnings:
                 highest = "WARNING"
-                endstr = ""
+                endstr = "\n"
                 number = len(warnings)
             else:
                 highest = "NONE"
