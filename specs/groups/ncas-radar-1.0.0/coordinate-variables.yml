@@ -17,10 +17,10 @@ var-requires1:
       - range
     defined_attrs:
       - type:float
-      - standard_name:projection_range_coordinate
       - axis:radial_range_coordinate
     rules_attrs:
       - dimension: rule-func:match-one-of:range|sweep, range
       - units: rule-func:match-one-of:metres|meters
       - long_name: rule-func:string-of-length:5+
       - spacing_is_constant: rule-func:match-one-of:true|false
+      - standard_name: rule-func:allow-proposed:projection_range_coordinate

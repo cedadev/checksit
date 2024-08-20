@@ -7,9 +7,10 @@ var-requires0:
       - type:float
       - dimension:time
       - units:degrees
-      - standard_name:ray_azimuth_angle
       - long_name:azimuth_angle_from_true_north
       - axis:radial_azimuth_coordinate
+    rules_attrs:
+      - standard_name: rule-func:allow-proposed:ray_azimuth_angle
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -19,6 +20,7 @@ var-requires1:
       - type:float
       - dimension:time
       - units:degrees
-      - standard_name:ray_elevation_angle
       - long_name:elevation_angle_from_horizontal_plane
       - axis:radial_elevation_coordinate
+    rules_attrs:
+      - standard_name: rule-func:allow-proposed:ray_elevation_angle
