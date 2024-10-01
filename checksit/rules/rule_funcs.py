@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 from urllib.request import urlopen
 import numpy as np
+import sys
 
 from . import processors
 from ..config import get_config
@@ -384,3 +385,48 @@ def check_qc_flags(value, context, extras=None, label=""):
         )
 
     return errors
+
+
+def check_utc_date_iso_format(value, context, extras=None, label=""):
+    """
+    Check date given is in ISO 8601 format and in UTC
+    value - date string
+    """
+    errors = []
+
+    original_value = value
+    if sys.version_info < (3,11): # python datetime changed its recognition of ISO format from 3.11 onward
+        if value.endswith("Z"):
+            value = value.replace("Z", "+00:00")
+        elif re.fullmatch(r"(\+|-)\d{4}", value[-5:]):
+            value = f"{value[:-2]}:{value[-2:]}"
+    try:
+        dt = datetime.fromisoformat(value)
+        if (dt.utcoffset() != None) and (dt.utcoffset().total_seconds() != 0):
+            errors.append(f"{label} Date string '{original_value}' not in UTC.")
+    except ValueError:
+        errors.append(f"{label} Date string '{original_value}' not in ISO 8601 format.")
+    except:
+        raise
+
+    return errors
+
+
+def allow_proposed(value, context, extras=None, label=""):
+    """
+    Check for proposed_standard_name if standard_name not given
+    value - value of the standard_name attribute
+    context - value of the proposed_standard_name attribute
+    extras - value to match
+    """
+    errors = []
+
+    if extras != None and isinstance(extras, list):
+        extras = extras[0]
+
+    if value != extras and context != extras:
+        errors.append(f"{label} does not contain standard_name or proposed_standard_name with value '{extras}'")
+
+    return errors
+
+

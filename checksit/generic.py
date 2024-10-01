@@ -319,10 +319,22 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                 attr_key = attr.split(":")[0]
                 attr_rule = ":".join(attr.split(":")[1:])
                 if attr_key not in dct["variables"][variable]:
-                    errors.append(
-                        f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
-                        f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
-                    )
+                    if not (
+                        attr_key == "standard_name" and attr_rule.split(":")[1] == "allow-proposed"
+                    ):
+                        errors.append(
+                            f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                            f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                        )
+                    else:
+                        rule_errors, rule_warnings = rules.check(
+                            attr_rule,
+                            dct["variables"][variable].get(attr_key),
+                            context=dct["variables"][variable].get("proposed_standard_name"),
+                            label=f"[variables:******:{variable}]***",
+                        )
+                        errors.extend(rule_errors)
+                        warnings.extend(rule_warnings)
                 elif is_undefined(dct["variables"][variable].get(attr_key)):
                     errors.append(
                         f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
@@ -386,14 +398,31 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                 attr_key = attr.split(":")[0]
                 attr_rule = ":".join(attr.split(":")[1:])
                 if attr_key not in dct["variables"][variable]:
-                    errors.append(
-                        f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
-                        f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
-                    )
-                elif is_undefined(dct["variables"][variable].get(attr_key)):
-                    errors.append(
-                        f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
-                    )
+                    if not (
+                        attr_key == "standard_name" and attr_rule.split(":")[1] == "allow-proposed"
+                    ):
+                        errors.append(
+                            f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                            f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                        )
+                    else:
+                        rule_errors, rule_warnings = rules.check(
+                            attr_rule,
+                            dct["variables"][variable].get(attr_key),
+                            context=dct["variables"][variable].get("proposed_standard_name"),
+                            label=f"[variables:******:{variable}]***",
+                        )
+                        errors.extend(rule_errors)
+                        warnings.extend(rule_warnings)
+                #if attr_key not in dct["variables"][variable]:
+                #    errors.append(
+                #        f"[variable:**************:{variable}]: Attribute '{attr_key}' does not exist. "
+                #        f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
+                #    )
+                #elif is_undefined(dct["variables"][variable].get(attr_key)):
+                #    errors.append(
+                #        f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
+                #    )
                 elif attr_rule.startswith("rule-func:same-type-as"):
                     var_checking_against = attr_rule.split(":")[-1]
                     rule_errors, rule_warnings = rules.check(
