@@ -223,6 +223,68 @@ def test_ncas_platform():
     # Test function returns error for example platform
     assert crf.ncas_platform("example", {}, label='Test') == ["Test 'example' is not a valid NCAS platform"]
 
+def test_utc_date_iso_format():
+    # Test function returns no errors for an ISO formatted date in UTC, with "Z", "+0000", and "+00:00" time zone identifiers
+    assert crf.check_utc_date_iso_format("2024-11-17T01:23:45Z", {}, label="Test") == []
+    assert (
+        crf.check_utc_date_iso_format("2024-11-17T01:23:45+0000", {}, label="Test")
+        == []
+    )
+    assert (
+        crf.check_utc_date_iso_format("2024-11-17T01:23:45 +0000", {}, label="Test")
+        == []
+    )
+    assert (
+        crf.check_utc_date_iso_format("2024-11-17T01:23:45+00:00", {}, label="Test")
+        == []
+    )
+    assert (
+        crf.check_utc_date_iso_format("2024-11-17 01:23:45+00:00", {}, label="Test")
+        == []
+    )
+    assert (
+        crf.check_utc_date_iso_format(
+            "2024-11-17T01:23:45.678901+00:00", {}, label="Test"
+        )
+        == []
+    )
+    # Test function returns error for ISO formatted date NOT in UTC
+    assert crf.check_utc_date_iso_format(
+        "2024-11-17T01:23:45+0100", {}, label="Test"
+    ) == ["Test Date string '2024-11-17T01:23:45+0100' not in UTC."]
+    assert crf.check_utc_date_iso_format(
+        "2024-11-17T01:23:45-01:00", {}, label="Test"
+    ) == ["Test Date string '2024-11-17T01:23:45-01:00' not in UTC."]
+    # Test function returns error for non ISO formatted date in UTC
+    assert crf.check_utc_date_iso_format("2024/11/17T01:23:45Z", {}, label="Test") == [
+        "Test Date string '2024/11/17T01:23:45Z' not in ISO 8601 format."
+    ]
+    assert crf.check_utc_date_iso_format(
+        "20241117T01-23-45+0000", {}, label="Test"
+    ) == ["Test Date string '20241117T01-23-45+0000' not in ISO 8601 format."]
+    # Test function returns error for something that is very much not a date
+    assert crf.check_utc_date_iso_format(
+        "11th November 2024 at 23 minutes and 45 seconds past 1 in the morning",
+        {},
+        label="Test",
+    ) == [
+        "Test Date string '11th November 2024 at 23 minutes and 45 seconds past 1 in the morning' not in ISO 8601 format."
+    ]
+
+
+def test_allow_proposed():
+    # Test function returns no errors when value of "extra" matches value of "value"
+    assert crf.allow_proposed("name1", None, extras="name1", label="Test") == []
+    assert crf.allow_proposed("name1", None, extras=["name1"], label="Test") == []
+    assert crf.allow_proposed("name1", "name2", extras="name1", label="Test") == []
+    # Test function returns no errors when value of "extra" matches value of "context"
+    assert crf.allow_proposed(None, "name2", extras="name2", label="Test") == []
+    # Test function returns errors when there is no match
+    assert crf.allow_proposed("name1", "name2", extras="name3", label="Test") == [
+        "Test does not contain standard_name or proposed_standard_name with value 'name3'"
+    ]
+
+
 # rules.py
 def _test_type(_type, value):
     return r.check(f"type-rule:{_type}", value)
