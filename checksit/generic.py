@@ -375,6 +375,9 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
             )
         else:
             for attr in defined_attrs:
+                if isinstance(attr, dict) and len(attr.keys()) == 1:
+                    for key, value in attr.items():
+                        attr = f"{key}: {value}"
                 attr_key = attr.split(":")[0]
                 attr_value = ":".join(attr.split(":")[1:])
                 if attr_key not in dct["variables"][variable]:
@@ -385,7 +388,7 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
                 elif "<" in attr_value:
                     # work this out
                     pass
-                elif not dct["variables"][variable].get(attr_key) == attr_value:
+                elif not str(dct["variables"][variable].get(attr_key)) == attr_value:
                     errors.append(
                         f"[variable**************:{variable}]: Attribute '{attr_key}' must have definition '{attr_value}', "
                         f"not '{dct['variables'][variable].get(attr_key)}'."

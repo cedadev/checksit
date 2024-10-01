@@ -1,0 +1,228 @@
+{
+    "product_common_variable_air": {
+        "time": {
+            "type": "float64",
+            "dimension": "time",
+            "units": "seconds since 1970-01-01 00:00:00",
+            "standard_name": "time",
+            "long_name": "Time (seconds since 1970-01-01)",
+            "axis": "T",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "calendar": "standard"
+        },
+        "latitude": {
+            "type": "float32",
+            "dimension": "latitude",
+            "units": "degrees_north",
+            "standard_name": "latitude",
+            "long_name": "Latitude",
+            "_FillValue": -1e+20,
+            "axis": "Y",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point"
+        },
+        "longitude": {
+            "type": "float32",
+            "dimension": "longitude",
+            "units": "degrees_east",
+            "standard_name": "longitude",
+            "long_name": "Longitude",
+            "_FillValue": -1e+20,
+            "axis": "X",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point"
+        },
+        "platform_speed_wrt_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "platform_speed_wrt_air",
+            "long_name": "Platform speed with respect to air (air speed)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_course": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "platform_course",
+            "long_name": "Direction in which the platform is travelling",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_orientation": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "platform_orientation",
+            "long_name": "Direction in which the platform is pointing",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_speed_wrt_ground": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "platform_speed_wrt_ground",
+            "long_name": "Platform speed with respect to ground (ground speed)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_pitch_angle": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "platform_pitch_angle",
+            "long_name": "Pitch Angle",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_pitch_rate": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree s-1",
+            "standard_name": "platform_pitch_rate",
+            "long_name": "Pitch Angle Rate of Change",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_roll_angle": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "platform_roll_angle",
+            "long_name": "Roll Angle",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_roll_rate": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree s-1",
+            "standard_name": "platform_roll_rate",
+            "long_name": "Roll Angle Rate of Change",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_yaw_angle": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "platform_yaw_angle",
+            "long_name": "Yaw Angle",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "platform_yaw_rate": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree s-1",
+            "standard_name": "platform_yaw_rate",
+            "long_name": "Yaw Angle Rate of Change",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "altitude": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m",
+            "standard_name": "altitude",
+            "long_name": "Geometric height above geoid (WGS84).",
+            "_FillValue": -1e+20,
+            "axis": "Z",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "day_of_year": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Day of Year",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>"
+        },
+        "year": {
+            "type": "int32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Year",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>"
+        },
+        "month": {
+            "type": "int32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Month",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>"
+        },
+        "day": {
+            "type": "int32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Day",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>"
+        },
+        "hour": {
+            "type": "int32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Hour",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>"
+        },
+        "minute": {
+            "type": "int32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Minute",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>"
+        },
+        "second": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Second",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "product_common_dimension_land": {
+        "time": {
+            "length": "<n>",
+            "units": "seconds since 1970-01-01 00:00:00"
+        },
+        "latitude": {
+            "length": "1",
+            "units": "degrees_north"
+        },
+        "longitude": {
+            "length": "1",
+            "units": "degrees_east"
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "platform": {
+        "wao": {
+            "platform_id": "wao",
+            "description": "weybourne atmospheric observatory"
+        },
+        "cvao": {
+            "platform_id": "cvao",
+            "description": "cape verde atmospheric observatory"
+        },
+        "iao": {
+            "platform_id": "iao",
+            "description": "icelandic atmospheric observatory"
+        },
+        "bt-tower-t35": {
+            "platform_id": "bt-tower-t35",
+            "description": "british telecoms tower observatory"
+        }
+    }
+}

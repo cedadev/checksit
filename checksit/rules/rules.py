@@ -127,7 +127,7 @@ class Rules:
             if i.startswith("rule-func"):
                 rule_comps = i.split(":")
                 rule_func = getattr(rule_funcs, rule_comps[1].replace("-", "_"))
-                extras = rule_comps[2:]
+                extras = [":".join(rule_comps[2:])]
                 output.extend(rule_func(value, context, extras, label=label))
 
             elif i.startswith("type-rule"):

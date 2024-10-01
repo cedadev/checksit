@@ -1,0 +1,74 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mole Fraction of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mass Fraction of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mole Concentration of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_peroxyacetyl_nitrate_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_peroxyacetyl_nitrate_in_air
+      - long_name:Mass Concentration of Peroxyacetyl Nitrate in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:C2H3NO5
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag:
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

@@ -1,0 +1,52 @@
+{
+    "product_aerosol-extinction-v1_variable": {
+        "altitude": {
+            "type": "float32",
+            "dimension": "time, index",
+            "units": "m",
+            "standard_name": "altitude",
+            "long_name": "Geometric height above geoid (WGS84).",
+            "_FillValue": -1e+20,
+            "axis": "Z",
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_355": {
+            "type": "float32",
+            "dimension": "time, index",
+            "units": "m-1 sr-1",
+            "long_name": "Volume Extinction Coefficient in air due to Ambient Aerosol Particles (Wavelength = 355 nm)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles_316": {
+            "type": "float32",
+            "dimension": "time, index",
+            "units": "m-1 sr-1",
+            "long_name": "Volume Extinction Coefficient in air due to Ambient Aerosol Particles (Wavelength = 316 nm)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag_355": {
+            "type": "byte",
+            "dimension": "time, index",
+            "units": "1",
+            "long_name": "Data Quality flag: 355nm",
+            "flag_values": "0b,1b, 2b, 3b, 4b, 5b",
+            "flag_meanings": "not_used|good_data |good_data_only_355nm_channel_operating|suspect_data_cloudy_profile|bad_data_gate_index_exceeds_number_of_measurement_gates_in_use|suspect_data_time_stamp_error"
+        },
+        "qc_flag_316": {
+            "type": "byte",
+            "dimension": "time, index",
+            "units": "1",
+            "long_name": "Data Quality flag: 316nm",
+            "flag_values": "0b,1b, 2b, 3b, 4b, 5b",
+            "flag_meanings": "not_used|good_data |good_data_only_316nm_channel_operating|suspect_data_cloudy_profile|bad_data_gate_index_exceeds_number_of_measurement_gates_in_use|suspect_data_time_stamp_error"
+        }
+    }
+}

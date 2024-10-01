@@ -1,0 +1,262 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_carbon_tetrachloride_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - standard_name:mole_fraction_of_carbon_tetrachloride_in_air
+      - long_name:Mole Fraction of Carbon Tetrachloride in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CCl4
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_bromoform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Bromoform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CHBr3
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_diiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Diiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CH2I2
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_chloroiodomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Chloroiodomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CH2ICl
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_bromodichloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Bromodichloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CHBrCl2
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_dibromomethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Dibromomethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CH2Br2
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_chloroform_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Chloroform in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CHCl3
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_methyl_iodide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Methyl Iodide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CH3I
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_bromochloromethane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - long_name:Mole Fraction of Bromochloromethane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ????
+      - coordinates:latitude longitude
+      - chemical_species:CH2BrCl
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ccl4:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CCl4
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_chbr3:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CHBr3
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2i2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2I2
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2icl:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2ICl
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_chbrcl2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CHBrCl2
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2br2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2Br2
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_chcl3:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CHCl3
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch3i:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH3I
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch2brcl:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CH2BrCl
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

@@ -1,0 +1,30 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_methane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:?
+      - practical_units:?
+      - standard_name:mole_fraction_of_methane_in_air
+      - long_name:Mole Fraction of Methane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: ?
+      - coordinates:latitude longitude
+      - chemical_species:CH4
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

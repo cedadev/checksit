@@ -1,0 +1,80 @@
+{
+    "product_aerosol-no3-so4-nh3-org-concentration_variable": {
+        "mass_concentration_of_nitrate_in_ambient_aerosol_particles_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug cm-3",
+            "long_name": "Mass concentration of the NO3 component of ambient aerosol particles in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "NO3"
+        },
+        "mass_concentration_of_sulfate_in_ambient_aerosol_particles_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug cm-3",
+            "long_name": "Mass concentration of the SO4 component of ambient aerosol particles in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "SO4"
+        },
+        "mass_concentration_of_ammonia_in_ ambient_aerosol_particles_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug cm-3",
+            "long_name": "Mass concentration of the NH3 component of ambient aerosol particles in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "NH3"
+        },
+        "mass_concentration_of_organics_in_ ambient_aerosol_particles_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "ug cm-3",
+            "long_name": "Mass concentration of the organic component of ambient aerosol particles in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "organic"
+        },
+        "qc_flag_no3": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: NO3",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        },
+        "qc_flag_so4": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: SO4",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        },
+        "qc_flag_nh3": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: NH3",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        },
+        "qc_flag_org": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Organics",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_bad_data_to_be_defined|suspect_data_time_stamp_error"
+        }
+    }
+}

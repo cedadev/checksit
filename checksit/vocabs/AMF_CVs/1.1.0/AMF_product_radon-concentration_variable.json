@@ -1,0 +1,58 @@
+{
+    "product_radon-concentration_variable": {
+        "mole_fraction_of_radon_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mole_fraction_of_radon_in_air",
+            "long_name": "Mole Fraction of Radon in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "Rn"
+        },
+        "mass_fraction_of_radon_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "standard_name": "mass_fraction_of_radon_in_air",
+            "long_name": "Mass Fraction of Radon in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "Rn"
+        },
+        "mole_concentration_of_radon_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mol m-3",
+            "standard_name": "mole_concentration_of_radon_in_air",
+            "long_name": "Mole Concentration of Radon in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "Rn"
+        },
+        "mass_concentration_of_radon_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-3",
+            "standard_name": "mass_concentration_of_radon_in_air",
+            "long_name": "Mass Concentration of Radon in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "Rn"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        }
+    }
+}

@@ -1,0 +1,318 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - atmosphere_stability_lifted_index:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - long_name:Atmosphere Stability Lifted Index (LI)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - modified_atmosphere_stability_k_index:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - long_name:Modified Atmosphere Stability K Index (KOI)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - atmosphere_stability_total_totals_index:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - standard_name:atmosphere_stability_total_totals_index
+      - long_name:Atmosphere Stability Total Totals Index (TTI)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires23:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - atmosphere_stability_showalter_index:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - standard_name:atmosphere_stability_showalter_index
+      - long_name:Atmosphere Stability Showalter Index (SI)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires24:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - atmosphere_convective_available_potential_energy:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:J kg-1
+      - standard_name:atmosphere_convective_available_potential_energy
+      - long_name:Atmosphere Convective Available Potential Energy (CAPE)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_surface_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Surface Temperature
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_surface_relative_humidity:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Surface Relative Humidity
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_surface_pressure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Surface Pressure
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_precipitation:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Precipitation
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_1_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 1 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_2_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 2 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_3_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 3 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_4_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 4 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_5_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 5 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_6_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 6 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_7_failure:__OPTIONAL__
+    defined_attrs:
+      - type:int
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 7 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_8_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 8 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_9_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 9 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_10_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 10 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_11_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 11 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires18:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_12_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 12 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires19:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_13_failure:__OPTIONAL__
+    defined_attrs:
+      - type:int
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 13 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires20:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_channel_14_failure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Receiver channel 14 failed
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires21:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_t_receiver_temperature_stability:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Thermal stability of temperature receiver bank
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags
+var-requires22:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_rh_receiver_temperature_stability:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Thermal stability of moisture receiver bank
+    rules_attrs:
+      - flag_values: rule-func:check-qc-flags

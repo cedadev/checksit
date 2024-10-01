@@ -1,0 +1,284 @@
+{
+    "product_common_global-attributes_trajectory": {
+        "Conventions": {
+            "global_attribute_id": "Conventions",
+            "description": "NetCDF Conventions being followed",
+            "fixed_value": "CF-1.6, NCAS-AMF-2.0.0",
+            "compliance_checking_rules": "Exact match",
+            "convention_providence": "CF"
+        },
+        "source": {
+            "global_attribute_id": "source",
+            "description": "Description of instrument",
+            "fixed_value": "",
+            "compliance_checking_rules": "Exact match in vocabulary",
+            "convention_providence": "CF"
+        },
+        "instrument_manufacturer": {
+            "global_attribute_id": "instrument_manufacturer",
+            "description": "Manufacturer of instrument and key sub components",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 2 characters",
+            "convention_providence": "AMF"
+        },
+        "instrument_model": {
+            "global_attribute_id": "instrument_model",
+            "description": "Model number of instrument and key sub components",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": "AMF"
+        },
+        "instrument_serial_number": {
+            "global_attribute_id": "instrument_serial_number",
+            "description": "Serial number of instrument and key sub components",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": "AMF"
+        },
+        "instrument_software": {
+            "global_attribute_id": "instrument_software",
+            "description": "Name of the native software running the measurement",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": "AMF"
+        },
+        "instrument_software_version": {
+            "global_attribute_id": "instrument_software_version",
+            "description": "Version number of the native software running the measurement",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 2 characters",
+            "convention_providence": "AMF"
+        },
+        "creator_name": {
+            "global_attribute_id": "creator_name",
+            "description": "Full name of the the person who made the file",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": "ACDD1.3"
+        },
+        "creator_email": {
+            "global_attribute_id": "creator_email",
+            "description": "E-mail address of the person who made the file",
+            "fixed_value": "",
+            "compliance_checking_rules": "Valid email",
+            "convention_providence": "ACDD1.3"
+        },
+        "creator_url": {
+            "global_attribute_id": "creator_url",
+            "description": "ORCID URL of the person who made the file",
+            "fixed_value": "",
+            "compliance_checking_rules": "Valid URL",
+            "convention_providence": "ACDD1.3"
+        },
+        "institution": {
+            "global_attribute_id": "institution",
+            "description": "Institution the maker affliated to",
+            "fixed_value": "",
+            "compliance_checking_rules": "Exact match in vocabulary",
+            "convention_providence": "CF"
+        },
+        "processing_software_url": {
+            "global_attribute_id": "processing_software_url",
+            "description": "A public URL for the processing software used to process/QC the data. NOTE: this excludes proprietary software.",
+            "fixed_value": "",
+            "compliance_checking_rules": "Valid URL",
+            "convention_providence": "AMF"
+        },
+        "processing_software_version": {
+            "global_attribute_id": "processing_software_version",
+            "description": "Version number of the software used to process and QC the data",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 2 characters",
+            "convention_providence": "AMF"
+        },
+        "calibration_sensitivity": {
+            "global_attribute_id": "calibration_sensitivity",
+            "description": "Calibrated sensitivity/measurement range",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 5 characters",
+            "convention_providence": "AMF"
+        },
+        "calibration_certification_date": {
+            "global_attribute_id": "calibration_certification_date",
+            "description": "Date when the instrument was last calibrated",
+            "fixed_value": "",
+            "compliance_checking_rules": "Match: YYYY-MM-DDThh:mm:ss\\.\\d+ _or_ N/A",
+            "convention_providence": "AMF"
+        },
+        "calibration_certification_url": {
+            "global_attribute_id": "calibration_certification_url",
+            "description": "URL to calibration file or certificate",
+            "fixed_value": "",
+            "compliance_checking_rules": "Valid URL _or_ N/A",
+            "convention_providence": "AMF"
+        },
+        "sampling_interval": {
+            "global_attribute_id": "sampling_interval",
+            "description": "Time interval between data values in the file",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 2 characters",
+            "convention_providence": "AMF"
+        },
+        "averaging_interval": {
+            "global_attribute_id": "averaging_interval",
+            "description": "Time interval over which each data point are averaged",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 2 characters",
+            "convention_providence": "AMF"
+        },
+        "product_version": {
+            "global_attribute_id": "product_version",
+            "description": "Version of the data in this file",
+            "fixed_value": "",
+            "compliance_checking_rules": "Match: vN.M",
+            "convention_providence": "ACDD1.3"
+        },
+        "processing_level": {
+            "global_attribute_id": "processing_level",
+            "description": "Data product level. Possible values: 0: native, 1: basic QC, 2: high-level QC, 3: product derived from levels 1 and 2 data",
+            "fixed_value": "",
+            "compliance_checking_rules": "Integer",
+            "convention_providence": "ACDD1.3"
+        },
+        "last_revised_date": {
+            "global_attribute_id": "last_revised_date",
+            "description": "Date file was produced",
+            "fixed_value": "",
+            "compliance_checking_rules": "Match: YYYY-MM-DDThh:mm:ss\\.\\d+",
+            "convention_providence": "AMF"
+        },
+        "project": {
+            "global_attribute_id": "project",
+            "description": "Full name and acronym of the project",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": "ACDD1.3"
+        },
+        "project_principal_investigator": {
+            "global_attribute_id": "project_principal_investigator",
+            "description": "Full name of project PI",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": "AMF"
+        },
+        "project_principal_investigator_email": {
+            "global_attribute_id": "project_principal_investigator_email",
+            "description": "Contact details of the Project PI",
+            "fixed_value": "",
+            "compliance_checking_rules": "Valid email",
+            "convention_providence": "AMF"
+        },
+        "project_principal_investigator_url": {
+            "global_attribute_id": "project_principal_investigator_url",
+            "description": "ORCID URL of the Project PI",
+            "fixed_value": "",
+            "compliance_checking_rules": "Valid URL",
+            "convention_providence": "AMF"
+        },
+        "licence": {
+            "global_attribute_id": "licence",
+            "description": "Under what licence the data are being made available",
+            "fixed_value": "Data usage licence - UK Government Open Licence agreement: http://www.nationalarchives.gov.uk/doc/open-government-licence",
+            "compliance_checking_rules": "Exact match of text to the left",
+            "convention_providence": "AMF"
+        },
+        "acknowledgement": {
+            "global_attribute_id": "acknowledgement",
+            "description": "How should use of these data should be acknowledged",
+            "fixed_value": "Acknowledgement of NCAS as the data provider is required whenever and wherever these data are used",
+            "compliance_checking_rules": "Exact match of text to the left",
+            "convention_providence": "ACDD1.3"
+        },
+        "platform": {
+            "global_attribute_id": "platform",
+            "description": "Name of the platform on which the instrument was deployed",
+            "fixed_value": "",
+            "compliance_checking_rules": "Exact match in vocabulary",
+            "convention_providence": "ACDD1.3"
+        },
+        "platform_type": {
+            "global_attribute_id": "platform_type",
+            "description": "Type of platform on which the instrument was deployed",
+            "fixed_value": "",
+            "compliance_checking_rules": "Exact match in vocabulary",
+            "convention_providence": "AMF"
+        },
+        "deployment_mode": {
+            "global_attribute_id": "deployment_mode",
+            "description": "Is the instrument deployed on land, sea, or in the air",
+            "fixed_value": "",
+            "compliance_checking_rules": "One of: land, sea, air, trajectory",
+            "convention_providence": null
+        },
+        "title": {
+            "global_attribute_id": "title",
+            "description": "Name and general description of the data set",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 10 characters",
+            "convention_providence": "CF"
+        },
+        "featureType": {
+            "global_attribute_id": "featureType",
+            "description": "Feature Type of measurements (set for each instrument type).",
+            "fixed_value": "",
+            "compliance_checking_rules": "Exact match in vocabulary",
+            "convention_providence": "CF"
+        },
+        "time_coverage_start": {
+            "global_attribute_id": "time_coverage_start",
+            "description": "Time stamp of the first data point in the file",
+            "fixed_value": "",
+            "compliance_checking_rules": "Match: YYYY-MM-DDThh:mm:ss\\.\\d+",
+            "convention_providence": "ACDD1.3"
+        },
+        "time_coverage_end": {
+            "global_attribute_id": "time_coverage_end",
+            "description": "Time stamp of the last data point in the file",
+            "fixed_value": "",
+            "compliance_checking_rules": "Match: YYYY-MM-DDThh:mm:ss\\.\\d+",
+            "convention_providence": "ACDD1.3"
+        },
+        "geospatial_bounds": {
+            "global_attribute_id": "geospatial_bounds",
+            "description": "For a point deployment: (latitude longitude) - signed decimal|For a bounding box: SW corner, NE corner: (latitude longitude, latitude longitude) - signed decimal",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 8 characters",
+            "convention_providence": "ACDD1.3"
+        },
+        "platform_altitude": {
+            "global_attribute_id": "platform_altitude",
+            "description": "Altitude of the deployment position above MSL. Enter Not Applicable for air",
+            "fixed_value": "",
+            "compliance_checking_rules": "Exact match: <number> m",
+            "convention_providence": "AMF"
+        },
+        "location_keywords": {
+            "global_attribute_id": "location_keywords",
+            "description": "Comma-separated words to help locate the geographical positon of the deployment site",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": "AMF"
+        },
+        "amf_vocabularies_release": {
+            "global_attribute_id": "amf_vocabularies_release",
+            "description": "URL to AMF Vocabularies repository",
+            "fixed_value": "",
+            "compliance_checking_rules": "Valid URL",
+            "convention_providence": "AMF"
+        },
+        "history": {
+            "global_attribute_id": "history",
+            "description": "History of the data. Append a time-stamped newline for each stage of re-processing",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 1 character",
+            "convention_providence": "CF"
+        },
+        "comment": {
+            "global_attribute_id": "comment",
+            "description": "Any other text that might be useful. Use \"None\" if no comment needed.",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 4 characters",
+            "convention_providence": "CF"
+        }
+    }
+}

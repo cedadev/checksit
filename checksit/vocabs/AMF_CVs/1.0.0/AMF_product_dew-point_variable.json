@@ -1,0 +1,48 @@
+{
+    "product_dew-point_variable": {
+        "dew_point_temperature": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "K",
+            "standard_name": "dew_point_temperature",
+            "long_name": "Dew \\Frost point Temperature",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude"
+        },
+        "relative_humidity": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "%",
+            "standard_name": "relative_humidity",
+            "long_name": "Relative Humidity",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude"
+        },
+        "mole_fraction_of_water_vapor_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "?",
+            "standard_name": "mole_fraction_of_water_vapor_in_air",
+            "long_name": "Mole Fraction of Water Vapor in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: ????",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_contact_creator|bad_data_do_not_use"
+        }
+    }
+}
