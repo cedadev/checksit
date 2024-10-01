@@ -394,6 +394,7 @@ def check_utc_date_iso_format(value, context, extras=None, label=""):
     """
     errors = []
 
+    original_value = value
     if sys.version_info < (3,11): # python datetime changed its recognition of ISO format from 3.11 onward
         if value.endswith("Z"):
             value = value.replace("Z", "+00:00")
@@ -402,9 +403,9 @@ def check_utc_date_iso_format(value, context, extras=None, label=""):
     try:
         dt = datetime.fromisoformat(value)
         if (dt.utcoffset() != None) and (dt.utcoffset().total_seconds() != 0):
-            errors.append(f"{label} Date string '{value}' not in UTC.")
+            errors.append(f"{label} Date string '{original_value}' not in UTC.")
     except ValueError:
-        errors.append(f"{label} Date string '{value}' not in ISO 8601 format.")
+        errors.append(f"{label} Date string '{original_value}' not in ISO 8601 format.")
     except:
         raise
 
