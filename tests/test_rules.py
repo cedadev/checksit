@@ -157,7 +157,7 @@ def test_url_checker():
     assert crf.url_checker("https://www.example.com", {}, label="Test") == []
 
     # Test that the function correctly handles an unreachable URL
-    assert crf.url_checker("https://www.nonexistenturl.com", {}, label="Test") == ["Test 'https://www.nonexistenturl.com' is not a reachable url"]
+    assert crf.url_checker("fake://www.nonexistenturl.com", {}, label="Test") == ["Test 'fake://www.nonexistenturl.com' is not a reachable url"]
 
     # Test that the function correctly handles an existing but unreachable URL
     assert crf.url_checker("https://www.example.com/nonexistentpage", {}, label="Test") == ["Test 'https://www.example.com/nonexistentpage' is not a reachable url"]
