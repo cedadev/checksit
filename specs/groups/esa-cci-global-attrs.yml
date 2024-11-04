@@ -1,6 +1,3 @@
-#required-filename:
-#  func: checksit.generic.check_file_name
-
 required-global-attrs0:
   func: checksit.generic.check_global_attrs
   params:
@@ -43,24 +40,6 @@ required-global-attrs0:
       - spatial_resolution
       - key_variables
     vocab_attrs:
-      Conventions: __vocabs__:esa_cci_global_attrs:Conventions
-      project: __vocabs__:esa_cci_global_attrs:project
-      license: __vocabs__:esa_cci_global_attrs:license
-
-var-requires1:
-  func: checksit.generic.check_var
-  params:
-    variable:
-      - latitude
-    defined_attrs:
-      - units:degree_north
-      - standard_name:latitude
-
-var-requires3:
-  func: checksit.generic.check_var
-  params:
-    variable:
-      - longitude
-    defined_attrs:
-      - units:degree_east
-      - standard_name:longitude
+      Conventions: __vocabs__:esa-cci-global-attrs-config:Conventions
+      project: __vocabs__:esa-cci-global-attrs-config:project
+      license: __vocabs__:esa-cci-global-attrs-config:license

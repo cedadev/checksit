@@ -25,6 +25,37 @@ class Vocabs:
         vocab_file = os.path.join(vocabs_dir, f"{vocab_id}.json")
         self._vocabs[vocab_id] = json.load(open(vocab_file))
 
+    def _load_from_url_ncas(self, vocab_id_url):
+        vocab_id_url_base = vocab_id_url.split("/__latest__")[0]
+        vocab_id_url_base = vocab_id_url_base.replace(
+            "raw.githubusercontent.com", "github.com"
+        )
+        latest_version = requests.get(
+            f"{vocab_id_url_base}/releases/latest"
+        ).url.split("/")[-1]
+        vocab_id_url = vocab_id_url.replace("__latest__", latest_version)
+        res = requests.get(vocab_id_url.replace("__URL__", "https://"))
+        if res.status_code == 200:
+            vocab_list = res.json()
+        else:
+            print(f"[WARNING] Failed to load vocab: {vocab_id_url}")
+        return vocab_list
+
+    def _load_from_url_esacci(self, vocab_id_url):
+        res = requests.get(vocab_id_url)
+        if res.status_code == 200:
+            js = res.json()
+
+            if 'dataType' in vocab_id_url:
+                vocab_list=sorted([altLabel[0]["@value"] for js_dct in js for key, altLabel in js_dct.items() if key.endswith("#altLabel")])
+            elif 'product' in vocab_id_url:
+                vocab_list=sorted([prefLabel[0]["@value"] for js_dct in js for key, prefLabel in js_dct.items() if key.endswith("#prefLabel")])
+            else:
+                print('ESA CCI vocab url not recognised.')
+        else:
+            print(f"[WARNING] Failed to load vocab: {vocab_id_url}")
+        return vocab_list
+
     def _load_from_url(self, vocab_id):
         # Loads a specific vocabulary from a URL
         vocab_id_url = vocab_id.replace("__URL__", "https://")
@@ -32,19 +63,15 @@ class Vocabs:
             vocab_id_url.startswith("https://raw.githubusercontent.com")
             and "/__latest__/" in vocab_id_url
         ):
-            vocab_id_url_base = vocab_id_url.split("/__latest__")[0]
-            vocab_id_url_base = vocab_id_url_base.replace(
-                "raw.githubusercontent.com", "github.com"
-            )
-            latest_version = requests.get(
-                f"{vocab_id_url_base}/releases/latest"
-            ).url.split("/")[-1]
-            vocab_id_url = vocab_id_url.replace("__latest__", latest_version)
-        res = requests.get(vocab_id_url.replace("__URL__", "https://"))
-        if res.status_code == 200:
-            self._vocabs[vocab_id] = res.json()
+            vocab_list=self._load_from_url_ncas(vocab_id_url)
+        elif (
+            vocab_id_url.startswith("https://vocab.ceda.ac.uk")
+        ):
+            vocab_list=self._load_from_url_esacci(vocab_id_url)
         else:
-            print(f"[WARNING] Failed to load vocab: {vocab_id}")
+            print(f"Vocabulary url provided is not recognised")
+
+        self._vocabs[vocab_id] = vocab_list
 
     def __getitem__(self, vocab_id):
         # Enables dictionary access to individual vocabulary items
@@ -89,12 +116,15 @@ class Vocabs:
         # Return a list of errors - empty list if no errors
         errors = []
         options = [self.lookup(vocab_lookup) if lookup else vocab_lookup][0]
+        print(f"Vocab lookup: {vocab_lookup}")
 
         if isinstance(options, list):
             if value not in options:
                 errors.append(
                     f"{label} '{value}' not in vocab options: {options} (using: '{vocab_lookup}')"
                 )
+            else:
+                print(f"Value: {value} is in list {options}")
         elif isinstance(options, dict):
             for key in options.keys():
                 if key in value.keys():

@@ -11,7 +11,9 @@ import datetime as dt
 DATE_REGEX = re.compile(
     r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$"
 )
-
+DATE_REGEX_GENERIC = re.compile(
+    r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{10}$|^\d{12}$|^\d{14}$"
+)
 
 def _get_bounds_var_ids(dct):
     return [
@@ -552,6 +554,84 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
 
     return errors, warnings
 
+def check_generic_file_name(file_name, vocab_checks=None, segregator=None, extension=None, **kwargs):
+    # Requires yaml file containing a list of file name fields and segregators
+    # Loop over each file field and segregator until there are no more
+    # check against defined file extension
+
+    vocab_checks = vocab_checks or {}
+    seg = segregator["seg"] or '_' #'-'
+    ext = extension["ext"] or '.test' #'.nc'
+    errors = []
+    warnings = []
+    # get filename parts
+    extracted_name = file_name.removesuffix(ext)
+    file_name_parts = extracted_name.split(seg)
+
+    print(f"File name: {file_name}")
+    print(f"Segregator: {seg}")
+    print(f"Extension: {ext}")
+    print(f"All file name parts: {file_name_parts}")
+
+    # Loop over file name parts
+    # Assume fields in yml file are in the same order
+
+    for idx, key in enumerate(file_name_parts):
+        print('')
+        print(idx, key)
+        num=f"{idx:02}"
+        field=vocab_checks["field"+num]
+
+        if field.startswith('__vocabs__') or field.startswith('__URL__'):
+            if (
+                    vocabs.check(field, key)
+                    != []
+                ):
+                    errors.append(
+                        f"[file name]: Invalid file name format - unknown field '{key}'"
+                    )
+                    print(errors)
+        elif field.startswith('__date__'):
+            datefmts=(field.split(":"))[1]
+            fmts=(datefmts.split(","))
+            print(f"Valid date formats: {fmts}")
+
+            if not DATE_REGEX_GENERIC.match(key):
+                errors.append(
+                    f"[file name]: Invalid file name format - bad date format '{key}'"
+                )
+            else:
+                valid_date_found = False
+                for f in fmts:
+                    try:
+                        t = dt.datetime.strptime(key, f)
+                        valid_date_found = True
+                        break
+                    except ValueError:
+                        pass
+                if valid_date_found:
+                    print(f"Date string {key} matches the required format")
+                else:
+                    errors.append(
+                        f"[file name]: Invalid file name format - invalid date in file name '{key}'"
+                    )
+                    print(errors)
+        elif field.startswith('__version__'):
+            verfmt=(field.split(":"))[1]
+            if re.match(verfmt, key):
+                print(f"File version {key} matches the required format")
+            else:
+                errors.append(
+                    f"[file name]: Invalid file name format - invalid file version in file name '{key}'"
+                )
+                print(errors)
+        else:
+            errors.append(
+                        f"[file name]: {field} field type not recognised"
+                    )
+            print(errors)
+    
+    return errors, warnings
 
 def check_radar_moment_variables(
     dct, exist_attrs=None, rule_attrs=None, one_of_attrs=None, skip_spellcheck=False

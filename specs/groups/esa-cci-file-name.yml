@@ -3,34 +3,21 @@ file-name-format:
   params:
     vocab_checks:
       # ESACCI
-      field00: __vocabs__:esa_cci_file_name:field00
-      #segregator01: __vocabs__:esa_cci_file_name:segregator01
+      field00: __vocabs__:esa-cci-file-name-config:field00
       # CCI Project (e.g. SEAICE)
-      field01: __vocabs__:esa_cci_file_name:field01
-      #segregator02: __vocabs__:esa_cci_file_name:segregator02
+      field01: __vocabs__:esa-cci-file-name-config:field01
       # Processing Level (e.g. L3C)
-      field02: __vocabs__:esa_cci_file_name:field02
-      #segregator03: __vocabs__:esa_cci_file_name:segregator03
+      field02: __vocabs__:esa-cci-file-name-config:field02
       # Data Type (e.g. SICONC): this is the 'alternative label' of those in the vocabulary
-      # https://vocab.ceda.ac.uk/collection/cci/cci-content/dataType.html
-      # https://vocab.ceda.ac.uk/collection/cci/cci-content/dataType.json
       # https://vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json
       field03: __URL__vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json
-      #segregator04: __vocabs__:esa_cci_file_name:segre04
       # Product String (e.g. NIMBUS5_ESMR-EASE2_NH)
-      # https://vocab.ceda.ac.uk/collection/cci/cci-content/product.html
-      # https://vocab.ceda.ac.uk/collection/cci/cci-content/product.json
       # http://vocab.ceda.ac.uk/scheme/cci/cci-content/product.json
       field04: __URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json
-      #segregator05: __vocabs__:esa_cci_file_name:segre05
-      # Additional field
-      #field06: "RegEx_Additional_segre"
-      #segregator06: __vocabs__:esa_cci_file_name:segre06
-      # Date (and time?)
-      #field07: "RegEx_Date_and_RegEx_Time"
-      #segregator07: __vocabs__:esa_cci_file_name:segre07
+      # Date and time
+      field05: __date__:%Y,%Y%m,%Y%m%d,%Y%m%d%H,%Y%m%d%H%M,%Y%m%d%H%M%S
       # File version
-      #field08: "RegEx_file_version"
+      field06: __version__:^fv\d?\d.?\d?\d?$
     segregator:
       seg: '-'
     extension:
