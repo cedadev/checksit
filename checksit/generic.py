@@ -580,7 +580,13 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
         print('')
         print(idx, key)
         num=f"{idx:02}"
-        field=vocab_checks["field"+num]
+        try:
+            field=vocab_checks["field"+num]
+        except:
+            errors.append(
+                    f"[file name]: Invalid number of file name fields - 'field{num}' not defined in yaml config file."
+                )
+            print(errors[-1])
 
         if field.startswith('__vocabs__') or field.startswith('__URL__'):
             if (
@@ -588,9 +594,9 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                     != []
                 ):
                     errors.append(
-                        f"[file name]: Invalid file name format - unknown field '{key}'"
+                        f"[file name]: Unknown field '{key}' in vocab {field}"
                     )
-                    print(errors)
+                    print(errors[-1])
         elif field.startswith('__date__'):
             datefmts=(field.split(":"))[1]
             fmts=(datefmts.split(","))
@@ -598,8 +604,9 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
 
             if not DATE_REGEX_GENERIC.match(key):
                 errors.append(
-                    f"[file name]: Invalid file name format - bad date format '{key}'"
+                    f"[file name]: Expecting date/time - bad date format '{key}'"
                 )
+                print(errors[-1])
             else:
                 valid_date_found = False
                 for f in fmts:
@@ -613,23 +620,23 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                     print(f"Date string {key} matches the required format")
                 else:
                     errors.append(
-                        f"[file name]: Invalid file name format - invalid date in file name '{key}'"
+                        f"[file name]: Invalid date/time string '{key}'"
                     )
-                    print(errors)
+                    print(errors[-1])
         elif field.startswith('__version__'):
             verfmt=(field.split(":"))[1]
             if re.match(verfmt, key):
                 print(f"File version {key} matches the required format")
             else:
                 errors.append(
-                    f"[file name]: Invalid file name format - invalid file version in file name '{key}'"
+                    f"[file name]: Invalid file version '{key}'"
                 )
-                print(errors)
+                print(errors[-1])
         else:
             errors.append(
                         f"[file name]: {field} field type not recognised"
                     )
-            print(errors)
+            print(errors[-1])
     
     return errors, warnings
 
