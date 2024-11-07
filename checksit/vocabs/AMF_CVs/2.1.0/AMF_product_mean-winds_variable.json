@@ -1,0 +1,214 @@
+{
+    "product_mean-winds_variable": {
+        "wind_speed": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "wind_speed",
+            "long_name": "Mean Wind Speed",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "wind_speed_of_gust": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "wind_speed_of_gust",
+            "long_name": "Maximum Wind Speed Observed in Averaging Period",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: maximum",
+            "coordinates": "latitude longitude"
+        },
+        "wind_from_direction": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "wind_from_direction",
+            "long_name": "Wind From Direction",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "wind_gust_from_direction": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "standard_name": "wind_gust_from_direction",
+            "long_name": "Direction of Maximum Wind Speed Observed in Averaging Period",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: maximum",
+            "coordinates": "latitude longitude"
+        },
+        "eastward_wind": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "eastward_wind",
+            "long_name": "Eastward Wind Component (U)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "northward_wind": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "northward_wind",
+            "long_name": "Northward Wind Component (V)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "upward_air_velocity": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "upward_air_velocity",
+            "long_name": "Upward Air Velocity Component (W)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "divergence_of_wind": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "standard_name": "divergence_of_wind",
+            "long_name": "Divergence of Horizontal Winds Speed",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: standard_deviation",
+            "coordinates": "latitude longitude"
+        },
+        "divergence_of_wind_from_direction": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "degree",
+            "long_name": "Divergence of Wind from Direction",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: standard_deviation",
+            "coordinates": "latitude longitude"
+        },
+        "divergence_of_eastward_wind": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "long_name": "Divergence of Eastward Wind Component (Sigma U)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: standard_deviation",
+            "coordinates": "latitude longitude"
+        },
+        "divergence_of_northward_wind": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "long_name": "Divergence of Northward Wind Component (Sigma V)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: standard_deviation",
+            "coordinates": "latitude longitude"
+        },
+        "divergence_of_upward_air_velocity": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "m s-1",
+            "long_name": "Divergence of Upward Air Velocity (Sigma W)",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: standard_deviation",
+            "coordinates": "latitude longitude"
+        },
+        "sonic_air_temperature": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "K",
+            "long_name": "Air Temperature Retrieved from Sonic Anemometry",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "divergence_of_sonic_air_temperature": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "K",
+            "long_name": "Divergence of Air Temperature Retrieved from Sonic Anemometry",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: standard_deviation",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag_sonic_temperature": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Sonic Temperature",
+            "flag_values": "0b,1b,2b,3b",
+            "flag_meanings": "not_used|good_data|bad_data_value_outside_operational_range_(-30C_to_50C)|suspect_data_time_stamp_error"
+        },
+        "qc_flag_wind_speed": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Wind Speed",
+            "flag_values": "0b,1b,2b,3b,4b",
+            "flag_meanings": "not_used|good_data|bad_data_value_outside_operational_range_(0_to_50m_s-1)|suspect_data_measured_wind_speed_equals_0|suspect_data_time_stamp_error"
+        },
+        "qc_flag_wind_direction": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Wind Direction",
+            "flag_values": "0b,1b,2b,3b,4b",
+            "flag_meanings": "not_used|good_data|bad_data_value_outside_operational_range_(0_to_360_degrees)|suspect_data_measured_wind_speed_equals_0|suspect_data_time_stamp_error"
+        },
+        "qc_flag_wind_component_eastward": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Eastward Wind Component (U)",
+            "flag_values": "0b,1b,2b,3b",
+            "flag_meanings": "not_used|good_data|bad_data_value_outside_operational_range_(-50m_s-1_to_50m_s-1)|suspect_data_time_stamp_error"
+        },
+        "qc_flag_wind_component_northward": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Northward Wind Component (V)",
+            "flag_values": "0b,1b,2b,3b",
+            "flag_meanings": "not_used|good_data|bad_data_value_outside_operational_range_(-50m_s-1_to_50m_s-1)|suspect_data_time_stamp_error"
+        },
+        "qc_flag_wind_component_upward_air_velocity": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag: Upward Air Velocity Component (W)",
+            "flag_values": "0b,1b,2b,3b",
+            "flag_meanings": "not_used|good_data|bad_data_value_outside_operational_range_(-50m_s-1_to_50m_s-1)|suspect_data_time_stamp_error"
+        }
+    }
+}
