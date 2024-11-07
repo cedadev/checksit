@@ -1,0 +1,288 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_nitric_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of Nitric Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_nitric_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of Nitric Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_nitric_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of Nitric Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_nitric_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of Nitric Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_nitrogen_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_nitrogen_dioxide_in_air
+      - long_name:Mole Fraction of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_nitrogen_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_nitrogen_dioxide_in_air
+      - long_name:Mass Fraction of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_nitrogen_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_nitrogen_dioxide_in_air
+      - long_name:Mole Concentration of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_nitrogen_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_nitrogen_dioxide_in_air
+      - long_name:Mass Concentration of Nitrogen Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO2
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_nox_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_nox_expressed_as_nitrogen_in_air
+      - long_name:Mole Fraction of NOx expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOx
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_nox_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_nox_expressed_as_nitrogen_in_air
+      - long_name:Mass Fraction of NOx expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOx
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_nox_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_nox_expressed_as_nitrogen_in_air
+      - long_name:Mole Concentration of NOx expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOx
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_nox_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_nox_expressed_as_nitrogen_in_air
+      - long_name:Mass Concentration of NOx expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOx
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_noy_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mole Fraction of NOy expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOy
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_noy_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - long_name:Mass Fraction of NOy expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOy
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_noy_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - long_name:Mole Concentration of NOy expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOy
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_noy_expressed_as_nitrogen_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - long_name:Mass Concentration of NOy expressed as nitrogen in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NOy
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_no:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: NO
+    rules_attrs:
+      - rule-func:check-qc-flags
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_no2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: NO2
+    rules_attrs:
+      - rule-func:check-qc-flags
+var-requires18:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_nox:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: NOx
+    rules_attrs:
+      - rule-func:check-qc-flags
+var-requires19:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_noy:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: NOy
+    rules_attrs:
+      - rule-func:check-qc-flags
