@@ -52,4 +52,4 @@ var-requires3:
       - units:1
       - long_name:Data quality flag for all variables
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags

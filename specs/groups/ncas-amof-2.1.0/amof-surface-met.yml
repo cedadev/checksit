@@ -213,7 +213,7 @@ var-requires13:
       - units:1
       - long_name:Data Quality flag: Temperature
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -225,7 +225,7 @@ var-requires14:
       - units:1
       - long_name:Data Quality flag: Relative Humidity
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -237,7 +237,7 @@ var-requires15:
       - units:1
       - long_name:Data Quality flag: Pressure
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -249,7 +249,7 @@ var-requires16:
       - units:1
       - long_name:Data Quality flag: Wind Speed
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -261,7 +261,7 @@ var-requires17:
       - units:1
       - long_name:Data Quality flag: Wind From Direction
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -273,7 +273,7 @@ var-requires18:
       - units:1
       - long_name:Data Quality flag: Radiation
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -285,7 +285,7 @@ var-requires19:
       - units:1
       - long_name:Data Quality flag: Precipitation
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -297,7 +297,7 @@ var-requires20:
       - units:1
       - long_name:Data Quality flag: Downwelling Total Irradiance
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -309,4 +309,4 @@ var-requires21:
       - units:1
       - long_name:Data Quality flag: Net Total Irradiance
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
