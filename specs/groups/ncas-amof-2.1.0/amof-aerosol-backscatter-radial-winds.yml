@@ -125,7 +125,7 @@ var-requires8:
       - units:1
       - long_name:Data Quality flag: Radial Velocity of Scatterers Away From Instrument
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -137,7 +137,7 @@ var-requires9:
       - units:1
       - long_name:Data Quality flag: Backscatter
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:
