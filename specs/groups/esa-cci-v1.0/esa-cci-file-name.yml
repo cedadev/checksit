@@ -22,3 +22,5 @@ file-name-format:
       seg: '-'
     extension:
       ext: '.nc'
+    spec_verbose:
+      spec_verb: False

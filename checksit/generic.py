@@ -554,31 +554,43 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
 
     return errors, warnings
 
-def check_generic_file_name(file_name, vocab_checks=None, segregator=None, extension=None, **kwargs):
+def check_generic_file_name(file_name, vocab_checks=None, segregator=None, extension=None, spec_verbose=False, **kwargs):
     # Requires yaml file containing a list of file name fields and segregators
     # Loop over each file field and segregator until there are no more
     # check against defined file extension
 
     vocab_checks = vocab_checks or {}
-    seg = segregator["seg"] or '_' #'-'
-    ext = extension["ext"] or '.test' #'.nc'
+    try:
+        seg = segregator["seg"]
+    except:
+        seg='_'
+    try:
+        ext = extension["ext"]
+    except:
+        ext = '.test'
+    try:
+        spec_verb = spec_verbose["spec_verb"]
+    except:
+        spec_verb = False
+
     errors = []
     warnings = []
+
     # get filename parts
     extracted_name = file_name.removesuffix(ext)
     file_name_parts = extracted_name.split(seg)
 
-    print(f"File name: {file_name}")
-    print(f"Segregator: {seg}")
-    print(f"Extension: {ext}")
-    print(f"All file name parts: {file_name_parts}")
+    if spec_verb:
+        print(f"File name: {file_name}")
+        print(f"Segregator: {seg}")
+        print(f"Extension: {ext}")
+        print(f"All file name parts: {file_name_parts}")
 
     # Loop over file name parts
-    # Assume fields in yml file are in the same order
-
     for idx, key in enumerate(file_name_parts):
-        print('')
-        print(idx, key)
+        if spec_verb:
+            print('')
+            print(idx, key)
         num=f"{idx:02}"
         
         # Check if number of file name parts matches the number of fields specified in the user-defined yaml file
@@ -586,13 +598,15 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
             errors.append(
                         f"[file name]: Number of file name fields ({len(file_name_parts)}) is greater than the {len(vocab_checks)} fields expected."
                     )
-            print(errors[-1])
+            if spec_verb:
+                print(errors[-1])
             break
         elif len(vocab_checks) > len(file_name_parts):
             errors.append(
                         f"[file name]: Number of file name fields ({len(file_name_parts)}) is less than the {len(vocab_checks)} fields expected."
                     )
-            print(errors[-1])
+            if spec_verb:
+                print(errors[-1])
             break
         else:
             field=vocab_checks["field"+num]
@@ -600,25 +614,28 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
             if field.startswith('__vocabs__') or field.startswith('__URL__'):
                 # VOCAB (config or URL)
                 if (
-                        vocabs.check(field, key)
+                        vocabs.check(field, key, spec_verb=spec_verb)
                         != []
                     ):
                         errors.append(
                             f"[file name]: Unknown field '{key}' in vocab {field}"
                         )
-                        print(errors[-1])
+                        if spec_verb:
+                            print(errors[-1])
 
             elif field.startswith('__date__'):
                 # DATE REGEX
                 datefmts=(field.split(":"))[1]
                 fmts=(datefmts.split(","))
-                print(f"Valid date formats: {fmts}")
+                if spec_verb:
+                    print(f"Valid date formats: {fmts}")
 
                 if not DATE_REGEX_GENERIC.match(key):
                     errors.append(
                         f"[file name]: Expecting date/time - bad date format '{key}'"
                     )
-                    print(errors[-1])
+                    if spec_verb:
+                        print(errors[-1])
                 else:
                     valid_date_found = False
                     for f in fmts:
@@ -629,30 +646,35 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                         except ValueError:
                             pass
                     if valid_date_found:
-                        print(f"Date string {key} matches the required format")
+                        if spec_verb:
+                            print(f"Date string {key} matches the required format")
                     else:
                         errors.append(
                             f"[file name]: Invalid date/time string '{key}'"
                         )
-                        print(errors[-1])
+                        if spec_verb:
+                            print(errors[-1])
 
             elif field.startswith('__version__'):
                 # FILE/PRODUCT VERSION
                 verfmt=(field.split(":"))[1]
                 if re.match(verfmt, key):
-                    print(f"File version {key} matches the required format")
+                    if spec_verb:
+                        print(f"File version {key} matches the required format")
                 else:
                     errors.append(
                         f"[file name]: Invalid file version '{key}'"
                     )
-                    print(errors[-1])
+                    if spec_verb:
+                        print(errors[-1])
 
             else:
                 # FIELD NOT RECOGNISED
                 errors.append(
                             f"[file name]: {field} field type not recognised"
                         )
-                print(errors[-1])
+                if spec_verb:
+                    print(errors[-1])
     
     return errors, warnings
 

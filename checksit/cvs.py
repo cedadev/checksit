@@ -112,11 +112,12 @@ class Vocabs:
 
         return obj
 
-    def check(self, vocab_lookup, value, label="", lookup=True):
+    def check(self, vocab_lookup, value, label="", lookup=True, spec_verb=False):
         # Return a list of errors - empty list if no errors
         errors = []
         options = [self.lookup(vocab_lookup) if lookup else vocab_lookup][0]
-        print(f"Vocab lookup: {vocab_lookup}")
+        if spec_verb:
+            print(f"Vocab lookup: {vocab_lookup}")
 
         if isinstance(options, list):
             if value not in options:
@@ -124,7 +125,8 @@ class Vocabs:
                     f"{label} '{value}' not in vocab options: {options} (using: '{vocab_lookup}')"
                 )
             else:
-                print(f"Value: {value} is in list {options}")
+                if spec_verb:
+                    print(f"Value: {value} is in list {options}")
         elif isinstance(options, dict):
             for key in options.keys():
                 if key in value.keys():
