@@ -464,7 +464,7 @@ def test_check_file_name():
     assert warnings == []
 
 def test_check_generic_file_name():
-    # Test that the function correctly identifies invalid instrument name
+    # Test for Standard ESA CCI file name
     vocab_checks = {
         'field00': '__vocabs__:esa-cci-file-name-config:field00', 
         'field01': '__vocabs__:esa-cci-file-name-config:field01', 
@@ -490,7 +490,7 @@ def test_check_generic_file_name():
     # Incorrect field00
     file_name = "ESAC3S-SOILMOISTURE-L3S-SSMV-COMBINED-20231231000000-fv09.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Unknown field 'ESAC3S' in vocab __vocabs__:esa-cci-file-name-config:field00"]
+    assert errors == ["[file name]: Unknown field 'ESAC3S' in vocab __vocabs__:esa-cci-file-name-config:field00."]
     assert warnings == []
 
     # Incorrect multiple fields
@@ -502,13 +502,37 @@ def test_check_generic_file_name():
     # Incorrect date
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-20231241000000-fv09.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Invalid date/time string '20231241000000'"]
+    assert errors == ["[file name]: Invalid date/time string '20231241000000'. Date/time should take the form YYYY[MM[DD[HH[MM[SS]]]]], where the fields in brackets are optional."]
     assert warnings == []   
 
     # Incorrect version format
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-20231231000000-fv09.2.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Invalid file version 'fv09.2.1'"]
+    assert errors == ["[file name]: Invalid file version 'fv09.2.1'. File versions should take the form n{1,}[.n{1,}]."]
+    assert warnings == []
+
+    # Test for Additional Segregator ESA CCI file name
+    vocab_checks = {
+        'field00': '__vocabs__:esa-cci-file-name-config:field00', 
+        'field01': '__vocabs__:esa-cci-file-name-config:field01', 
+        'field02': '__vocabs__:esa-cci-file-name-config:field02', 
+        'field03': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json', 
+        'field04': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json', 
+        'field05': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json', 
+        'field06': '__date__:%Y,%Y%m,%Y%m%d,%Y%m%d%H,%Y%m%d%H%M,%Y%m%d%H%M%S', 
+        'field07': '__version__:^fv\\d?\\d.?\\d?\\d?$'
+    }
+    segregator = {
+        'seg': '-'
+    }
+    extension = {
+        'ext': '.nc'
+    }
+
+    # Legitimate Additional Segregator ESA CCI file name - should pass wihtout error
+    file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-TEST_ADD_SEG-20231231000000-fv09.1.nc"
+    errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
+    assert errors == ["[file name]: Unknown field 'TEST_ADD_SEG' in vocab __URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json."]
     assert warnings == []
 
 def test_check_radar_moment_variables():

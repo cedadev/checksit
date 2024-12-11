@@ -618,7 +618,7 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                         != []
                     ):
                         errors.append(
-                            f"[file name]: Unknown field '{key}' in vocab {field}"
+                            f"[file name]: Unknown field '{key}' in vocab {field}."
                         )
                         if spec_verb:
                             print(errors[-1])
@@ -650,7 +650,7 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                             print(f"Date string {key} matches the required format")
                     else:
                         errors.append(
-                            f"[file name]: Invalid date/time string '{key}'"
+                            f"[file name]: Invalid date/time string '{key}'. Date/time should take the form YYYY[MM[DD[HH[MM[SS]]]]], where the fields in brackets are optional."
                         )
                         if spec_verb:
                             print(errors[-1])
@@ -663,7 +663,7 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                         print(f"File version {key} matches the required format")
                 else:
                     errors.append(
-                        f"[file name]: Invalid file version '{key}'"
+                        f"[file name]: Invalid file version '{key}'. File versions should take the form n{{1,}}[.n{{1,}}]."
                     )
                     if spec_verb:
                         print(errors[-1])
@@ -671,7 +671,7 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
             else:
                 # FIELD NOT RECOGNISED
                 errors.append(
-                            f"[file name]: {field} field type not recognised"
+                            f"[file name]: {field} field type not recognised."
                         )
                 if spec_verb:
                     print(errors[-1])

@@ -1,0 +1,26 @@
+file-name-format:
+  func: checksit.generic.check_generic_file_name
+  params:
+    vocab_checks:
+      # Date and time
+      field00: __date__:%Y,%Y%m,%Y%m%d,%Y%m%d%H,%Y%m%d%H%M,%Y%m%d%H%M%S
+      # ESACCI
+      field01: __vocabs__:esa-cci-file-name-config:field00
+      # Processing Level (e.g. L3C)
+      field02: __vocabs__:esa-cci-file-name-config:field02
+      # CCI Project (e.g. SEAICE)
+      field03: __vocabs__:esa-cci-file-name-config:field01
+      # Data Type (e.g. SICONC): this is the 'alternative label' of those in the vocabulary
+      # https://vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json
+      field04: __URL__vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json
+      # Product String (e.g. NIMBUS5_ESMR-EASE2_NH)
+      # http://vocab.ceda.ac.uk/scheme/cci/cci-content/product.json
+      field05: __URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json
+      # File version
+      field06: __version__:^fv\d?\d.?\d?\d?$
+    segregator:
+      seg: '-'
+    extension:
+      ext: '.nc'
+    spec_verbose:
+      spec_verb: True
