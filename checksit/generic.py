@@ -577,7 +577,10 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
     warnings = []
 
     # get filename parts
-    extracted_name = file_name.removesuffix(ext)
+    if not isinstance(file_name,str):
+        raise ValueError
+
+    extracted_name = file_name.replace(ext,'')
     file_name_parts = extracted_name.split(seg)
 
     if spec_verb:
