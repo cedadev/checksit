@@ -58,7 +58,6 @@ class Vocabs:
             vocab_list=sorted([prefLabel[0]["@value"] for js_dct in js for key, prefLabel in js_dct.items() if key.endswith("#prefLabel")])
         else:
             print(f"[WARNING] ESA CCI vocab url not recognised: {vocab_id_url}")
-        import pdb; pdb.set_trace()
             
         return vocab_list
 
