@@ -1,0 +1,45 @@
+required-global-attrs0:
+  func: checksit.generic.check_global_attrs
+  params:
+    defined_attrs:
+      - title
+      - institution
+      - source
+      - history
+      - references
+      - tracking_id
+      - Conventions
+      - product_version
+      - format_version
+      - summary
+      - keywords
+      - id
+      - naming_authority
+      - keywords_vocabulary
+      - cdm_data_type
+      - comment
+      - date_created
+      - creator_name
+      - creator_url
+      - creator_email
+      - project
+      - geospatial_lat_min
+      - geospatial_lat_max
+      - geospatial_lon_min
+      - geospatial_lon_max
+      - geospatial_vertical_min
+      - geospatial_vertical_max
+      - time_coverage_start
+      - time_coverage_end
+      - time_coverage_duration
+      - time_coverage_resolution
+      - standard_name_vocabulary
+      - license
+      - platform
+      - sensor
+      - spatial_resolution
+      - key_variables
+    vocab_attrs:
+      Conventions: __vocabs__:esa-cci-global-attrs-config:Conventions
+      project: __vocabs__:esa-cci-global-attrs-config:project
+      license: __vocabs__:esa-cci-global-attrs-config:license

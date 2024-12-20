@@ -1,0 +1,17 @@
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - latitude
+    defined_attrs:
+      - units:degree_north
+      - standard_name:latitude
+
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - longitude
+    defined_attrs:
+      - units:degree_east
+      - standard_name:longitude
