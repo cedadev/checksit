@@ -2,7 +2,7 @@ from .utils import get_public_funcs, map_to_rule
 from .rules import rule_funcs
 from typing import List, Optional
 
-def describe(check_ids: Optional[List[str]] = None, verbose: bool = False):
+def describe(check_ids: Optional[List[str]] = None, verbose: bool = False) -> None:
     all_funcs = get_public_funcs(rule_funcs)
 
     if not check_ids:
