@@ -2,7 +2,7 @@ import os
 import re
 import glob
 from collections import defaultdict, OrderedDict as OD
-
+from typing import Optional
 import pandas as pd
 
 
@@ -32,7 +32,11 @@ def do_exclude(err, exclude_patterns):
 
 
 def summarise(
-    log_files=None, log_directory=None, show_files=False, exclude=None, verbose=False
+    log_files: Optional[list[str]] = None,
+    log_directory: Optional[str] = None,
+    show_files: bool = False,
+    exclude: Optional[list[str]] = None,
+    verbose: bool = False,
 ):
     log_files = log_files or find_log_files(log_directory)
     exclude_patterns = exclude or []

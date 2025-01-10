@@ -4,11 +4,11 @@ import inspect
 UNDEFINED = "UNDEFINED"
 
 
-def string_to_dict(s):
+def string_to_dict(s: str) -> dict[str, str]:
     return dict([x.split("=") for x in s.split(",")])
 
 
-def string_to_list(s):
+def string_to_list(s: str) -> list[str]:
     return s.split(",")
 
 
