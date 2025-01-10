@@ -60,5 +60,5 @@ class ImageParser:
         return {"global_attributes": self.global_attrs, "inpt": self.inpt}
 
 
-def read(fpath, verbose=False):
+def read(fpath: str, verbose: bool = False) -> ImageParser:
     return ImageParser(fpath, verbose=verbose)
