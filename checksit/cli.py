@@ -206,8 +206,7 @@ def describe(check_ids: Optional[list[str]] = None, verbose: bool = False):
 
 @main.command()
 @click.argument("spec_ids", nargs=-1, default=None)
-@click.option("--verbose/--no-verbose", default=False)
-def show_specs(spec_ids: Optional[list[str]] = None, verbose: bool = False):
+def show_specs(spec_ids: Optional[list[str]] = None):
     """CLI call to show details of specs.
 
     Reads options from the command line and calls the show_specs function to print the
@@ -216,9 +215,8 @@ def show_specs(spec_ids: Optional[list[str]] = None, verbose: bool = False):
 
     Args:
         spec_ids: List of specs to show.
-        verbose: Print additional information to the console.
     """
-    return specs.show_specs(spec_ids, verbose=verbose)
+    return specs.show_specs(spec_ids)
 
 
 if __name__ == "__main__":

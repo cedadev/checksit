@@ -28,7 +28,7 @@ def load_specs(spec_ids=None):
     return _parse_specs(spec_files)
 
 
-def show_specs(spec_ids=None, verbose=False):
+def show_specs(spec_ids: Optional[List[str]] = None) -> None:
     all_specs = load_specs(spec_ids)
     spec_ids_names = tuple([(spec_id.split("/")[-1]) for spec_id in spec_ids])
 
