@@ -71,7 +71,7 @@ class SpecificationChecker:
         errors = []
         warnings = []
 
-        for check_id, check_dict in self.spec.items():
+        for _, check_dict in self.spec.items():
             check_errors, check_warnings = self._run_check(
                 record, check_dict, skip_spellcheck=skip_spellcheck
             )
