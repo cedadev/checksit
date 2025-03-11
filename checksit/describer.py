@@ -1,8 +1,23 @@
+"""Describe checksit rule functions.
+
+Module that provides function that prints out rule functions and their descriptions in
+a human readable format.
+"""
+
 from .utils import get_public_funcs, map_to_rule
 from .rules import rule_funcs
 from typing import List, Optional
 
 def describe(check_ids: Optional[List[str]] = None, verbose: bool = False) -> None:
+    """Print out rule functions and description.
+
+    Prints out name and description for given rule function or functions in a human
+    readable format. Endpoint for the `checksit describe` CLI command. If no functions
+    are specified, descriptions for all rule functions are printed.
+
+    Args:
+        check_ids: name of function, or names of functions, to describe.
+    """
     all_funcs = get_public_funcs(rule_funcs)
 
     if not check_ids:
