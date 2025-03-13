@@ -1,15 +1,47 @@
+"""Reader for image files.
+"""
 import subprocess as sp
 import yaml
+from typing import Tuple
 
+def get_output(cmd: str) -> Tuple[str, str]:
+    """Get the output of a shell command.
 
-def get_output(cmd):
+    Args:
+        cmd: The shell command to run.
+
+    Returns:
+        The output of the shell command.
+    """
     subp = sp.Popen(cmd, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
     return subp.stdout.read().decode("charmap"), subp.stderr.read().decode("charmap")
 
 
 class ImageParser:
+    """Parse an image file into dictionaries.
 
-    def __init__(self, inpt, verbose=False):
+    Extract information from an image file into a dictionary for tags, labelled as
+    `global_attributes` for use within `checksit`. This uses `exiftool` to extract the
+    metadata from the image file.
+
+
+    Attributes:
+        inpt: The input file path.
+        verbose: Print verbose output during parsing.
+        base_exiftool_arguments: The arguments to pass to exiftool.
+        global_attrs: The tag name and values from the image file.
+    """
+    def __init__(
+        self,
+        inpt: str,
+        verbose: bool = False
+    ) -> None:
+        """Initialise the ImageParser and parse the input file.
+
+        Args:
+            inpt: The input file path.
+            verbose: Print verbose output during parsing.
+        """
         self.inpt = inpt
         self.verbose = verbose
         self.base_exiftool_arguments = ["exiftool", "-G1", "-j", "-c", "%+.6f"]
