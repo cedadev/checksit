@@ -1,3 +1,10 @@
+"""Rule functions for checks.
+
+This module contains functions that are used to check values against rules. Each
+function takes a value and returns a list of errors if the value does not meet the
+rule.
+"""
+
 import os
 import re
 from datetime import datetime
@@ -5,6 +12,7 @@ import requests
 from urllib.request import urlopen
 import numpy as np
 import sys
+from typing import List, Dict, Optional, Any, Union
 
 from . import processors
 from ..config import get_config
@@ -13,7 +21,20 @@ conf = get_config()
 rule_splitter = conf["settings"].get("rule_splitter", "|")
 
 
-def _preprocess(value, preprocessors):
+def _preprocess(value: str, preprocessors: Optional[List[str]]) -> str:
+    """Run value through preprocessors.
+
+    Preprocess value by running it through preprocessor functions. Functions are
+    defined in the processors module. Hyphens in the preprocessors (e.g. from specs)
+    are replaced with underscores.
+
+    Args:
+        value: value to preprocess
+        preprocessors: list of preprocessor functions to run
+
+    Returns:
+        Preprocessed value as string.
+    """
     preprocessors = preprocessors or []
 
     for processor in preprocessors:
@@ -22,15 +43,25 @@ def _preprocess(value, preprocessors):
     return value
 
 
-def match_file_name(value, context, extras=None, label=""):
-    """
-    Matches file name to value...
+def match_file_name(
+    value: str,
+    context: Dict[str, str],
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check if value matches the file name.
 
-    Example usage:
-     - match-file-name:lowercase:no-extension
-     - match-file-name:uppercase
-     - match-file-name
+    Check if the value matches the file name. The file name is extracted from the context
+    dictionary, which should contain the file path as a value with the key 'file_path'.
 
+    Args:
+        value: value to check
+        context: dictionary containing the file path
+        extras: list of preprocessors to run on the value
+        label: label to prepend to error message returned
+
+    Returns:
+        List of errors.
     """
     file_name = os.path.basename(context["file_path"])
     value = _preprocess(value, extras)
@@ -42,10 +73,26 @@ def match_file_name(value, context, extras=None, label=""):
     return errors
 
 
-def match_one_of(value, context, extras=None, label=""):
-    """
-    value matches one of options defined in extras
-    default rule splitter is '|' and defined in checksit.ini file
+def match_one_of(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check if value matches one of the options.
+
+    Check if the value matches one of the options defined in the extras list. The
+    options are separated by the rule splitter, which is defined in the checksit.ini
+    file. The default rule splitter is '|'.
+
+    Args:
+        value: value to check
+        extras: list with string of options to match, options separated by rule
+          splitter (default '|')
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if no match found.
     """
     options = [x.strip() for x in extras[0].split(rule_splitter)]
     errors = []
@@ -56,9 +103,27 @@ def match_one_of(value, context, extras=None, label=""):
     return errors
 
 
-def match_one_or_more_of(value, context, extras=None, label=""):
-    """
-    String value or list value must match one of more of list given in extras
+def match_one_or_more_of(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check one or more values for matches against options.
+
+    Check if the value or values given can be found in the options list specified in
+    `extras`. The options in `extras` are a string separated by the rule splitter, and
+    the `value` is a string with values separated by commas. Checks if all values are
+    found within the options.
+
+    Args:
+        value: value to check
+        extras: list with string of options to match, options separated by rule
+          splitter (default '|')
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if no match found.
     """
 
     def as_set(x, sep):
@@ -75,9 +140,26 @@ def match_one_or_more_of(value, context, extras=None, label=""):
     return errors
 
 
-def string_of_length(value, context, extras=None, label=""):
-    """
-    Matches string of length...
+def string_of_length(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check string is of a certain length.
+
+    Check if the string is of a certain length. The length is defined in the extras
+    list, which should contain the length as a string. If the length is followed by a
+    '+' sign, the string must be at least that length. If the length is not followed by
+    a '+', the string must be exactly that length.
+
+    Args:
+        value: value to check
+        extras: list with length as string
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if length does not match.
     """
     spec = extras[0]
     min_length = int(re.match(r"^(\d+)\+?", spec).groups()[0])
@@ -93,9 +175,24 @@ def string_of_length(value, context, extras=None, label=""):
     return errors
 
 
-def validate_image_date_time(value, context, extras=None, label=""):
-    """
-    A function to indifity if a date-time value is compatible with the NCAS image standard
+def validate_image_date_time(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check value meets date and time format.
+
+    Check if the value meets the date and time format that is expected for the
+    NCAS-Image standard. The expected format is 'YYYY:MM:DD HH:MM:SS' or
+    'YYYY:MM:DD HH:MM:SS.s'.
+
+    Args:
+        value: value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if date and time format does not match.
     """
     errors = []
 
@@ -115,9 +212,23 @@ def validate_image_date_time(value, context, extras=None, label=""):
     return errors
 
 
-def validate_orcid_ID(value, context, extras=None, label=""):
-    """
-    A function to verify the format of an orcid ID
+def validate_orcid_ID(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check value meets ORCID URL format.
+
+    Check if the value meets the ORCID URL format (i.e.
+    https://orcid.org/XXXX-XXXX-XXXX-XXXX).
+
+    Args:
+        value: value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if ORCID ID format does not match.
     """
     orcid_string = "https://orcid.org/"  # required format of start of the string
 
@@ -157,9 +268,24 @@ def validate_orcid_ID(value, context, extras=None, label=""):
     return errors
 
 
-def list_of_names(value, context, extras=None, label=""):
-    """
-    A function to verify the names of people when a list of names may be provided
+def list_of_names(
+    value: Union[str, List[str]],
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check list of names matches expected pattern.
+
+    Check if a given name or list of names matches the expected pattern. The pattern
+    is <last name>, <first name> <middle initials(s)> or <last name>, <first name>
+    <middle name(s)>. Designed for checks with the NCAS-Image standard.
+
+    Args:
+        value: name(s) to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if name format does not match.
     """
     name_pattern = (
         r"(.)+, (.)+ ?((.)+|((.)\.))"  # The format names should be written in
@@ -192,9 +318,24 @@ def list_of_names(value, context, extras=None, label=""):
     return warnings
 
 
-def headline(value, context, extras=None, label=""):
-    """
-    A function to verify the format of the Headline
+def headline(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check value is valid for NCAS Image headline tag.
+
+    Check if the value is valid for the NCAS Image headline tag. The headline should
+    be a single sentence, starting with a capital letter, and should not exceed 150
+    characters.
+
+    Args:
+        value: value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if headline format does not match.
     """
     warnings = []
 
@@ -221,9 +362,24 @@ def headline(value, context, extras=None, label=""):
     return warnings
 
 
-def title_check(value, context, extras=None, label=""):
-    """
-    A function to check if the title matches the system filename
+def title_check(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check if title matches the filename.
+
+    For NCAS-Image standard, check if the value (from the title tag) matches the name
+    of the file (given in the context).
+
+    Args:
+        value: value to check
+        context: file path
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if title does not match file name.
     """
     errors = []
 
@@ -233,9 +389,20 @@ def title_check(value, context, extras=None, label=""):
     return errors
 
 
-def url_checker(value, context, extras=None, label=""):
-    """
-    A function to check if the url exists
+def url_checker(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check URL exists and is reachable.
+
+    Args:
+        value: URL to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if URL is not reachable.
     """
     warnings = []
 
@@ -250,9 +417,24 @@ def url_checker(value, context, extras=None, label=""):
         return warnings
 
 
-def relation_url_checker(value, context, extras=None, label=""):
-    """
-    A function to check if Relation field is in the correct format, and that the url exists
+def relation_url_checker(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = ""
+) -> List[str]:
+    """Check relation field is in the correct format and that the url exists.
+
+    Designed for checking the Relation tag matches the expected format in the
+    NCAS-Image standard, and the URL is reachable using the `url_checker` function.
+
+    Args:
+        value: value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if Relation tag does not match expected format or URL is
+          not reachable
     """
     errors = []
 
@@ -270,9 +452,20 @@ def relation_url_checker(value, context, extras=None, label=""):
     return errors
 
 
-def latitude(value, context, extras=None, label=""):
-    """
-    A function to check if the latitude is within -90 and +90
+def latitude(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check if the value is within -90 and +90
+
+    Args:
+        value: value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if latitude is not within -90 and +90
     """
     errors = []
 
@@ -286,9 +479,20 @@ def latitude(value, context, extras=None, label=""):
     return errors
 
 
-def longitude(value, context, extras=None, label=""):
-    """
-    A function to check if the longitude is within -180 and +180
+def longitude(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check if the value is within -180 and +180
+
+    Args:
+        value: value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if longitude is not within -180 and +180
     """
     errors = []
 
@@ -302,9 +506,23 @@ def longitude(value, context, extras=None, label=""):
     return errors
 
 
-def ceda_platform(value, context, extras=None, label=""):
-    """
-    A function to check if the platform is in the CEDA catalogue API
+def ceda_platform(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check if the platform is in the CEDA catalogue API
+
+    Attempt to find the platform in the CEDA catalogue API, at
+    `http://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}`.
+
+    Args:
+        value: platform value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if platform is not in the CEDA catalogue
     """
     errors = []
     api_result = requests.get(
@@ -325,9 +543,23 @@ def ceda_platform(value, context, extras=None, label=""):
     return errors
 
 
-def ncas_platform(value, context, extras=None, label=""):
-    """
-    A function to check if the platform is in the NCAS platform list
+def ncas_platform(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check if the platform is in the NCAS platform list
+
+    Attempt to find the platform in the NCAS platform list, in the latest release of
+    `https://github.com/ncasuk/ncas-data-platform-vocabs`.
+
+    Args:
+        value: platform value to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if platform is not in the NCAS platform list
     """
     errors = []
 
@@ -346,11 +578,26 @@ def ncas_platform(value, context, extras=None, label=""):
     return errors
 
 
-def check_qc_flags(value, context, extras=None, label=""):
-    """
-    A function to check flag_values and flag_meanings
-    value - flag_values
-    context - flag_meanings
+def check_qc_flags(
+    value: Any,
+    context: str,
+    extras: Optional[List[str]] = None,
+    label: str = ""
+) -> List[str]:
+    """Check QC flag values and meanings meet NCAS-General requirements
+
+    Checks the QC flag values and meanings. The flag values must be an array or tuple
+    of byte values, with at least two values, starting with 0 and 1. The flag meanings
+    must be space separated and the first two must start with 'not_used' and
+    'good_data'. The number of flag values must equal the number of flag meanings.
+
+    Args:
+        value: flag values, as defined in the netCDF file
+        context: flag meanings, as defined in the netCDF file
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if QC flag values and meanings do not meet requirements
     """
     errors = []
 
@@ -387,10 +634,20 @@ def check_qc_flags(value, context, extras=None, label=""):
     return errors
 
 
-def check_utc_date_iso_format(value, context, extras=None, label=""):
-    """
-    Check date given is in ISO 8601 format and in UTC
-    value - date string
+def check_utc_date_iso_format(
+    value: str,
+    context: Any,
+    extras: Optional[List[str]] = None,
+    label: str = "",
+) -> List[str]:
+    """Check date given is in ISO 8601 format and in UTC
+
+    Args:
+        value: date string to check
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if date string does not meet
     """
     errors = []
 
@@ -413,11 +670,20 @@ def check_utc_date_iso_format(value, context, extras=None, label=""):
 
 
 def allow_proposed(value, context, extras=None, label=""):
-    """
-    Check for proposed_standard_name if standard_name not given
-    value - value of the standard_name attribute
-    context - value of the proposed_standard_name attribute
-    extras - value to match
+    """Check for proposed_standard_name if standard_name not given
+
+    Used in CFRadial and the NCAS-Radar standard, this function takes the value of both
+    the `standard_name` attribute and the `proposed_standard_name` attribute (if they
+    exist) and compares each to the expected value, as given in `extras`.
+
+    Args:
+        value: value of the standard_name attribute
+        context: value of the proposed_standard_name attribute
+        extras: list of expected values
+        label: label to prepend to error message returned
+
+    Returns:
+        List with error string if neither value matches the expected value
     """
     errors = []
 
