@@ -1,3 +1,5 @@
+"""Reader for CDL files and netCDF files.
+"""
 from collections import deque
 import re
 import yaml
@@ -8,7 +10,15 @@ from typing import Tuple, List, Dict
 from ..cvs import vocabs, vocabs_prefix
 
 
-def get_output(cmd):
+def get_output(cmd: str) -> str:
+    """Get the output of a shell command.
+
+    Args:
+        cmd: The shell command to run.
+
+    Returns:
+        The output of the shell command.
+    """
     subp = sp.Popen(cmd, shell=True, stdout=sp.PIPE)
     return subp.stdout.read().decode("utf-8")
 
