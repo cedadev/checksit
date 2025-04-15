@@ -30,6 +30,8 @@ class ImageParser:
         verbose: Print verbose output during parsing.
         base_exiftool_arguments: The arguments to pass to exiftool.
         global_attrs: The tag name and values from the image file.
+        exiftool_location: The location on the machine of the exiftool executable.
+        global_attrs: The global attributes extracted from the image file.
     """
     def __init__(
         self,
@@ -48,7 +50,12 @@ class ImageParser:
         self._find_exiftool()
         self._parse(inpt)
 
-    def _parse(self, inpt):
+    def _parse(self, inpt: str) -> None:
+        """Parse the input file using exiftool.
+
+        Args:
+            inpt: The input file path.
+        """
         if self.verbose:
             print(f"[INFO] Parsing input: {inpt[:100]}...")
         self.global_attrs = {}
@@ -62,7 +69,12 @@ class ImageParser:
             else:
                 self.global_attrs[tag_name] = str(raw_global_attrs[tag_name])
 
-    def _find_exiftool(self):
+    def _find_exiftool(self) -> None:
+        """Find the location of exiftool on the machine.
+
+        Raises:
+            RuntimeError: If exiftool cannot be found on the machine.
+        """
         if self.verbose:
             print("[INFO] Searching for exiftool...")
         which_output, which_error = get_output("which exiftool")
