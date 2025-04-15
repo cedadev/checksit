@@ -31,7 +31,7 @@ class ImageParser:
         base_exiftool_arguments: The arguments to pass to exiftool.
         global_attrs: The tag name and values from the image file.
         exiftool_location: The location on the machine of the exiftool executable.
-        global_attrs: The global attributes extracted from the image file.
+        global_attrs: The metadata tags and values extracted from the image file.
     """
     def __init__(
         self,
