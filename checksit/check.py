@@ -7,7 +7,6 @@ spec checks on data files, as well as parsing the data files and managing templa
 import os
 import sys
 import glob
-import tempfile
 import re
 import difflib
 import yaml
