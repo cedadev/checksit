@@ -662,7 +662,25 @@ class TemplateManager:
         self.verbose = verbose
         self.log_mode = log_mode
 
-    def get(self, file_path, template="auto"):
+    def get(
+        self,
+        file_path: str,
+        template: str = "auto",
+    ) -> Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile]:
+        """Get the template for checking a data file.
+
+        If template is "auto", will try to find a suitable template based on the file
+        to be checked. If template is a file path, will check if the file exists, and
+        will use that file as the template.
+
+        Args:
+            file_path: Path to the file to check.
+            template: Template to use for checking. Options are "auto" (default), or
+              `<template file>`.
+
+        Returns:
+            Template object to use for checking the file.
+        """
         if template == "auto":
             template = self._get_template_from_config(file_path)
         elif not os.path.isfile(template):
@@ -680,7 +698,7 @@ class TemplateManager:
         )
         return tmpl
 
-    def _get_template_from_config(self, file_path):
+    def _get_template_from_config(self, file_path: str) -> str:
         # Loop through datasets in config to find appropriate template (cached or in archive)
         dsets = [key.split(":")[1] for key in conf if key.startswith("dataset:")]
 
@@ -696,7 +714,7 @@ class TemplateManager:
         else:
             return self._get_template_from_cache(file_path)
 
-    def _get_template_by_dataset(self, file_path, config):
+    def _get_template_by_dataset(self, file_path: str, config: Dict[str, str]) -> str:
         if "template" in config:
             return config["template"]
         elif "template_cache" in config:
@@ -704,7 +722,11 @@ class TemplateManager:
         else:
             raise Exception("No rule for finding the template")
 
-    def _get_template_from_cache(self, file_path, template_cache=None):
+    def _get_template_from_cache(
+        self,
+        file_path: str,
+        template_cache: Optional[str] = None,
+    ) -> str:
         if not template_cache:
             template_cache = conf["settings"]["default_template_cache_dir"]
 
@@ -798,7 +820,7 @@ class FileParser:
         return content
 
 
-def check_file(file_path: str, **kwargs):
+def check_file(file_path: str, **kwargs) -> None:
     """Entry script for checking a file.
 
     Passes options through to the check_file function in the Checker class.
@@ -809,4 +831,4 @@ def check_file(file_path: str, **kwargs):
           Checker.check_file function.
     """
     ch = Checker(**kwargs)
-    return ch.check_file(file_path, **kwargs)
+    ch.check_file(file_path, **kwargs)
