@@ -6,7 +6,6 @@ from URLs. It also provides a method to check a value against a controlled vocab
 import os
 import re
 import json
-from collections import deque
 import requests
 from typing import Dict, List, Union, Any
 
