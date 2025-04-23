@@ -1,22 +1,61 @@
+"""Reader for image files.
+"""
 import subprocess as sp
 import yaml
+from typing import Tuple, Dict, Union
 
+def get_output(cmd: str) -> Tuple[str, str]:
+    """Get the output of a shell command.
 
-def get_output(cmd):
+    Args:
+        cmd: The shell command to run.
+
+    Returns:
+        The output of the shell command.
+    """
     subp = sp.Popen(cmd, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
     return subp.stdout.read().decode("charmap"), subp.stderr.read().decode("charmap")
 
 
 class ImageParser:
+    """Parse an image file into dictionaries.
 
-    def __init__(self, inpt, verbose=False):
+    Extract information from an image file into a dictionary for tags, labelled as
+    `global_attributes` for use within `checksit`. This uses `exiftool` to extract the
+    metadata from the image file.
+
+
+    Attributes:
+        inpt: The input file path.
+        verbose: Print verbose output during parsing.
+        base_exiftool_arguments: The arguments to pass to exiftool.
+        global_attrs: The tag name and values from the image file.
+        exiftool_location: The location on the machine of the exiftool executable.
+        global_attrs: The metadata tags and values extracted from the image file.
+    """
+    def __init__(
+        self,
+        inpt: str,
+        verbose: bool = False
+    ) -> None:
+        """Initialise the ImageParser and parse the input file.
+
+        Args:
+            inpt: The input file path.
+            verbose: Print verbose output during parsing.
+        """
         self.inpt = inpt
         self.verbose = verbose
         self.base_exiftool_arguments = ["exiftool", "-G1", "-j", "-c", "%+.6f"]
         self._find_exiftool()
         self._parse(inpt)
 
-    def _parse(self, inpt):
+    def _parse(self, inpt: str) -> None:
+        """Parse the input file using exiftool.
+
+        Args:
+            inpt: The input file path.
+        """
         if self.verbose:
             print(f"[INFO] Parsing input: {inpt[:100]}...")
         self.global_attrs = {}
@@ -30,7 +69,12 @@ class ImageParser:
             else:
                 self.global_attrs[tag_name] = str(raw_global_attrs[tag_name])
 
-    def _find_exiftool(self):
+    def _find_exiftool(self) -> None:
+        """Find the location of exiftool on the machine.
+
+        Raises:
+            RuntimeError: If exiftool cannot be found on the machine.
+        """
         if self.verbose:
             print("[INFO] Searching for exiftool...")
         which_output, which_error = get_output("which exiftool")
@@ -56,9 +100,24 @@ class ImageParser:
             attr_dict[key] = value
         return attr_dict
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, Union[str, Dict[str, str]]]:
+        """Convert the ImageParser object data to a dictionary.
+
+        Returns:
+            Dictionary containing metadata tags and values as "global_attributes", and
+              the input file path as "inpt".
+        """
         return {"global_attributes": self.global_attrs, "inpt": self.inpt}
 
 
-def read(fpath, verbose=False):
+def read(fpath: str, verbose: bool = False) -> ImageParser:
+    """Read an image file and return an ImageParser object.
+
+    Args:
+        fpath: The path to the image file.
+        verbose: Print verbose output during parsing.
+
+    Returns:
+        An ImageParser object containing the metadata tags and values.
+    """
     return ImageParser(fpath, verbose=verbose)

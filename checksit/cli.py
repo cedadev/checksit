@@ -7,6 +7,7 @@ __license__ = "BSD - see LICENSE file in top-level package directory"
 
 import click
 import os
+from typing import Optional, List
 
 from .utils import string_to_dict, string_to_list
 from .check import check_file
@@ -38,22 +39,58 @@ def main():
 @click.option("-w", "--ignore-warnings", is_flag=True)
 @click.option("-p", "--skip-spellcheck", is_flag=True)
 def check(
-    file_path,
-    mappings=None,
-    rules=None,
-    specs=None,
-    ignore_attrs=None,
-    ignore_all_globals=False,
-    ignore_all_dimensions=False,
-    ignore_all_variables=False,
-    ignore_all_variable_attrs=False,
-    auto_cache=False,
-    log_mode="standard",
-    verbose=False,
-    template="auto",
-    ignore_warnings=False,
-    skip_spellcheck=False,
+    file_path: str,
+    mappings: Optional[str] = None,
+    rules: Optional[str] = None,
+    specs: Optional[str] = None,
+    ignore_attrs: Optional[str] = None,
+    ignore_all_globals: bool = False,
+    ignore_all_dimensions: bool = False,
+    ignore_all_variables: bool = False,
+    ignore_all_variable_attrs: bool = False,
+    auto_cache: bool = False,
+    log_mode: str = "standard",
+    verbose: bool = False,
+    template: str = "auto",
+    ignore_warnings: bool = False,
+    skip_spellcheck: bool = False,
 ):
+    """CLI call to check a file against a set of rules, specs or templates.
+
+    Reads options from the command line and calls the check_file function to check the
+    compliance of a file against a set of rules, specs or templates. If any of
+    `mappings`, `rules`, `specs` or `ignore_attrs` are provided as a string, they will
+    be converted to the appropriate data type.
+
+    Args:
+        file_path: Path to the file to check.
+        mappings: Map variable names between name used in file and name in template.
+          Format should be `<template variable name>=<file variable name>`. Multiple
+          mappings should be separated by a comma.
+        rules: Specific rules to use to check items. Format should be
+          `<what to check>=<rule type>:<function/check>[:<extras>[:<extras>...]]`.
+          Multiple rules should be separated by a comma.
+        specs: Specific specs to use to check items. Format should be `<spec file>` or
+          `<spec folder>/<spec file>`. File location and path relative to the specs
+          folder in the checksit repository. Multiple specs should be separated by a
+          comma.
+        ignore_attrs: Attributes to ignore when checking variables. Multiple attributes
+          should be separated by a comma.
+        ignore_all_globals: Not implemented yet.
+        ignore_all_dimensions: Not implemented yet.
+        ignore_all_variables: Not implemented yet.
+        ignore_all_variable_attrs: Not implemented yet.
+        auto_cache: Store the file in the template cache for future use as a template.
+        log_mode: How the output should be printed. Options are "standard" (default)
+          and "compact".
+        verbose: Print additional information to the console.
+        template: Template to use for checking. Options are "auto" (default), "off", or
+          `<template file>`. File location is relative to the top level of the checksit
+          repository.
+        ignore_warnings: Ignore warnings when checking the file, only return errors.
+        skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
+          checking.
+    """
 
     if (
         ignore_all_globals
@@ -63,16 +100,16 @@ def check(
     ):
         raise Exception("Options not implemented yet!!!!!")
 
-    if mappings:
+    if mappings is not None:
         mappings = string_to_dict(mappings)
 
-    if rules:
+    if rules is not None:
         rules = string_to_dict(rules)
 
-    if specs:
+    if specs is not None:
         specs = string_to_list(specs)
 
-    if ignore_attrs:
+    if ignore_attrs is not None:
         ignore_attrs = string_to_list(ignore_attrs)
 
     return check_file(
@@ -98,15 +135,32 @@ def check(
 @click.option("-e", "--exclude-file", default=None)
 @click.option("--verbose/--no-verbose", default=False)
 def summary(
-    log_files=None,
-    log_directory=None,
-    show_files=False,
-    exclude=None,
-    exclude_file=None,
-    verbose=False,
+    log_files: Optional[List[str]] = None,
+    log_directory: Optional[str] = None,
+    show_files: bool = False,
+    exclude: Optional[str] = None,
+    exclude_file: Optional[str] = None,
+    verbose: bool = False,
 ):
+    """CLI call to summarise the contents of log files.
 
-    if exclude:
+    Reads options from the command line and calls the summarise function to summarise
+    log files output from the check function when "log_mode" is set to "compact". Can
+    take either a list of log files, or a directory which contains log files. If the
+    `exclude` option is provided, it will be converted to a list.
+
+    Args:
+        log_files: List of log files to summarise.
+        log_directory: Directory where the log files are located.
+        show_files: Print the files in which the errors occur.
+        exclude: Patterns to exclude from the summary. Multiple patterns should be
+          separated by a comma.
+        exclude_file: File containing patterns to exclude from the summary. Each pattern
+          should be on a new line.
+        verbose: Print additional information to the console.
+    """
+
+    if exclude is not None:
         exclude = string_to_list(exclude)
     else:
         exclude = []
@@ -136,15 +190,33 @@ def summary(
 @main.command()
 @click.argument("check_ids", nargs=-1, default=None)
 @click.option("--verbose/--no-verbose", default=False)
-def describe(check_ids=None, verbose=False):
+def describe(check_ids: Optional[List[str]] = None, verbose: bool = False):
+    """CLI call to describe rules.
+
+    Reads options from the command line and calls the describe function to print the
+    docstring of a given rule or set of rules. If no rule given, docstrings for all
+    rules are printed.
+
+    Args:
+        check_ids: List of rules to describe.
+        verbose: Print additional information to the console.
+    """
     return describer.describe(check_ids, verbose=verbose)
 
 
 @main.command()
 @click.argument("spec_ids", nargs=-1, default=None)
-@click.option("--verbose/--no-verbose", default=False)
-def show_specs(spec_ids=None, verbose=False):
-    return specs.show_specs(spec_ids, verbose=verbose)
+def show_specs(spec_ids: Optional[List[str]] = None):
+    """CLI call to show details of specs.
+
+    Reads options from the command line and calls the show_specs function to print the
+    contents of a given spec or set of specs. If no spec given, contents of specs
+    within the `specs/groups` folder in the checksit repository are printed.
+
+    Args:
+        spec_ids: List of specs to show.
+    """
+    return specs.show_specs(spec_ids)
 
 
 if __name__ == "__main__":

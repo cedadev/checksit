@@ -28,6 +28,7 @@ Other options include specifying the particular checks to run or to compare with
    dev/templates
    dev/vocabs
    dev/ncas_standard_specifics
+   dev/api
 
 .. toctree::
    :caption: Links

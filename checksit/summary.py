@@ -1,17 +1,42 @@
+"""Summarise log files with checksit output.
+
+Reads log files that contain output from checksit in "compact" log mode from numerous
+files, and summarise the results.
+"""
+
 import os
 import re
 import glob
 from collections import defaultdict, OrderedDict as OD
-
+from typing import Optional
 import pandas as pd
+from typing import List, Optional
 
+def find_log_files(dr: Optional[str] = None) -> List[str]:
+    """Find all log files in directory.
 
-def find_log_files(dr=None):
+    Find all the files ending ".log" in given directory. If no directory given, uses current directory.
+
+    Args:
+        dr: directory to find files in.
+
+    Returns:
+        List of files in directory ending with ".log"
+    """
     dr = dr or "."
     return glob.glob(f"{dr}/*.log")
 
 
-def get_max_column_count(files, sep):
+def get_max_column_count(files: List[str], sep: str) -> int:
+    """Find maximum number of columns across a number of files.
+
+    Args:
+        files: list of files to look through
+        sep: separator between columns in files
+
+    Returns:
+        Largest number of columns in any of the files.
+    """
     count = 0
     for f in files:
         with open(f) as reader:
@@ -32,7 +57,11 @@ def do_exclude(err, exclude_patterns):
 
 
 def summarise(
-    log_files=None, log_directory=None, show_files=False, exclude=None, verbose=False
+    log_files: Optional[List[str]] = None,
+    log_directory: Optional[str] = None,
+    show_files: bool = False,
+    exclude: Optional[List[str]] = None,
+    verbose: bool = False,
 ):
     log_files = log_files or find_log_files(log_directory)
     exclude_patterns = exclude or []

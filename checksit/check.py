@@ -1,12 +1,18 @@
+"""Initiate checks and file reading.
+
+This module contains the main classes and functions for initialising template, rule and
+spec checks on data files, as well as parsing the data files and managing templates.
+"""
+
 import os
 import sys
 import glob
-import tempfile
 import re
 import difflib
 import yaml
 import urllib.request
 import urllib.error
+from typing import Optional, Union, List, Dict, Tuple
 
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
@@ -24,20 +30,66 @@ conf = get_config()
 
 
 class Checker:
+    """Manage and intialise checks on data files.
+
+    This class manages the initialisation of checks on data files, including retrieving
+    the default specs if required for NCAS data files, and handles the printing of the
+    results of the checks.
+
+    Attributes:
+        template: Template to use for checking. Options are "auto" (default), "off", or
+          `<template file>`. File location is relative to the top level of the checksit
+          repository.
+        mappings: Dictionary of mappings to use when checking data files. Keys are the
+          template keys and values are the data file keys.
+        extra_rules: Dictionary of extra rules to use when checking data files. Keys are
+          the template keys and values are the rules to apply.
+        specs: List of spec files to use when checking data files. File location and path
+          relative to the specs folder in the checksit repository.
+        ignore_attrs: List of attributes to ignore when checking variables.
+        auto_cache: Store the file in the template cache for future use as a template.
+        log_mode: How the output should be printed. Options are "standard" (default) and
+          "compact".
+        verbose: Print additional information.
+        ignore_warnings: Ignore warnings when checking the file, only return errors.
+        skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
+          checking.
+    """
 
     def __init__(
         self,
-        template="auto",
-        mappings=None,
-        extra_rules=None,
-        specs=None,
-        ignore_attrs=None,
-        auto_cache=False,
-        verbose=False,
-        log_mode="standard",
-        ignore_warnings=False,
-        skip_spellcheck=False,
-    ):
+        template: str = "auto",
+        mappings: Optional[Dict[str, str]] = None,
+        extra_rules: Optional[Dict[str, str]] = None,
+        specs: Optional[List[str]] = None,
+        ignore_attrs: Optional[List[str]] = None,
+        auto_cache: bool = False,
+        verbose: bool = False,
+        log_mode: str = "standard",
+        ignore_warnings: bool = False,
+        skip_spellcheck: bool = False,
+    ) -> None:
+        """Initialise the Checker class.
+
+        Args:
+            template: Template to use for checking. Options are "auto" (default), "off",
+              or `<template file>`. File location is relative to the top level of the
+              checksit repository.
+            mappings: Dictionary of mappings to use when checking data files. Keys are the
+              template keys and values are the data file keys.
+            extra_rules: Dictionary of extra rules to use when checking data files. Keys
+              are the template keys and values are the rules to apply.
+            specs: List of spec files to use when checking data files. File location and
+              path relative to the specs folder in the checksit repository.
+            ignore_attrs: List of attributes to ignore when checking variables.
+            auto_cache: Store the file in the template cache for future use as a template.
+            log_mode: How the output should be printed. Options are "standard" (default)
+              and "compact".
+            verbose: Print additional information.
+            ignore_warnings: Ignore warnings when checking the file, only return errors.
+            skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
+              checking.
+        """
         self.template = template
         self.mappings = mappings or {}
         self.extra_rules = extra_rules or {}
@@ -50,7 +102,7 @@ class Checker:
         self.skip_spellcheck = skip_spellcheck
         self._check_context = {}
 
-    def _update_check_context(self, file_path, template):
+    def _update_check_context(self, file_path: str, template: str) -> None:
         self._check_context["file_path"] = file_path
         self._check_context["size"] = os.path.getsize(file_path)
         self._check_context["template"] = template
@@ -166,18 +218,37 @@ class Checker:
 
     def _check_file(
         self,
-        file_content,
-        template,
-        mappings=None,
-        extra_rules=None,
-        specs=None,
-        ignore_attrs=None,
-        log_mode="standard",
-        fmt_errors=None,
-        ignore_warnings=False,
-        skip_spellcheck=False,
-    ):
+        file_content: Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile],
+        template: Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile, str],
+        mappings: Optional[Dict[str, str]] =None,
+        extra_rules: Optional[Dict[str, str]] = None,
+        specs: Optional[List[str]] = None,
+        ignore_attrs: Optional[List[str]] = None,
+        log_mode: str = "standard",
+        #fmt_errors=None,
+        ignore_warnings: bool =False,
+        skip_spellcheck: bool = False,
+    ) -> None:
+        """Check the content of a file against a template and specs.
 
+        Args:
+            file_content: Content of the file to check.
+            template: Template to use for checking. Options are "auto" (default), "off",
+              or `<template file>`. File location is relative to the top level of the
+              checksit repository.
+            mappings: Dictionary of mappings to use when checking data files. Keys are the
+              template keys and values are the data file keys.
+            extra_rules: Dictionary of extra rules to use when checking data files. Keys
+              are the template keys and values are the rules to apply.
+            specs: List of spec files to use when checking data files. File location and
+              path relative to the specs folder in the checksit repository.
+            ignore_attrs: List of attributes to ignore when checking variables.
+            log_mode: How the output should be printed. Options are "standard" (default)
+              and "compact".
+            ignore_warnings: Ignore warnings when checking the file, only return errors.
+            skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
+              checking.
+        """
         if hasattr(file_content, "to_dict"):
             record = file_content.to_dict()
 
@@ -262,8 +333,24 @@ class Checker:
                 print("[INFO] File is compliant!")
 
     def _get_ncas_specs(
-        self, file_path, file_content, log_mode="standard", verbose=False
-    ):
+        self,
+        file_path: str,
+        file_content: Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile],
+        log_mode: str = "standard",
+        verbose: bool = False,
+    ) -> Tuple[str, List[str]]:
+        """Get the correct specs for NCAS data files.
+
+        Args:
+            file_path: Path to the file to check.
+            file_content: Content of the file to check.
+            log_mode: How the output should be printed. Options are "standard" (default)
+              and "compact".
+            verbose: Print additional information.
+
+        Returns:
+            Template and list of specs to use for checking the file.
+        """
         template = "auto"
         specs = None
         # find appropriate specs depending on convention
@@ -447,19 +534,43 @@ class Checker:
 
     def check_file(
         self,
-        file_path,
-        template="auto",
-        mappings=None,
-        extra_rules=None,
-        specs=None,
-        ignore_attrs=None,
-        auto_cache=False,
-        verbose=False,
-        log_mode="standard",
-        ignore_warnings=False,
-        skip_spellcheck=False,
-    ):
+        file_path: str,
+        template: str = "auto",
+        mappings: Optional[Dict[str, str]] = None,
+        extra_rules: Optional[Dict[str, str]] = None,
+        specs: Optional[List[str]] = None,
+        ignore_attrs: Optional[List[str]] = None,
+        auto_cache: bool = False,
+        verbose: bool = False,
+        log_mode: str = "standard",
+        ignore_warnings: bool = False,
+        skip_spellcheck: bool = False,
+    ) -> None:
+        """Check a data file against a template or specs.
 
+        Read in the given file, checks specified options for template and specs, and
+        gets NCAS specs if required.
+
+        Args:
+            file_path: Path to the file to check.
+            template: Template to use for checking. Options are "auto" (default), "off",
+              or `<template file>`. File location is relative to the top level of the
+              checksit repository.
+            mappings: Dictionary of mappings to use when checking data files. Keys are the
+              template keys and values are the data file keys.
+            extra_rules: Dictionary of extra rules to use when checking data files. Keys
+              are the template keys and values are the rules to apply.
+            specs: List of spec files to use when checking data files. File location and
+              path relative to the specs folder in the checksit repository.
+            ignore_attrs: List of attributes to ignore when checking variables.
+            auto_cache: Store the file in the template cache for future use as a template.
+            log_mode: How the output should be printed. Options are "standard" (default)
+              and "compact".
+            verbose: Print additional information.
+            ignore_warnings: Ignore warnings when checking the file, only return errors.
+            skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
+              checking.
+        """
         try:
             fp = FileParser()
             file_content = fp.parse_file_header(file_path, verbose=verbose)
@@ -523,13 +634,52 @@ class Checker:
 
 
 class TemplateManager:
+    """Finds and reads template file for checking data files.
 
-    def __init__(self, auto_cache=False, verbose=False, log_mode="standard"):
+    Attributes:
+        auto_cache: Store the file in the template cache for future use as a template.
+        verbose: Print additional information.
+        log_mode: How the output should be printed. Options are "standard" (default) and
+          "compact".
+    """
+
+    def __init__(
+        self,
+        auto_cache: bool = False,
+        verbose: bool = False,
+        log_mode: str = "standard"
+    ):
+        """Initialise the TemplateManager class.
+
+        Args:
+            auto_cache: Store the file in the template cache for future use as a template.
+            verbose: Print additional information.
+            log_mode: How the output should be printed. Options are "standard" (default)
+              and "compact".
+        """
         self.auto_cache = auto_cache
         self.verbose = verbose
         self.log_mode = log_mode
 
-    def get(self, file_path, template="auto"):
+    def get(
+        self,
+        file_path: str,
+        template: str = "auto",
+    ) -> Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile]:
+        """Get the template for checking a data file.
+
+        If template is "auto", will try to find a suitable template based on the file
+        to be checked. If template is a file path, will check if the file exists, and
+        will use that file as the template.
+
+        Args:
+            file_path: Path to the file to check.
+            template: Template to use for checking. Options are "auto" (default), or
+              `<template file>`.
+
+        Returns:
+            Template object to use for checking the file.
+        """
         if template == "auto":
             template = self._get_template_from_config(file_path)
         elif not os.path.isfile(template):
@@ -547,7 +697,7 @@ class TemplateManager:
         )
         return tmpl
 
-    def _get_template_from_config(self, file_path):
+    def _get_template_from_config(self, file_path: str) -> str:
         # Loop through datasets in config to find appropriate template (cached or in archive)
         dsets = [key.split(":")[1] for key in conf if key.startswith("dataset:")]
 
@@ -563,7 +713,7 @@ class TemplateManager:
         else:
             return self._get_template_from_cache(file_path)
 
-    def _get_template_by_dataset(self, file_path, config):
+    def _get_template_by_dataset(self, file_path: str, config: Dict[str, str]) -> str:
         if "template" in config:
             return config["template"]
         elif "template_cache" in config:
@@ -571,7 +721,11 @@ class TemplateManager:
         else:
             raise Exception("No rule for finding the template")
 
-    def _get_template_from_cache(self, file_path, template_cache=None):
+    def _get_template_from_cache(
+        self,
+        file_path: str,
+        template_cache: Optional[str] = None,
+    ) -> str:
         if not template_cache:
             template_cache = conf["settings"]["default_template_cache_dir"]
 
@@ -603,8 +757,27 @@ class TemplateManager:
 
 
 class FileParser:
+    """Parse input file into format for checksit.
+    """
 
-    def parse_file_header(self, file_path, auto_cache=False, verbose=False):
+    def parse_file_header(
+            self,
+            file_path: str,
+            auto_cache: bool = False,
+            verbose: bool = False
+        ) -> Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile]:
+        """Parse the header of a file to determine the file type and read the content.
+
+        Determines the correct reader to use based on the file extension, and then uses
+        the read function in that reader to parse the file into a format that can be
+        used for checksit checks. If auto_cache is True, will also write the data from
+        the file to the template cache.
+
+        Args:
+            file_path: Path to the file to parse.
+            auto_cache: Store the file in the template cache for future use as a template.
+            verbose: Print additional information.
+        """
         ext = extension(file_path)
 
         if ext in ("nc", "cdl"):
@@ -646,6 +819,15 @@ class FileParser:
         return content
 
 
-def check_file(file_path, **kwargs):
+def check_file(file_path: str, **kwargs) -> None:
+    """Entry script for checking a file.
+
+    Passes options through to the check_file function in the Checker class.
+
+    Args:
+        file_path: Path to the file to check.
+        **kwargs: Keyword arguments to pass to the Checker class and
+          Checker.check_file function.
+    """
     ch = Checker(**kwargs)
-    return ch.check_file(file_path, **kwargs)
+    ch.check_file(file_path, **kwargs)

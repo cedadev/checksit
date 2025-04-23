@@ -1,8 +1,21 @@
+"""Handle rule checks for a given value.
+
+This module contains the `Rules` class, which is used to check a value against a set of
+rules. Available rules fall into four categories: rule functions, type rules, regex,
+and regex rules. Rule functions are specifically defined functions that take a value and
+return a list of errors if the value does not meet the rule. Type rules are simple type
+checks, such as checking if a value is an integer or a string. Regex checks are custom
+regular expressions that a value must match to be considered valid. Regex rules are
+custom regular expressions that a value must match to be considered valid, and are
+defined in the `static_regex_rules` dictionary.
+"""
+
 import os
 import re
 import json
 from collections import deque
 from numbers import Number
+from typing import List, Union, Tuple, Dict
 
 from . import rule_funcs
 from ..config import get_config
@@ -13,9 +26,22 @@ rules_prefix = conf["settings"]["rules_prefix"]
 
 
 class Rules:
+    """Handle rule checks for a given value.
 
+    This class is used to check a value against a set of rules. Available rules fall
+    into four categories: rule functions, type rules, regex, and regex rules.
+
+    Attributes:
+        static_regex_rules: dictionary of static regex rules, with the key as the rule
+            name and the value as a dictionary containing the regex rule and an example
+            valid value
+    """
     def __init__(self):
+        """Initialise the Rules class.
 
+        Initialise an instance of the Rules class and set the static regex rules used
+        for `regex-rule` checks.
+        """
         _NOT_APPLICABLE_RULES = (
             "(N/A)|(NA)|(N A)|(n/a)|(na)|(n a)|"
             "(Not Applicable)|(Not applicable)|(Not available)|(Not Available)|"
@@ -94,7 +120,15 @@ class Rules:
             },
         }
 
-    def _map_type_rule(self, type_rule):
+    def _map_type_rule(self, type_rule: str) -> type:
+        """Map a string to a Python type.
+
+        Args:
+            type_rule: string representing the type
+
+        Returns:
+            Python type corresponding to the type_rule string.
+        """
         mappings = {
             "number": Number,
             "integer": int,
@@ -105,7 +139,29 @@ class Rules:
         }
         return mappings[type_rule]
 
-    def check(self, rule_lookup, value, context=None, label=""):
+    def check(
+        self,
+        rule_lookup: str,
+        value: Union[str, int, float, Number],
+        context: Union[str, Dict[str, str], None] = None,
+        label: str = "",
+    ) -> Tuple[List[str], List[str]]:
+        """Check a value against a set of rules.
+
+        Check a value against a set of rules, returning a list of errors and warnings
+        if the value does not meet the rules. The rules are defined in the rule_lookup
+        string, which is a concatenation of rule IDs separated by '||'. The rule IDs
+        correspond to rule functions, type rules, regex, and regex rules.
+
+        Args:
+            rule_lookup: string of rule IDs separated by '||'
+            value: value to check
+            context: additional context needed for some checks
+            label: label for the value being checked
+
+        Returns:
+            Tuple of lists of errors and warnings.
+        """
         if not context:
             context = {}
 

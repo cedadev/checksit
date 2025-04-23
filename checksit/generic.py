@@ -1,3 +1,11 @@
+"""Generic functions to be called by specs.
+
+Functions intended to be the entry point for spec checks, and can do direct checks
+(e.g. is a equal to b) or call to vocab and rule checks. All functions called by the
+specs MUST return two lists, errors and warnings, even if one will always be empty, and
+MUST take `skip_spellcheck` as a parameter, even if not used.
+"""
+
 from .utils import UNDEFINED, is_undefined
 from .cvs import vocabs
 from .rules import rules
@@ -5,17 +13,31 @@ from .rules import rules
 import re
 import numpy as np
 import datetime as dt
+from typing import List, Dict, Any, Set, Tuple, Optional, Union, Iterable
 
 # date formate regex
-# could be yyyy, yyyymm, yyyymmdd, yyyymmdd-HH, yyyymmdd-HHMM, yyyymmdd-HHMMSS
+# could be YYYY, YYYYmm, YYYYmmdd, YYYYmmdd-HH, YYYYmmdd-HHMM, YYYYmmdd-HHMMSS
 DATE_REGEX = re.compile(
     r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{8}-\d{2}$|^\d{8}-\d{4}$|^\d{8}-\d{6}$"
 )
+# YYYY, YYYYmm, YYYYmmdd, YYYYmmddHH, YYYYmmddHHMM, YYYYmmddHHMMSS
 DATE_REGEX_GENERIC = re.compile(
     r"^\d{4}$|^\d{6}$|^\d{8}$|^\d{10}$|^\d{12}$|^\d{14}$"
 )
 
-def _get_bounds_var_ids(dct):
+def _get_bounds_var_ids(dct: Dict[str, Dict[str, Any]]) -> List[str]:
+    """Find all boundary variables.
+
+    Finds all variables that are boundary variables, based on variable name starting or
+    ending with "bounds" or "bnds".
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "variables" as a key.
+
+    Returns:
+        List of boundary variable names.
+    """
     return [
         var_id
         for var_id in dct["variables"]
@@ -28,10 +50,20 @@ def _get_bounds_var_ids(dct):
     ]
 
 
-def one_spelling_mistake(word):
-    """
-    All edits that are one edit away from `word`.
+def one_spelling_mistake(word: str) -> Set[str]:
+    """All edits that are one edit away from `word`.
+
+    Part of spell checking, finds all possible strings that have one error in them, for
+    example one character missing, one extra character, two characters switched
+    positions, or one character replaced with another. Letters are considered to be
+    lower case a-z, digits 0-9, and the characters `.`, `_`, and `-`.
     Adapted from https://norvig.com/spell-correct.html
+
+    Args:
+        word: string to find all single edits from.
+
+    Returns:
+        Set of all possible single edits from `word`.
     """
     letters = "abcdefghijklmnopqrstuvwxyz0123456789._-"
     splits = [
@@ -44,17 +76,38 @@ def one_spelling_mistake(word):
     return set(deletes + transposes + replaces + inserts)
 
 
-def two_spelling_mistakes(word):
-    """
-    All edits that are two edits away from `word`.
+def two_spelling_mistakes(word: str) -> Set[str]:
+    """All edits that are two edits away from `word`.
+
+    Part of spell checking, finds all possible strings that have two errors in them,
+    taking the results from `one_spelling_mistake(word)` and checking for one spelling
+    mistake in all those values.
     From https://norvig.com/spell-correct.html
+
+    Args:
+        word: string to find all double edits from.
+
+    Returns:
+        Set of all possible double edits from `word`.
     """
     return set(
         [e2 for e1 in one_spelling_mistake(word) for e2 in one_spelling_mistake(e1)]
     )
 
 
-def search_close_match(search_for, search_in):
+def search_close_match(search_for: str, search_in: Iterable[str]) -> str:
+    """Find potential misspelt strings.
+
+    Search within `search_in` to identify a string that is close to `search_for` as a
+    potential misspelling.
+
+    Args:
+        search_for: correctly spelt string to search against.
+        search_in: list of strings to search within for potentially misspelt string.
+
+    Returns:
+        String with message if potential misspelling found, otherwise empty string.
+    """
     possible_close_edits = two_spelling_mistakes(search_for.lower())
     for s in search_in:
         if s.lower() in possible_close_edits:
@@ -62,11 +115,26 @@ def search_close_match(search_for, search_in):
     return ""
 
 
-def check_var_attrs(dct, defined_attrs, ignore_bounds=True, skip_spellcheck=False):
-    """
-    Check that variable attributes are defined.
+def check_var_attrs(
+    dct: Dict[str, Dict[str, Any]],
+    defined_attrs: List[str],
+    ignore_bounds: bool = True,
+    skip_spellcheck: bool = False,
+) -> Tuple[List[str], List[str]]:
+    """Check that variable attributes are defined.
 
-    E.g.: check-var-attrs:defined_attrs:long_name|units
+    Checks that all given attributes are defined for all variables in file.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "variables" as a key.
+        defined_attrs: list of attributes to check exist in each variable in `dct`.
+        ignore_bounds: ignore checking attributes in boundary variables. Default True.
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     errors = []
     warnings = []
@@ -87,18 +155,39 @@ def check_var_attrs(dct, defined_attrs, ignore_bounds=True, skip_spellcheck=Fals
 
 
 def check_global_attrs(
-    dct,
-    defined_attrs=None,
-    vocab_attrs=None,
-    regex_attrs=None,
-    rules_attrs=None,
-    skip_spellcheck=False,
-):
-    """
-    Check that required global attributes are correct.
+    dct: Dict[str, Dict[str, Any]],
+    defined_attrs: Optional[List[str]] = None,
+    vocab_attrs: Optional[Dict[str, str]] = None,
+    regex_attrs: Optional[Dict[str, str]] = None,
+    rules_attrs: Optional[Dict[str, str]] = None,
+    skip_spellcheck: bool = False,
+) -> Tuple[List[str], List[str]]:
+    """Run checks against global attributes.
 
-    E.g.: check-global-attrs:defined_attrs:source
-          check-global-attrs:vocab_attrs:Conventions
+    Run series of checks against global attributes in file. Can check for any or all of:
+      - defined_attrs (i.e. does the attribute exist),
+      - vocab_attrs (i.e. does the value of the attribute match value defined in
+        controlled vocabulary),
+      - regex_attrs (i.e. does the value of the attribute match a regex expression),
+      - rules_attrs (i.e. does the attribute value pass a defined rule).
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "global_attributes" as a key.
+        defined_attrs: list of attributes to check exist and are defined.
+        vocab_attrs: dictionary with attribute to check as keys and vocab rule to check
+          against as value.
+        regex_attrs: dictionary with attribute to check as keys and regex rule to check
+          against as value.
+        rules_attrs: dictionary with attribute to check as keys and rule to check
+          against, and any options needed, as string value (e.g.
+          "rule-func:string-of-length:3+"). See documentation on the `check` function
+          in the `Rules` class for more information on formatting.
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     defined_attrs = defined_attrs or []
     vocab_attrs = vocab_attrs or {}
@@ -177,11 +266,27 @@ def check_global_attrs(
     return errors, warnings
 
 
-def check_var_exists(dct, variables, skip_spellcheck=False):
-    """
-    Check that variables exist
+def check_var_exists(
+    dct: Dict[str, Dict[str, Any]],
+    variables: List[str],
+    skip_spellcheck: bool = False,
+) -> Tuple[List[str], List[str]]:
+    """Check that variables exist in file.
 
-    E.g. check-var-exists:variables:time|altitude
+    Checks a list of variables to see if they exist in given file. Optional variables
+    can be defined by having ":__OPTIONAL__" after the variable name. Missing optional
+    variables will be returned as warnings, and other missing variables will be
+    returned as errors.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "variables" as a key.
+        variables: list of variable names to check exist
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     errors = []
     warnings = []
@@ -204,11 +309,27 @@ def check_var_exists(dct, variables, skip_spellcheck=False):
     return errors, warnings
 
 
-def check_dim_exists(dct, dimensions, skip_spellcheck=False):
-    """
-    Check that dimensions exist
+def check_dim_exists(
+    dct: Dict[str, Dict[str, Any]],
+    dimensions: List[str],
+    skip_spellcheck: bool = False,
+) -> Tuple[List[str], List[str]]:
+    """Check that dimensions exist in file.
 
-    E.g. check-dim-exists:dimensions:time|latitude
+    Checks a list of dimensions to see if they exist in given file. Optional dimensions
+    can be defined by having ":__OPTIONAL__" after the dimension name. Missing optional
+    dimensions will be returned as warnings, and other missing dimensions will be
+    returned as errors.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "dimension" as a key.
+        dimensions: list of dimension names to check exist
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     errors = []
     warnings = []
@@ -231,11 +352,24 @@ def check_dim_exists(dct, dimensions, skip_spellcheck=False):
     return errors, warnings
 
 
-def check_dim_regex(dct, regex_dims, skip_spellcheck=False):
-    """
-    Check dimension exists matching regex
+def check_dim_regex(
+    dct: Dict[str, Dict[str, Any]],
+    regex_dims: List[str],
+    skip_spellcheck: bool = False,
+) -> Tuple[List[str], List[str]]:
+    """Check dimension exists matching regex.
 
-    E.g. check-dime-regex:regex-dims:^string_length[^,]*$
+    For each regex string in `regex_dims`, checks if a dimension exists matching that
+    regex. Optional dimensions can be specified by appending ":__OPTIONAL__" to the end
+    of the regex string.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "dimension" as a key.
+        regex_dims: list of regex strings to check dimensions for matches.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     errors = []
     warnings = []
@@ -258,9 +392,35 @@ def check_dim_regex(dct, regex_dims, skip_spellcheck=False):
     return errors, warnings
 
 
-def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=False):
-    """
-    Check variable exists and has attributes defined.
+def check_var(
+    dct: Dict[str, Dict[str, Any]],
+    variable: Union[str, List[str]],
+    defined_attrs: List[str],
+    rules_attrs: Optional[Dict[str, str]] = None,
+    skip_spellcheck: bool = False,
+) -> Tuple[List[str], List[str]]:
+    """Check variable exists and attributes defined and/or meet rules.
+
+    For a given variable, check it exists, all `defined_attrs` exist as variable
+    attributes, and all `rules_attrs` are met for variable attributes. Variable can be
+    marked as an optional variable by appending ":__OPTIONAL__" to the variable name -
+    if optional variable does not exist this message is returned as a warning, all
+    other messages are returned as errors.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "global_attributes" as a key.
+        variable: variable to check. If list, only first variable is checked.
+        defined_attrs: list of attributes to check exist and are defined.
+        rules_attrs: dictionary with attribute to check as keys and rule to check
+          against, and any options needed, as string value (e.g.
+          "rule-func:string-of-length:3+"). See documentation on the `check` function
+          in the `Rules` class for more information on formatting.
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     errors = []
     warnings = []
@@ -459,11 +619,28 @@ def check_var(dct, variable, defined_attrs, rules_attrs=None, skip_spellcheck=Fa
     return errors, warnings
 
 
-def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
-    """
-    Checks format of file name
+def check_file_name(
+    file_name: str,
+    vocab_checks: Optional[Dict[str, str]] = None,
+    rule_checks: Optional[Dict[str, str]] = None,
+    skip_spellcheck: bool = False
+) -> Tuple[List[str], List[str]]:
+    """Checks format of NCAS-GENERAL file name.
 
-    Works for NCAS-GENERAL, would work for NCAS-RADAR if radar scan type is added as data product
+    Checks format of NCAS-GENERAL file name is correct. Requires vocab checks for
+    "instrument" and "data_product", plus rule_check for "platform", to be defined.
+
+    Args:
+        file_name: Name of NCAS-GENERAL file.
+        vocab_checks: Dictionary with "instrument" and "data_product" as keys, and
+          vocabs for each as values.
+        rule_checks: Dictionary with "platform" as key, and rule check for platform as
+          value.
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     vocab_checks = vocab_checks or {}
     rule_checks = rule_checks or {}
@@ -516,7 +693,7 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
         valid_date_found = False
         for f in fmts:
             try:
-                t = dt.datetime.strptime(file_name_parts[2], f)
+                _ = dt.datetime.strptime(file_name_parts[2], f)
                 valid_date_found = True
                 break
             except ValueError:
@@ -554,7 +731,39 @@ def check_file_name(file_name, vocab_checks=None, rule_checks=None, **kwargs):
 
     return errors, warnings
 
-def check_generic_file_name(file_name, vocab_checks=None, segregator=None, extension=None, spec_verbose=False, **kwargs):
+
+def check_generic_file_name(
+    file_name: str,
+    vocab_checks: Optional[Dict[str, str]] = None,
+    segregator: Optional[Dict[str, str]] = None,
+    extension: Optional[Dict[str, str]] = None,
+    spec_verbose: Optional[Dict[str, str]] = None,
+    skip_spellcheck: bool = False
+) -> Tuple[List[str], List[str]]:
+    """Checks file name against series of vocab checks.
+
+    For a given file_name, splits name into parts based on the segregator and checks
+    each part based on vocab_checks.
+
+    Args:
+        file_name: Name of the file to check.
+        vocab_checks: Dictionary of vocab checks for each part of the file name. Keys
+          must be "field00", "field01" e.t.c., and values for each are the vocab checks
+          for each section.
+        segregator: Character on which to split the file name. Should be dictionary
+          with key "seg" and value being the character to separate on. Default
+          segregator is "_".
+        extension: File extension. Should be dictionary with key "ext" and value being
+          the file extension. Default file extension is ".test".
+        spec_verbose: Print additional information. Can be defined in the spec file,
+          which gets passed through as dictionary. Should have key "spec_verb" and
+          value True/False.
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
+    """
     # Requires yaml file containing a list of file name fields and segregators
     # Loop over each file field and segregator until there are no more
     # check against defined file extension
@@ -595,7 +804,7 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
             print('')
             print(idx, key)
         num=f"{idx:02}"
-        
+
         # Check if number of file name parts matches the number of fields specified in the user-defined yaml file
         if len(vocab_checks) < len(file_name_parts):
             errors.append(
@@ -643,7 +852,7 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                     valid_date_found = False
                     for f in fmts:
                         try:
-                            t = dt.datetime.strptime(key, f)
+                            _ = dt.datetime.strptime(key, f)
                             valid_date_found = True
                             break
                         except ValueError:
@@ -678,14 +887,40 @@ def check_generic_file_name(file_name, vocab_checks=None, segregator=None, exten
                         )
                 if spec_verb:
                     print(errors[-1])
-    
+
     return errors, warnings
 
+
 def check_radar_moment_variables(
-    dct, exist_attrs=None, rule_attrs=None, one_of_attrs=None, skip_spellcheck=False
-):
-    """
-    Finds moment variables in radar file, runs checks against all those variables
+    dct: Dict[str, Dict[str, Any]],
+    exist_attrs: Optional[List[str]] = None,
+    rule_attrs: Optional[Dict[str, str]] = None,
+    one_of_attrs: Optional[List[str]] = None,
+    skip_spellcheck: bool = False
+) -> Tuple[List[str], List[str]]:
+    """Finds moment variables in radar file and checks attributes of those variables.
+
+    Finds all the moment variables in a radar file based on the existence of the
+    "coordinates" attribute, and for all of those variables checks all the attributes
+    listed in "exist_attrs" exist, all of the rules listed in "rule_attrs" are met, and
+    one of the attributes in each string in "one_of_attrs" are defined.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "global_attributes" as a key.
+        exist_attrs: list of attributes to check exist.
+        rules_attrs: dictionary with attribute to check as keys and rule to check
+          against, and any options needed, as string value (e.g.
+          "rule-func:string-of-length:3+"). See documentation on the `check` function
+          in the `Rules` class for more information on formatting.
+        one_of_attrs: list of attribute choices. Each string in the list should have a
+          number of attributes separated by "|", and one of those attributes in each
+          string should be present as an attribute in each variable.
+        skip_spellcheck: skip looking for close misspelling of attribute if not found
+          in variable. Default False.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     exist_attrs = exist_attrs or []
     rule_attrs = rule_attrs or {}
