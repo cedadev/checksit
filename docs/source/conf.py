@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'checksit'
-copyright = '2024, Ag Stephens, Hugo Ricketts, Joshua Hampton'
+copyright = '2025, Ag Stephens, Hugo Ricketts, Joshua Hampton'
 author = 'Ag Stephens, Hugo Ricketts, Joshua Hampton'
 release = '0.1'
 
@@ -16,7 +16,16 @@ release = '0.1'
 
 extensions = [
     "sphinx_rtd_theme",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.autosummary",
 ]
+
+autodoc_default_options = {
+    "members": True,
+    "member-order": "groupwise",
+}
 
 templates_path = ['_templates']
 exclude_patterns = []
