@@ -9,6 +9,7 @@ import glob
 import json
 import yaml
 import importlib
+import sys
 from typing import List, Dict, Any, Union, Optional, Tuple
 from .config import get_config
 
@@ -155,7 +156,10 @@ class SpecificationChecker:
         parts = d["func"].split(".")
 
         mod_path, func = ".".join(parts[:-1]), parts[-1]
-        func = getattr(importlib.import_module(mod_path), func)
+        # Import the module if not already imported
+        if mod_path not in sys.modules:
+            importlib.import_module(mod_path)
+        func = getattr(sys.modules[mod_path], func)
 
         params = d["params"]
         params["skip_spellcheck"] = skip_spellcheck
