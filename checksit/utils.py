@@ -68,7 +68,7 @@ def get_file_base(file_path: str) -> str:
     return "_".join(parts)
 
 
-def map_to_rule(func: Callable[...]) -> str:
+def map_to_rule(func: Callable[..., Any]) -> str:
     """Convert function name to spec file rule name.
 
     Convert the function name into the rule name used in the spec files by replacing
@@ -85,7 +85,7 @@ def map_to_rule(func: Callable[...]) -> str:
     return func.__name__.replace("_", "-")
 
 
-def get_public_funcs(module: object) -> List[Callable[...]]:
+def get_public_funcs(module: object) -> List[Callable[..., Any]]:
     """Get all public functions from a module.
 
     Get all public functions from a given module. Public functions are those that do

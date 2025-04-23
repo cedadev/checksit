@@ -5,7 +5,7 @@ import re
 import yaml
 import subprocess as sp
 import sys
-from typing import Tuple, List, Dict
+from typing import Tuple, List, Dict, Union
 
 from ..cvs import vocabs, vocabs_prefix
 
@@ -332,7 +332,7 @@ class CDLParser:
             sort_keys=False,
         )
 
-    def to_dict(self) -> Dict[str, Dict[str, str] | Dict[str, Dict[str, str]] | str]:
+    def to_dict(self) -> Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str]]:
         """Return the parsed CDL content as a dictionary.
 
         Returns:

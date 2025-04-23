@@ -135,7 +135,7 @@ class SpecificationChecker:
 
     def _run_check(
         self,
-        record: Dict[str, Dict[str, str] | Dict[str, Dict[str, str]] | str],
+        record: Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str]],
         check_dict: SpecCheck,
         skip_spellcheck: bool = False,
     ) -> Tuple[List[str], List[str]]:
@@ -163,7 +163,7 @@ class SpecificationChecker:
 
     def run_checks(
         self,
-        record: Dict[str, Dict[str, str] | Dict[str, Dict[str, str]] | str],
+        record: Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str]],
         skip_spellcheck: bool = False,
     ) -> Tuple[List[str], List[str]]:
         """Runs checks in spec against record.

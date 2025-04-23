@@ -2,7 +2,7 @@
 """
 import subprocess as sp
 import yaml
-from typing import Tuple
+from typing import Tuple, Dict, Union
 
 def get_output(cmd: str) -> Tuple[str, str]:
     """Get the output of a shell command.
@@ -100,9 +100,24 @@ class ImageParser:
             attr_dict[key] = value
         return attr_dict
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, Union[str, Dict[str, str]]]:
+        """Convert the ImageParser object data to a dictionary.
+
+        Returns:
+            Dictionary containing metadata tags and values as "global_attributes", and
+              the input file path as "inpt".
+        """
         return {"global_attributes": self.global_attrs, "inpt": self.inpt}
 
 
 def read(fpath: str, verbose: bool = False) -> ImageParser:
+    """Read an image file and return an ImageParser object.
+
+    Args:
+        fpath: The path to the image file.
+        verbose: Print verbose output during parsing.
+
+    Returns:
+        An ImageParser object containing the metadata tags and values.
+    """
     return ImageParser(fpath, verbose=verbose)
