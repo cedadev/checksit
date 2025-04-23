@@ -7,7 +7,7 @@ __license__ = "BSD - see LICENSE file in top-level package directory"
 
 import click
 import os
-from typing import Optional
+from typing import Optional, List
 
 from .utils import string_to_dict, string_to_list
 from .check import check_file
@@ -135,7 +135,7 @@ def check(
 @click.option("-e", "--exclude-file", default=None)
 @click.option("--verbose/--no-verbose", default=False)
 def summary(
-    log_files: Optional[list[str]] = None,
+    log_files: Optional[List[str]] = None,
     log_directory: Optional[str] = None,
     show_files: bool = False,
     exclude: Optional[str] = None,
@@ -190,7 +190,7 @@ def summary(
 @main.command()
 @click.argument("check_ids", nargs=-1, default=None)
 @click.option("--verbose/--no-verbose", default=False)
-def describe(check_ids: Optional[list[str]] = None, verbose: bool = False):
+def describe(check_ids: Optional[List[str]] = None, verbose: bool = False):
     """CLI call to describe rules.
 
     Reads options from the command line and calls the describe function to print the
@@ -206,7 +206,7 @@ def describe(check_ids: Optional[list[str]] = None, verbose: bool = False):
 
 @main.command()
 @click.argument("spec_ids", nargs=-1, default=None)
-def show_specs(spec_ids: Optional[list[str]] = None):
+def show_specs(spec_ids: Optional[List[str]] = None):
     """CLI call to show details of specs.
 
     Reads options from the command line and calls the show_specs function to print the

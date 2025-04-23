@@ -57,10 +57,10 @@ def do_exclude(err, exclude_patterns):
 
 
 def summarise(
-    log_files: Optional[list[str]] = None,
+    log_files: Optional[List[str]] = None,
     log_directory: Optional[str] = None,
     show_files: bool = False,
-    exclude: Optional[list[str]] = None,
+    exclude: Optional[List[str]] = None,
     verbose: bool = False,
 ):
     log_files = log_files or find_log_files(log_directory)

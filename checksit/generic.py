@@ -13,8 +13,7 @@ from .rules import rules
 import re
 import numpy as np
 import datetime as dt
-from typing import List, Dict, Any, Set, Tuple, Optional, Union
-from collections.abc import Iterable
+from typing import List, Dict, Any, Set, Tuple, Optional, Union, Iterable
 
 # date formate regex
 # could be YYYY, YYYYmm, YYYYmmdd, YYYYmmdd-HH, YYYYmmdd-HHMM, YYYYmmdd-HHMMSS

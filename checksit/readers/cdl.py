@@ -73,7 +73,7 @@ class CDLParser:
         else:
             self.cdl = inpt
 
-        cdl_lines: list[str] = self.cdl.strip().split("\n")
+        cdl_lines: List[str] = self.cdl.strip().split("\n")
 
         # Add "data:" and "}" to the CDL if they are not present - to aid parsing
         if "data:" not in [i.strip() for i in cdl_lines]:
@@ -110,7 +110,7 @@ class CDLParser:
 
     def _get_sections(
         self,
-        lines: list[str],
+        lines: List[str],
         split_patterns: Tuple[str, ...],
         start_at: int,
     ) -> List[List[str]]:

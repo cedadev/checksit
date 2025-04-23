@@ -338,7 +338,7 @@ class Checker:
         file_content: Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile],
         log_mode: str = "standard",
         verbose: bool = False,
-    ) -> Tuple[str, list[str]]:
+    ) -> Tuple[str, List[str]]:
         """Get the correct specs for NCAS data files.
 
         Args:
