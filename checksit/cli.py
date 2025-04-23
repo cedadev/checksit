@@ -112,7 +112,7 @@ def check(
     if ignore_attrs is not None:
         ignore_attrs = string_to_list(ignore_attrs)
 
-    return check_file(
+    check_file(
         file_path,
         template=template,
         mappings=mappings,
@@ -178,7 +178,7 @@ def summary(
                 ]
             )
 
-    return summarise(
+    summarise(
         log_files,
         log_directory=log_directory,
         show_files=show_files,
@@ -201,7 +201,7 @@ def describe(check_ids: Optional[List[str]] = None, verbose: bool = False):
         check_ids: List of rules to describe.
         verbose: Print additional information to the console.
     """
-    return describer.describe(check_ids, verbose=verbose)
+    describer.describe(check_ids, verbose=verbose)
 
 
 @main.command()
@@ -216,7 +216,7 @@ def show_specs(spec_ids: Optional[List[str]] = None):
     Args:
         spec_ids: List of specs to show.
     """
-    return specs.show_specs(spec_ids)
+    specs.show_specs(spec_ids)
 
 
 if __name__ == "__main__":
