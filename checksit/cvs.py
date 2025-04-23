@@ -178,7 +178,7 @@ class Vocabs:
         for i, key in enumerate(vocab_lookup.split(":")):
             if i == 0:
                 obj = obj[key]
-            if isinstance(obj, dict):
+            elif isinstance(obj, dict):
                 if key in WILDCARD:
                     if i + 1 != len(vocab_lookup.split(":")):
                         obj = [obj[key] for key in obj.keys()]
