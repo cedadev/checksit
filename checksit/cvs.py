@@ -8,6 +8,7 @@ import re
 import json
 import requests
 from typing import Dict, List, Union, Any
+import time
 
 
 from .config import get_config
@@ -66,11 +67,11 @@ class Vocabs:
             "raw.githubusercontent.com", "github.com"
         )
         if "/__latest__/" in vocab_id_url:
-            latest_version = requests.get(
+            latest_version = self._get_url(
                 f"{vocab_id_url_base}/releases/latest"
             ).url.split("/")[-1]
             vocab_id_url = vocab_id_url.replace("__latest__", latest_version)
-        res = requests.get(vocab_id_url.replace("__URL__", "https://"))
+        res = self._get_url(vocab_id_url.replace("__URL__", "https://"))
         if res.status_code != 200:
             print(f"[WARNING] Failed to load vocab: {vocab_id_url}")
             return vocab_list
@@ -130,6 +131,27 @@ class Vocabs:
             print(f"Vocabulary url provided is not recognised: {vocab_id_url}")
 
         self._vocabs[vocab_id] = vocab_list
+
+    def _get_url(self, url: str) -> requests.Response:
+        """GET a URL, retrying on timeout or HTTP 429 error.
+
+        Args:
+            url: URL to GET.
+
+        Returns:
+            Response from the GET request.
+        """
+        try:
+            res = requests.get(url)
+            if res.status_code == 429:
+                time.sleep(10)
+                res = self._get_url(url)
+        except TimeoutError:
+            time.sleep(10)
+            res = self._get_url(url)
+        except:
+            raise
+        return res
 
     def __getitem__(self, vocab_id: str) -> Union[Dict[str, Any], List[str]]:
         """Enable dictionary access to individual vocabulary items.
