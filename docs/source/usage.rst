@@ -18,10 +18,20 @@ Then ``checksit`` can be run using the following, as an example:
 
 .. code-block::
 
-   checksit check /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc 
+   checksit check /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc
 
 ``checksit`` will then look at the file given and attempt to find either a template file to
 compare against or a series of specs to match with, and then print out the results of the checks.
+
+Multiple Files
+--------------
+If you want to check multiple files, you can do so by using the ``check-files`` command and list
+all the files to check, for example:
+
+.. code-block::
+
+   checksit check-files /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20681201-20691130.nc
+
 
 Specify Template
 ----------------
