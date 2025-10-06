@@ -583,11 +583,22 @@ class Checker:
 
         ### Check for NCAS data files and gather specs ###
         # if template and specs are "default" values, check to see if
-        # file is an ncas file (assuming file name starts with instrument name)
+        # file is an ncas file (file name starts with NCAS instrument name or NCAS mentioned in Conventions)
+        is_ncas_file = (
+            "global_attrs" in dir(file_content) and (
+                (
+                    "Conventions" in file_content.global_attrs.keys() and
+                    "ncas-" in file_content.global_attrs["Conventions"].lower()
+                ) or (
+                    "XMP-photoshop:Instructions" in file_content.global_attrs.keys() and
+                    "national centre for atmospheric science" in file_content.global_attrs["XMP-photoshop:Instructions"].lower()
+                )
+            )
+        )
         if (
             template == "auto"
             and specs == None
-            and file_path.split("/")[-1].startswith("ncas-")
+            and (is_ncas_file or file_path.split("/")[-1].startswith("ncas-"))
         ):
             template, specs = self._get_ncas_specs(
                 file_path, file_content, log_mode=log_mode, verbose=verbose
