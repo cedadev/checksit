@@ -371,6 +371,8 @@ class Checker:
                     .split("-")[2]
                     .replace('"', "")
                 )
+                if version_number.count(".") == 1:
+                    version_number = f"{version_number}.0"
                 spec_folder = f"ncas-amof-{version_number}"
                 if verbose:
                     print(f"  {version_number}")
