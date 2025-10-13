@@ -983,3 +983,26 @@ def check_radar_moment_variables(
                 )
 
     return errors, warnings
+
+
+def strict_check(
+    dct: Dict[str, Dict[str, Any]],
+    all_global_attrs: List[str],
+    all_dimensions: List[str],
+    all_variables: List[str],
+    skip_spellcheck: bool = False,
+ ):
+    """
+    """
+    errors = []
+    warnings = []
+    for attr in dct['global_attributes']:
+        if attr not in all_global_attrs:
+            errors.append(f"[global-attributes:**************:{attr}]: Invalid global attribute '{attr}' found in file.")
+    for dim in dct['dimensions']:
+        if dim not in all_dimensions:
+            errors.append(f"[dimension**************:{dim}]: Invalid dimension '{dim}' found in file.")
+    for var in dct['variables']:
+        if var not in all_variables:
+            errors.append(f"[variable**************:{var}]: Invalid variable '{var}' found in file.")
+    return errors, warnings
