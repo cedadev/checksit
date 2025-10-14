@@ -13,6 +13,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - calendar:standard
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -27,6 +29,8 @@ var-requires1:
       - axis:Y
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -41,6 +45,8 @@ var-requires2:
       - axis:X
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -57,6 +63,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -73,6 +81,8 @@ var-requires4:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -89,6 +99,8 @@ var-requires5:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -104,6 +116,8 @@ var-requires6:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -119,6 +133,8 @@ var-requires7:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -134,6 +150,8 @@ var-requires8:
       - valid_max:<derived from file>
       - cell_methods:time: minimum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -149,6 +167,8 @@ var-requires9:
       - valid_max:<derived from file>
       - cell_methods:time: maximum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -164,6 +184,8 @@ var-requires10:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -179,6 +201,8 @@ var-requires11:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -194,6 +218,8 @@ var-requires12:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -209,6 +235,8 @@ var-requires13:
       - valid_max:<derived from file>
       - cell_methods:time: minimum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -224,6 +252,8 @@ var-requires14:
       - valid_max:<derived from file>
       - cell_methods:time: maximum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -239,6 +269,8 @@ var-requires15:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -254,6 +286,8 @@ var-requires16:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -269,6 +303,8 @@ var-requires17:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -284,6 +320,8 @@ var-requires18:
       - valid_max:<derived from file>
       - cell_methods:time: minimum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -299,6 +337,8 @@ var-requires19:
       - valid_max:<derived from file>
       - cell_methods:time: maximum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -314,6 +354,8 @@ var-requires20:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -326,6 +368,8 @@ var-requires21:
       - long_name:Day of Year
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires22:
   func: checksit.generic.check_var
   params:
@@ -338,6 +382,8 @@ var-requires22:
       - long_name:Year
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires23:
   func: checksit.generic.check_var
   params:
@@ -350,6 +396,8 @@ var-requires23:
       - long_name:Month
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires24:
   func: checksit.generic.check_var
   params:
@@ -362,6 +410,8 @@ var-requires24:
       - long_name:Day
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires25:
   func: checksit.generic.check_var
   params:
@@ -374,6 +424,8 @@ var-requires25:
       - long_name:Hour
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires26:
   func: checksit.generic.check_var
   params:
@@ -386,6 +438,8 @@ var-requires26:
       - long_name:Minute
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires27:
   func: checksit.generic.check_var
   params:
@@ -398,6 +452,8 @@ var-requires27:
       - long_name:Second
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 
 dims-requires:
   func: checksit.generic.check_dim_exists

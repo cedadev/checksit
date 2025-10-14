@@ -55,6 +55,7 @@ class CDLParser:
         """
         self.inpt = inpt
         self.verbose = verbose
+        self.fmt_errors = []
         self._parse(inpt)
         self._check_format()
 
@@ -98,8 +99,6 @@ class CDLParser:
         self.variables, self.global_attrs = self._split_vars_globals(sections[1])
 
     def _check_format(self) -> None:
-        self.fmt_errors = []
-
         source = self.global_attrs.get("source", "UNDEFINED")
 
         min_chars = 10
@@ -248,10 +247,20 @@ class CDLParser:
             else:
                 #                key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
                 # Send last key and last value (from last iteration of loop) and line to get new value
-                key, value = self._parse_key_value_multiline_safe(
+                key, value, new_key = self._parse_key_value_multiline_safe(
                     line, key, value, variable_attr=True
                 )
-                current[key] = self._safe_parse_value(value)
+                if new_key and key in current.keys():
+                    if current[key] != self._safe_parse_value(value) and self.verbose:
+                        print(
+                            f"[WARNING] Variable attribute '{key}' for variable '{var_id}' already exists,"
+                            f" not overwriting existing value '{current[key]}' with new value '{value}'"
+                        )
+                    self.fmt_errors.append(
+                        f"[DUPLICATE:variable:{var_id}:{key}] Variable attribute '{key}' for variable '{var_id}' defined multiple times"
+                    )
+                else:
+                    current[key] = self._safe_parse_value(value)
 
             last_line = line
         else:
@@ -261,7 +270,7 @@ class CDLParser:
 
     def _parse_key_value_multiline_safe(
         self, line: str, last_key: str, last_value: str, variable_attr: bool = False
-    ) -> Tuple[str, str]:
+    ) -> Tuple[str, str, bool]:
         """Cater for values over multiple lines in CDL files.
 
         If an attribute value is printed over multiple lines in the CDL file, this
@@ -270,15 +279,17 @@ class CDLParser:
         # Caters for continuation lines for arrays of strings, etc
         if "=" in line:
             # A new (key, value) pair is found
+            new_key = True
             if variable_attr:  # var attr
                 key, value = [x.strip() for x in line.split(":", 1)[1].split("=", 1)]
             else:  # global attr
                 key, value = [x.strip() for x in line.lstrip(":").split("=", 1)]
         else:
             # Assume a continuation of th last value, so set key to None
+            new_key = False
             key, value = last_key, last_value + " " + line.strip().rstrip(";")
 
-        return key, value
+        return key, value, new_key
 
     def _ordered_dict(self, content: List[str]) -> Dict[str, str]:
         """Construct a dictionary from a list of attribute string.
@@ -311,7 +322,7 @@ class CDLParser:
             # Assume a continuation of th last value
             #                value += " " + line.strip()
             # Send last key and last value (from last iteration of loop) and line to get new value
-            key, value = self._parse_key_value_multiline_safe(line, key, value)
+            key, value, _ = self._parse_key_value_multiline_safe(line, key, value)
 
             # This will overwrite the previous value - which is safe if a continuation happened
             # as the key is the same as last time
@@ -332,7 +343,7 @@ class CDLParser:
             sort_keys=False,
         )
 
-    def to_dict(self) -> Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str]]:
+    def to_dict(self) -> Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str, List[str]]]:
         """Return the parsed CDL content as a dictionary.
 
         Returns:

@@ -12,6 +12,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -27,6 +29,8 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -42,6 +46,8 @@ var-requires2:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -56,6 +62,8 @@ var-requires3:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -70,6 +78,8 @@ var-requires4:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -85,6 +95,8 @@ var-requires5:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -100,6 +112,8 @@ var-requires6:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -115,6 +129,8 @@ var-requires7:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -130,6 +146,8 @@ var-requires8:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -145,6 +163,8 @@ var-requires9:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -157,6 +177,8 @@ var-requires10:
       - long_name:Data Quality flag:  Attenuated backscatter coefficient (Planar Polarised)
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -169,6 +191,8 @@ var-requires11:
       - long_name:Data Quality flag:  Attenuated backscatter coefficient (Cross Polarised)
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -181,8 +205,126 @@ var-requires12:
       - long_name:Data Quality flag:  Depolarisation R
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
       - index_of_range:__OPTIONAL__
+strict-checking:
+  func: checksit.generic.check_defined_only
+  params:
+    all_global_attrs:
+        - source
+        - platform
+        - Conventions
+        - instrument_manufacturer
+        - instrument_model
+        - instrument_serial_number
+        - instrument_software
+        - instrument_software_version
+        - creator_name
+        - creator_email
+        - creator_url
+        - institution
+        - processing_software_url
+        - processing_software_version
+        - calibration_sensitivity
+        - calibration_certification_date
+        - calibration_certification_url
+        - sampling_interval
+        - averaging_interval
+        - product_version
+        - processing_level
+        - last_revised_date
+        - project
+        - project_principal_investigator
+        - project_principal_investigator_email
+        - project_principal_investigator_url
+        - licence
+        - acknowledgement
+        - platform_type
+        - deployment_mode
+        - title
+        - featureType
+        - time_coverage_start
+        - time_coverage_end
+        - geospatial_bounds
+        - platform_altitude
+        - location_keywords
+        - amf_vocabularies_release
+        - history
+        - comment
+        - laser_wavelength
+        - laser_pulse_energy
+        - pulse_repetition_frequency
+        - pulses_per_ray
+        - rays_per_point
+        - lens_diameter
+        - beam_divergence
+        - pulse_length
+        - sampling_frequency
+        - focus
+        - velocity_resolution
+        - number_of_gates
+        - gate_length
+        - fft_length
+        - maximum_range
+    all_dimensions:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - index_of_angle
+        - index_of_range
+    all_variables:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - day_of_year
+        - year
+        - month
+        - day
+        - hour
+        - minute
+        - second
+        - platform_speed_wrt_air
+        - platform_course
+        - platform_orientation
+        - platform_speed_wrt_ground
+        - platform_pitch_angle
+        - platform_pitch_rate
+        - platform_roll_angle
+        - platform_roll_rate
+        - platform_yaw_angle
+        - platform_yaw_rate
+        - instrument_pitch_angle
+        - instrument_pitch_rate
+        - instrument_pitch_minimum
+        - instrument_pitch_maximum
+        - instrument_pitch_standard_deviation
+        - instrument_roll_angle
+        - instrument_roll_rate
+        - instrument_roll_minimum
+        - instrument_roll_maximum
+        - instrument_roll_standard_deviation
+        - instrument_yaw_angle
+        - instrument_yaw_rate
+        - instrument_yaw_minimum
+        - instrument_yaw_maximum
+        - instrument_yaw_standard_deviation
+        - range
+        - sensor_azimuth_angle_instrument_frame
+        - sensor_view_angle_instrument_frame
+        - sensor_azimuth_angle_earth_frame
+        - sensor_view_angle_earth_frame
+        - attenuated_aerosol_backscatter_coefficient_co
+        - signal_to_noise_ratio_plus_1_co
+        - attenuated_aerosol_backscatter_coefficient_cr
+        - signal_to_noise_ratio_plus_1_cr
+        - depolarisation_ratio
+        - qc_flag_attenuated_aerosol_backscatter_coefficient_co
+        - qc_flag_attenuated_aerosol_backscatter_coefficient_cr
+        - qc_flag_depolarisation_ratio

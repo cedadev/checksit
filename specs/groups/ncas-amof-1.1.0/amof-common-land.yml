@@ -13,6 +13,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - calendar:standard
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -24,6 +26,8 @@ var-requires1:
       - units:degrees_north
       - standard_name:latitude
       - long_name:Latitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -35,6 +39,8 @@ var-requires2:
       - units:degrees_east
       - standard_name:longitude
       - long_name:Longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -47,6 +53,8 @@ var-requires3:
       - long_name:Day of Year
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -59,6 +67,8 @@ var-requires4:
       - long_name:Year
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -71,6 +81,8 @@ var-requires5:
       - long_name:Month
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -83,6 +95,8 @@ var-requires6:
       - long_name:Day
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -95,6 +109,8 @@ var-requires7:
       - long_name:Hour
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -107,6 +123,8 @@ var-requires8:
       - long_name:Minute
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -119,6 +137,8 @@ var-requires9:
       - long_name:Second
       - valid_min:<derived from file>
       - valid_max:<derived from file>
+    additional_attrs_allowed:
+      False
 
 dims-requires:
   func: checksit.generic.check_dim_exists

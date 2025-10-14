@@ -12,6 +12,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -26,6 +28,8 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -40,6 +44,8 @@ var-requires2:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -55,6 +61,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -70,6 +78,8 @@ var-requires4:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -85,6 +95,8 @@ var-requires5:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -101,6 +113,8 @@ var-requires6:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -117,6 +131,8 @@ var-requires7:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -132,6 +148,8 @@ var-requires8:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -147,6 +165,8 @@ var-requires9:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -162,6 +182,8 @@ var-requires10:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -174,6 +196,8 @@ var-requires11:
       - long_name:Quality flag: Skew U
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -186,6 +210,8 @@ var-requires12:
       - long_name:Quality flag: Skew V
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -198,6 +224,8 @@ var-requires13:
       - long_name:Quality flag: Skew W
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -210,6 +238,8 @@ var-requires14:
       - long_name:Quality flag: Skew Ts
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -222,6 +252,8 @@ var-requires15:
       - long_name:Quality flag: Kurtosis U
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -234,6 +266,8 @@ var-requires16:
       - long_name:Quality flag: Kurtosis V
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -246,6 +280,8 @@ var-requires17:
       - long_name:Quality flag: Kurtosis W
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -258,6 +294,8 @@ var-requires18:
       - long_name:Quality flag: Kurtosis Ts
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -270,6 +308,8 @@ var-requires19:
       - long_name:Quality flag: Steady State Class WU
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -282,6 +322,8 @@ var-requires20:
       - long_name:Quality flag: Steady State Class WV
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -294,6 +336,8 @@ var-requires21:
       - long_name:Quality flag: Steady State Class WTs
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires22:
   func: checksit.generic.check_var
   params:
@@ -306,6 +350,8 @@ var-requires22:
       - long_name:Quality flag: WU
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires23:
   func: checksit.generic.check_var
   params:
@@ -318,6 +364,8 @@ var-requires23:
       - long_name:Quality flag: WV
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires24:
   func: checksit.generic.check_var
   params:
@@ -342,3 +390,117 @@ var-requires25:
       - long_name:Quality flag: General Turbulent Characteristic of W Class
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
+strict-checking:
+  func: checksit.generic.check_defined_only
+  params:
+    all_global_attrs:
+        - source
+        - platform
+        - Conventions
+        - instrument_manufacturer
+        - instrument_model
+        - instrument_serial_number
+        - instrument_software
+        - instrument_software_version
+        - creator_name
+        - creator_email
+        - creator_url
+        - institution
+        - processing_software_url
+        - processing_software_version
+        - calibration_sensitivity
+        - calibration_certification_date
+        - calibration_certification_url
+        - sampling_interval
+        - averaging_interval
+        - product_version
+        - processing_level
+        - last_revised_date
+        - project
+        - project_principal_investigator
+        - project_principal_investigator_email
+        - project_principal_investigator_url
+        - licence
+        - acknowledgement
+        - platform_type
+        - deployment_mode
+        - title
+        - featureType
+        - time_coverage_start
+        - time_coverage_end
+        - geospatial_bounds
+        - platform_altitude
+        - location_keywords
+        - amf_vocabularies_release
+        - history
+        - comment
+    all_dimensions:
+        - time
+        - latitude
+        - longitude
+        - altitude
+    all_variables:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - day_of_year
+        - year
+        - month
+        - day
+        - hour
+        - minute
+        - second
+        - platform_speed_wrt_air
+        - platform_course
+        - platform_orientation
+        - platform_speed_wrt_ground
+        - platform_pitch_angle
+        - platform_pitch_rate
+        - platform_roll_angle
+        - platform_roll_rate
+        - platform_yaw_angle
+        - platform_yaw_rate
+        - instrument_pitch_angle
+        - instrument_pitch_rate
+        - instrument_pitch_minimum
+        - instrument_pitch_maximum
+        - instrument_pitch_standard_deviation
+        - instrument_roll_angle
+        - instrument_roll_rate
+        - instrument_roll_minimum
+        - instrument_roll_maximum
+        - instrument_roll_standard_deviation
+        - instrument_yaw_angle
+        - instrument_yaw_rate
+        - instrument_yaw_minimum
+        - instrument_yaw_maximum
+        - instrument_yaw_standard_deviation
+        - start_of_run
+        - run_length
+        - number_of_samples_in_run
+        - buoyancy_flux
+        - kinematic_humidity_flux
+        - kinematic_sonic_temperature_flux
+        - upward_sensible_heat_flux_in_air
+        - upward_latent_heat_flux_in_air
+        - momentum_flux_u
+        - momentum_flux_v
+        - bowen_ratio
+        - qc_flag_skew_u
+        - qc_flag_skew_v
+        - qc_flag_skew_w
+        - qc_flag_skew_ts
+        - qc_flag_kurtosis_u
+        - qc_flag_kurtosis_v
+        - qc_flag_kurtosis_w
+        - qc_flag_kurtosis_ts
+        - qc_flag_sstclass_wu
+        - qc_flag_sstclass_wv
+        - qc_flag_sstclass_wts
+        - qc_flag_quality_wu
+        - qc_flag_quality_wv
+        - qc_flag_quality_wts
+        - qc_flag_quality_itc_class

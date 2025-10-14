@@ -12,6 +12,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -25,6 +27,8 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -38,6 +42,8 @@ var-requires2:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -51,6 +57,8 @@ var-requires3:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -65,6 +73,8 @@ var-requires4:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -79,6 +89,8 @@ var-requires5:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -93,6 +105,8 @@ var-requires6:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -107,6 +121,8 @@ var-requires7:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -121,6 +137,8 @@ var-requires8:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -135,6 +153,8 @@ var-requires9:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -149,6 +169,8 @@ var-requires10:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -161,6 +183,8 @@ var-requires11:
       - long_name:Data Quality flag
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:
@@ -178,3 +202,109 @@ required-global-attrs:
       impactor_orifice_diameter: rule-func:string-of-length:3+
       lower_channel_cuf_off: rule-func:string-of-length:3+
       upper_channel_cut_off: rule-func:string-of-length:3+
+strict-checking:
+  func: checksit.generic.check_defined_only
+  params:
+    all_global_attrs:
+        - source
+        - platform
+        - Conventions
+        - instrument_manufacturer
+        - instrument_model
+        - instrument_serial_number
+        - instrument_software
+        - instrument_software_version
+        - creator_name
+        - creator_email
+        - creator_url
+        - institution
+        - processing_software_url
+        - processing_software_version
+        - calibration_sensitivity
+        - calibration_certification_date
+        - calibration_certification_url
+        - sampling_interval
+        - averaging_interval
+        - product_version
+        - processing_level
+        - last_revised_date
+        - project
+        - project_principal_investigator
+        - project_principal_investigator_email
+        - project_principal_investigator_url
+        - licence
+        - acknowledgement
+        - platform_type
+        - deployment_mode
+        - title
+        - featureType
+        - time_coverage_start
+        - time_coverage_end
+        - geospatial_bounds
+        - platform_altitude
+        - location_keywords
+        - amf_vocabularies_release
+        - history
+        - comment
+        - measurement_technique
+        - dma_inner_radius
+        - dma_outer_radius
+        - dma_length
+        - impactor_orifice_diameter
+        - lower_channel_cut_off
+        - upper_channel_cut_off
+    all_dimensions:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - index
+    all_variables:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - day_of_year
+        - year
+        - month
+        - day
+        - hour
+        - minute
+        - second
+        - platform_speed_wrt_air
+        - platform_course
+        - platform_orientation
+        - platform_speed_wrt_ground
+        - platform_pitch_angle
+        - platform_pitch_rate
+        - platform_roll_angle
+        - platform_roll_rate
+        - platform_yaw_angle
+        - platform_yaw_rate
+        - instrument_pitch_angle
+        - instrument_pitch_rate
+        - instrument_pitch_minimum
+        - instrument_pitch_maximum
+        - instrument_pitch_standard_deviation
+        - instrument_roll_angle
+        - instrument_roll_rate
+        - instrument_roll_minimum
+        - instrument_roll_maximum
+        - instrument_roll_standard_deviation
+        - instrument_yaw_angle
+        - instrument_yaw_rate
+        - instrument_yaw_minimum
+        - instrument_yaw_maximum
+        - instrument_yaw_standard_deviation
+        - ambient_aerosol_particle_diameter
+        - measurement_channel_lower_limit
+        - measurement_channel_upper_limit
+        - ambient_aerosol_number_per_channel
+        - ambient_aerosol_size_distribution
+        - ambient_aerosol_size_log_distribution
+        - total_number_concentration_of_ambient_aerosol_particles_in_air
+        - sample_pressure
+        - sample_temperature
+        - sample_mean_free_path
+        - sample_gas_viscosity
+        - qc_flag

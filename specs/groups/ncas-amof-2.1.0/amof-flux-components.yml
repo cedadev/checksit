@@ -12,6 +12,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -26,6 +28,8 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -40,6 +44,8 @@ var-requires2:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -56,6 +62,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -72,6 +80,8 @@ var-requires4:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -88,6 +98,8 @@ var-requires5:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -104,6 +116,8 @@ var-requires6:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -120,6 +134,8 @@ var-requires7:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -136,6 +152,8 @@ var-requires8:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -152,6 +170,8 @@ var-requires9:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -167,6 +187,8 @@ var-requires10:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -182,6 +204,8 @@ var-requires11:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -198,6 +222,8 @@ var-requires12:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -214,6 +240,8 @@ var-requires13:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -230,6 +258,8 @@ var-requires14:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -245,6 +275,8 @@ var-requires15:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -260,6 +292,8 @@ var-requires16:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -275,6 +309,8 @@ var-requires17:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -290,6 +326,8 @@ var-requires18:
       - valid_max:<derived from file>
       - cell_methods:time: skew
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -305,6 +343,8 @@ var-requires19:
       - valid_max:<derived from file>
       - cell_methods:time: skew
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -320,6 +360,8 @@ var-requires20:
       - valid_max:<derived from file>
       - cell_methods:time: skew
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -335,6 +377,8 @@ var-requires21:
       - valid_max:<derived from file>
       - cell_methods:time: skew
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires22:
   func: checksit.generic.check_var
   params:
@@ -350,6 +394,8 @@ var-requires22:
       - valid_max:<derived from file>
       - cell_methods:time: kurtosis
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires23:
   func: checksit.generic.check_var
   params:
@@ -365,6 +411,8 @@ var-requires23:
       - valid_max:<derived from file>
       - cell_methods:time: kurtosis
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires24:
   func: checksit.generic.check_var
   params:
@@ -380,6 +428,8 @@ var-requires24:
       - valid_max:<derived from file>
       - cell_methods:time: kurtosis
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires25:
   func: checksit.generic.check_var
   params:
@@ -395,6 +445,8 @@ var-requires25:
       - valid_max:<derived from file>
       - cell_methods:time: kurtosis
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires26:
   func: checksit.generic.check_var
   params:
@@ -410,6 +462,8 @@ var-requires26:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires27:
   func: checksit.generic.check_var
   params:
@@ -425,6 +479,8 @@ var-requires27:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires28:
   func: checksit.generic.check_var
   params:
@@ -440,6 +496,8 @@ var-requires28:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires29:
   func: checksit.generic.check_var
   params:
@@ -455,6 +513,8 @@ var-requires29:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires30:
   func: checksit.generic.check_var
   params:
@@ -470,6 +530,8 @@ var-requires30:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires31:
   func: checksit.generic.check_var
   params:
@@ -485,6 +547,8 @@ var-requires31:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires32:
   func: checksit.generic.check_var
   params:
@@ -500,6 +564,8 @@ var-requires32:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires33:
   func: checksit.generic.check_var
   params:
@@ -515,6 +581,8 @@ var-requires33:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires34:
   func: checksit.generic.check_var
   params:
@@ -530,6 +598,8 @@ var-requires34:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires35:
   func: checksit.generic.check_var
   params:
@@ -545,6 +615,8 @@ var-requires35:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires36:
   func: checksit.generic.check_var
   params:
@@ -560,6 +632,8 @@ var-requires36:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires37:
   func: checksit.generic.check_var
   params:
@@ -575,6 +649,8 @@ var-requires37:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires38:
   func: checksit.generic.check_var
   params:
@@ -590,6 +666,8 @@ var-requires38:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires39:
   func: checksit.generic.check_var
   params:
@@ -605,6 +683,8 @@ var-requires39:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires40:
   func: checksit.generic.check_var
   params:
@@ -620,6 +700,8 @@ var-requires40:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires41:
   func: checksit.generic.check_var
   params:
@@ -635,6 +717,8 @@ var-requires41:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires42:
   func: checksit.generic.check_var
   params:
@@ -650,6 +734,8 @@ var-requires42:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires43:
   func: checksit.generic.check_var
   params:
@@ -665,6 +751,8 @@ var-requires43:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires44:
   func: checksit.generic.check_var
   params:
@@ -680,6 +768,8 @@ var-requires44:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires45:
   func: checksit.generic.check_var
   params:
@@ -695,6 +785,8 @@ var-requires45:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires46:
   func: checksit.generic.check_var
   params:
@@ -710,6 +802,8 @@ var-requires46:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires47:
   func: checksit.generic.check_var
   params:
@@ -725,6 +819,8 @@ var-requires47:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires48:
   func: checksit.generic.check_var
   params:
@@ -740,6 +836,8 @@ var-requires48:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires49:
   func: checksit.generic.check_var
   params:
@@ -755,6 +853,8 @@ var-requires49:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires50:
   func: checksit.generic.check_var
   params:
@@ -770,6 +870,8 @@ var-requires50:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires51:
   func: checksit.generic.check_var
   params:
@@ -785,6 +887,8 @@ var-requires51:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires52:
   func: checksit.generic.check_var
   params:
@@ -800,6 +904,8 @@ var-requires52:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires53:
   func: checksit.generic.check_var
   params:
@@ -815,6 +921,8 @@ var-requires53:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires54:
   func: checksit.generic.check_var
   params:
@@ -830,6 +938,8 @@ var-requires54:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires55:
   func: checksit.generic.check_var
   params:
@@ -845,6 +955,8 @@ var-requires55:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires56:
   func: checksit.generic.check_var
   params:
@@ -860,6 +972,8 @@ var-requires56:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires57:
   func: checksit.generic.check_var
   params:
@@ -875,6 +989,8 @@ var-requires57:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires58:
   func: checksit.generic.check_var
   params:
@@ -890,6 +1006,8 @@ var-requires58:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires59:
   func: checksit.generic.check_var
   params:
@@ -905,6 +1023,8 @@ var-requires59:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires60:
   func: checksit.generic.check_var
   params:
@@ -920,6 +1040,8 @@ var-requires60:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires61:
   func: checksit.generic.check_var
   params:
@@ -935,6 +1057,8 @@ var-requires61:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires62:
   func: checksit.generic.check_var
   params:
@@ -950,6 +1074,8 @@ var-requires62:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires63:
   func: checksit.generic.check_var
   params:
@@ -965,6 +1091,8 @@ var-requires63:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires64:
   func: checksit.generic.check_var
   params:
@@ -980,6 +1108,8 @@ var-requires64:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires65:
   func: checksit.generic.check_var
   params:
@@ -995,6 +1125,8 @@ var-requires65:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires66:
   func: checksit.generic.check_var
   params:
@@ -1010,6 +1142,8 @@ var-requires66:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires67:
   func: checksit.generic.check_var
   params:
@@ -1025,6 +1159,8 @@ var-requires67:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires68:
   func: checksit.generic.check_var
   params:
@@ -1040,6 +1176,8 @@ var-requires68:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires69:
   func: checksit.generic.check_var
   params:
@@ -1055,6 +1193,8 @@ var-requires69:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires70:
   func: checksit.generic.check_var
   params:
@@ -1070,6 +1210,8 @@ var-requires70:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires71:
   func: checksit.generic.check_var
   params:
@@ -1085,6 +1227,8 @@ var-requires71:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires72:
   func: checksit.generic.check_var
   params:
@@ -1100,6 +1244,8 @@ var-requires72:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires73:
   func: checksit.generic.check_var
   params:
@@ -1115,6 +1261,8 @@ var-requires73:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires74:
   func: checksit.generic.check_var
   params:
@@ -1127,6 +1275,8 @@ var-requires74:
       - long_name:Quality flag: Skew U
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires75:
   func: checksit.generic.check_var
   params:
@@ -1139,6 +1289,8 @@ var-requires75:
       - long_name:Quality flag: Skew V
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires76:
   func: checksit.generic.check_var
   params:
@@ -1151,6 +1303,8 @@ var-requires76:
       - long_name:Quality flag: Skew W
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires77:
   func: checksit.generic.check_var
   params:
@@ -1163,6 +1317,8 @@ var-requires77:
       - long_name:Quality flag: Skew Ts
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires78:
   func: checksit.generic.check_var
   params:
@@ -1175,6 +1331,8 @@ var-requires78:
       - long_name:Quality flag: Kurtosis U
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires79:
   func: checksit.generic.check_var
   params:
@@ -1187,6 +1345,8 @@ var-requires79:
       - long_name:Quality flag: Kurtosis V
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires80:
   func: checksit.generic.check_var
   params:
@@ -1199,6 +1359,8 @@ var-requires80:
       - long_name:Quality flag: Kurtosis W
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires81:
   func: checksit.generic.check_var
   params:
@@ -1211,6 +1373,8 @@ var-requires81:
       - long_name:Quality flag: Kurtosis Ts
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires82:
   func: checksit.generic.check_var
   params:
@@ -1223,6 +1387,8 @@ var-requires82:
       - long_name:Quality flag: Steady State Class WU
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires83:
   func: checksit.generic.check_var
   params:
@@ -1235,6 +1401,8 @@ var-requires83:
       - long_name:Quality flag: Steady State Class WV
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires84:
   func: checksit.generic.check_var
   params:
@@ -1247,6 +1415,8 @@ var-requires84:
       - long_name:Quality flag: Steady State Class WTs
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires85:
   func: checksit.generic.check_var
   params:
@@ -1259,6 +1429,8 @@ var-requires85:
       - long_name:Quality flag: WU
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires86:
   func: checksit.generic.check_var
   params:
@@ -1268,8 +1440,184 @@ var-requires86:
       - type:byte
       - dimension:time
       - units:1
+    additional_attrs_allowed:
+      False
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:
     dimensions:
       - index:__OPTIONAL__
+strict-checking:
+  func: checksit.generic.check_defined_only
+  params:
+    all_global_attrs:
+        - source
+        - platform
+        - Conventions
+        - instrument_manufacturer
+        - instrument_model
+        - instrument_serial_number
+        - instrument_software
+        - instrument_software_version
+        - creator_name
+        - creator_email
+        - creator_url
+        - institution
+        - processing_software_url
+        - processing_software_version
+        - calibration_sensitivity
+        - calibration_certification_date
+        - calibration_certification_url
+        - sampling_interval
+        - averaging_interval
+        - product_version
+        - processing_level
+        - last_revised_date
+        - project
+        - project_principal_investigator
+        - project_principal_investigator_email
+        - project_principal_investigator_url
+        - licence
+        - acknowledgement
+        - platform_type
+        - deployment_mode
+        - title
+        - featureType
+        - time_coverage_start
+        - time_coverage_end
+        - geospatial_bounds
+        - platform_altitude
+        - location_keywords
+        - amf_vocabularies_release
+        - history
+        - comment
+    all_dimensions:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - index
+    all_variables:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - day_of_year
+        - year
+        - month
+        - day
+        - hour
+        - minute
+        - second
+        - platform_speed_wrt_air
+        - platform_course
+        - platform_orientation
+        - platform_speed_wrt_ground
+        - platform_pitch_angle
+        - platform_pitch_rate
+        - platform_roll_angle
+        - platform_roll_rate
+        - platform_yaw_angle
+        - platform_yaw_rate
+        - instrument_pitch_angle
+        - instrument_pitch_rate
+        - instrument_pitch_minimum
+        - instrument_pitch_maximum
+        - instrument_pitch_standard_deviation
+        - instrument_roll_angle
+        - instrument_roll_rate
+        - instrument_roll_minimum
+        - instrument_roll_maximum
+        - instrument_roll_standard_deviation
+        - instrument_yaw_angle
+        - instrument_yaw_rate
+        - instrument_yaw_minimum
+        - instrument_yaw_maximum
+        - instrument_yaw_standard_deviation
+        - start_of_run
+        - run_length
+        - number_of_samples_in_run
+        - air_temperature
+        - air_pressure
+        - mole_concentration_of_carbon_dioxide_in_air
+        - mole_concentration_of_water_vapor_in_air
+        - specific_humidity
+        - water_vapur_partial_pressure_in_air
+        - humidity_mixing_ratio
+        - sonic_air_temperature_theta
+        - sonic_air_temperature
+        - eastward_wind
+        - northward_wind
+        - upward_air_velocity
+        - eastward_wind_rotated_to_run
+        - northward_wind_rotated_to_run
+        - upward_air_velocity_rotated_to_run
+        - skew_eastward_wind
+        - skew_northward_wind
+        - skew_upward_air_velocity
+        - skew_sonic_air_temperature
+        - kurtosis_eastward_wind
+        - kurtosis_northward_wind
+        - kurtosis_upward_air_velocity
+        - kurtosis_sonic_air_temperature
+        - sst_wu
+        - sst_wv
+        - sst_wts
+        - friction_velocity
+        - obukhov_length
+        - stability_parameter
+        - divergence_of_upward_air_velocity
+        - integral_turbulent_characteristic_upward_air_velocity
+        - ubar
+        - vbar
+        - wbar
+        - tsbar
+        - co2bar
+        - h2obar
+        - qbar
+        - thetabar
+        - wvmmrbar
+        - uprime
+        - vprime
+        - wprime
+        - tsprime
+        - co2prime
+        - h2oprime
+        - qprime
+        - thetaprime
+        - wvmmrprime
+        - wprimeuprime
+        - wprimevprime
+        - wprimewprime
+        - uprimeuprime
+        - vprimevprime
+        - wprimetsprime
+        - wprimeco2prime
+        - wprimeh2oprime
+        - wprimeqprime
+        - wprimethetaprime
+        - wprimewvmmrprime
+        - wprimeuprimebar
+        - wprimevprimebar
+        - wprimewprimebar
+        - uprimeuprimebar
+        - vprimevprimebar
+        - wprimetsprimebar
+        - wprimeco2primebar
+        - wprimeh2oprimebar
+        - wprimeqprimebar
+        - wprimethetaprimebar
+        - wprimewvmmrprimebar
+        - qc_flag_skew_u
+        - qc_flag_skew_v
+        - qc_flag_skew_w
+        - qc_flag_skew_ts
+        - qc_flag_kurtosis_u
+        - qc_flag_kurtosis_v
+        - qc_flag_kurtosis_w
+        - qc_flag_kurtosis_ts
+        - qc_flag_sstclass_wu
+        - qc_flag_sstclass_wv
+        - qc_flag_sstclass_wts
+        - qc_flag_quality_wu
+        - qc_flag_quality_wv

@@ -12,6 +12,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -26,6 +28,8 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -41,6 +45,8 @@ var-requires2:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -56,6 +62,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -72,6 +80,8 @@ var-requires4:
       - valid_max:<derived from file>
       - cell_methods:time: sum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -88,6 +98,8 @@ var-requires5:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -103,6 +115,8 @@ var-requires6:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -118,6 +132,8 @@ var-requires7:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -133,6 +149,8 @@ var-requires8:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -148,6 +166,8 @@ var-requires9:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -163,6 +183,8 @@ var-requires10:
       - valid_max:<derived from file>
       - cell_methods:time: point
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -178,6 +200,8 @@ var-requires11:
       - valid_max:<derived from file>
       - cell_methods:time: sum
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -194,6 +218,8 @@ var-requires12:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -209,6 +235,8 @@ var-requires13:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -221,6 +249,8 @@ var-requires14:
       - long_name:Data Quality flag
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:
@@ -238,3 +268,112 @@ required-global-attrs:
       collection_area: rule-func:string-of-length:3+
       laser_wavelength: rule-func:string-of-length:3+
       laser_sample_area: rule-func:string-of-length:3+
+
+strict-checking:
+  func: checksit.generic.check_defined_only
+  params:
+    all_global_attrs:
+        - source
+        - platform
+        - Conventions
+        - instrument_manufacturer
+        - instrument_model
+        - instrument_serial_number
+        - instrument_software
+        - instrument_software_version
+        - creator_name
+        - creator_email
+        - creator_url
+        - institution
+        - processing_software_url
+        - processing_software_version
+        - calibration_sensitivity
+        - calibration_certification_date
+        - calibration_certification_url
+        - sampling_interval
+        - averaging_interval
+        - product_version
+        - processing_level
+        - last_revised_date
+        - project
+        - project_principal_investigator
+        - project_principal_investigator_email
+        - project_principal_investigator_url
+        - licence
+        - acknowledgement
+        - platform_type
+        - deployment_mode
+        - title
+        - featureType
+        - time_coverage_start
+        - time_coverage_end
+        - geospatial_bounds
+        - platform_altitude
+        - location_keywords
+        - amf_vocabularies_release
+        - history
+        - comment
+        - measurement_technique
+        - measurement_quanta
+        - collection_area
+        - laser_wavelength
+        - laser_sample_area
+    all_dimensions:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - diameter
+        - fallspeed
+    all_variables:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - day_of_year
+        - year
+        - month
+        - day
+        - hour
+        - minute
+        - second
+        - platform_speed_wrt_air
+        - platform_course
+        - platform_orientation
+        - platform_speed_wrt_ground
+        - platform_pitch_angle
+        - platform_pitch_rate
+        - platform_roll_angle
+        - platform_roll_rate
+        - platform_yaw_angle
+        - platform_yaw_rate
+        - instrument_pitch_angle
+        - instrument_pitch_rate
+        - instrument_pitch_minimum
+        - instrument_pitch_maximum
+        - instrument_pitch_standard_deviation
+        - instrument_roll_angle
+        - instrument_roll_rate
+        - instrument_roll_minimum
+        - instrument_roll_maximum
+        - instrument_roll_standard_deviation
+        - instrument_yaw_angle
+        - instrument_yaw_rate
+        - instrument_yaw_minimum
+        - instrument_yaw_maximum
+        - instrument_yaw_standard_deviation
+        - diameter
+        - fallspeed
+        - number_of_hydrometeors_per_fallspeed_channel_per_size_channel
+        - number_of_hydrometeors_per_size_channel
+        - thickness_of_rainfall_amount
+        - rainfall_rate
+        - total_precipitation_rate
+        - solid_precipitation_rate
+        - hail_intensity
+        - hail_rate
+        - maximum_diameter_of_hail
+        - number_of_drops
+        - equivalent_reflectivity_factor
+        - precipitation_visibility
+        - qc_flag

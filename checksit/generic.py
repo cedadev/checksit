@@ -397,6 +397,7 @@ def check_var(
     variable: Union[str, List[str]],
     defined_attrs: List[str],
     rules_attrs: Optional[Dict[str, str]] = None,
+    additional_attrs_allowed: bool = True,
     skip_spellcheck: bool = False,
 ) -> Tuple[List[str], List[str]]:
     """Check variable exists and attributes defined and/or meet rules.
@@ -416,6 +417,8 @@ def check_var(
           against, and any options needed, as string value (e.g.
           "rule-func:string-of-length:3+"). See documentation on the `check` function
           in the `Rules` class for more information on formatting.
+        additional_attrs_allowed: if False, will return an error if variable has
+          any attributes not defined in `defined_attrs` or `rules_attrs`. Default True.
         skip_spellcheck: skip looking for close misspelling of attribute if not found
           in variable. Default False.
 
@@ -615,6 +618,28 @@ def check_var(
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
+
+    if not additional_attrs_allowed and variable in dct["variables"].keys():
+        all_allowed_attrs = []
+        for attr in defined_attrs:
+            if isinstance(attr, dict) and len(attr.keys()) == 1:
+                for key in attr.keys():
+                    all_allowed_attrs.append(key.split(":")[0])
+            else:
+                all_allowed_attrs.append(attr.split(":")[0])
+        for attr in rules_attrs:
+            if isinstance(attr, dict) and len(attr.keys()) == 1:
+                for key in attr.keys():
+                    all_allowed_attrs.append(key.split(":")[0])
+            else:
+                all_allowed_attrs.append(attr.split(":")[0])
+        if "qc_flag" in variable and "flag_meanings" not in all_allowed_attrs:
+            all_allowed_attrs.append("flag_meanings")
+        for attr in dct["variables"][variable].keys():
+            if attr not in all_allowed_attrs:
+                errors.append(
+                    f"[variable**************:{variable}]: Attribute '{attr}' in variable {variable} is not allowed."
+                )
 
     return errors, warnings
 
@@ -981,5 +1006,37 @@ def check_radar_moment_variables(
                 errors.append(
                     f"[variable:**************:{variable}]: Only one of '{attr_options}' should be defined, {matches} found."
                 )
+    return errors, warnings
 
+
+def check_defined_only(
+    dct: Dict[str, Dict[str, Any]],
+    all_global_attrs: List[str],
+    all_dimensions: List[str],
+    all_variables: List[str],
+    skip_spellcheck: bool = False,
+ ):
+    """Checks that only defined global attributes, dimensions and variables are present.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "variables", "dimensions" and "global_attributes" as keys.
+        all_global_attrs: list of all allowed global attributes.
+        all_dimensions: list of all allowed dimensions.
+        all_variables: list of all allowed variables.
+
+    Returns:
+        A list of errors and a list of warnings
+    """
+    errors = []
+    warnings = []
+    for attr in dct['global_attributes']:
+        if attr not in all_global_attrs:
+            errors.append(f"[global-attributes:**************:{attr}]: Invalid global attribute '{attr}' found in file.")
+    for dim in dct['dimensions']:
+        if dim not in all_dimensions:
+            errors.append(f"[dimension**************:{dim}]: Invalid dimension '{dim}' found in file.")
+    for var in dct['variables']:
+        if var not in all_variables:
+            errors.append(f"[variable**************:{var}]: Invalid variable '{var}' found in file.")
     return errors, warnings
