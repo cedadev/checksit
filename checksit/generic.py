@@ -981,18 +981,27 @@ def check_radar_moment_variables(
                 errors.append(
                     f"[variable:**************:{variable}]: Only one of '{attr_options}' should be defined, {matches} found."
                 )
-
     return errors, warnings
 
 
-def strict_check(
+def check_defined_only(
     dct: Dict[str, Dict[str, Any]],
     all_global_attrs: List[str],
     all_dimensions: List[str],
     all_variables: List[str],
     skip_spellcheck: bool = False,
  ):
-    """
+    """Checks that only defined global attributes, dimensions and variables are present.
+
+    Args:
+        dct: dictionary of file data, as made by the `to_dict()` function in each
+          reader class, with "variables", "dimensions" and "global_attributes" as keys.
+        all_global_attrs: list of all allowed global attributes.
+        all_dimensions: list of all allowed dimensions.
+        all_variables: list of all allowed variables.
+
+    Returns:
+        A list of errors and a list of warnings
     """
     errors = []
     warnings = []

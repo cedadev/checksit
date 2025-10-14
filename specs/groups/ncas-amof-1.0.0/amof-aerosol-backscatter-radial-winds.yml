@@ -160,7 +160,7 @@ dims-requires:
       - index_of_angle:__OPTIONAL__
       - index_of_range:__OPTIONAL__
 strict-checking:
-  func: checksit.generic.strict_check
+  func: checksit.generic.check_defined_only
   params:
     all_global_attrs:
         - source

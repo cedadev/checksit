@@ -179,7 +179,7 @@ required-global-attrs:
       lower_channel_cuf_off: rule-func:string-of-length:3+
       upper_channel_cut_off: rule-func:string-of-length:3+
 strict-checking:
-  func: checksit.generic.strict_check
+  func: checksit.generic.check_defined_only
   params:
     all_global_attrs:
         - source

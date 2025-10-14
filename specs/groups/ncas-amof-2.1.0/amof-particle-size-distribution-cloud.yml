@@ -260,7 +260,7 @@ required-global-attrs:
       category_configuration_headers: regex:min\sarea,\smax\sarea,\smin\sshape,\smax\sshape,\smin\sIAT,\smax\sIAT,\sedge\srej,\smin\sN,\smax\sN,\smin\sarea\sfrac,\smax\sarea\sfrac,\smin\saspect\sratio,\smax\saspect\sratio,\swidth\smin,\swidth\smax,\sstreak,\sCoM,\sgrey\sMode,\szd\sthreshold
 
 strict-checking:
-  func: checksit.generic.strict_check
+  func: checksit.generic.check_defined_only
   params:
     all_global_attrs:
         - source

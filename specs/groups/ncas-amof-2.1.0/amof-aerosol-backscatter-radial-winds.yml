@@ -167,7 +167,7 @@ required-global-attrs:
       maximum_range: rule-func:string-of-length:3+
 
 strict-checking:
-  func: checksit.generic.strict_check
+  func: checksit.generic.check_defined_only
   params:
     all_global_attrs:
         - source

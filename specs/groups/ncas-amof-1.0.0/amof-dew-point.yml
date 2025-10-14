@@ -59,7 +59,7 @@ var-requires3:
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
 strict-checking:
-  func: checksit.generic.strict_check
+  func: checksit.generic.check_defined_only
   params:
     all_global_attrs:
         - source

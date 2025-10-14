@@ -78,7 +78,7 @@ dims-requires:
       - index_bin:__OPTIONAL__
       - altitude:__OPTIONAL__
 strict-checking:
-  func: checksit.generic.strict_check
+  func: checksit.generic.check_defined_only
   params:
     all_global_attrs:
         - source
