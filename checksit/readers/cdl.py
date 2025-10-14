@@ -55,6 +55,7 @@ class CDLParser:
         """
         self.inpt = inpt
         self.verbose = verbose
+        self.fmt_errors = []
         self._parse(inpt)
         self._check_format()
 
@@ -98,8 +99,6 @@ class CDLParser:
         self.variables, self.global_attrs = self._split_vars_globals(sections[1])
 
     def _check_format(self) -> None:
-        self.fmt_errors = []
-
         source = self.global_attrs.get("source", "UNDEFINED")
 
         min_chars = 10
@@ -251,7 +250,17 @@ class CDLParser:
                 key, value = self._parse_key_value_multiline_safe(
                     line, key, value, variable_attr=True
                 )
-                current[key] = self._safe_parse_value(value)
+                if key in current.keys():
+                    if current[key] != self._safe_parse_value(value) and self.verbose:
+                        print(
+                            f"[WARNING] Variable attribute '{key}' for variable '{var_id}' already exists,"
+                            f" not overwriting existing value '{current[key]}' with new value '{value}'"
+                        )
+                    self.fmt_errors.append(
+                        f"[DUPLICATE:variable:{var_id}:{key}] Variable attribute '{key}' for variable '{var_id}' defined multiple times"
+                    )
+                else:
+                    current[key] = self._safe_parse_value(value)
 
             last_line = line
         else:
@@ -332,7 +341,7 @@ class CDLParser:
             sort_keys=False,
         )
 
-    def to_dict(self) -> Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str]]:
+    def to_dict(self) -> Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str, List[str]]]:
         """Return the parsed CDL content as a dictionary.
 
         Returns:
