@@ -14,6 +14,8 @@ var-requires0:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -30,6 +32,8 @@ var-requires1:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -46,6 +50,8 @@ var-requires2:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -61,6 +67,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -75,6 +83,8 @@ var-requires4:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -87,6 +97,8 @@ var-requires5:
       - long_name:Data Quality flag: upwelling shortwave
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -99,6 +111,8 @@ var-requires6:
       - long_name:Data Quality flag: downwelling shortwave
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -111,6 +125,8 @@ var-requires7:
       - long_name:Data Quality flag: upwelling longwave
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -123,6 +139,8 @@ var-requires8:
       - long_name:Data Quality flag: downwelling longwave
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -135,6 +153,8 @@ var-requires9:
       - long_name:Data Quality flag: Body Temperature
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -147,6 +167,8 @@ var-requires10:
       - long_name:Data Quality flag: sensor cleaning
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

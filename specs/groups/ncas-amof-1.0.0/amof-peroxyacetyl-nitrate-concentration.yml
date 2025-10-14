@@ -16,6 +16,8 @@ var-requires0:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:C2H3NO5
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -28,6 +30,8 @@ var-requires1:
       - long_name:Data Quality flag:
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

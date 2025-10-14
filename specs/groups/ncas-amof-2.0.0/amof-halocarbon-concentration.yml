@@ -13,6 +13,8 @@ var-requires0:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -28,6 +30,8 @@ var-requires1:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -44,6 +48,8 @@ var-requires2:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -60,6 +66,8 @@ var-requires3:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -74,6 +82,8 @@ var-requires4:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -88,6 +98,8 @@ var-requires5:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -103,6 +115,8 @@ var-requires6:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -118,6 +132,8 @@ var-requires7:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -132,6 +148,8 @@ var-requires8:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -146,6 +164,8 @@ var-requires9:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -161,6 +181,8 @@ var-requires10:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -176,6 +198,8 @@ var-requires11:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -190,6 +214,8 @@ var-requires12:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -204,6 +230,8 @@ var-requires13:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -219,6 +247,8 @@ var-requires14:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -234,6 +264,8 @@ var-requires15:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    additional_attrs_allowed:
+      False
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -248,6 +280,8 @@ var-requires16:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    additional_attrs_allowed:
+      False
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -262,6 +296,8 @@ var-requires17:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    additional_attrs_allowed:
+      False
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -277,6 +313,8 @@ var-requires18:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    additional_attrs_allowed:
+      False
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -292,6 +330,8 @@ var-requires19:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    additional_attrs_allowed:
+      False
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -306,6 +346,8 @@ var-requires20:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    additional_attrs_allowed:
+      False
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -320,6 +362,8 @@ var-requires21:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    additional_attrs_allowed:
+      False
 var-requires22:
   func: checksit.generic.check_var
   params:
@@ -335,6 +379,8 @@ var-requires22:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    additional_attrs_allowed:
+      False
 var-requires23:
   func: checksit.generic.check_var
   params:
@@ -350,6 +396,8 @@ var-requires23:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    additional_attrs_allowed:
+      False
 var-requires24:
   func: checksit.generic.check_var
   params:
@@ -364,6 +412,8 @@ var-requires24:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    additional_attrs_allowed:
+      False
 var-requires25:
   func: checksit.generic.check_var
   params:
@@ -378,6 +428,8 @@ var-requires25:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    additional_attrs_allowed:
+      False
 var-requires26:
   func: checksit.generic.check_var
   params:
@@ -393,6 +445,8 @@ var-requires26:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    additional_attrs_allowed:
+      False
 var-requires27:
   func: checksit.generic.check_var
   params:
@@ -408,6 +462,8 @@ var-requires27:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    additional_attrs_allowed:
+      False
 var-requires28:
   func: checksit.generic.check_var
   params:
@@ -422,6 +478,8 @@ var-requires28:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    additional_attrs_allowed:
+      False
 var-requires29:
   func: checksit.generic.check_var
   params:
@@ -436,6 +494,8 @@ var-requires29:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    additional_attrs_allowed:
+      False
 var-requires30:
   func: checksit.generic.check_var
   params:
@@ -451,6 +511,8 @@ var-requires30:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    additional_attrs_allowed:
+      False
 var-requires31:
   func: checksit.generic.check_var
   params:
@@ -466,6 +528,8 @@ var-requires31:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    additional_attrs_allowed:
+      False
 var-requires32:
   func: checksit.generic.check_var
   params:
@@ -480,6 +544,8 @@ var-requires32:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    additional_attrs_allowed:
+      False
 var-requires33:
   func: checksit.generic.check_var
   params:
@@ -494,6 +560,8 @@ var-requires33:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    additional_attrs_allowed:
+      False
 var-requires34:
   func: checksit.generic.check_var
   params:
@@ -509,6 +577,8 @@ var-requires34:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    additional_attrs_allowed:
+      False
 var-requires35:
   func: checksit.generic.check_var
   params:
@@ -524,6 +594,8 @@ var-requires35:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    additional_attrs_allowed:
+      False
 var-requires36:
   func: checksit.generic.check_var
   params:
@@ -536,6 +608,8 @@ var-requires36:
       - long_name:Data Quality flag: CCl4
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires37:
   func: checksit.generic.check_var
   params:
@@ -548,6 +622,8 @@ var-requires37:
       - long_name:Data Quality flag: CHBr3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires38:
   func: checksit.generic.check_var
   params:
@@ -560,6 +636,8 @@ var-requires38:
       - long_name:Data Quality flag: CH2I2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires39:
   func: checksit.generic.check_var
   params:
@@ -572,6 +650,8 @@ var-requires39:
       - long_name:Data Quality flag: CH2ICl
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires40:
   func: checksit.generic.check_var
   params:
@@ -584,6 +664,8 @@ var-requires40:
       - long_name:Data Quality flag: CHBrCl2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires41:
   func: checksit.generic.check_var
   params:
@@ -596,6 +678,8 @@ var-requires41:
       - long_name:Data Quality flag: CH2Br2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires42:
   func: checksit.generic.check_var
   params:
@@ -608,6 +692,8 @@ var-requires42:
       - long_name:Data Quality flag: CHCl3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires43:
   func: checksit.generic.check_var
   params:
@@ -620,6 +706,8 @@ var-requires43:
       - long_name:Data Quality flag: CH3I
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires44:
   func: checksit.generic.check_var
   params:
@@ -632,6 +720,8 @@ var-requires44:
       - long_name:Data Quality flag: CH2BrCl
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

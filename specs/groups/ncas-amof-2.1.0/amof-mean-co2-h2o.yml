@@ -14,6 +14,8 @@ var-requires0:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -29,6 +31,8 @@ var-requires1:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -45,6 +49,8 @@ var-requires2:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -60,6 +66,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -77,6 +85,8 @@ var-requires4:
       - cell_methods:time: mean
       - coordinates:latitude longitude
       - chemical_species:CO2
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -93,6 +103,8 @@ var-requires5:
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
       - chemical_species:CO2
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -110,6 +122,8 @@ var-requires6:
       - cell_methods:time: mean
       - coordinates:latitude longitude
       - chemical_species:H2O
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -126,6 +140,8 @@ var-requires7:
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
       - chemical_species:H2O
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -142,6 +158,8 @@ var-requires8:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -157,6 +175,8 @@ var-requires9:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -173,6 +193,8 @@ var-requires10:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -188,6 +210,8 @@ var-requires11:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -200,6 +224,8 @@ var-requires12:
       - long_name:Data Quality flag: Temperature
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -212,6 +238,8 @@ var-requires13:
       - long_name:Data Quality flag: Pressure
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -224,6 +252,8 @@ var-requires14:
       - long_name:Data Quality flag: Carbon Dioxide concentration
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -236,6 +266,8 @@ var-requires15:
       - long_name:Data Quality flag: Water Vapor concentration
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

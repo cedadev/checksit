@@ -13,6 +13,8 @@ var-requires0:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -28,6 +30,8 @@ var-requires1:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -40,6 +44,8 @@ var-requires2:
       - long_name:Data Quality flag: Surface Temperature
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -52,6 +58,8 @@ var-requires3:
       - long_name:Data Quality flag: Surface Relative Humidity
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -64,6 +72,8 @@ var-requires4:
       - long_name:Data Quality flag: Surface Pressure
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -76,6 +86,8 @@ var-requires5:
       - long_name:Data Quality flag: Precipitation
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -88,6 +100,8 @@ var-requires6:
       - long_name:Data Quality flag: Receiver channel 1 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -100,6 +114,8 @@ var-requires7:
       - long_name:Data Quality flag: Receiver channel 2 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -112,6 +128,8 @@ var-requires8:
       - long_name:Data Quality flag: Receiver channel 3 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -124,6 +142,8 @@ var-requires9:
       - long_name:Data Quality flag: Receiver channel 4 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -136,6 +156,8 @@ var-requires10:
       - long_name:Data Quality flag: Receiver channel 5 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -148,6 +170,8 @@ var-requires11:
       - long_name:Data Quality flag: Receiver channel 6 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -160,6 +184,8 @@ var-requires12:
       - long_name:Data Quality flag: Receiver channel 7 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -172,6 +198,8 @@ var-requires13:
       - long_name:Data Quality flag: Receiver channel 8 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -184,6 +212,8 @@ var-requires14:
       - long_name:Data Quality flag: Receiver channel 9 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -196,6 +226,8 @@ var-requires15:
       - long_name:Data Quality flag: Receiver channel 10 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -208,6 +240,8 @@ var-requires16:
       - long_name:Data Quality flag: Receiver channel 11 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -220,6 +254,8 @@ var-requires17:
       - long_name:Data Quality flag: Receiver channel 12 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -232,6 +268,8 @@ var-requires18:
       - long_name:Data Quality flag: Receiver channel 13 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -244,6 +282,8 @@ var-requires19:
       - long_name:Data Quality flag: Receiver channel 14 failed
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -256,6 +296,8 @@ var-requires20:
       - long_name:Data Quality flag: Thermal stability of temperature receiver bank
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -268,6 +310,8 @@ var-requires21:
       - long_name:Data Quality flag: Thermal stability of moisture receiver bank
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

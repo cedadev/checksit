@@ -16,6 +16,8 @@ var-requires0:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -33,6 +35,8 @@ var-requires1:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -50,6 +54,8 @@ var-requires2:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -67,6 +73,8 @@ var-requires3:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -84,6 +92,8 @@ var-requires4:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -101,6 +111,8 @@ var-requires5:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -118,6 +130,8 @@ var-requires6:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -135,6 +149,8 @@ var-requires7:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -152,6 +168,8 @@ var-requires8:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -164,6 +182,8 @@ var-requires9:
       - long_name:Data Quality flag: CCl4
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -176,6 +196,8 @@ var-requires10:
       - long_name:Data Quality flag: CHBr3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -188,6 +210,8 @@ var-requires11:
       - long_name:Data Quality flag: CH2I2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -200,6 +224,8 @@ var-requires12:
       - long_name:Data Quality flag: CH2ICl
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -212,6 +238,8 @@ var-requires13:
       - long_name:Data Quality flag: CHBrCl2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -224,6 +252,8 @@ var-requires14:
       - long_name:Data Quality flag: CH2Br2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -236,6 +266,8 @@ var-requires15:
       - long_name:Data Quality flag: CHCl3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -248,6 +280,8 @@ var-requires16:
       - long_name:Data Quality flag: CH3I
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -260,6 +294,8 @@ var-requires17:
       - long_name:Data Quality flag: CH2BrCl
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

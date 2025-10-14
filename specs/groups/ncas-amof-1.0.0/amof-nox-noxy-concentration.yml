@@ -15,6 +15,8 @@ var-requires0:
       - cell_methods:time: ?
       - coordinates:latitude longitude
       - chemical_species:NO
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -33,6 +35,8 @@ var-requires1:
       - cell_methods:time: ?
       - coordinates:latitude longitude
       - chemical_species:NO2
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -51,6 +55,8 @@ var-requires2:
       - cell_methods:time: ?
       - coordinates:latitude longitude
       - chemical_species:NOx
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -67,6 +73,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: ?
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -79,6 +87,8 @@ var-requires4:
       - long_name:Data Quality flag: NO
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -91,6 +101,8 @@ var-requires5:
       - long_name:Data Quality flag: NO2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -103,6 +115,8 @@ var-requires6:
       - long_name:Data Quality flag: NOx
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -115,6 +129,8 @@ var-requires7:
       - long_name:Data Quality flag: NOy
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

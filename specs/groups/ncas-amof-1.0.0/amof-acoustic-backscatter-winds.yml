@@ -14,6 +14,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -30,6 +32,8 @@ var-requires1:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -46,6 +50,8 @@ var-requires2:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -62,6 +68,8 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -78,6 +86,8 @@ var-requires4:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -94,6 +104,8 @@ var-requires5:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -110,6 +122,8 @@ var-requires6:
       - valid_max:<derived from file>
       - cell_methods:time: mean
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -125,6 +139,8 @@ var-requires7:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -140,6 +156,8 @@ var-requires8:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -155,6 +173,8 @@ var-requires9:
       - valid_max:<derived from file>
       - cell_methods:time: standard_deviation
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -166,7 +186,9 @@ var-requires10:
       - units:1
       - long_name:Data Quality flag: Mean Winds
     rules_attrs:
-      - flag_values: flag_values: rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -178,7 +200,9 @@ var-requires11:
       - units:1
       - long_name:Data Quality flag: Eastward Wind Component (U)
     rules_attrs:
-      - flag_values: flag_values: rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -190,7 +214,9 @@ var-requires12:
       - units:1
       - long_name:Data Quality flag: Northward Wind Component (V)
     rules_attrs:
-      - flag_values: flag_values: rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -202,7 +228,9 @@ var-requires13:
       - units:1
       - long_name:Data Quality flag: Upward Air Velocity (W)
     rules_attrs:
-      - flag_values: flag_values: rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -214,7 +242,9 @@ var-requires14:
       - units:1
       - long_name:Data Quality flag: Backscatter
     rules_attrs:
-      - flag_values: flag_values: rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -226,7 +256,9 @@ var-requires15:
       - units:1
       - long_name:Data Quality flag: Background Noise
     rules_attrs:
-      - flag_values: flag_values: rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

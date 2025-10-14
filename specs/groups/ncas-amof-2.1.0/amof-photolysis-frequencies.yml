@@ -12,6 +12,8 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -26,6 +28,8 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -40,6 +44,8 @@ var-requires2:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -54,6 +60,8 @@ var-requires3:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -66,6 +74,8 @@ var-requires4:
       - long_name:Data Quality flag
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:

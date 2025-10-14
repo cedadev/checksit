@@ -1,5 +1,4 @@
 var-requires0:
-  func: checksit.generic.check_var
   params:
     variable:
       - mass_concentration_of_nitrate_in_ambient_aerosol_particles_in_air:__OPTIONAL__
@@ -13,8 +12,9 @@ var-requires0:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:NO3
+    additional_attrs_allowed:
+      False
 var-requires1:
-  func: checksit.generic.check_var
   params:
     variable:
       - mass_concentration_of_sulfate_in_ambient_aerosol_particles_in_air:__OPTIONAL__
@@ -28,8 +28,9 @@ var-requires1:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:SO4
+    additional_attrs_allowed:
+      False
 var-requires2:
-  func: checksit.generic.check_var
   params:
     variable:
       - mass_concentration_of_ammonia_in_ambient_aerosol_particles_in_air:__OPTIONAL__
@@ -43,8 +44,9 @@ var-requires2:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:NH3
+    additional_attrs_allowed:
+      False
 var-requires3:
-  func: checksit.generic.check_var
   params:
     variable:
       - mass_concentration_of_organics_in_ambient_aerosol_particles_in_air:__OPTIONAL__
@@ -58,8 +60,9 @@ var-requires3:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:organic
+    additional_attrs_allowed:
+      False
 var-requires4:
-  func: checksit.generic.check_var
   params:
     variable:
       - qc_flag_no3:__OPTIONAL__
@@ -70,8 +73,9 @@ var-requires4:
       - long_name:Data Quality flag: NO3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires5:
-  func: checksit.generic.check_var
   params:
     variable:
       - qc_flag_so4:__OPTIONAL__
@@ -82,8 +86,9 @@ var-requires5:
       - long_name:Data Quality flag: SO4
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires6:
-  func: checksit.generic.check_var
   params:
     variable:
       - qc_flag_nh3:__OPTIONAL__
@@ -94,8 +99,9 @@ var-requires6:
       - long_name:Data Quality flag: NH3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires7:
-  func: checksit.generic.check_var
   params:
     variable:
       - qc_flag_org:__OPTIONAL__
@@ -106,6 +112,8 @@ var-requires7:
       - long_name:Data Quality flag: Organics
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 strict-checking:
   func: checksit.generic.check_defined_only
   params:
