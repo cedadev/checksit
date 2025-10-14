@@ -383,6 +383,19 @@ def test_check_var():
     assert errors == []
     assert warnings == []
 
+    # Test the function checks additional attributes correctly
+    variable = "var1:__OPTIONAL__"
+    defined_attrs = ["long_name:Variable 1", "flag_values:0b, 1b, 2b"]
+    errors, warnings = cg.check_var(dct, variable, defined_attrs, additional_attrs_allowed=False)
+    assert errors == ["[variable**************:var1]: Attribute 'units' in variable var1 is not allowed."]
+    assert warnings == []
+
+    variable = "var2:__OPTIONAL__"
+    defined_attrs = ["long_name:Variable 2", "units:kg"]
+    errors, warnings = cg.check_var(dct, variable, defined_attrs, additional_attrs_allowed=False)
+    assert errors == []
+    assert warnings == []
+
     # Test that the function correctly handles an empty dct
     variable = "var2"
     dct = {"variables": {}}
