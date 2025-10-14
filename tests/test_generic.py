@@ -466,12 +466,12 @@ def test_check_file_name():
 def test_check_generic_file_name():
     # Test for Standard ESA CCI file name
     vocab_checks = {
-        'field00': '__vocabs__:esa-cci-file-name-config:field00', 
-        'field01': '__vocabs__:esa-cci-file-name-config:field01', 
-        'field02': '__vocabs__:esa-cci-file-name-config:field02', 
-        'field03': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json', 
-        'field04': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json', 
-        'field05': '__date__:%Y,%Y%m,%Y%m%d,%Y%m%d%H,%Y%m%d%H%M,%Y%m%d%H%M%S', 
+        'field00': '__vocabs__:esa-cci-file-name-config:field00',
+        'field01': '__vocabs__:esa-cci-file-name-config:field01',
+        'field02': '__vocabs__:esa-cci-file-name-config:field02',
+        'field03': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json',
+        'field04': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json',
+        'field05': '__date__:%Y,%Y%m,%Y%m%d,%Y%m%d%H,%Y%m%d%H%M,%Y%m%d%H%M%S',
         'field06': '__version__:^fv\\d?\\d.?\\d?\\d?$'
     }
     segregator = {
@@ -498,12 +498,12 @@ def test_check_generic_file_name():
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
     assert errors == ["[file name]: Number of file name fields (8) is greater than the 7 fields expected."]
     assert warnings == []
-    
+
     # Incorrect date
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-20231241000000-fv09.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
     assert errors == ["[file name]: Invalid date/time string '20231241000000'. Date/time should take the form YYYY[MM[DD[HH[MM[SS]]]]], where the fields in brackets are optional."]
-    assert warnings == []   
+    assert warnings == []
 
     # Incorrect version format
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-20231231000000-fv09.2.1.nc"
@@ -513,13 +513,13 @@ def test_check_generic_file_name():
 
     # Test for Additional Segregator ESA CCI file name
     vocab_checks = {
-        'field00': '__vocabs__:esa-cci-file-name-config:field00', 
-        'field01': '__vocabs__:esa-cci-file-name-config:field01', 
-        'field02': '__vocabs__:esa-cci-file-name-config:field02', 
-        'field03': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json', 
-        'field04': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json', 
-        'field05': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json', 
-        'field06': '__date__:%Y,%Y%m,%Y%m%d,%Y%m%d%H,%Y%m%d%H%M,%Y%m%d%H%M%S', 
+        'field00': '__vocabs__:esa-cci-file-name-config:field00',
+        'field01': '__vocabs__:esa-cci-file-name-config:field01',
+        'field02': '__vocabs__:esa-cci-file-name-config:field02',
+        'field03': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/dataType.json',
+        'field04': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json',
+        'field05': '__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json',
+        'field06': '__date__:%Y,%Y%m,%Y%m%d,%Y%m%d%H,%Y%m%d%H%M,%Y%m%d%H%M%S',
         'field07': '__version__:^fv\\d?\\d.?\\d?\\d?$'
     }
     segregator = {
@@ -569,3 +569,47 @@ def test_check_radar_moment_variables():
         "[variable:**************:var2]: One attribute of '['attribute3', 'attribute4']' must be defined."
     ]
     assert warnings == []
+
+def test_check_defined_only():
+    dct = {
+        "variables": {
+            "var1": {  # moment variable
+                "coordinates": "some coordinates",
+                "attribute1": "attribute1_value",
+                "attribute2": "attribute2_value",
+                "attribute3": "attribute3_value",
+            },
+            "var2": {  # moment variable
+                "coordinates": "some other coordinates",
+                "attribute1": "attribute1_value",
+                "attribute2": "not_attribute2_value",
+            },
+            "var3": {  # not moment variable
+                "attribute1": "attribute1_value",
+            },
+        },
+        "dimensions": {
+            "dim1": {},
+            "dim2": {},
+        },
+        "global_attributes": {
+            "attr1": "value1",
+            "attr2": "value2",
+        },
+    }
+    defined_vars = ["var1", "var2", "var4"]
+    defined_dims = ["dim1", "dim3"]
+    defined_attrs = ["attr1", "attr3"]
+    errors, warnings = cg.check_defined_only(dct, defined_attrs, defined_dims, defined_vars, skip_spellcheck=True)
+    assert len(errors) == 3
+    assert len(warnings) == 0
+    assert "[variable**************:var3]: Invalid variable 'var3' found in file." in errors
+    assert "[dimension**************:dim2]: Invalid dimension 'dim2' found in file." in errors
+    assert "[global-attributes:**************:attr2]: Invalid global attribute 'attr2' found in file." in errors
+
+    defined_vars = ["var1", "var2", "var3"]
+    defined_dims = ["dim1", "dim2"]
+    defined_attrs = ["attr1", "attr2"]
+    errors, warnings = cg.check_defined_only(dct, defined_attrs, defined_dims, defined_vars)
+    assert len(errors) == 0
+    assert len(warnings) == 0
