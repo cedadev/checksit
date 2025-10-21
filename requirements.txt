@@ -4,4 +4,4 @@ cf-python
 netcdf4
 pandas
 requests
-numpy>=1,<2
+numpy
