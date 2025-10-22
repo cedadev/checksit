@@ -1,7 +1,0 @@
-click
-pyyaml
-cf-python
-netcdf4
-pandas
-requests
-numpy

@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "checksit"
+authors = [
+    {name = "Ag Stephens", email = "ag.stephens@stfc.ac.uk"},
+]
+description = "File checking made simple"
+readme = "README.md"
+requires-python = ">=3.7"
+license = "BSD-3-Clause"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "click",
+    "pyyaml",
+    "cf-python",
+    "netcdf4",
+    "pandas",
+    "requests",
+    "numpy",
+]
+keywords = [
+    "checksit",
+    "file check",
+    "CEDA",
+    "Centre for Environmental Data Analysis",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "build",
+]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+
+[project.scripts]
+checksit = "checksit.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/cedadev/checksit"
+Documentation = "https://checksit.readthedocs.io"
+Repository = "https://github.com/cedadev/checksit"
+
+[tool.setuptools.dynamic]
+version = {attr = "checksit.__version__"}
+
+[tool.setuptools]
+packages = ["checksit"]
