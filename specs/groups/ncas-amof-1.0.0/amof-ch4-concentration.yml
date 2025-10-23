@@ -122,4 +122,4 @@ strict-checking:
         - mass_fraction_of_methane_in_air
         - mole_concentration_of_methane_in_air
         - mass_concentration_of_methane_in_air
-        - qc_flag_ch4
+        - qc_flag

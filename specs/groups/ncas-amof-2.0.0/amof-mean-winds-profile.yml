@@ -346,10 +346,5 @@ strict-checking:
         - divergence_of_upward_air_velocity
         - sonic_air_temperature
         - divergence_of_sonic_air_temperature
-        - qc_flag_sonic_temperature
-        - qc_flag_wind_speed
-        - qc_flag_wind_direction
-        - qc_flag_wind_component_eastward
-        - qc_flag_wind_component_northward
-        - qc_flag_wind_component_upward_air_velocity
+        - qc_flag
 
