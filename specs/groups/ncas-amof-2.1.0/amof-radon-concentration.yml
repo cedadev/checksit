@@ -13,6 +13,9 @@ var-requires0:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:Rn
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
     additional_attrs_allowed:
       False
 var-requires1:
@@ -30,6 +33,9 @@ var-requires1:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:Rn
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires2:
