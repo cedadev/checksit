@@ -6,7 +6,7 @@ Originally designed to be used against the NCAS Data Standards to provide confor
 it has evolved to be more generic and can accomodate other compliance checking options too.
 
 On a basic level a user can point the checksit tool at a given file and it will attempt to run
-some basic checks based on some matches that it will try to perform. 
+some basic checks based on some matches that it will try to perform.
 Other options include specifying the particular checks to run or to compare with known 'good' files.
 
 .. toctree::
@@ -17,6 +17,7 @@ Other options include specifying the particular checks to run or to compare with
    install
    usage
    specifics
+   understanding-output
 
 .. toctree::
    :hidden:
