@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -43,6 +43,7 @@ dependencies = [
     "pandas",
     "requests",
     "numpy",
+    "importlib-resources ; python_version < '3.9'",
 ]
 keywords = [
     "checksit",
@@ -73,5 +74,8 @@ Repository = "https://github.com/cedadev/checksit"
 [tool.setuptools.dynamic]
 version = {attr = "checksit.__version__"}
 
-[tool.setuptools]
-packages = ["checksit"]
+[tool.setuptools.packages.find]
+include = ["checksit*"]
+
+[tool.setuptools.package-data]
+"checksit" = ["data/*"]
