@@ -1,6 +1,17 @@
 import os
 from configparser import ConfigParser
 from itertools import chain
+import sys
+
+if sys.version_info >= (3, 9):
+    from importlib.resources import files
+else:
+    from importlib_resources import files as imported_files
+    def files(package):
+        return imported_files(package)
+
+
+PACKAGE_ROOT = files("checksit")
 
 # Global CONFIG used by other packages
 _CONFIG = None
@@ -19,7 +30,8 @@ def get_config(package=None):
 
 def _gather_config_files(package=None):
     conf_files = []
-    _config = os.path.join(os.path.dirname(__file__), "etc", ini_file)
+    #_config = os.path.join(os.path.dirname(__file__), "etc", ini_file)
+    _config = os.path.join(str(PACKAGE_ROOT), "etc", ini_file)
 
     if not os.path.isfile(_config):
         print(f"[WARN] Cannot load default config file from: {_config}")
@@ -101,6 +113,7 @@ def _load_config(package=None):
     conf = ConfigParser()
 
     conf.read(conf_files)
+    conf["settings"].update({'basedir': str(PACKAGE_ROOT)})
     config = {}
 
     mappers = _get_mappers(conf)
