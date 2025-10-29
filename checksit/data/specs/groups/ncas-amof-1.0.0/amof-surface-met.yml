@@ -364,5 +364,3 @@ strict-checking:
         - qc_flag_wind_from_direction
         - qc_flag_radiation
         - qc_flag_precipitation
-        - qc_flag_downwelling_total_irradiance
-        - qc_flag_net_total_irradiance

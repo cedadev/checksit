@@ -293,4 +293,4 @@ strict-checking:
         - attenuated_aerosol_backscatter_coefficient
         - signal_to_noise_ratio_plus_1
         - qc_flag_radial_velocity_of_scatterers_away_from_instrument
-        - qc_flag_backscatter
+        - qc_flag_attenuated_aerosol_backscatter_coefficient

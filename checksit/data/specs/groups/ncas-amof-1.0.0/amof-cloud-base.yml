@@ -240,4 +240,5 @@ strict-checking:
         - window_transmttance
         - background_light
         - backscatter_sum
-        - qc_flag
+        - qc_flag_cloud_base
+        - qc_flag_cloud_coverage

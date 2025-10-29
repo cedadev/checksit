@@ -15,6 +15,9 @@ var-requires0:
       - cell_methods:time: ?
       - coordinates:latitude longitude
       - chemical_species:NO
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires1:
@@ -35,6 +38,9 @@ var-requires1:
       - cell_methods:time: ?
       - coordinates:latitude longitude
       - chemical_species:NO2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires2:
@@ -55,6 +61,9 @@ var-requires2:
       - cell_methods:time: ?
       - coordinates:latitude longitude
       - chemical_species:NOx
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires3:
@@ -73,6 +82,9 @@ var-requires3:
       - valid_max:<derived from file>
       - cell_methods:time: ?
       - coordinates:latitude longitude
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires4:

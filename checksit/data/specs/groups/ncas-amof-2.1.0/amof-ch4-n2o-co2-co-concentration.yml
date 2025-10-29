@@ -13,6 +13,9 @@ var-requires0:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH4
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
     additional_attrs_allowed:
       False
 var-requires1:
@@ -30,6 +33,9 @@ var-requires1:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH4
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires2:
@@ -83,6 +89,9 @@ var-requires4:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:N2O
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
     additional_attrs_allowed:
       False
 var-requires5:
@@ -100,6 +109,9 @@ var-requires5:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:N2O
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires6:
@@ -153,6 +165,9 @@ var-requires8:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CO2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
     additional_attrs_allowed:
       False
 var-requires9:
@@ -170,6 +185,9 @@ var-requires9:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CO2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires10:
@@ -223,6 +241,9 @@ var-requires12:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CO
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
     additional_attrs_allowed:
       False
 var-requires13:
@@ -240,6 +261,9 @@ var-requires13:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CO
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires14:

@@ -16,6 +16,9 @@ var-requires0:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires1:
@@ -35,6 +38,9 @@ var-requires1:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires2:
@@ -54,6 +60,9 @@ var-requires2:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires3:
@@ -73,6 +82,9 @@ var-requires3:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires4:
@@ -92,6 +104,9 @@ var-requires4:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires5:
@@ -111,6 +126,9 @@ var-requires5:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires6:
@@ -130,6 +148,9 @@ var-requires6:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires7:
@@ -149,6 +170,9 @@ var-requires7:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires8:
@@ -168,6 +192,9 @@ var-requires8:
       - cell_methods:time: ????
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1|ppm|ppb|ppt
     additional_attrs_allowed:
       False
 var-requires9:
