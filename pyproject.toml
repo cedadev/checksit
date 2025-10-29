@@ -10,7 +10,7 @@ authors = [
 description = "File checking made simple"
 readme = "README.md"
 requires-python = ">=3.7"
-license = "BSD-3-Clause"
+license = {"text" = "BSD-3-Clause"}
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
