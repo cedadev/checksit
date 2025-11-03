@@ -6,11 +6,15 @@ File-checking made simple
 
 ## Installation
 
-Create a venv, then install dependencies:
-
+Create a venv, then install, either directly from GitHub:
 ```
-pip install -r requirements.txt
-pip install -e .
+pip install git+https://github.com/cedadev/checksit.git
+```
+or clone the repository and install
+```
+git clone https://github.com/cedadev/checksit
+cd checksit
+pip install .
 ```
 
 
@@ -51,7 +55,7 @@ checksit check -m cltAnom=cloud_area_fraction /gws/nopw/j04/cmip6_prep_vol1/ukcp
 ```
 * Allows mapping of variable name, for the case that the name of a variable is different between the file to be checked and the template
 * Format - `-m <template variable name>=<file variable name>`
-* Multiple mappings should be comma separated 
+* Multiple mappings should be comma separated
 
 
 #### Ignore attributes
