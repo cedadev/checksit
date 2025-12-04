@@ -1,0 +1,54 @@
+{
+    "product_o2-concentration_variable": {
+        "mole_fraction_of_molecular_oxygen_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "long_name": "Mole Fraction of Molecular Oxygen in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "O2"
+        },
+        "mass_fraction_of_molecular_oxygen_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "long_name": "Mass Fraction of Molecular Oxygen in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "O2"
+        },
+        "mole_concentration_of_molecular_oxygen_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "mol m-3",
+            "long_name": "Mole Concentration of Molecular Oxygen in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "O2"
+        },
+        "mass_concentration_of_molecular_oxygen_in_air": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "kg m-3",
+            "long_name": "Mass Concentration of Molecular Oxygen in air",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude",
+            "chemical_species": "O2"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag",
+            "flag_values": "0b,1b, 2b, 3b",
+            "flag_meanings": "not_used|good_data |suspect_data_data_not_quality_controlled|bad_data_do_not_use"
+        }
+    }
+}

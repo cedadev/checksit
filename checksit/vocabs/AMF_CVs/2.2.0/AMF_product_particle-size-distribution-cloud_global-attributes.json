@@ -1,0 +1,18 @@
+{
+    "product_particle-size-distribution-cloud_global-attributes": {
+        "measurement_technique": {
+            "global_attribute_id": "measurement_technique",
+            "description": "What measurement technique does the instrument employ?",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "category_configuration_headers": {
+            "global_attribute_id": "category_configuration_headers",
+            "description": "Category Headers",
+            "fixed_value": "min area, max area, min shape, max shape, min IAT, max IAT, edge rej, min N, max N, min area frac, max area frac, min aspect ratio, max aspect ratio, width min, width max, streak, CoM, grey Mode, zd threshold",
+            "compliance_checking_rules": null,
+            "convention_providence": null
+        }
+    }
+}
