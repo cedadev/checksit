@@ -1,0 +1,344 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - start_of_run:__OPTIONAL__
+    defined_attrs:
+      - type:double
+      - dimension:time
+      - units:seconds since 1970-01-01 00:00:00
+      - long_name:Start of run (seconds since 1970-01-01 00:00:00)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - run_length:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:s
+      - long_name:Length of run
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_of_samples_in_run:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Number of samples in run
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - buoyancy_flux:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:W m-2
+      - long_name:Buoyancy Flux (<w'Ts'>*rho*cp)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - kinematic_humidity_flux:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg kg-1 m s-1
+      - long_name:Kinematic Humidity Flux (<w'Q'>)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - kinematic_sonic_temperature_flux:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K m s-1
+      - long_name:Kinematic Sonic Temperature Flux (<w'Ts'>)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - upward_sensible_heat_flux_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:W m-2
+      - standard_name:upward_sensible_heat_flux_in_air
+      - long_name:Sensible heat flux
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - upward_latent_heat_flux_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:W m-2
+      - standard_name:upward_latent_heat_flux_in_air
+      - long_name:Latent heat flux
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - momentum_flux_u:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-1 s-2
+      - long_name:Momentum flux (-rho.<w'u'>)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - momentum_flux_v:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-1 s-2
+      - long_name:Momentum flux (-rho.<w'v'>)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - bowen_ratio:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:1
+      - long_name:Bowen Ratio (sensible\latent)
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_u:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew U
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_v:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew V
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_w:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew W
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_skew_ts:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Skew Ts
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_u:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis U
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_v:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis V
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_w:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis W
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires18:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_kurtosis_ts:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Kurtosis Ts
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires19:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_sstclass_wu:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Steady State Class WU
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires20:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_sstclass_wv:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Steady State Class WV
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires21:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_sstclass_wts:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: Steady State Class WTs
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires22:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_quality_wu:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: WU
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires23:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_quality_wv:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: WV
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires24:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_quality_wts:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: WTs
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires25:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_quality_itc_class:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Quality flag: General Turbulent Characteristic of W Class
+    attr_rules:
+      - rule-func:check-qc-flags

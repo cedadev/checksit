@@ -1,0 +1,108 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_nitrate_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug cm-3
+      - long_name:Mass concentration of the NO3 component of ambient aerosol particles in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NO3
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_sulfate_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug cm-3
+      - long_name:Mass concentration of the SO4 component of ambient aerosol particles in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:SO4
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_ammonia_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug cm-3
+      - long_name:Mass concentration of the NH3 component of ambient aerosol particles in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:NH3
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_organics_in_ambient_aerosol_particles_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug cm-3
+      - long_name:Mass concentration of the organic component of ambient aerosol particles in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:organic
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_no3:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: NO3
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_so4:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: SO4
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_nh3:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: NH3
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_org:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Organics
+    attr_rules:
+      - rule-func:check-qc-flags

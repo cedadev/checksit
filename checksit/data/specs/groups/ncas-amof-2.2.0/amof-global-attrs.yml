@@ -1,0 +1,45 @@
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    vocab_attrs:
+      source: __vocabs__:AMF_CVs/2.2.0/AMF_ncas_instrument:ncas_instrument:__all__:description
+      platform: __vocabs__:AMF_CVs/2.2.0/AMF_platform:platform:__all__
+    rules_attrs:
+      Conventions: regex:CF-1.6\sNCAS-GENERAL-2.2.0
+      instrument_manufacturer: rule-func:string-of-length:2+
+      instrument_model: rule-func:string-of-length:3+
+      instrument_serial_number: rule-func:string-of-length:3+
+      instrument_software: rule-func:string-of-length:3+
+      instrument_software_version: rule-func:string-of-length:2+
+      creator_name: rule-func:string-of-length:3+
+      creator_email: regex-rule:valid-email
+      creator_url: regex-rule:valid-url
+      institution: regex:National\sCentre\sfor\sAtmospheric\sScience\s\(NCAS\)
+      processing_software_url: regex-rule:valid-url
+      processing_software_version: rule-func:string-of-length:2+
+      calibration_sensitivity: rule-func:string-of-length:5+
+      calibration_certification_date: regex-rule:datetime-or-na
+      calibration_certification_url: regex-rule:valid-url-or-na
+      sampling_interval: rule-func:string-of-length:2+
+      averaging_interval: rule-func:string-of-length:2+
+      product_version: regex-rule:match:vN.M
+      processing_level: type-rule:integer
+      last_revised_date: regex-rule:datetime
+      project: rule-func:string-of-length:3+
+      project_principal_investigator: rule-func:string-of-length:3+
+      project_principal_investigator_email: regex-rule:valid-email
+      project_principal_investigator_url: regex-rule:valid-url
+      licence: regex:Data\susage\slicence\s-\sUK\sGovernment\sOpen\sLicence\sagreement:\shttp://www.nationalarchives.gov.uk/doc/open-government-licence
+      acknowledgement: regex:Acknowledgement\sof\sNCAS\sas\sthe\sdata\sprovider\sis\srequired\swhenever\sand\swherever\sthese\sdata\sare\sused
+      platform_type: rule-func:match-one-of:stationary_platform|moving_platform
+      deployment_mode: rule-func:match-one-of:land|sea|air|trajectory
+      title: rule-func:string-of-length:10+
+      featureType: rule-func:match-one-of:timeSeries|timeSeriesProfile|trajectory
+      time_coverage_start: regex-rule:datetime
+      time_coverage_end: regex-rule:datetime
+      geospatial_bounds: rule-func:string-of-length:8+
+      platform_altitude: regex:^-?\d+\.?\d*\sm$
+      location_keywords: rule-func:string-of-length:3+
+      amf_vocabularies_release: regex-rule:valid-url
+      history: rule-func:string-of-length:1+
+      comment: rule-func:string-of-length:4+
