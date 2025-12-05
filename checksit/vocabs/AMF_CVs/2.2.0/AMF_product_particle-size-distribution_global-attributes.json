@@ -1,0 +1,11 @@
+{
+    "product_particle-size-distribution_global-attributes": {
+        "measurement_technique": {
+            "global_attribute_id": "measurement_technique",
+            "description": "What measurement technique does the instrument employ?",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        }
+    }
+}

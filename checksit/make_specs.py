@@ -26,7 +26,7 @@ def make_amof_specs(version_number):
     ###############
 
     cvs_dir = f"vocabs/AMF_CVs/{version_number}"
-    out_dir = f"../specs/groups/ncas-amof-{version_number}"
+    out_dir = f"data/specs/groups/ncas-amof-{version_number}"
 
     ################
     # GLOBAL ATTRS #

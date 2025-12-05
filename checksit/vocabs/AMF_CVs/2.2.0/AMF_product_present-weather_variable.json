@@ -1,0 +1,43 @@
+{
+    "product_present-weather_variable": {
+        "present_weather_code": {
+            "type": "int32",
+            "dimension": "time",
+            "long_name": "Present weather codes from WMO Table 4680",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude",
+            "code_values": "-999, 0, 4, 30, 40, 50, 60, 70",
+            "code_meanings": "instrument_not_ready no_significant_weather haze_or_smoke fog indeterminate_precip drizzle rain snow"
+        },
+        "optical_range": {
+            "type": "float64",
+            "dimension": "time",
+            "units": "m",
+            "long_name": "Meteorological optical range",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: mean",
+            "coordinates": "latitude longitude"
+        },
+        "instantaneous_optical_range": {
+            "type": "float64",
+            "dimension": "time",
+            "units": "m",
+            "long_name": "Instantaneous meteorological optical range",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "cell_methods": "time: point",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data quality flag for all variables",
+            "flag_values": "0b, 1b, 2b",
+            "flag_meanings": "not_used|good_data|suspect_data_failed_self_check"
+        }
+    }
+}

@@ -1,0 +1,240 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - diameter:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:diameter
+      - units:mm
+      - long_name:Hydrometeor Diameter
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - fallspeed:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:fallspeed
+      - units:m s-1
+      - long_name:Hydrometeor Fallspeed
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_of_hydrometeors_per_fallspeed_channel_per_size_channel:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, fallspeed, diameter
+      - units:1
+      - long_name:Number of Hydrometeors per Fallspeed Channel per Instrument Channel
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_of_hydrometeors_per_size_channel:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time, diameter
+      - units:1
+      - long_name:Number of Hydrometeors per Instrument Channel
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - thickness_of_rainfall_amount:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mm
+      - standard_name:thickness_of_rainfall_amount
+      - long_name:Rain Accumulated in Averaging Period
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: sum
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - rainfall_rate:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mm hr-1
+      - standard_name:rainfall_rate
+      - long_name:Rainfall Rate
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - total_precipitation_rate:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mm hr-1
+      - long_name:Total Precipitation Rate
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - solid_precipitation_rate:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mm hr-1
+      - long_name:Solid Precipitation Rate
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - hail_intensity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:hits cm-2
+      - long_name:Hail Intensity
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - hail_rate:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:hits cm-2 hr-1
+      - long_name:Hail Rate
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - maximum_diameter_of_hail:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mm
+      - long_name:Maximum Diameter of Hail
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: point
+      - coordinates:latitude longitude
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_of_drops:__OPTIONAL__
+    defined_attrs:
+      - type:int
+      - dimension:time
+      - units:1
+      - long_name:Number of Pulses\Drops Counted in Integration Period
+      - _FillValue:-1000000000.0
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: sum
+      - coordinates:latitude longitude
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - equivalent_reflectivity_factor:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:dBZ
+      - standard_name:equivalent_reflectivity_factor
+      - long_name:Equivalent Radar Reflectivity Factor
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - precipitation_visibility:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:m
+      - long_name:Visibility Reduction Caused by Precipitation.
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag
+    attr_rules:
+      - rule-func:check-qc-flags
+dims-requires:
+  func: checksit.generic.check_dim_exists
+  params:
+    dimensions:
+      - diameter:__OPTIONAL__
+      - fallspeed:__OPTIONAL__
+
+required-global-attrs:
+  func: checksit.generic.check_global_attrs
+  params:
+    vocab_attrs:
+    rules_attrs:
+      measurement_technique: rule-func:match-one-of:optical|piezoelectric|tipping_bucket|drop_counting|weighing|collecting|droplet_impact
+      measurement_quanta: rule-func:string-of-length:3+
+      collection_area: rule-func:string-of-length:3+
+      laser_wavelength: rule-func:string-of-length:3+
+      laser_sample_area: rule-func:string-of-length:3+

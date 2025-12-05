@@ -1,0 +1,53 @@
+{
+    "product_boundary-layer-thickness-ceilometer_global-attributes": {
+        "laser_wavelength": {
+            "global_attribute_id": "laser_wavelength",
+            "description": "wavelength of ceilometer laser",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "nominal_laser_pulse_energy": {
+            "global_attribute_id": "nominal_laser_pulse_energy",
+            "description": "nominal laser pulse energy",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "pulse_repetition_frequency": {
+            "global_attribute_id": "pulse_repetition_frequency",
+            "description": "pulse repetition frequency",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "lens_diameter": {
+            "global_attribute_id": "lens_diameter",
+            "description": "lens diameter",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "beam_divergence": {
+            "global_attribute_id": "beam_divergence",
+            "description": "beam divergence",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "pulse_length": {
+            "global_attribute_id": "pulse_length",
+            "description": "pulse length",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        },
+        "sampling_frequency": {
+            "global_attribute_id": "sampling_frequency",
+            "description": "sampling frequency",
+            "fixed_value": "",
+            "compliance_checking_rules": "String: min 3 characters",
+            "convention_providence": null
+        }
+    }
+}

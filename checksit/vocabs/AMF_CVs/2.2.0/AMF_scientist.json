@@ -1,0 +1,112 @@
+{
+    "scientist": {
+        "barbara.brooks@ncas.ac.uk": {
+            "name": "Barbara Brooks",
+            "primary_email": "barbara.brooks@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0001-8932-9256"
+        },
+        "emily.norton@ncas.ac.uk": {
+            "name": "Emily Norton",
+            "primary_email": "emily.norton@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-8879-9325"
+        },
+        "hugo.ricketts@ncas.ac.uk": {
+            "name": "Hugo Ricketts",
+            "primary_email": "hugo.ricketts@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-1708-2431"
+        },
+        "paul.i.williams@ncas.ac.uk": {
+            "name": "Paul I. Williams",
+            "primary_email": "paul.i.williams@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": null
+        },
+        "sebastian.soshea@ncas.ac.uk": {
+            "name": "Sebastian O'Shea",
+            "primary_email": "sebastian.soshea@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-0489-1723"
+        },
+        "lisa.whalley@ncas.ac.uk": {
+            "name": "Lisa Whalley",
+            "primary_email": "lisa.whalley@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-4486-9029"
+        },
+        "trevor.ingham@ncas.ac.uk": {
+            "name": "Trevor Ingham",
+            "primary_email": "trevor.ingham@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": null
+        },
+        "lindsay.bennett@ncas.ac.uk": {
+            "name": "Lindsay Bennett",
+            "primary_email": "lindsay.bennett@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-0325-0449"
+        },
+        "katie.read@ncas.ac.uk": {
+            "name": "Katie Read",
+            "primary_email": "katie.read@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-4044-455X"
+        },
+        "james.hopkins@ncas.ac.uk": {
+            "name": "James Hopkins",
+            "primary_email": "james.hopkins@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-0447-2633"
+        },
+        "james.lee@ncas.ac.uk": {
+            "name": "James Lee",
+            "primary_email": "james.lee@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": null
+        },
+        "grant.forster@ncas.ac.uk": {
+            "name": "Grant Forster",
+            "primary_email": "grant.forster@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0003-1783-9307"
+        },
+        "paul.hayden@ncas.ac.uk": {
+            "name": "Paul Hayden",
+            "primary_email": "paul.hayden@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0003-3492-3009"
+        },
+        "philip.rosenberg@ncas.ac.uk": {
+            "name": "Phil Rosenberg",
+            "primary_email": "philip.rosenberg@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-6920-0559"
+        },
+        "judith.jeffery@ncas.ac.uk": {
+            "name": "Judith Jeffery",
+            "primary_email": "judith.jeffery@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-9273-4380"
+        },
+        "emal.rumi@ncas.ac.uk": {
+            "name": "Emal Rumi",
+            "primary_email": "emal.rumi@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0001-6617-4941"
+        },
+        "chris.walden@ncas.ac.uk": {
+            "name": "Chris Walden",
+            "primary_email": "chris.walden@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0002-5718-466X"
+        },
+        "david.hooper@ncas.ac.uk": {
+            "name": "David Hooper",
+            "primary_email": "david.hooper@ncas.ac.uk",
+            "previous_emails": [],
+            "orcid": "https://orcid.org/0000-0003-0956-6732"
+        }
+    }
+}

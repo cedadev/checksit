@@ -1,0 +1,244 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_pm1_ambient_aerosol_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug m-3
+      - standard_name:mass_concentration_of_pm1_ambient_aerosol_in_air
+      - long_name:Mass Concentration of PM1 Ambient Aerosol in Air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_pm2p5_ambient_aerosol_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug m-3
+      - standard_name:mass_concentration_of_pm2p5_ambient_aerosol_in_air
+      - long_name:Mass Concentration of PM2.5 Ambient Aerosol in Air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_pm4_ambient_aerosol_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug m-3
+      - long_name:Mass Concentration of PM4 Ambient Aerosol in Air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_pm10_ambient_aerosol_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug m-3
+      - standard_name:mass_concentration_of_pm10_ambient_aerosol_in_air
+      - long_name:Mass Concentration of PM10 Ambient Aerosol in Air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_total_pm_ambient_aerosol_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:ug m-3
+      - long_name:Mass Concentration of Total PM Ambient Aerosol Particles in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - number_concentration_of_ambient_aerosol_particles_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:cm-3
+      - standard_name:number_concentration_of_ambient_aerosol_particles_in_air
+      - long_name:Number Concentration of Ambient Aerosol Particles in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - air_pressure:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:hPa
+      - standard_name:air_pressure
+      - long_name:Air Pressure
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - air_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:K
+      - standard_name:air_temperature
+      - long_name:Air Temperature
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - relative_humidity:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:%
+      - standard_name:relative_humidity
+      - long_name:Relative Humidity
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - cell_methods:time: mean
+      - coordinates:latitude longitude
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_pm1:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: PM1
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_pm2p5:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: PM2.5
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_pm4:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: PM4
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_pm10:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: PM10
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_total_pm:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Total PM
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_total_number:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Total Number
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_temperature:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Temperature
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_relative_humidity:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Relative Humidity
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_pressure:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: Pressure
+    attr_rules:
+      - rule-func:check-qc-flags

@@ -1,0 +1,22 @@
+{
+    "product_liquid-water-content_variable": {
+        "cloud_liquid_water_content": {
+            "type": "float32",
+            "dimension": "time",
+            "units": "g m-3",
+            "long_name": "Cloud Liquid Water Content",
+            "_FillValue": -1e+20,
+            "valid_min": "<derived from file>",
+            "valid_max": "<derived from file>",
+            "coordinates": "latitude longitude"
+        },
+        "qc_flag": {
+            "type": "byte",
+            "dimension": "time",
+            "units": "1",
+            "long_name": "Data Quality flag",
+            "flag_values": "0b,1b, 2b",
+            "flag_meanings": "not_used|good_data |bad_data_do not_use"
+        }
+    }
+}

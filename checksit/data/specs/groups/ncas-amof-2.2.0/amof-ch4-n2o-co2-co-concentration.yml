@@ -1,0 +1,296 @@
+var-requires0:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_methane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_methane_in_air
+      - long_name:Mole Fraction of Methane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH4
+var-requires1:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_methane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_methane_in_air
+      - long_name:Mass Fraction of Methane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH4
+var-requires2:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_methane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_methane_in_air
+      - long_name:Mole Concentration of Methane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH4
+var-requires3:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_methane_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_methane_in_air
+      - long_name:Mass Concentration of Methane in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CH4
+var-requires4:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_nitrous_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_nitrous_oxide_in_air
+      - long_name:Mole Fraction of Nitrous Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:N2O
+var-requires5:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_nitrous_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_nitrous_oxide_in_air
+      - long_name:Mass Fraction of Nitrous Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:N2O
+var-requires6:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_nitrous_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_nitrous_oxide_in_air
+      - long_name:Mole Concentration of Nitrous Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:N2O
+var-requires7:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_nitrous_oxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_nitrous_oxide_in_air
+      - long_name:Mass Concentration of Nitrous Oxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:N2O
+var-requires8:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_carbon_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_carbon_dioxide_in_air
+      - long_name:Mole Fraction of Carbon Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO2
+var-requires9:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_carbon_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_carbon_dioxide_in_air
+      - long_name:Mass Fraction of Carbon Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO2
+var-requires10:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_carbon_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_carbon_dioxide_in_air
+      - long_name:Mole Concentration of Carbon Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO2
+var-requires11:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_carbon_dioxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_carbon_dioxide_in_air
+      - long_name:Mass Concentration of Carbon Dioxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO2
+var-requires12:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_fraction_of_carbon_monoxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mole_fraction_of_carbon_monoxide_in_air
+      - long_name:Mole Fraction of Carbon Monoxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO
+var-requires13:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_fraction_of_carbon_monoxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - standard_name:mass_fraction_of_carbon_monoxide_in_air
+      - long_name:Mass Fraction of Carbon Monoxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO
+var-requires14:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mole_concentration_of_carbon_monoxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:mol m-3
+      - standard_name:mole_concentration_of_carbon_monoxide_in_air
+      - long_name:Mole Concentration of Carbon Monoxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO
+var-requires15:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - mass_concentration_of_carbon_monoxide_in_air:__OPTIONAL__
+    defined_attrs:
+      - type:float
+      - dimension:time
+      - units:kg m-3
+      - standard_name:mass_concentration_of_carbon_monoxide_in_air
+      - long_name:Mass Concentration of Carbon Monoxide in air
+      - _FillValue:-1e+20
+      - valid_min:<derived from file>
+      - valid_max:<derived from file>
+      - coordinates:latitude longitude
+      - chemical_species:CO
+var-requires16:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_ch4:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1.00E+00
+      - long_name:Data Quality flag: CH4
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires17:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_n2o:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1.00E+00
+      - long_name:Data Quality flag: N2O
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires18:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_co2:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CO2
+    attr_rules:
+      - rule-func:check-qc-flags
+var-requires19:
+  func: checksit.generic.check_var
+  params:
+    variable:
+      - qc_flag_co:__OPTIONAL__
+    defined_attrs:
+      - type:byte
+      - dimension:time
+      - units:1
+      - long_name:Data Quality flag: CO
+    attr_rules:
+      - rule-func:check-qc-flags
