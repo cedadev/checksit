@@ -69,7 +69,7 @@ var-requires4:
       - units:1
       - long_name:Data Quality flag: NO3
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -81,7 +81,7 @@ var-requires5:
       - units:1
       - long_name:Data Quality flag: SO4
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -93,7 +93,7 @@ var-requires6:
       - units:1
       - long_name:Data Quality flag: NH3
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -105,4 +105,4 @@ var-requires7:
       - units:1
       - long_name:Data Quality flag: Organics
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags

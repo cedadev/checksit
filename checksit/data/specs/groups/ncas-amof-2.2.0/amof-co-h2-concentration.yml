@@ -133,7 +133,7 @@ var-requires8:
       - units:1
       - long_name:Data Quality flag: CO
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -145,4 +145,4 @@ var-requires9:
       - units:1
       - long_name:Data Quality flag: H2
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags

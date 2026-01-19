@@ -1,3 +1,4 @@
+      platform: __vocabs__:AMF_CVs/2.2.0/AMF_platform:platform:__all__
 var-requires0:
   func: checksit.generic.check_var
   params:
@@ -208,7 +209,7 @@ var-requires14:
       - units:1
       - long_name:Data Quality flag: Temperature
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -220,7 +221,7 @@ var-requires15:
       - units:1
       - long_name:Data Quality flag: Pressure
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -232,7 +233,7 @@ var-requires16:
       - units:1
       - long_name:Data Quality flag: Instrument Counts
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -244,7 +245,7 @@ var-requires17:
       - units:1
       - long_name:Data Quality flag: Ambient Particle Number per Channel
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:

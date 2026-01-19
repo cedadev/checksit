@@ -1035,7 +1035,7 @@ var-requires68:
       - units:1
       - long_name:Data Quality flag: C2H6
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires69:
   func: checksit.generic.check_var
   params:
@@ -1047,7 +1047,7 @@ var-requires69:
       - units:1
       - long_name:Data Quality flag: C2H4
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires70:
   func: checksit.generic.check_var
   params:
@@ -1059,7 +1059,7 @@ var-requires70:
       - units:1
       - long_name:Data Quality flag: C3H8
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires71:
   func: checksit.generic.check_var
   params:
@@ -1071,7 +1071,7 @@ var-requires71:
       - units:1
       - long_name:Data Quality flag: C3H6
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires72:
   func: checksit.generic.check_var
   params:
@@ -1083,7 +1083,7 @@ var-requires72:
       - units:1
       - long_name:Data Quality flag: C4H10
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires73:
   func: checksit.generic.check_var
   params:
@@ -1095,7 +1095,7 @@ var-requires73:
       - units:1
       - long_name:Data Quality flag: C2H2
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires74:
   func: checksit.generic.check_var
   params:
@@ -1107,7 +1107,7 @@ var-requires74:
       - units:1
       - long_name:Data Quality flag: C5H12
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires75:
   func: checksit.generic.check_var
   params:
@@ -1119,7 +1119,7 @@ var-requires75:
       - units:1
       - long_name:Data Quality flag: C5H8
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires76:
   func: checksit.generic.check_var
   params:
@@ -1131,4 +1131,4 @@ var-requires76:
       - units:1
       - long_name:Data Quality flag: C6H6
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags

@@ -257,7 +257,7 @@ var-requires16:
       - units:1.00E+00
       - long_name:Data Quality flag: CH4
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -269,7 +269,7 @@ var-requires17:
       - units:1.00E+00
       - long_name:Data Quality flag: N2O
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -281,7 +281,7 @@ var-requires18:
       - units:1
       - long_name:Data Quality flag: CO2
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -293,4 +293,4 @@ var-requires19:
       - units:1
       - long_name:Data Quality flag: CO
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags

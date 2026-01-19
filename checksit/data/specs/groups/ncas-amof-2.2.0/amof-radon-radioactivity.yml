@@ -44,7 +44,7 @@ var-requires2:
       - units:1
       - long_name:Data Quality flag
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 
 required-global-attrs:
   func: checksit.generic.check_global_attrs

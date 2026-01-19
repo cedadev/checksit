@@ -166,7 +166,7 @@ var-requires10:
       - units:1
       - long_name:Data Quality flag: Mean Winds
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -178,7 +178,7 @@ var-requires11:
       - units:1
       - long_name:Data Quality flag: Eastward Wind Component (U)
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -190,7 +190,7 @@ var-requires12:
       - units:1
       - long_name:Data Quality flag: Northward Wind Component (V)
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -202,7 +202,7 @@ var-requires13:
       - units:1
       - long_name:Data Quality flag: Upward Air Velocity (W)
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -214,7 +214,7 @@ var-requires14:
       - units:1
       - long_name:Data Quality flag: Backscatter
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -226,7 +226,7 @@ var-requires15:
       - units:1
       - long_name:Data Quality flag: Background Noise
     rules_attrs:
-      - rule-func:check-qc-flags
+      - flag_values: rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists
   params:
