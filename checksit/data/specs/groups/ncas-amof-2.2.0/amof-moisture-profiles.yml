@@ -55,7 +55,7 @@ var-requires3:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Surface Temperature
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires4:
   func: checksit.generic.check_var
@@ -67,7 +67,7 @@ var-requires4:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Surface Relative Humidity
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires5:
   func: checksit.generic.check_var
@@ -79,7 +79,7 @@ var-requires5:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Surface Pressure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires6:
   func: checksit.generic.check_var
@@ -91,7 +91,7 @@ var-requires6:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Precipitation
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires7:
   func: checksit.generic.check_var
@@ -103,7 +103,7 @@ var-requires7:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 1 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires8:
   func: checksit.generic.check_var
@@ -115,7 +115,7 @@ var-requires8:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 2 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires9:
   func: checksit.generic.check_var
@@ -127,7 +127,7 @@ var-requires9:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 3 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires10:
   func: checksit.generic.check_var
@@ -139,7 +139,7 @@ var-requires10:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 4 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires11:
   func: checksit.generic.check_var
@@ -151,7 +151,7 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 5 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
@@ -163,7 +163,7 @@ var-requires12:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 6 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
@@ -175,7 +175,7 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 7 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
@@ -187,7 +187,7 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 8 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
@@ -199,7 +199,7 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 9 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
@@ -211,7 +211,7 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 10 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
@@ -223,7 +223,7 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 11 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
@@ -235,7 +235,7 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 12 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
@@ -247,7 +247,7 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 13 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
@@ -259,7 +259,7 @@ var-requires20:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Receiver channel 14 failure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
@@ -271,7 +271,7 @@ var-requires21:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Thermal stability of temperature receiver bank
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires22:
   func: checksit.generic.check_var
@@ -283,7 +283,7 @@ var-requires22:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Thermal stability of moisture receiver bank
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists

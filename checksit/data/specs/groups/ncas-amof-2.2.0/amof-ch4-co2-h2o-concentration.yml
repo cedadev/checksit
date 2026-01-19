@@ -193,7 +193,7 @@ var-requires12:
       - dimension:time
       - units:1.00E+00
       - long_name:Data Quality flag: CH4
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
@@ -205,7 +205,7 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CO2
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
@@ -217,5 +217,5 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: H2O
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags

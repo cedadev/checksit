@@ -226,7 +226,7 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Sonic Temperature
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
@@ -238,7 +238,7 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind Speed
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
@@ -250,7 +250,7 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind Direction
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
@@ -262,7 +262,7 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Eastward Wind Component (U)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
@@ -274,7 +274,7 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Northward Wind Component (V)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
@@ -286,5 +286,5 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Upward Air Velocity Component (W)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags

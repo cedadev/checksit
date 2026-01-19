@@ -281,7 +281,7 @@ var-requires18:
       - dimension:time, altitude
       - units:1
       - long_name:Data Quality flag: Mean Winds
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
@@ -293,7 +293,7 @@ var-requires19:
       - dimension:time, altitude
       - units:1
       - long_name:Data Quality flag: SNR Beam 1 (back panel)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
@@ -305,7 +305,7 @@ var-requires20:
       - dimension:time, altitude
       - units:1
       - long_name:Data Quality flag: SNR Beam 2 (side panel)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
@@ -317,7 +317,7 @@ var-requires21:
       - dimension:time, altitude
       - units:1
       - long_name:Data Quality flag: SNR Beam 3 (vertical beam from centre panel)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires22:
   func: checksit.generic.check_var
@@ -329,7 +329,7 @@ var-requires22:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Rain Detected
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists

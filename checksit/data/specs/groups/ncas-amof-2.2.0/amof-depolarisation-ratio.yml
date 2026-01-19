@@ -153,7 +153,7 @@ var-requires10:
       - dimension:time, index_of_range
       - units:1
       - long_name:Data Quality flag:  Attenuated backscatter coefficient (Planar Polarised)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires11:
   func: checksit.generic.check_var
@@ -165,7 +165,7 @@ var-requires11:
       - dimension:time, index_of_range
       - units:1
       - long_name:Data Quality flag:  Attenuated backscatter coefficient (Cross Polarised)
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
@@ -177,7 +177,7 @@ var-requires12:
       - dimension:time, index_of_range
       - units:1
       - long_name:Data Quality flag:  Depolarisation Ratio
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists

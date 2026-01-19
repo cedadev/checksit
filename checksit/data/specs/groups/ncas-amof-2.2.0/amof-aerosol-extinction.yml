@@ -52,7 +52,7 @@ var-requires3:
       - dimension:time, altitude
       - units:1
       - long_name:Data Quality flag: 355nm
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires4:
   func: checksit.generic.check_var
@@ -64,7 +64,7 @@ var-requires4:
       - dimension:time, altitude
       - units:1
       - long_name:Data Quality flag: 316nm
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists

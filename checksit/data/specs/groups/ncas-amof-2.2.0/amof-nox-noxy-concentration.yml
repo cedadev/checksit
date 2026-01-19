@@ -248,7 +248,7 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: NO
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
@@ -260,7 +260,7 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: NO2
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
@@ -272,7 +272,7 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: NOx
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
@@ -284,5 +284,5 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: NOy
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags

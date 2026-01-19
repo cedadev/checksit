@@ -51,5 +51,5 @@ var-requires3:
       - dimension:time
       - units:1
       - long_name:Data quality flag for all variables
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags

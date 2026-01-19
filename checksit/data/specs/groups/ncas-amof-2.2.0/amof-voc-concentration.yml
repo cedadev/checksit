@@ -1034,7 +1034,7 @@ var-requires68:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C2H6
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires69:
   func: checksit.generic.check_var
@@ -1046,7 +1046,7 @@ var-requires69:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C2H4
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires70:
   func: checksit.generic.check_var
@@ -1058,7 +1058,7 @@ var-requires70:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C3H8
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires71:
   func: checksit.generic.check_var
@@ -1070,7 +1070,7 @@ var-requires71:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C3H6
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires72:
   func: checksit.generic.check_var
@@ -1082,7 +1082,7 @@ var-requires72:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C4H10
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires73:
   func: checksit.generic.check_var
@@ -1094,7 +1094,7 @@ var-requires73:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C2H2
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires74:
   func: checksit.generic.check_var
@@ -1106,7 +1106,7 @@ var-requires74:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C5H12
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires75:
   func: checksit.generic.check_var
@@ -1118,7 +1118,7 @@ var-requires75:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C5H8
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires76:
   func: checksit.generic.check_var
@@ -1130,5 +1130,5 @@ var-requires76:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: C6H6
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags

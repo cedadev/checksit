@@ -307,7 +307,7 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Temperature
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
@@ -319,7 +319,7 @@ var-requires20:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Relative Humidity
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
@@ -331,7 +331,7 @@ var-requires21:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Pressure
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires22:
   func: checksit.generic.check_var
@@ -343,7 +343,7 @@ var-requires22:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind Speed
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires23:
   func: checksit.generic.check_var
@@ -355,7 +355,7 @@ var-requires23:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Wind From Direction
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires24:
   func: checksit.generic.check_var
@@ -367,7 +367,7 @@ var-requires24:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Radiation
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires25:
   func: checksit.generic.check_var
@@ -379,7 +379,7 @@ var-requires25:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Precipitation
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires26:
   func: checksit.generic.check_var
@@ -391,7 +391,7 @@ var-requires26:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Downwelling Total Irradiance
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires27:
   func: checksit.generic.check_var
@@ -403,5 +403,5 @@ var-requires27:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: Net Total Irradiance
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags

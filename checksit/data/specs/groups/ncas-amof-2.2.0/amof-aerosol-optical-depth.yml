@@ -52,7 +52,7 @@ var-requires3:
       - dimension:time, index
       - units:1
       - long_name:Data Quality flag
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists

@@ -55,7 +55,7 @@ var-requires3:
       - dimension:time, index
       - units:1
       - long_name:Data Quality flag: Soil Heat Flux
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires4:
   func: checksit.generic.check_var
@@ -67,7 +67,7 @@ var-requires4:
       - dimension:time, index
       - units:1
       - long_name:Data Quality flag: Soil Temperature
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires5:
   func: checksit.generic.check_var
@@ -79,7 +79,7 @@ var-requires5:
       - dimension:time, index
       - units:1
       - long_name:Data Quality flag: Soil Water Potential
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 dims-requires:
   func: checksit.generic.check_dim_exists

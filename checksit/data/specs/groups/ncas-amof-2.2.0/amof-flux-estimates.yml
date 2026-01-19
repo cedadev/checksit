@@ -172,7 +172,7 @@ var-requires11:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew U
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires12:
   func: checksit.generic.check_var
@@ -184,7 +184,7 @@ var-requires12:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew V
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires13:
   func: checksit.generic.check_var
@@ -196,7 +196,7 @@ var-requires13:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew W
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires14:
   func: checksit.generic.check_var
@@ -208,7 +208,7 @@ var-requires14:
       - dimension:time
       - units:1
       - long_name:Quality flag: Skew Ts
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires15:
   func: checksit.generic.check_var
@@ -220,7 +220,7 @@ var-requires15:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis U
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires16:
   func: checksit.generic.check_var
@@ -232,7 +232,7 @@ var-requires16:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis V
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires17:
   func: checksit.generic.check_var
@@ -244,7 +244,7 @@ var-requires17:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis W
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires18:
   func: checksit.generic.check_var
@@ -256,7 +256,7 @@ var-requires18:
       - dimension:time
       - units:1
       - long_name:Quality flag: Kurtosis Ts
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires19:
   func: checksit.generic.check_var
@@ -268,7 +268,7 @@ var-requires19:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WU
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires20:
   func: checksit.generic.check_var
@@ -280,7 +280,7 @@ var-requires20:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WV
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires21:
   func: checksit.generic.check_var
@@ -292,7 +292,7 @@ var-requires21:
       - dimension:time
       - units:1
       - long_name:Quality flag: Steady State Class WTs
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires22:
   func: checksit.generic.check_var
@@ -304,7 +304,7 @@ var-requires22:
       - dimension:time
       - units:1
       - long_name:Quality flag: WU
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires23:
   func: checksit.generic.check_var
@@ -316,7 +316,7 @@ var-requires23:
       - dimension:time
       - units:1
       - long_name:Quality flag: WV
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires24:
   func: checksit.generic.check_var
@@ -328,7 +328,7 @@ var-requires24:
       - dimension:time
       - units:1
       - long_name:Quality flag: WTs
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires25:
   func: checksit.generic.check_var
@@ -340,5 +340,5 @@ var-requires25:
       - dimension:time
       - units:1
       - long_name:Quality flag: General Turbulent Characteristic of W Class
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags

@@ -534,7 +534,7 @@ var-requires36:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CCl4
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires37:
   func: checksit.generic.check_var
@@ -546,7 +546,7 @@ var-requires37:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CHBr3
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires38:
   func: checksit.generic.check_var
@@ -558,7 +558,7 @@ var-requires38:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2I2
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires39:
   func: checksit.generic.check_var
@@ -570,7 +570,7 @@ var-requires39:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2ICl
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires40:
   func: checksit.generic.check_var
@@ -582,7 +582,7 @@ var-requires40:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CHBrCl2
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires41:
   func: checksit.generic.check_var
@@ -594,7 +594,7 @@ var-requires41:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2Br2
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires42:
   func: checksit.generic.check_var
@@ -606,7 +606,7 @@ var-requires42:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CHCl3
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires43:
   func: checksit.generic.check_var
@@ -618,7 +618,7 @@ var-requires43:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH3I
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
 var-requires44:
   func: checksit.generic.check_var
@@ -630,5 +630,5 @@ var-requires44:
       - dimension:time
       - units:1
       - long_name:Data Quality flag: CH2BrCl
-    attr_rules:
+    rules_attrs:
       - rule-func:check-qc-flags
