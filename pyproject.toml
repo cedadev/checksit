@@ -38,7 +38,7 @@ classifiers = [
 dependencies = [
     "click",
     "pyyaml",
-    "cf-python",
+    "cf-python != 3.19.0",
     "netcdf4",
     "pandas",
     "requests",
