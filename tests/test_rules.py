@@ -299,7 +299,7 @@ def test_url_checker():
 def test_relation_url_checker():
     # Test that the function correctly handles valid inputs
     assert (
-        crf.relation_url_checker("relation https://example.com", {}, label="Test") == []
+        crf.relation_url_checker("relation http://example.com", {}, label="Test") == []
     )
 
     # Test that the function correctly handles inputs without a space
