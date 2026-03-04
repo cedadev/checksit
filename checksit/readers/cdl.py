@@ -203,7 +203,7 @@ class CDLParser:
             # Remove datatype suffixes and parse as list if commas are in value
             return eval(
                 ", ".join(
-                    [part.strip().rstrip("bBcCfFiIlLsS") for part in value.split(",")]
+                    [part.strip().rstrip("bBcCfFiIlLsSuU") for part in value.split(",")]
                 )
             )
 
