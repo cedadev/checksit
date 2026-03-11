@@ -9,6 +9,9 @@ On a basic level a user can point the checksit tool at a given file and it will 
 some basic checks based on some matches that it will try to perform.
 Other options include specifying the particular checks to run or to compare with known 'good' files.
 
+.. note::
+   For a quick overview on how to run checksit on JASMIN, follow the link in the side bar.
+
 .. toctree::
    :hidden:
    :maxdepth: 1
