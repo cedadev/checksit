@@ -45,7 +45,7 @@ It does that with the following steps:
 
 
 Manually specifying templates and specs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 
 A specific template can be chosen for ``checksit`` to use by specifying the file with
 the ``-t/--template`` flag when running the check command:
