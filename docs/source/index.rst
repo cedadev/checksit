@@ -36,3 +36,4 @@ Other options include specifying the particular checks to run or to compare with
    :hidden:
 
    GitHub <https://github.com/cedadev/checksit>
+   checksit on JASMIN <https://help.jasmin.ac.uk/docs/software-on-jasmin/community-software-checksit/>
