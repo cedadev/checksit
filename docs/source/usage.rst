@@ -90,7 +90,7 @@ Multiple Files
 If you want to check multiple files, you can do so by using the ``check-files`` command and list
 all the files to check, for example:
 
-.. code-block::
+.. code-block:: bash
 
    checksit check-files /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20671201-20681130.nc /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_rcp85_land-cpm_uk_2.2km_01_day_20681201-20691130.nc
 
@@ -100,6 +100,7 @@ Brief other flags
 -----------------
 
 Some other options that can be given to the ``check`` and ``check-files`` commands include:
+
 - ``-l/--log-mode``: whether ``checksit`` should output in "standard" (default) or "compact" mode.
 - ``-w/--ignore-warnings``: if flag is given, warnings from file checks will not be printed in the output.
 - ``-p/--skip-spellcheck``: if flag is given, spellcheck that attempts to find close matches to any failed checks will be skipped.

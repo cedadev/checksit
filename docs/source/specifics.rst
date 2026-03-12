@@ -34,13 +34,13 @@ variables used for the deployment mode and data product.
 For example, for a file with data from an automatic weather station
 (\ ``ncas-aws-10``\ ) using version 2.0.0 of the standard,
 
-.. code-block::
+.. code-block:: bash
 
    checksit check ncas-aws-10_iao_20231117_surface-met_v1.0.nc
 
 is the same as
 
-.. code-block::
+.. code-block:: bash
 
    checksit check -t off -s ncas-amof-2.0.0/amof-file-name,ncas-amof-2.0.0/amof-common-land,ncas-amof-2.0.0/amof-surface-met,ncas-amof-2.0.0/amof-global-attrs ncas-aws-10_iao_20231117_surface-met_v1.0.nc
 
@@ -54,7 +54,7 @@ the file is identified as an NCAS-Radar file. There are a number of different sp
 files that cover different areas of the standard which ``checksit`` will use to check
 against the files. These spec files are:
 
-.. code-block::
+.. code-block:: bash
 
   coordinate-variables
   dimensions
@@ -78,12 +78,12 @@ value that contains "National Centre for Atmospheric Science" (case insensitive 
 then the file is identified as an NCAS-Image file. The appropriate specs are then found
 to check both global tags and photo or plot specific tags. For example,
 
-.. code-block::
+.. code-block:: bash
 
    checksit check ncas-cam-9_cao_20231117_photo_v1.0.nc
 
 is the same as
 
-.. code-block::
+.. code-block:: bash
 
    checksit check -t off -s ncas-image-1.0.0/amof-image-global-attrs,ncas-image-1.0.0/amof-photo ncas-cam-9_cao_20231117_photo_v1.0.nc

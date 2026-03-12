@@ -26,8 +26,5 @@ or by cloning the repository and installing that:
    cd checksit
    pip install .
 
-----
-
-Other installation methods might be added later.
 
 
