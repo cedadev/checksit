@@ -71,6 +71,19 @@ given one, to check the file with. To only use specs, the template option must b
 switched off by specifying ``-t off``.
 
 
+Where can I find specs to use?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Specs are provided with the ``checksit`` python package. Available specs can be seen in
+the `GitHub repository <https://github.com/cedadev/checksit/checksit/data>`_ for
+``checksit``.
+
+.. note::
+   When specifying specs, the path to the spec file should be given relative to the
+   ``specs/groups`` folder, and without the file extension, e.g. ``--specs=ceda-base``
+   or ``--specs=ncas-amof-2.0.0/amof-global-attrs``.
+
+
 Multiple Files
 --------------
 
