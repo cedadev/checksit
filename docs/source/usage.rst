@@ -42,7 +42,7 @@ It does that with the following steps:
   - If that doesn't produce a template file ``checksit`` searches the template cache,
     searching for a file with a similar name.
   - If a template file still isn't found, ``checksit`` uses a default template, called
-    `ceda-base.yml`.
+    ``ceda-base.yml``.
 
 
 Manually specifying templates and specs
