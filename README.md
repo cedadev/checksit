@@ -42,4 +42,4 @@ checksit check /badc/ukcp18/data/land-cpm/uk/2.2km/rcp85/01/rss/day/latest/rss_r
 ```
 * Attempts to find best checks to use for this file, and then runs checks.
 * A specific template can be defined using the `-t/--template` flag, or specific specs
-can be defined using the `-s/--specs` flag.
+can be defined using the `-s/--specs` flag (see docs for info).
