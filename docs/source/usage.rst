@@ -29,6 +29,7 @@ rules and vocabularies that the contents of the file being checked need to meet.
 When checking a file, if no template or spec files are given in the ``check`` command,
 ``checksit`` will attempt to find the most suitable checks to use.
 It does that with the following steps:
+
 1. ``checksit`` looks to see if there are any file-specific checks that have been
    defined for that particular file. These include the checks for NCAS data standards.
    For more information on how these file-specific checks are determined, see the
