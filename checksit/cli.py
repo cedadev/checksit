@@ -42,7 +42,6 @@ pass_config = click.make_pass_decorator(CliConfig, ensure=True)
 @click.pass_context
 def main(ctx, debug):
     """Console script for checker."""
-    #return 0
     ctx.obj = CliConfig(debug)
 
 
