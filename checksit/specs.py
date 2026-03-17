@@ -121,16 +121,18 @@ def list_specs(option: str) -> None:
     if not spec_folder.endswith("/*"):
         spec_folder = f"{spec_folder}/*"
     results = glob.glob(f"{spec_folder}")
+    if not results:
+        print(f"No spec files or folders found in {option if option != '*' else 'main spec folder'}")
+        return
     spec_files = []
     spec_folders = []
-    if results:
-        for result in results:
-            if result.endswith(".yml"):
-                spec_files.append(
-                    result.removeprefix(f"{spec_folder.removesuffix('/*')}/").removesuffix('.yml')
-                )
-            elif not "test" in result:
-                spec_folders.append(result.removeprefix(f"{spec_folder.removesuffix('/*')}/"))
+    for result in results:
+        if result.endswith(".yml"):
+            spec_files.append(
+                result.removeprefix(f"{spec_folder.removesuffix('/*')}/").removesuffix('.yml')
+            )
+        elif not "test" in result:
+            spec_folders.append(result.removeprefix(f"{spec_folder.removesuffix('/*')}/"))
     if spec_files:
         print(f"Spec files found in {option if option != '*' else 'main spec folder'}")
         for f in spec_files:
