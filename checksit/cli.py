@@ -367,5 +367,24 @@ def show_specs(config: CliConfig, spec_ids: Optional[List[str]] = None):
         config.handle_error(e)
 
 
+@main.command()
+@click.argument("option", nargs=1, default="*")
+@pass_config
+def list_specs(config: CliConfig, option: str = "*"):
+    """CLI call to show list of available specs.
+
+    Reads options from the command line and calls the list_specs function to print a
+    list of specs available in a given location in the specs directory. If the location
+    is a specific spec file, this is printed instead (using the `show_specs` option).
+
+    Args:
+        option: Location in specs directory to list, with the name of the spec file or folder
+    """
+    try:
+        specs.list_specs(option)
+    except Exception as e:
+        config.handle_error(e)
+
+
 if __name__ == "__main__":
     main()

@@ -105,6 +105,43 @@ def show_specs(spec_ids: Optional[List[str]] = None) -> None:
         print(json.dumps(spec, indent=4).replace("\\\\", "\\"))
 
 
+def list_specs(option: str) -> None:
+    """List spec files and folders in given specs directory.
+
+    For a given location in the specs directory, lists all spec files and folders. If
+    the location is a specific spec file, this is printed instead.
+
+    Args:
+        option: location in specs directory to list, with the name of the spec file or folder
+    """
+    spec_folder = f"{specs_dir}/{option}"
+    if "*" not in option and glob.glob(f"{spec_folder}.yml"):
+        show_specs([option])
+        return
+    if not spec_folder.endswith("/*"):
+        spec_folder = f"{spec_folder}/*"
+    results = glob.glob(f"{spec_folder}")
+    spec_files = []
+    spec_folders = []
+    if results:
+        for result in results:
+            if result.endswith(".yml"):
+                spec_files.append(
+                    result.removeprefix(f"{spec_folder.removesuffix('/*')}/").removesuffix('.yml')
+                )
+            elif not "test" in result:
+                spec_folders.append(result.removeprefix(f"{spec_folder.removesuffix('/*')}/"))
+    if spec_files:
+        print(f"Spec files found in {option if option != '*' else 'main spec folder'}")
+        for f in spec_files:
+            print(f"[FILE]: {f}")
+        print("")
+    if spec_folders:
+        print(f"Spec folders found in {option if option != '*' else 'main spec folder'}")
+        for d in spec_folders:
+            print(f"[DIR]: {d}")
+
+
 class SpecificationChecker:
     """Manage checks from spec files.
 
