@@ -16,7 +16,7 @@ the terminal if the virtual environment is active. To check a file, the command
 ``checksit`` will then look at the file, attempt to work out what template or specs to
 check the file with, and then print out the results of the checks. See the
 `understanding ouput page <understanding-output.html>`_ for more information on how to
-read and interpret the output from ``checksit``..
+read and interpret the output from ``checksit``.
 
 
 How does ``checksit`` decide what checks to use?
