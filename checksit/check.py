@@ -354,9 +354,9 @@ class Checker:
         template = "auto"
         specs = None
         # find appropriate specs depending on convention
-        if file_path.split(".")[-1] == "nc" and ":Conventions" in file_content.cdl:
+        if file_path.split(".")[-1] == "nc" and ":conventions" in file_content.cdl.lower():
             conventions = (
-                file_content.cdl.split(":Conventions =")[1].split(";")[0].strip()
+                file_content.cdl.lower().split(":conventions =")[1].split(";")[0].strip()
             )
             # NCAS-GENERAL file
             if any(
@@ -367,7 +367,7 @@ class Checker:
                     print("\nNCAS-AMOF file detected, finding correct spec files")
                     print("Finding correct AMOF version...")
                 version_number = (
-                    conventions[conventions.index("NCAS-") :]
+                    conventions[conventions.upper().index("NCAS-") :]
                     .split("-")[2]
                     .replace('"', "")
                 )
@@ -591,6 +591,9 @@ class Checker:
                 (
                     "Conventions" in file_content.global_attrs.keys() and
                     "ncas-" in file_content.global_attrs["Conventions"].lower()
+                ) or (
+                    "conventions" in file_content.global_attrs.keys() and
+                    "ncas-" in file_content.global_attrs["conventions"].lower()
                 ) or (
                     "XMP-photoshop:Instructions" in file_content.global_attrs.keys() and
                     "national centre for atmospheric science" in file_content.global_attrs["XMP-photoshop:Instructions"].lower()
