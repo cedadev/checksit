@@ -472,7 +472,7 @@ class Checker:
                 for name in RADAR_CONVENTION_PREFIXES
             ):
                 version_number = (
-                    conventions[conventions.index("NCAS-") :]
+                    conventions[conventions.upper().index("NCAS-") :]
                     .split("-")[2]
                     .split(" ")[0]
                     .replace('"', "")
