@@ -39,6 +39,7 @@ dependencies = [
     "click",
     "pyyaml",
     "cf-python < 3.19.0 ; python_version <= '3.10'",
+    "cf-python ; python_version >= '3.11'",
     "netcdf4",
     "pandas",
     "requests",
