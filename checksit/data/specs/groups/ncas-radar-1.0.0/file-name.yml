@@ -1,0 +1,9 @@
+file-name-format:
+  func: checksit.generic.check_file_name
+  params:
+    vocab_checks:
+      instrument: __URL__raw.githubusercontent.com/ncasuk/ncas-data-instrument-vocabs/__latest__/AMF_CVs/AMF_ncas_instrument.json:ncas_instrument:__all__
+    rule_checks:
+      data_product: rule-func:match-one-of:birdbath|vol|rhi|ppi|radar-velocity
+      platform: rule-func:ceda-platform||rule-func-warning:ncas-platform
+      file_version: regex-rule:ncas-radar-file-version

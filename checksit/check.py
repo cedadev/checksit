@@ -481,6 +481,7 @@ class Checker:
                     version_number = f"{version_number}.0"
                 template = "off"
                 spec_names = [
+                    "file-name",
                     "coordinate-variables",
                     "dimensions",
                     "global-attrs",
