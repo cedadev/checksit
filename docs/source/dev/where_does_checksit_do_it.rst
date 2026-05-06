@@ -144,6 +144,10 @@ checks, managed by the ``Rules`` class in ``checksit/rules/rules.py``. There are
      - ``r"-?\d+(\.\d+)?\sm"``
    * - "ncas-email"
      - ``r"[^@\s]+@ncas.ac.uk"``
+   * - "ncas-general-file-version"
+     - ``r"v[0-9]+(\.[0-9]+)"``
+   * - "ncas-radar-file-version"
+     - ``r"v[0-9]+(\.[0-9]+){2,}"``
 
 
 where ``NOT_APPLICABLE_RULES`` cover phrases such as "Not Available", "Not applicable", "N/A" and

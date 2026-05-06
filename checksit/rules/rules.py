@@ -118,6 +118,14 @@ class Rules:
                 "regex-rule": r"[^@\s]+@ncas.ac.uk",
                 "example": "sam.jones@ncas.ac.uk",
             },
+            "ncas-general-file-version": {
+                "regex-rule": r"v[0-9]+(\.[0-9]+)",
+                "example": "v1.0",
+            },
+            "ncas-radar-file-version": {
+                "regex-rule": r"v[0-9]+(\.[0-9]+){2,}",
+                "example": "v1.0.0",
+            },
         }
 
     def _map_type_rule(self, type_rule: str) -> type:
