@@ -737,16 +737,39 @@ def check_file_name(
             errors.append(
                 f"[file name]: Invalid file name format - unknown data product '{file_name_parts[3]}'"
             )
+    elif "data_product" in rule_checks.keys():
+        dp_rules_check = rules.check(
+            rule_checks["data_product"],
+            file_name_parts[3],
+            label="[file name]: Invalid file name format -",
+        )
+        if dp_rules_check != ([], []):
+            rule_errors, rule_warnings = dp_rules_check
+            if rule_errors != []:
+                errors.extend(rule_errors)
+            if rule_warnings != []:
+                warnings.extend(rule_warnings)
     else:
         msg = "No data product vocab defined in specs"
         raise KeyError(msg)
 
     # check version number format
     version_component = file_name_parts[-1].split(".nc")[0]
-    if not re.match(r"^v\d.\d$", version_component):
-        errors.append(
-            f"[file name]: Invalid file name format - incorrect file version number '{version_component}'"
+    if "file_version" in rule_checks.keys():
+        file_version_check = rules.check(
+            rule_checks["file_version"],
+            version_component,
+            label="[file name]: Invalid file name format -",
         )
+        if file_version_check != ([], []):
+            rule_errors, rule_warnings = file_version_check
+            if rule_errors != []:
+                errors.extend(rule_errors)
+            if rule_warnings != []:
+                warnings.extend(rule_warnings)
+    else:
+        msg = "No file version rule defined in specs"
+        raise KeyError(msg)
 
     # check number of options - max length of splitted file name
     if len(file_name_parts) > 8:
