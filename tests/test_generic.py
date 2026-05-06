@@ -411,7 +411,8 @@ def test_check_file_name():
         "data_product": "__vocabs__:tests/test_products:test_products"
     }
     rule_checks = {
-        "platform": "rule-func:match-one-of:plat1|plat2"
+        "platform": "rule-func:match-one-of:plat1|plat2",
+        "file_version": r"regex:^v[0-9]+(\.[0-9]+)$",
     }
     file_name = "inst3_plat1_20220101_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
@@ -445,7 +446,7 @@ def test_check_file_name():
     # Test that the function correctly identifies invalid version number format
     file_name = "inst1_plat1_20220101_prod1_v10.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - incorrect file version number 'v10'"]
+    assert errors == ["[file name]: Invalid file name format - Value 'v10' does not match regular expression: '^v[0-9]+(\\.[0-9]+)$'."]
     assert warnings == []
 
     # Test that the function correctly identifies too many options in file name
