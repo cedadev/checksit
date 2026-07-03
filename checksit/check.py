@@ -457,11 +457,13 @@ class Checker:
                 deploy_spec = f"{spec_folder}/amof-common-{deployment_mode}"
                 product = file_path.split("/")[-1].split("_")[3]
                 product_spec = f"{spec_folder}/amof-{product}"
+                file_name_spec = f"{spec_folder}/amof-file-name" if file_path.split("/")[-1].startswith("ncas-") else f"{spec_folder}/community-file-name"
+                global_attrs_spec = f"{spec_folder}/amof-global-attrs" if file_path.split("/")[-1].startswith("ncas-") else f"{spec_folder}/community-global-attrs"
                 specs = [
-                    f"{spec_folder}/amof-file-name",
+                    file_name_spec,
                     deploy_spec,
                     product_spec,
-                    f"{spec_folder}/amof-global-attrs",
+                    global_attrs_spec,
                 ]
                 # don't need to do template check
                 template = "off"
