@@ -6,4 +6,4 @@ file-name-format:
       data_product: __vocabs__:AMF_CVs/2.2.0/AMF_product:product
     rule_checks:
       file_version: regex-rule:ncas-general-file-version
-      platform: rule-func:ceda-platform||rule-func-warning:ncas-platform
+      platform: rule-func:ceda-platform
