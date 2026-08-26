@@ -5,9 +5,10 @@ import re
 import yaml
 import subprocess as sp
 import sys
-from typing import Tuple, List, Dict, Union
+from typing import Tuple, List, Dict
 
 from ..cvs import vocabs, vocabs_prefix
+from .base import BaseReader
 
 
 def get_output(cmd: str) -> str:
@@ -23,7 +24,7 @@ def get_output(cmd: str) -> str:
     return subp.stdout.read().decode("utf-8")
 
 
-class CDLParser:
+class CDLParser(BaseReader):
     """Parse a CDL file or netCDF file into dictionaries.
 
     Extract information from netCDF files or CDL files into a dictionaries for
@@ -47,7 +48,7 @@ class CDLParser:
         inpt: str,
         verbose: bool = False,
     ) -> None:
-        """Initialise the CDLParser and parse the input file.
+        """Initialise the CDLParser.
 
         Args:
             inpt: The input file path or CDL content.
@@ -55,24 +56,27 @@ class CDLParser:
         """
         self.inpt = inpt
         self.verbose = verbose
-        self.fmt_errors = []
-        self._parse(inpt)
-        self._check_format()
+        self.fmt_errors: List[str] = []
+        self.global_attrs: Dict[str, str] = {}
+        self.dimensions: Dict[str, str] = {}
+        self.variables: Dict[str, Dict[str, str]] = {}
+        #self.read()
+        #self._check_format()
 
-    def _parse(self, inpt: str) -> None:
+    def read(self) -> None:
         """Parse the input file or CDL content into dictionaries.
 
         Args:
             inpt: The input file path or CDL content.
         """
         if self.verbose:
-            print(f"[INFO] Parsing input: {inpt[:100]}...")
-        if inpt.endswith(".nc"):
-            self.cdl = get_output(f"ncdump -h {inpt}")
-        elif inpt.endswith(".cdl"):
-            self.cdl = open(inpt).read()
+            print(f"[INFO] Parsing input: {self.inpt[:100]}...")
+        if self.inpt.endswith(".nc"):
+            self.cdl = get_output(f"ncdump -h {self.inpt}")
+        elif self.inpt.endswith(".cdl"):
+            self.cdl = open(self.inpt).read()
         else:
-            self.cdl = inpt
+            self.cdl = self.inpt
 
         cdl_lines: List[str] = self.cdl.strip().split("\n")
 
@@ -343,30 +347,30 @@ class CDLParser:
             sort_keys=False,
         )
 
-    def to_dict(self) -> Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str, List[str]]]:
-        """Return the parsed CDL content as a dictionary.
+#    def to_dict(self) -> Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str, List[str]]]:
+#        """Return the parsed CDL content as a dictionary.
+#
+#        Returns:
+#            A dictionary of the parsed CDL content, with keys "dimensions",
+#              "variables", "global_attributes" and "inpt", where "inpt" is the input
+#              file path or CDL content.
+#        """
+#        return {
+#            "dimensions": self.dimensions,
+#            "variables": self.variables,
+#            "global_attributes": self.global_attrs,
+#            "inpt": self.inpt,
+#        }
 
-        Returns:
-            A dictionary of the parsed CDL content, with keys "dimensions",
-              "variables", "global_attributes" and "inpt", where "inpt" is the input
-              file path or CDL content.
-        """
-        return {
-            "dimensions": self.dimensions,
-            "variables": self.variables,
-            "global_attributes": self.global_attrs,
-            "inpt": self.inpt,
-        }
 
-
-def read(fpath: str, verbose: bool = False) -> CDLParser:
-    """Read a CDL file or netCDF file and parse it into a CDLParser object.
-
-    Args:
-        fpath: The file path to read.
-        verbose: Print verbose output during parsing.
-
-    Returns:
-        A CDLParser object containing the parsed CDL content.
-    """
-    return CDLParser(fpath, verbose=verbose)
+#def read(fpath: str, verbose: bool = False) -> CDLParser:
+#    """Read a CDL file or netCDF file and parse it into a CDLParser object.
+#
+#    Args:
+#        fpath: The file path to read.
+#        verbose: Print verbose output during parsing.
+#
+#    Returns:
+#        A CDLParser object containing the parsed CDL content.
+#    """
+#    return CDLParser(fpath, verbose=verbose)
