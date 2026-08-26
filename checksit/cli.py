@@ -81,8 +81,8 @@ def check_files(
         ignore_all_variables: Not implemented yet.
         ignore_all_variable_attrs: Not implemented yet.
         auto_cache: Store the file in the template cache for future use as a template.
-        log_mode: How the output should be printed. Options are "standard" (default)
-          and "compact".
+        log_mode: How the output should be printed. Options are "standard" (default),
+          "compact" and "json".
         verbose: Print additional information to the console.
         template: Template to use for checking. Options are "auto" (default), "off", or
           `<template file>`. File location is relative to the top level of the checksit
@@ -187,8 +187,8 @@ def check(
         ignore_all_variables: Not implemented yet.
         ignore_all_variable_attrs: Not implemented yet.
         auto_cache: Store the file in the template cache for future use as a template.
-        log_mode: How the output should be printed. Options are "standard" (default)
-          and "compact".
+        log_mode: How the output should be printed. Options are "standard" (default),
+          "compact" and "json".
         verbose: Print additional information to the console.
         template: Template to use for checking. Options are "auto" (default), "off", or
           `<template file>`. File location is relative to the top level of the checksit
