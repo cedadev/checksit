@@ -10,6 +10,7 @@ import glob
 import re
 import difflib
 import yaml
+import json
 import urllib.request
 import urllib.error
 from typing import Optional, Union, List, Dict, Tuple
@@ -253,44 +254,7 @@ class Checker:
                     template,
                     section,
                 )
-        if log_mode == "compact":
-            if len(errors) > 0:
-                highest = "ERROR"
-                endstr = ""
-                number = len(errors)
-            elif len(warnings) > 0 and not ignore_warnings:
-                highest = "WARNING"
-                endstr = "\n"
-                number = len(warnings)
-            else:
-                highest = "NONE"
-                endstr = "\n"
-                number = 0
-            print(f"{highest} | {number} ", end=endstr)
-            err_string = " | ".join(
-                [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors]
-            )
-            if err_string:
-                print(f"| {err_string}")
-
-        else:
-            if errors:
-                print(f"[FAILED] with {len(errors)} errors:\n")
-                for i, error in enumerate(errors):
-                    count = i + 1
-                    print(f"\t{count:02d}. {error}")
-                compliant = False
-            else:
-                compliant = True
-
-            if warnings and not ignore_warnings:
-                print(f"\n[WARNING] {len(warnings)} warnings about file:\n")
-                for i, warning in enumerate(warnings):
-                    count = i + 1
-                    print(f"\t{count:02d}. {warning}")
-
-            if compliant:
-                print("[INFO] File is compliant!")
+                self.errors.extend([f"[{section}] {err}" for err in errs])
 
     def _get_ncas_specs(
         self,
@@ -485,6 +449,54 @@ class Checker:
                 specs = [product_spec, f"{spec_folder}/amof-image-global-attrs"]
                 template = "off"
         return template, specs
+
+    def _print_output(self) -> None:
+        """Print output from checks"""
+        if self.log_mode == "compact":
+            if len(self.errors) > 0:
+                highest = "ERROR"
+                endstr = ""
+                number = len(self.errors)
+            elif len(self.warnings) > 0 and not self.ignore_warnings:
+                highest = "WARNING"
+                endstr = "\n"
+                number = len(self.warnings)
+            else:
+                highest = "NONE"
+                endstr = "\n"
+                number = 0
+            print(f"{highest} | {number} ", end=endstr)
+            err_string = " | ".join(
+                [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in self.errors]
+            )
+            if err_string:
+                print(f"| {err_string}")
+        elif self.log_mode == "standard":
+            if self.errors:
+                print(f"[FAILED] with {len(self.errors)} errors:\n")
+                for i, error in enumerate(self.errors):
+                    count = i + 1
+                    print(f"\t{count:02d}. {error}")
+                compliant = False
+            else:
+                compliant = True
+            if self.warnings and not self.ignore_warnings:
+                print(f"\n[WARNING] {len(self.warnings)} warnings about file:\n")
+                for i, warning in enumerate(self.warnings):
+                    count = i + 1
+                    print(f"\t{count:02d}. {warning}")
+            if compliant:
+                print("[INFO] File is compliant!")
+        elif self.log_mode == "json":
+            data = {
+                "input_file": self.file_path,
+                "specs": self.specs,
+                "template": self.template,
+                "compliant": len(self.errors) == 0,
+                "errors": self.errors,
+                "warnings": self.warnings
+            }
+            print(json.dumps(data))
 
     def check_file(self) -> None:
         """Check a data file against a template or specs.
