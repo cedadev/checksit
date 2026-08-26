@@ -2,7 +2,8 @@
 """
 import subprocess as sp
 import yaml
-from typing import Tuple, Dict, Union
+from typing import Tuple, Dict
+from .base import BaseReader
 
 def get_output(cmd: str) -> Tuple[str, str]:
     """Get the output of a shell command.
@@ -17,7 +18,7 @@ def get_output(cmd: str) -> Tuple[str, str]:
     return subp.stdout.read().decode("charmap"), subp.stderr.read().decode("charmap")
 
 
-class ImageParser:
+class ImageParser(BaseReader):
     """Parse an image file into dictionaries.
 
     Extract information from an image file into a dictionary for tags, labelled as
@@ -38,7 +39,7 @@ class ImageParser:
         inpt: str,
         verbose: bool = False
     ) -> None:
-        """Initialise the ImageParser and parse the input file.
+        """Initialise the ImageParser.
 
         Args:
             inpt: The input file path.
@@ -46,20 +47,19 @@ class ImageParser:
         """
         self.inpt = inpt
         self.verbose = verbose
-        self.base_exiftool_arguments = ["exiftool", "-G1", "-j", "-c", "%+.6f"]
+        self._base_exiftool_arguments = ["exiftool", "-G1", "-j", "-c", "%+.6f"]
+        self.global_attrs: Dict[str, str] = {}
+        self.dimensions: Dict[str, str] = {}
+        self.variables: Dict[str, Dict[str, str]] = {}
         self._find_exiftool()
-        self._parse(inpt)
+        #self.read()
 
-    def _parse(self, inpt: str) -> None:
-        """Parse the input file using exiftool.
-
-        Args:
-            inpt: The input file path.
-        """
+    def read(self) -> None:
+        """Parse the input file using exiftool."""
         if self.verbose:
-            print(f"[INFO] Parsing input: {inpt[:100]}...")
+            print(f"[INFO] Parsing input: {self.inpt[:100]}...")
         self.global_attrs = {}
-        exiftool_arguments = self.base_exiftool_arguments + [inpt]
+        exiftool_arguments = self._base_exiftool_arguments + [self.inpt]
         exiftool_return_string = sp.check_output(exiftool_arguments)
         raw_global_attrs = yaml.load(exiftool_return_string, Loader=yaml.SafeLoader)[0]
         for tag_name in raw_global_attrs.keys():
@@ -100,24 +100,24 @@ class ImageParser:
             attr_dict[key] = value
         return attr_dict
 
-    def to_dict(self) -> Dict[str, Union[str, Dict[str, str]]]:
-        """Convert the ImageParser object data to a dictionary.
+#    def to_dict(self) -> Dict[str, Union[str, Dict[str, str]]]:
+#        """Convert the ImageParser object data to a dictionary.
+#
+#        Returns:
+#            Dictionary containing metadata tags and values as "global_attributes", and
+#              the input file path as "inpt".
+#        """
+#        return {"global_attributes": self.global_attrs, "inpt": self.inpt}
 
-        Returns:
-            Dictionary containing metadata tags and values as "global_attributes", and
-              the input file path as "inpt".
-        """
-        return {"global_attributes": self.global_attrs, "inpt": self.inpt}
 
-
-def read(fpath: str, verbose: bool = False) -> ImageParser:
-    """Read an image file and return an ImageParser object.
-
-    Args:
-        fpath: The path to the image file.
-        verbose: Print verbose output during parsing.
-
-    Returns:
-        An ImageParser object containing the metadata tags and values.
-    """
-    return ImageParser(fpath, verbose=verbose)
+#def read(fpath: str, verbose: bool = False) -> ImageParser:
+#    """Read an image file and return an ImageParser object.
+#
+#    Args:
+#        fpath: The path to the image file.
+#        verbose: Print verbose output during parsing.
+#
+#    Returns:
+#        An ImageParser object containing the metadata tags and values.
+#    """
+#    return ImageParser(fpath, verbose=verbose)

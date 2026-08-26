@@ -10,6 +10,7 @@ import glob
 import re
 import difflib
 import yaml
+import json
 import urllib.request
 import urllib.error
 from typing import Optional, Union, List, Dict, Tuple
@@ -37,6 +38,7 @@ class Checker:
     results of the checks.
 
     Attributes:
+        file_path: File to check.
         template: Template to use for checking. Options are "auto" (default), "off", or
           `<template file>`. File location is relative to the top level of the checksit
           repository.
@@ -54,10 +56,13 @@ class Checker:
         ignore_warnings: Ignore warnings when checking the file, only return errors.
         skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
           checking.
+        errors: Errors found in file by checks.
+        warnings: Warnings found in file by checks.
     """
 
     def __init__(
         self,
+        file_path: str,
         template: str = "auto",
         mappings: Optional[Dict[str, str]] = None,
         extra_rules: Optional[Dict[str, str]] = None,
@@ -72,6 +77,7 @@ class Checker:
         """Initialise the Checker class.
 
         Args:
+            file_path: File to check.
             template: Template to use for checking. Options are "auto" (default), "off",
               or `<template file>`. File location is relative to the top level of the
               checksit repository.
@@ -90,6 +96,7 @@ class Checker:
             skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
               checking.
         """
+        self.file_path = file_path
         self.template = template
         self.mappings = mappings or {}
         self.extra_rules = extra_rules or {}
@@ -101,39 +108,33 @@ class Checker:
         self.log_mode = log_mode
         self.skip_spellcheck = skip_spellcheck
         self._check_context = {}
+        self.errors: List[str] = []
+        self.warnings: List[str] = []
 
-    def _update_check_context(self, file_path: str, template: str) -> None:
-        self._check_context["file_path"] = file_path
-        self._check_context["size"] = os.path.getsize(file_path)
-        self._check_context["template"] = template
+    def _update_check_context(self) -> None:
+        self._check_context["file_path"] = self.file_path
+        self._check_context["size"] = os.path.getsize(self.file_path)
+        self._check_context["template"] = self.template
 
     def _compare_items(
-        self, rec, tmpl, key, label, mappings=None, extra_rules=None, ignore_attrs=None
+        self, rec, tmpl, key, label
     ):
-
-        mappings = mappings or self.mappings
-        extra_rules = extra_rules or self.extra_rules
-        ignore_attrs = ignore_attrs or self.ignore_attrs
         errors = []
-
         label_key = f"{label}:{key}"
 
-        if label_key in ignore_attrs:
+        if label_key in self.ignore_attrs:
             # Ignore if told to ignore
             return errors
 
         # Map key if required
-        rec_key = mappings.get(key, key)
+        rec_key = self.mappings.get(key, key)
 
         if isinstance(tmpl[key], dict):
             errors.extend(
-                self._compare_dicts(
-                    rec, tmpl, key, mappings=mappings, ignore_attrs=ignore_attrs
-                )
+                self._compare_dicts(rec, tmpl, key)
             )
         else:
             tmpl_value = str(tmpl[key])
-
             if label_key in conf["settings"]["excludes"]:
                 pass
             elif key.startswith(f"{vocabs_prefix}:"):
@@ -159,11 +160,11 @@ class Checker:
                     )
                 )
             # Rule defined in `extra_rules` dictionary
-            elif [rule for rule in extra_rules if rule.startswith(label_key)]:
-                rule_key = [rule for rule in extra_rules if rule.startswith(label_key)][
+            elif [rule for rule in self.extra_rules if rule.startswith(label_key)]:
+                rule_key = [rule for rule in self.extra_rules if rule.startswith(label_key)][
                     0
                 ]
-                rule = extra_rules[rule_key]
+                rule = self.extra_rules[rule_key]
                 errors.extend(
                     rules.check(
                         rule,
@@ -177,28 +178,21 @@ class Checker:
                 errors.append(
                     f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'"
                 )
-
         return errors
 
-    def _compare_dicts(self, record, template, label, mappings=None, ignore_attrs=None):
-        mappings = mappings or self.mappings
+    def _compare_dicts(self, record, template, label):
         errors = []
-
         do_sort = False
         if label in ("dimensions", "global_attributes"):
             do_sort = True
-
         # Recursively check dicts
         tmpl = template[label]
-        rec_key = mappings.get(label, label)
-
+        rec_key = self.mappings.get(label, label)
         if rec_key in record:
             rec = record[rec_key]
-
             keys = tmpl.keys()
             if do_sort:
                 keys = sorted(keys)
-
             for key in keys:
                 errors.extend(
                     self._compare_items(
@@ -206,28 +200,16 @@ class Checker:
                         tmpl,
                         key,
                         label=label,
-                        mappings=mappings,
-                        ignore_attrs=ignore_attrs,
                     )
                 )
-
         else:
             errors.append(f"Expected item '{label}' not found in data file.")
-
         return errors
 
     def _check_file(
         self,
         file_content: Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile],
         template: Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile, str],
-        mappings: Optional[Dict[str, str]] =None,
-        extra_rules: Optional[Dict[str, str]] = None,
-        specs: Optional[List[str]] = None,
-        ignore_attrs: Optional[List[str]] = None,
-        log_mode: str = "standard",
-        #fmt_errors=None,
-        ignore_warnings: bool =False,
-        skip_spellcheck: bool = False,
     ) -> None:
         """Check the content of a file against a template and specs.
 
@@ -236,36 +218,19 @@ class Checker:
             template: Template to use for checking. Options are "auto" (default), "off",
               or `<template file>`. File location is relative to the top level of the
               checksit repository.
-            mappings: Dictionary of mappings to use when checking data files. Keys are the
-              template keys and values are the data file keys.
-            extra_rules: Dictionary of extra rules to use when checking data files. Keys
-              are the template keys and values are the rules to apply.
-            specs: List of spec files to use when checking data files. File location and
-              path relative to the specs folder in the checksit repository.
-            ignore_attrs: List of attributes to ignore when checking variables.
-            log_mode: How the output should be printed. Options are "standard" (default)
-              and "compact".
-            ignore_warnings: Ignore warnings when checking the file, only return errors.
-            skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
-              checking.
         """
-        if hasattr(file_content, "to_dict"):
-            record = file_content.to_dict()
+        record = file_content.to_dict()
 
         if hasattr(template, "to_dict"):
             template = template.to_dict()
 
-        if log_mode == "standard":
+        if self.log_mode == "standard":
             print("\n\n---------------- Running checks ------------------\n")
 
-        # Create a container for collecting errors
-        errors = getattr(file_content, "fmt_errors", [])
-        warnings = []
+        if hasattr(file_content, "fmt_errors"):
+            self.errors.extend(file_content.fmt_errors)
 
-        # Use check specifications if requested
-        specs = specs or self.specs
-
-        for spec in specs:
+        for spec in self.specs:
             sr = SpecificationChecker(spec)
             if "file-name" in spec:
                 spec_errors, spec_warnings = sr.run_checks(
@@ -273,12 +238,12 @@ class Checker:
                 )
             else:
                 spec_errors, spec_warnings = sr.run_checks(
-                    record, skip_spellcheck=skip_spellcheck
+                    record, skip_spellcheck=self.skip_spellcheck
                 )
-            errors.extend(spec_errors)
-            warnings.extend(spec_warnings)
+            self.errors.extend(spec_errors)
+            self.warnings.extend(spec_warnings)
 
-        if template == "off" and log_mode == "standard":
+        if template == "off" and self.log_mode == "standard":
             print("[WARNING] Template checks switched off!")
         elif template != "off":
             sections = "dimensions", "variables", "global_attributes"
@@ -288,73 +253,25 @@ class Checker:
                     record,
                     template,
                     section,
-                    mappings=mappings,
-                    ignore_attrs=ignore_attrs,
                 )
-                errors.extend([f"[{section}] {err}" for err in errs])
-
-        if log_mode == "compact":
-            if len(errors) > 0:
-                highest = "ERROR"
-                endstr = ""
-                number = len(errors)
-            elif len(warnings) > 0 and not ignore_warnings:
-                highest = "WARNING"
-                endstr = "\n"
-                number = len(warnings)
-            else:
-                highest = "NONE"
-                endstr = "\n"
-                number = 0
-            print(f"{highest} | {number} ", end=endstr)
-            err_string = " | ".join(
-                [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in errors]
-            )
-            if err_string:
-                print(f"| {err_string}")
-
-        else:
-            if errors:
-                print(f"[FAILED] with {len(errors)} errors:\n")
-                for i, error in enumerate(errors):
-                    count = i + 1
-                    print(f"\t{count:02d}. {error}")
-                compliant = False
-            else:
-                compliant = True
-
-            if warnings and not ignore_warnings:
-                print(f"\n[WARNING] {len(warnings)} warnings about file:\n")
-                for i, warning in enumerate(warnings):
-                    count = i + 1
-                    print(f"\t{count:02d}. {warning}")
-
-            if compliant:
-                print("[INFO] File is compliant!")
+                self.errors.extend([f"[{section}] {err}" for err in errs])
 
     def _get_ncas_specs(
         self,
-        file_path: str,
         file_content: Union[cdl.CDLParser, image.ImageParser, pp.PPHeader, badc_csv.BADCCSVHeader, yml.YAMLFile],
-        log_mode: str = "standard",
-        verbose: bool = False,
     ) -> Tuple[str, List[str]]:
         """Get the correct specs for NCAS data files.
 
         Args:
-            file_path: Path to the file to check.
             file_content: Content of the file to check.
-            log_mode: How the output should be printed. Options are "standard" (default)
-              and "compact".
-            verbose: Print additional information.
 
         Returns:
             Template and list of specs to use for checking the file.
         """
         template = "auto"
-        specs = None
+        specs = []
         # find appropriate specs depending on convention
-        if file_path.split(".")[-1] == "nc" and ":conventions" in file_content.cdl.lower():
+        if self.file_path.split(".")[-1] == "nc" and ":conventions" in file_content.cdl.lower():
             conventions = (
                 file_content.cdl.lower().split(":conventions =")[1].split(";")[0].strip()
             )
@@ -363,7 +280,7 @@ class Checker:
                 name in conventions.upper()
                 for name in GENERAL_CONVENTION_PREFIXES
             ):
-                if verbose:
+                if self.verbose:
                     print("\nNCAS-AMOF file detected, finding correct spec files")
                     print("Finding correct AMOF version...")
                 version_number = (
@@ -374,7 +291,7 @@ class Checker:
                 if version_number.count(".") == 1:
                     version_number = f"{version_number}.0"
                 spec_folder = f"ncas-amof-{version_number}"
-                if verbose:
+                if self.verbose:
                     print(f"  {version_number}")
 
                 # check specs exist for that version
@@ -383,7 +300,7 @@ class Checker:
                     f"groups/{spec_folder}",
                 )
                 if not os.path.exists(specs_dir):
-                    if verbose:
+                    if self.verbose:
                         print(
                             f"Specs for version NCAS-GENERAL-{version_number} not found, attempting download..."
                         )
@@ -418,12 +335,12 @@ class Checker:
                                     ) as f:
                                         _ = f.write(cv.read().decode())
                         make_amof_specs(version_number)
-                        if verbose:
+                        if self.verbose:
                             print("  Downloaded of specs successful")
                     except urllib.error.HTTPError:
-                        if log_mode == "compact":
+                        if self.log_mode == "compact":
                             print(
-                                f"{file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}"
+                                f"{self.file_path} | ABORTED | FATAL | Cannot download data for NCAS-AMOF-{version_number}"
                             )
                         else:
                             print(
@@ -432,9 +349,9 @@ class Checker:
                             print("Aborting...")
                         sys.exit()
                     except PermissionError:
-                        if log_mode == "compact":
+                        if self.log_mode == "compact":
                             print(
-                                f"{file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit."
+                                f"{self.file_path} | ABORTED | FATAL | Permission Error when trying to create folders or files within checksit."
                             )
                         else:
                             print(
@@ -446,7 +363,6 @@ class Checker:
                         sys.exit()
                     except:
                         raise
-
                 # get deployment mode and data product, to then get specs
                 deployment_mode = (
                     file_content.cdl.split(":deployment_mode =")[1]
@@ -455,10 +371,10 @@ class Checker:
                     .strip('"')
                 )
                 deploy_spec = f"{spec_folder}/amof-common-{deployment_mode}"
-                product = file_path.split("/")[-1].split("_")[3]
+                product = self.file_path.split("/")[-1].split("_")[3]
                 product_spec = f"{spec_folder}/amof-{product}"
-                file_name_spec = f"{spec_folder}/amof-file-name" if file_path.split("/")[-1].startswith("ncas-") else f"{spec_folder}/community-file-name"
-                global_attrs_spec = f"{spec_folder}/amof-global-attrs" if file_path.split("/")[-1].startswith("ncas-") else f"{spec_folder}/community-global-attrs"
+                file_name_spec = f"{spec_folder}/amof-file-name" if self.file_path.split("/")[-1].startswith("ncas-") else f"{spec_folder}/community-file-name"
+                global_attrs_spec = f"{spec_folder}/amof-global-attrs" if self.file_path.split("/")[-1].startswith("ncas-") else f"{spec_folder}/community-global-attrs"
                 specs = [
                     file_name_spec,
                     deploy_spec,
@@ -467,7 +383,6 @@ class Checker:
                 ]
                 # don't need to do template check
                 template = "off"
-
             # NCAS-Radar
             elif any(
                 name in conventions.upper()
@@ -497,9 +412,8 @@ class Checker:
                     "sweep-variables",
                 ]
                 specs = [f"ncas-radar-{version_number}/{spec}" for spec in spec_names]
-
         elif (
-            file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS
+            self.file_path.split(".")[-1].lower() in IMAGE_EXTENSIONS
             and "XMP-photoshop:Instructions" in file_content.global_attrs.keys()
         ):
             conventions = file_content.global_attrs["XMP-photoshop:Instructions"]
@@ -509,7 +423,7 @@ class Checker:
                     "\n", " "
                 )
             ):
-                if verbose:
+                if self.verbose:
                     print("\nNCAS-IMAGE file detected, finding correct spec files")
                     print("Finding correct IMAGE version...")
                 version_number = (
@@ -518,7 +432,7 @@ class Checker:
                     .split(":")[0]
                 )
                 spec_folder = f"ncas-image-{version_number}"
-                if verbose:
+                if self.verbose:
                     print(f"  {version_number}")
                 specs_dir = os.path.join(
                     conf["settings"].get("specs_dir", "./specs"),
@@ -530,58 +444,72 @@ class Checker:
                     )
                     print("Aborting...")
                     sys.exit()
-                product = file_path.split("/")[-1].split("_")[3]
+                product = self.file_path.split("/")[-1].split("_")[3]
                 product_spec = f"{spec_folder}/amof-{product}"
                 specs = [product_spec, f"{spec_folder}/amof-image-global-attrs"]
                 template = "off"
-
         return template, specs
 
-    def check_file(
-        self,
-        file_path: str,
-        template: str = "auto",
-        mappings: Optional[Dict[str, str]] = None,
-        extra_rules: Optional[Dict[str, str]] = None,
-        specs: Optional[List[str]] = None,
-        ignore_attrs: Optional[List[str]] = None,
-        auto_cache: bool = False,
-        verbose: bool = False,
-        log_mode: str = "standard",
-        ignore_warnings: bool = False,
-        skip_spellcheck: bool = False,
-    ) -> None:
+    def _print_output(self) -> None:
+        """Print output from checks"""
+        if self.log_mode == "compact":
+            if len(self.errors) > 0:
+                highest = "ERROR"
+                endstr = ""
+                number = len(self.errors)
+            elif len(self.warnings) > 0 and not self.ignore_warnings:
+                highest = "WARNING"
+                endstr = "\n"
+                number = len(self.warnings)
+            else:
+                highest = "NONE"
+                endstr = "\n"
+                number = 0
+            print(f"{highest} | {number} ", end=endstr)
+            err_string = " | ".join(
+                [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in self.errors]
+            )
+            if err_string:
+                print(f"| {err_string}")
+        elif self.log_mode == "standard":
+            if self.errors:
+                print(f"[FAILED] with {len(self.errors)} errors:\n")
+                for i, error in enumerate(self.errors):
+                    count = i + 1
+                    print(f"\t{count:02d}. {error}")
+                compliant = False
+            else:
+                compliant = True
+            if self.warnings and not self.ignore_warnings:
+                print(f"\n[WARNING] {len(self.warnings)} warnings about file:\n")
+                for i, warning in enumerate(self.warnings):
+                    count = i + 1
+                    print(f"\t{count:02d}. {warning}")
+            if compliant:
+                print("[INFO] File is compliant!")
+        elif self.log_mode == "json":
+            data = {
+                "input_file": self.file_path,
+                "specs": self.specs,
+                "template": self.template,
+                "compliant": len(self.errors) == 0,
+                "errors": self.errors,
+                "warnings": self.warnings
+            }
+            print(json.dumps(data))
+
+    def check_file(self) -> None:
         """Check a data file against a template or specs.
 
         Read in the given file, checks specified options for template and specs, and
         gets NCAS specs if required.
-
-        Args:
-            file_path: Path to the file to check.
-            template: Template to use for checking. Options are "auto" (default), "off",
-              or `<template file>`. File location is relative to the top level of the
-              checksit repository.
-            mappings: Dictionary of mappings to use when checking data files. Keys are the
-              template keys and values are the data file keys.
-            extra_rules: Dictionary of extra rules to use when checking data files. Keys
-              are the template keys and values are the rules to apply.
-            specs: List of spec files to use when checking data files. File location and
-              path relative to the specs folder in the checksit repository.
-            ignore_attrs: List of attributes to ignore when checking variables.
-            auto_cache: Store the file in the template cache for future use as a template.
-            log_mode: How the output should be printed. Options are "standard" (default)
-              and "compact".
-            verbose: Print additional information.
-            ignore_warnings: Ignore warnings when checking the file, only return errors.
-            skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
-              checking.
         """
         try:
             fp = FileParser()
-            file_content = fp.parse_file_header(file_path, verbose=verbose)
+            file_content = fp.parse_file_header(self.file_path, verbose=self.verbose)
         except Exception as err:
-            if log_mode == "compact":
-                print(f"{file_path} | ABORTED | FATAL | Cannot parse input file")
+            if self.log_mode == "compact":
+                print(f"{self.file_path} | ABORTED | FATAL | Cannot parse input file")
                 sys.exit(1)
             else:
                 raise Exception(err)
@@ -604,27 +532,25 @@ class Checker:
             )
         )
         if (
-            template == "auto"
-            and specs == None
-            and (is_ncas_file or file_path.split("/")[-1].startswith("ncas-"))
+            self.template == "auto"
+            and self.specs == []
+            and (is_ncas_file or self.file_path.split("/")[-1].startswith("ncas-"))
         ):
-            template, specs = self._get_ncas_specs(
-                file_path, file_content, log_mode=log_mode, verbose=verbose
-            )
+            self.template, self.specs = self._get_ncas_specs(file_content)
 
-        if template == "off":
-            tmpl = template
+        if self.template == "off":
+            tmpl = self.template
             tmpl_input = "OFF"
         else:
             tm = TemplateManager(
-                auto_cache=auto_cache, verbose=verbose, log_mode=log_mode
+                auto_cache=self.auto_cache, verbose=self.verbose, log_mode=self.log_mode
             )
-            tmpl = tm.get(file_path, template=template)
+            tmpl = tm.get(self.file_path, template=self.template)
             tmpl_input = tmpl.inpt
 
-        self._update_check_context(file_path, template)
+        self._update_check_context()
 
-        if verbose:
+        if self.verbose:
             if tmpl == "off":
                 print("\n--- NOT USING Template CHECK!")
             else:
@@ -632,24 +558,15 @@ class Checker:
 
             print("\n--- Datafile dictionary:\n", file_content.to_dict())
 
-        if log_mode == "compact":
-            print(f"{file_path} | {tmpl_input} | ", end="")
-        else:
+        if self.log_mode == "compact":
+            print(f"{self.file_path} | {tmpl_input} | ", end="")
+        elif self.log_mode == "standard":
             print(
-                f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {specs}\n\tDatafile: {file_content.inpt}"
+                f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {self.specs}\n\tDatafile: {file_content.inpt}"
             )
 
-        self._check_file(
-            file_content,
-            template=tmpl,
-            mappings=mappings,
-            extra_rules=extra_rules,
-            specs=specs,
-            ignore_attrs=ignore_attrs,
-            log_mode=log_mode,
-            ignore_warnings=ignore_warnings,
-            skip_spellcheck=skip_spellcheck,
-        )
+        self._check_file(file_content, template=tmpl)
+        self._print_output()
 
 
 class TemplateManager:
@@ -800,42 +717,40 @@ class FileParser:
         ext = extension(file_path)
 
         if ext in ("nc", "cdl"):
-            reader = cdl
+            reader = cdl.CDLParser(file_path, verbose)
         elif ext in ("pp"):
-            reader = pp
-        elif ext in ("txt"):
-            reader = badc_csv
+            reader = pp.PPHeader(file_path, verbose)
         elif ext in ("yml"):
-            reader = yml
+            reader = yml.YAMLFile(file_path, verbose)
+        elif ext in ("txt"):
+            reader = badc_csv.BADCCSVHeader(file_path, verbose)
         elif ext.lower() in IMAGE_EXTENSIONS:
-            reader = image
+            reader = image.ImageParser(file_path, verbose)
         else:
             raise Exception(f"No known reader for file with extension: {ext}")
 
-        content = reader.read(file_path, verbose=verbose)
+        reader.read()
 
         if auto_cache:
             base = os.path.splitext(os.path.basename(file_path))[0]
             output_path = os.path.join(
                 conf["settings"]["default_template_cache_dir"], base
             )
-
-            if reader == cdl:
+            if isinstance(reader, cdl.CDLParser):
                 # Special case for NetCDF files using CDL
                 with open(f"{output_path}.cdl", "w") as writer:
-                    writer.write(content.cdl)
+                    writer.write(reader.cdl)
             else:
                 # All others use YAML
                 with open(f"{output_path}.yml", "w") as writer:
                     yaml.dump(
-                        content.to_dict(),
+                        reader.to_dict(),
                         writer,
                         Dumper=yaml.SafeDumper,
                         default_flow_style=False,
                         sort_keys=False,
                     )
-
-        return content
+        return reader
 
 
 def check_file(file_path: str, **kwargs) -> None:
@@ -848,5 +763,5 @@ def check_file(file_path: str, **kwargs) -> None:
         **kwargs: Keyword arguments to pass to the Checker class and
           Checker.check_file function.
     """
-    ch = Checker(**kwargs)
-    ch.check_file(file_path, **kwargs)
+    ch = Checker(file_path, **kwargs)
+    ch.check_file()
