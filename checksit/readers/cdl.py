@@ -90,7 +90,7 @@ class CDLParser(BaseReader):
         for s in self.CDL_SPLITTERS:
             if s not in cdl_lines:
                 print(
-                    f"Please check your command - invalid file or CDL contents provided: '{inpt[:100]}...'"
+                    f"Please check your command - invalid file or CDL contents provided: '{self.inpt[:100]}...'"
                 )
                 sys.exit(1)
 
