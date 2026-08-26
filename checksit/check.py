@@ -800,19 +800,20 @@ class FileParser:
         ext = extension(file_path)
 
         if ext in ("nc", "cdl"):
-            reader = cdl
+            reader = cdl.CDLParser(file_path, verbose)
         elif ext in ("pp"):
-            reader = pp
-        elif ext in ("txt"):
-            reader = badc_csv
+            reader = pp.PPHeader(file_path, verbose)
         elif ext in ("yml"):
-            reader = yml
+            reader = yml.YAMLFile(file_path, verbose)
+        elif ext in ("txt"):
+            reader = badc_csv.BADCCSVHeader(file_path, verbose)
         elif ext.lower() in IMAGE_EXTENSIONS:
-            reader = image
+            reader = image.ImageParser(file_path, verbose)
         else:
             raise Exception(f"No known reader for file with extension: {ext}")
 
-        content = reader.read(file_path, verbose=verbose)
+        reader.read()
+
 
         if auto_cache:
             base = os.path.splitext(os.path.basename(file_path))[0]
@@ -820,22 +821,22 @@ class FileParser:
                 conf["settings"]["default_template_cache_dir"], base
             )
 
-            if reader == cdl:
+            if isinstance(reader, cdl.CDLParser):
                 # Special case for NetCDF files using CDL
                 with open(f"{output_path}.cdl", "w") as writer:
-                    writer.write(content.cdl)
+                    writer.write(reader.cdl)
             else:
                 # All others use YAML
                 with open(f"{output_path}.yml", "w") as writer:
                     yaml.dump(
-                        content.to_dict(),
+                        reader.to_dict(),
                         writer,
                         Dumper=yaml.SafeDumper,
                         default_flow_style=False,
                         sort_keys=False,
                     )
 
-        return content
+        return reader
 
 
 def check_file(file_path: str, **kwargs) -> None:

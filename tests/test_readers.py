@@ -1,7 +1,8 @@
 import os
 import pytest
 
-from checksit.readers.cdl import read as read_cdl
+#from checksit.readers.cdl import read as read_cdl
+from checksit.readers.cdl import CDLParser
 
 from .common import TESTDATA_DIR
 
@@ -15,7 +16,8 @@ def check(file_path, mappings=None, rules=None, ignore_attrs=None, ignore_all_gl
 
 def test_cdl_reader_multiline_parser_1():
     cci_file = os.path.join(TESTDATA_DIR, "esacci/ESACCI-GHG-L2-CH4-CO-TROPOMI-WFMD-20171110-fv2.cdl")
-    resp = read_cdl(cci_file)
+    resp = CDLParser(cci_file)
+    resp.read()
 
     d = resp.to_dict()
     assert d["variables"]["pressure_levels"]["comment"] == \
@@ -31,14 +33,16 @@ def test_cdl_reader_multiline_parser_1():
 @pytest.mark.xfail(reason="File contains badly defined number attributes in strings - so let it fail for now.")
 def test_cdl_reader_multiline_parser_2():
     cci_file = os.path.join(TESTDATA_DIR, "esacci/ESACCI-GHG-L2-CO2-GOSAT2-SRFP-20191231-fv2.cdl")
-    resp = read_cdl(cci_file)
+    resp = CDLParser(cci_file)
+    resp.read()
 
     d = resp.to_dict()
 
 
 def test_cdl_reader_netcdf():
     ncfile = os.path.join(TESTDATA_DIR, "netcdf/test_netcdf.nc")
-    resp = read_cdl(ncfile)
+    resp = CDLParser(ncfile)
+    resp.read()
 
     d = resp.to_dict()
     assert sorted(d.keys()) == sorted(["global_attributes", "dimensions", "variables", "inpt"])
