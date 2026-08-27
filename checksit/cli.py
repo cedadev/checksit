@@ -100,6 +100,9 @@ def check_files(
     ):
         raise Exception("Options not implemented yet!!!!!")
 
+    if log_mode == "standard":
+        _checksit_ascii()
+
     if mappings is not None:
         mappings = string_to_dict(mappings)
 
@@ -205,6 +208,9 @@ def check(
         or ignore_all_variable_attrs
     ):
         raise Exception("Options not implemented yet!!!!!")
+
+    if log_mode == "standard":
+        _checksit_ascii()
 
     if mappings is not None:
         mappings = string_to_dict(mappings)
@@ -323,6 +329,14 @@ def show_specs(spec_ids: Optional[List[str]] = None):
         spec_ids: List of specs to show.
     """
     specs.show_specs(spec_ids)
+
+def _checksit_ascii() -> None:
+    print(r"      _               _        _ _   ")
+    print(r"  ___| |__   ___  ___| | _____(_) |_ ")
+    print(r" / __| '_ \ / _ \/ __| |/ / __| | __|")
+    print(r"| (__| | | |  __/ (__|   <\__ \ | |_ ")
+    print(r" \___|_| |_|\___|\___|_|\_\___/_|\__|")
+    print("")
 
 
 if __name__ == "__main__":
