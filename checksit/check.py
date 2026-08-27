@@ -453,50 +453,65 @@ class Checker:
     def _print_output(self) -> None:
         """Print output from checks"""
         if self.log_mode == "compact":
-            if len(self.errors) > 0:
-                highest = "ERROR"
-                endstr = ""
-                number = len(self.errors)
-            elif len(self.warnings) > 0 and not self.ignore_warnings:
-                highest = "WARNING"
-                endstr = "\n"
-                number = len(self.warnings)
-            else:
-                highest = "NONE"
-                endstr = "\n"
-                number = 0
-            print(f"{highest} | {number} ", end=endstr)
-            err_string = " | ".join(
-                [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in self.errors]
-            )
-            if err_string:
-                print(f"| {err_string}")
+            self._print_output_compact()
         elif self.log_mode == "standard":
-            if self.errors:
-                print(f"[FAILED] with {len(self.errors)} errors:\n")
-                for i, error in enumerate(self.errors):
-                    count = i + 1
-                    print(f"\t{count:02d}. {error}")
-                compliant = False
-            else:
-                compliant = True
-            if self.warnings and not self.ignore_warnings:
-                print(f"\n[WARNING] {len(self.warnings)} warnings about file:\n")
-                for i, warning in enumerate(self.warnings):
-                    count = i + 1
-                    print(f"\t{count:02d}. {warning}")
-            if compliant:
-                print("[INFO] File is compliant!")
+            self._print_output_standard()
         elif self.log_mode == "json":
-            data = {
-                "input_file": self.file_path,
-                "specs": self.specs,
-                "template": self.template,
-                "compliant": len(self.errors) == 0,
-                "errors": self.errors,
-                "warnings": self.warnings
-            }
-            print(json.dumps(data))
+            self._print_output_json()
+
+    def _print_output_compact(self) -> None:
+        if len(self.errors) > 0:
+            highest = "ERROR"
+            endstr = ""
+            number = len(self.errors)
+        elif len(self.warnings) > 0 and not self.ignore_warnings:
+            highest = "WARNING"
+            endstr = "\n"
+            number = len(self.warnings)
+        else:
+            highest = "NONE"
+            endstr = "\n"
+            number = 0
+        print(f"{highest} | {number} ", end=endstr)
+        err_string = " | ".join(
+            [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in self.errors]
+        )
+        if err_string:
+            print(f"| {err_string}")
+
+    def _print_output_standard(self) -> None:
+        num_errors = len(self.errors)
+        num_warnings = len(self.warnings)
+        compliant = num_errors == 0
+        print("Summary:")
+        print(f"  {num_errors} errors found{' (see details below)' if num_errors > 0 else ''}")
+        print(f"  {num_warnings} warnings found{' (see details below)' if num_warnings > 0 else ''}")
+        if compliant:
+            print("\033[92m\u2714\033[00m File is compliant!")
+        else:
+            print("\033[91m\u2717\033[00m File is not compliant.")
+        if num_errors:
+            print("\nErrors:")
+            for i, error in enumerate(self.errors):
+                count = i + 1
+                print(f"\t{count:02d}. {error}")
+        if num_warnings and not self.ignore_warnings:
+            print("\nWarnings:")
+            for i, warning in enumerate(self.warnings):
+                count = i + 1
+                print(f"\t{count:02d}. {warning}")
+
+
+    def _print_output_json(self) -> None:
+        data = {
+            "input_file": self.file_path,
+            "specs": self.specs,
+            "template": self.template,
+            "compliant": len(self.errors) == 0,
+            "errors": self.errors,
+            "warnings": self.warnings
+        }
+        print(json.dumps(data))
 
     def check_file(self) -> None:
         """Check a data file against a template or specs.
