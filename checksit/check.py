@@ -483,9 +483,13 @@ class Checker:
         num_errors = len(self.errors)
         num_warnings = len(self.warnings)
         compliant = num_errors == 0
+        if self.show_warnings:
+            warnings_message = "see details below"
+        else:
+            warnings_message = "run checksit with `--show-warnings` flag to display"
         print("Summary:")
-        print(f"  {num_errors} errors found{' (see details below)' if num_errors > 0 else ''}")
-        print(f"  {num_warnings} warnings found{' (see details below)' if num_warnings > 0 else ''}")
+        print(f"  {num_errors} errors found{' (see details below)' if num_errors else ''}")
+        print(f"  {num_warnings} warnings found{f' ({warnings_message})' if num_warnings else ''}")
         if compliant:
             print("\033[92m\u2714\033[00m File is compliant!")  # green tick
         else:
