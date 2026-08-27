@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict, Union
+from ..utils import CheckIssue
 
 class BaseReader(ABC):
     inpt: str
     verbose: bool
-    fmt_errors: List[str]
+    fmt_errors: List[CheckIssue]
     global_attrs: Dict[str, str]
     dimensions: Dict[str, str]
     variables: Dict[str, Dict[str, str]]

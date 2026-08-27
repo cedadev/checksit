@@ -11,6 +11,7 @@ import yaml
 import importlib
 import sys
 from typing import List, Dict, Any, Union, Optional, Tuple
+from .utils import CheckIssue
 from .config import get_config
 
 SpecCheck = Dict[str, Union[str, Dict[str, Any]]]
@@ -169,7 +170,7 @@ class SpecificationChecker:
         self,
         record: Dict[str, Union[Dict[str, str], Dict[str, Dict[str, str]], str]],
         skip_spellcheck: bool = False,
-    ) -> Tuple[List[str], List[str]]:
+    ) -> Tuple[List[CheckIssue], List[CheckIssue]]:
         """Runs checks in spec against record.
 
         Takes the record of a file, as produced by the `to_dict()` function from the

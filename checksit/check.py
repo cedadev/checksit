@@ -19,7 +19,7 @@ from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
 from .readers import pp, badc_csv, cdl, yml, image
 from .specs import SpecificationChecker
-from .utils import get_file_base, extension, UNDEFINED
+from .utils import get_file_base, extension, UNDEFINED, CheckIssue
 from .config import get_config
 from .make_specs import make_amof_specs
 
@@ -108,8 +108,8 @@ class Checker:
         self.log_mode = log_mode
         self.skip_spellcheck = skip_spellcheck
         self._check_context = {}
-        self.errors: List[str] = []
-        self.warnings: List[str] = []
+        self.errors: List[CheckIssue] = []
+        self.warnings: List[CheckIssue] = []
 
     def _update_check_context(self) -> None:
         self._check_context["file_path"] = self.file_path
@@ -119,7 +119,7 @@ class Checker:
     def _compare_items(
         self, rec, tmpl, key, label
     ):
-        errors = []
+        errors: List[CheckIssue] = []
         label_key = f"{label}:{key}"
 
         if label_key in self.ignore_attrs:
@@ -175,8 +175,18 @@ class Checker:
                 )
             # Else...
             elif tmpl[key] != rec.get(rec_key, UNDEFINED):
+                #errors.append(
+                #    f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'"
+                #)
                 errors.append(
-                    f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'"
+                    CheckIssue(
+                        category="Value Mismatch",
+                        target_type=label,
+                        target_name=key,
+                        message=f"`{rec.get(rec_key, UNDEFINED)}` does not match expected value `{tmpl[key]}`",
+                        expected=tmpl[key],
+                        found=rec.get(rec_key, UNDEFINED),
+                    )
                 )
         return errors
 
@@ -203,7 +213,15 @@ class Checker:
                     )
                 )
         else:
-            errors.append(f"Expected item '{label}' not found in data file.")
+            #errors.append(f"Expected item '{label}' not found in data file.")
+            errors.append(
+                CheckIssue(
+                    category="Missing Section",
+                    target_type=label,
+                    target_name=label,
+                    message=f"Item `{label}` not found in data file",
+                )
+            )
         return errors
 
     def _check_file(
@@ -252,7 +270,7 @@ class Checker:
                     template,
                     section,
                 )
-                self.errors.extend([f"[{section}] {err}" for err in errs])
+                self.errors.extend(errs)
         if self.log_mode == "standard":
             print("\nChecks complete!\n")
 

@@ -1,34 +1,6 @@
 import cf
 from .base import BaseReader
-from typing import List, Dict
-
-"""
-req_dicts = "dimensions", "variables", "global_attributes"
-
-class PPHeader:
-    def __init__(self, fpath, content):
-        self.inpt = fpath
-        self._content = content
-        for key in req_dicts:
-            if key not in self._content:
-                self._content[key] = {}
-
-    def to_dict(self):
-        return self._content
-
-
-def read(fpath: str, verbose: bool = False) -> PPHeader:
-    fieldlist = cf.read(fpath)
-    d = {"variables": {}}
-
-    for field in fieldlist:
-        sn = field.standard_name
-        sh = list(field.shape)
-
-        d["variables"][sn] = {"shape": sh}
-
-    return PPHeader(fpath, d)
-"""
+from typing import Dict
 
 class PPHeader(BaseReader):
     def __init__(
@@ -44,7 +16,6 @@ class PPHeader(BaseReader):
         """
         self.inpt = inpt
         self.verbose = verbose
-        self.fmt_errors: List[str] = []
         self.global_attrs: Dict[str, str] = {}
         self.dimensions: Dict[str, str] = {}
         self.variables: Dict[str, Dict[str, str]] = {}

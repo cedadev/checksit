@@ -3,9 +3,22 @@
 
 import os
 import inspect
-from typing import List, Dict, Callable, Any
+from typing import List, Dict, Callable, Any, Optional
+from dataclasses import dataclass
 
 UNDEFINED = "UNDEFINED"
+
+@dataclass
+class CheckIssue:
+    category: str
+    target_type: str
+    target_name: str
+    message: str
+    expected: Optional[Any] = None
+    found: Optional[Any] = None
+
+    def __str__(self) -> str:
+        return f"[{self.target_type}:{self.target_name}] {self.message}"
 
 
 def string_to_dict(s: str) -> Dict[str, str]:

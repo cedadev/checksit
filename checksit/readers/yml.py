@@ -1,25 +1,6 @@
 import yaml
 from typing import List, Dict
 from .base import BaseReader
-"""
-req_dicts = "dimensions", "variables", "global_attributes"
-
-class YAMLFile:
-    def __init__(self, fpath, content):
-        self.inpt = fpath
-        self._content = content
-        for key in req_dicts:
-            if key not in self._content:
-                self._content[key] = {}
-
-    def to_dict(self):
-        return self._content
-
-
-def read(fpath: str, verbose: bool = False) -> YAMLFile:
-    d = yaml.load(open(fpath), Loader=yaml.SafeLoader)
-    return YAMLFile(fpath, d)
-"""
 
 class YAMLFile(BaseReader):
     def __init__(
@@ -35,7 +16,6 @@ class YAMLFile(BaseReader):
         """
         self.inpt = inpt
         self.verbose = verbose
-        self.fmt_errors: List[str] = []
         self.global_attrs: Dict[str, str] = {}
         self.dimensions: Dict[str, str] = {}
         self.variables: Dict[str, Dict[str, str]] = {}

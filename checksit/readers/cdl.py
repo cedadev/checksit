@@ -9,6 +9,7 @@ from typing import Tuple, List, Dict
 
 from ..cvs import vocabs, vocabs_prefix
 from .base import BaseReader
+from ..utils import CheckIssue
 
 
 def get_output(cmd: str) -> str:
@@ -56,7 +57,7 @@ class CDLParser(BaseReader):
         """
         self.inpt = inpt
         self.verbose = verbose
-        self.fmt_errors: List[str] = []
+        self.fmt_errors: List[CheckIssue] = []
         self.global_attrs: Dict[str, str] = {}
         self.dimensions: Dict[str, str] = {}
         self.variables: Dict[str, Dict[str, str]] = {}
@@ -107,8 +108,16 @@ class CDLParser(BaseReader):
 
         min_chars = 10
         if len(source) < min_chars:
+            #self.fmt_errors.append(
+            #    f"[FORMAT:global_attributes:source] Must be at least {min_chars} characters, not {source}"
+            #)
             self.fmt_errors.append(
-                f"[FORMAT:global_attributes:source] Must be at least {min_chars} characters, not {source}"
+                CheckIssue(
+                    category="File Format Error",
+                    target_type="global_attribute",
+                    target_name="source",
+                    message="Attribute `source` must be at least {min_chars} characters long"
+                )
             )
 
     def _get_sections(
@@ -260,8 +269,16 @@ class CDLParser(BaseReader):
                             f"[WARNING] Variable attribute '{key}' for variable '{var_id}' already exists,"
                             f" not overwriting existing value '{current[key]}' with new value '{value}'"
                         )
+                    #self.fmt_errors.append(
+                    #    f"[DUPLICATE:variable:{var_id}:{key}] Variable attribute '{key}' for variable '{var_id}' defined multiple times"
+                    #)
                     self.fmt_errors.append(
-                        f"[DUPLICATE:variable:{var_id}:{key}] Variable attribute '{key}' for variable '{var_id}' defined multiple times"
+                        CheckIssue(
+                            category="Duplicate Attribute",
+                            target_type="variable",
+                            target_name=var_id,
+                            message=f"Attribute {key} defined multiple times for variable {var_id}"
+                        )
                     )
                 else:
                     current[key] = self._safe_parse_value(value)
