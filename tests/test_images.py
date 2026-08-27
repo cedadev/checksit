@@ -20,7 +20,7 @@ from checksit import cli
 def test_ncas_photo_checks(photo, error_level, number_errors):
     runner = CliRunner()
     photo_file = f"tests/test_images/{photo}"
-    result = runner.invoke(cli.check, ["-p", "-l", "compact", photo_file])
+    result = runner.invoke(cli.check, ["-p", "-l", "compact", "-w", photo_file])
     level_found, errors_found = [i.strip() for i in result.output.split("|")[2:4]]
     errors_found = int(errors_found)
     assert error_level == level_found
@@ -45,7 +45,7 @@ def test_ncas_photo_checks(photo, error_level, number_errors):
 def test_other_plot_checks(plot, error_level, number_errors):
     runner = CliRunner()
     specs = "ncas-image-v1.0/amof-image-global-attrs,ncas-image-v1.0/amof-plot"
-    result = runner.invoke(cli.check, ["-p", "-l", "compact", "-t", "off", "--specs", specs, f"tests/test_images/{plot}"])
+    result = runner.invoke(cli.check, ["-p", "-l", "compact", "-t", "off", "-w", "--specs", specs, f"tests/test_images/{plot}"])
     level_found, errors_found = [i.strip() for i in result.output.split("|")[2:4]]
     errors_found = int(errors_found)
     assert error_level == level_found

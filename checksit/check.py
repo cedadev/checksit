@@ -225,7 +225,7 @@ class Checker:
             template = template.to_dict()
 
         if self.log_mode == "standard":
-            print("\n\n---------------- Running checks ------------------\n")
+            print("\nRunning checks...")
 
         if hasattr(file_content, "fmt_errors"):
             self.errors.extend(file_content.fmt_errors)
@@ -243,9 +243,7 @@ class Checker:
             self.errors.extend(spec_errors)
             self.warnings.extend(spec_warnings)
 
-        if template == "off" and self.log_mode == "standard":
-            print("[WARNING] Template checks switched off!")
-        elif template != "off":
+        if template != "off":
             sections = "dimensions", "variables", "global_attributes"
 
             for section in sections:
@@ -255,6 +253,8 @@ class Checker:
                     section,
                 )
                 self.errors.extend([f"[{section}] {err}" for err in errs])
+        if self.log_mode == "standard":
+            print("\nChecks complete!\n")
 
     def _get_ncas_specs(
         self,
@@ -576,9 +576,14 @@ class Checker:
         if self.log_mode == "compact":
             print(f"{self.file_path} | {tmpl_input} | ", end="")
         elif self.log_mode == "standard":
-            print(
-                f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {self.specs}\n\tDatafile: {file_content.inpt}"
-            )
+            #print(
+            #    f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {self.specs}\n\tDatafile: {file_content.inpt}"
+            #)
+            print(f"Checking file {self.file_path}")
+            if self.specs:
+                print(f"Using spec files: {self.specs}")
+            if self.template != "off":
+                print(f"Using template: {tmpl_input}")
 
         self._check_file(file_content, template=tmpl)
         self._print_output()
