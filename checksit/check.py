@@ -53,7 +53,7 @@ class Checker:
         log_mode: How the output should be printed. Options are "standard" (default) and
           "compact".
         verbose: Print additional information.
-        ignore_warnings: Ignore warnings when checking the file, only return errors.
+        show_warnings: Show warnings when checking the file.
         skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
           checking.
         errors: Errors found in file by checks.
@@ -71,7 +71,7 @@ class Checker:
         auto_cache: bool = False,
         verbose: bool = False,
         log_mode: str = "standard",
-        ignore_warnings: bool = False,
+        show_warnings: bool = False,
         skip_spellcheck: bool = False,
     ) -> None:
         """Initialise the Checker class.
@@ -92,7 +92,7 @@ class Checker:
             log_mode: How the output should be printed. Options are "standard" (default)
               and "compact".
             verbose: Print additional information.
-            ignore_warnings: Ignore warnings when checking the file, only return errors.
+            show_warnings: Show warnings when checking the file.
             skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
               checking.
         """
@@ -103,7 +103,7 @@ class Checker:
         self.specs = specs or []
         self.ignore_attrs = ignore_attrs or []
         self.auto_cache = auto_cache
-        self.ignore_warnings = ignore_warnings
+        self.show_warnings = show_warnings
         self.verbose = verbose
         self.log_mode = log_mode
         self.skip_spellcheck = skip_spellcheck
@@ -464,7 +464,7 @@ class Checker:
             highest = "ERROR"
             endstr = ""
             number = len(self.errors)
-        elif len(self.warnings) > 0 and not self.ignore_warnings:
+        elif len(self.warnings) > 0 and self.show_warnings:
             highest = "WARNING"
             endstr = "\n"
             number = len(self.warnings)
@@ -495,7 +495,7 @@ class Checker:
             for i, error in enumerate(self.errors):
                 count = i + 1
                 print(f"\t{count:02d}. {error}")
-        if num_warnings and not self.ignore_warnings:
+        if num_warnings and self.show_warnings:
             print("\nWarnings:")
             for i, warning in enumerate(self.warnings):
                 count = i + 1
