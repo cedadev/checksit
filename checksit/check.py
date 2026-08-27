@@ -487,9 +487,9 @@ class Checker:
         print(f"  {num_errors} errors found{' (see details below)' if num_errors > 0 else ''}")
         print(f"  {num_warnings} warnings found{' (see details below)' if num_warnings > 0 else ''}")
         if compliant:
-            print("\033[92m\u2714\033[00m File is compliant!")
+            print("\033[92m\u2714\033[00m File is compliant!")  # green tick
         else:
-            print("\033[91m\u2717\033[00m File is not compliant.")
+            print("\033[91m\u2717\033[00m File is not compliant.")  # red cross
         if num_errors:
             print("\nErrors:")
             for i, error in enumerate(self.errors):
