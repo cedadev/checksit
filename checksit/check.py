@@ -576,9 +576,6 @@ class Checker:
         if self.log_mode == "compact":
             print(f"{self.file_path} | {tmpl_input} | ", end="")
         elif self.log_mode == "standard":
-            #print(
-            #    f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {self.specs}\n\tDatafile: {file_content.inpt}"
-            #)
             print(f"Checking file {self.file_path}")
             if self.specs:
                 print(f"Using spec files: {self.specs}")
