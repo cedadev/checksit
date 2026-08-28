@@ -18,6 +18,7 @@ from numbers import Number
 from typing import List, Union, Tuple, Dict
 
 from . import rule_funcs
+from ..utils import CheckIssue
 from ..config import get_config
 
 conf = get_config()
@@ -153,7 +154,7 @@ class Rules:
         value: Union[str, int, float, Number],
         context: Union[str, Dict[str, str], None] = None,
         label: str = "",
-    ) -> Tuple[List[str], List[str]]:
+    ) -> Tuple[List[CheckIssue], List[CheckIssue]]:
         """Check a value against a set of rules.
 
         Check a value against a set of rules, returning a list of errors and warnings
@@ -199,7 +200,12 @@ class Rules:
 
                 if not isinstance(value, self._map_type_rule(type_rule)):
                     output.append(
-                        f"{label} Value '{value}' is not of required type: '{type_rule}'."
+                        CheckIssue(
+                            category="Type Mismatch",
+                            target_type=label.removeprefix("[").split(":")[0].replace("*",""),
+                            target_name="-".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
+                            message=f"Value `{value}` is not of required type: `{type_rule}`.",
+                        )
                     )
 
             elif i.startswith("regex-rule"):
@@ -209,8 +215,16 @@ class Rules:
                     pattern = self.static_regex_rules[regex_rule]["regex-rule"]
 
                     if not re.match("^" + pattern + "$", value):
+                        message = (
+                            f"Value '{value}' does not match regex rule: '{regex_rule}' - Example valid value '{self.static_regex_rules[regex_rule]['example']}'."
+                        )
                         output.append(
-                            f"{label} Value '{value}' does not match regex rule: '{regex_rule}' - Example valid value '{self.static_regex_rules[regex_rule]['example']}'."
+                            CheckIssue(
+                                category="Regex Value Mismatch",
+                                target_type=label.removeprefix("[").split(":")[0].replace("*",""),
+                                target_name="-".join(label.split(":")[1:]).replace("*","").removeprefix("-").removesuffix("]") or label.replace("*",""),
+                                message=message,
+                            )
                         )
 
                 else:
@@ -222,7 +236,12 @@ class Rules:
                 ]  # in case pattern has colons in it, e.g. a URL
                 if not re.match(f"^{pattern}$", value):
                     output.append(
-                        f"{label} Value '{value}' does not match regular expression: '{pattern}'."
+                        CheckIssue(
+                            category="Regex Value Mismatch",
+                            target_type=label.removeprefix("[").split(":")[0].replace("*",""),
+                            target_name="-".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
+                            message=f"Value `{value}` does not match regular expression: `{pattern}`.",
+                        )
                     )
 
             else:

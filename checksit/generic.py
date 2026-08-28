@@ -254,7 +254,7 @@ def check_global_attrs(
                 vocabs.check(
                     vocab_attrs[attr],
                     dct["global_attributes"].get(attr),
-                    label=f"[global-attributes:******:{attr}]***",
+                    label=f"[global_attribute:******:{attr}]***",
                 )
             )
 
@@ -321,7 +321,7 @@ def check_global_attrs(
                 rules_attrs[attr],
                 dct["global_attributes"].get(attr),
                 context=dct["inpt"],
-                label=f"[global-attributes:******:{attr}]***",
+                label=f"[global_attribute:******:{attr}]***",
             )
             warnings.extend(rules_check_output[1])
             errors.extend(rules_check_output[0])
