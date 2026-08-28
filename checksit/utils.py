@@ -3,8 +3,9 @@
 
 import os
 import inspect
+import json
 from typing import List, Dict, Callable, Any, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, is_dataclass, asdict
 
 UNDEFINED = "UNDEFINED"
 
@@ -19,6 +20,13 @@ class CheckIssue:
 
     def __str__(self) -> str:
         return f"[{self.target_type}:{self.target_name}] {self.message}"
+
+
+class ChecksitJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if is_dataclass(obj):
+            return asdict(obj)
+        return super().default(obj)
 
 
 def string_to_dict(s: str) -> Dict[str, str]:

@@ -19,7 +19,7 @@ from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
 from .readers import pp, badc_csv, cdl, yml, image
 from .specs import SpecificationChecker
-from .utils import get_file_base, extension, UNDEFINED, CheckIssue
+from .utils import get_file_base, extension, UNDEFINED, CheckIssue, ChecksitJSONEncoder
 from .config import get_config
 from .make_specs import make_amof_specs
 
@@ -157,7 +157,7 @@ class Checker:
                         rec.get(rec_key, UNDEFINED),
                         context=self._check_context,
                         label=label_key,
-                    )
+                    )[0]
                 )
             # Rule defined in `extra_rules` dictionary
             elif [rule for rule in self.extra_rules if rule.startswith(label_key)]:
@@ -171,7 +171,7 @@ class Checker:
                         rec.get(rec_key, UNDEFINED),
                         context=self._check_context,
                         label=label_key,
-                    )
+                    )[0]
                 )
             # Else...
             elif tmpl[key] != rec.get(rec_key, UNDEFINED):
@@ -531,9 +531,9 @@ class Checker:
             "template": self.template,
             "compliant": len(self.errors) == 0,
             "errors": self.errors,
-            "warnings": self.warnings
+            "warnings": self.warnings,
         }
-        print(json.dumps(data))
+        print(json.dumps(data, cls=ChecksitJSONEncoder))
 
     def check_file(self) -> None:
         """Check a data file against a template or specs.
