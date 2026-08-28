@@ -492,7 +492,7 @@ class Checker:
             number = 0
         print(f"{highest} | {number} ", end=endstr)
         err_string = " | ".join(
-            [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in self.errors]
+            [f'{err.target_type}:{err.target_name} {err.message.replace("|", "__VERTICAL_BAR_REPLACED__")}' for err in self.errors]
         )
         if err_string:
             print(f"| {err_string}")
