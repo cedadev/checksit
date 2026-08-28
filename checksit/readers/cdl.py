@@ -277,7 +277,7 @@ class CDLParser(BaseReader):
                             category="Duplicate Attribute",
                             target_type="variable",
                             target_name=var_id,
-                            message=f"Attribute {key} defined multiple times for variable {var_id}"
+                            message=f"Attribute `{key}` defined multiple times for variable `{var_id}`"
                         )
                     )
                 else:
