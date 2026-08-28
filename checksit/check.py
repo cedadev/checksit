@@ -14,6 +14,7 @@ import json
 import urllib.request
 import urllib.error
 from typing import Optional, Union, List, Dict, Tuple
+from collections import defaultdict
 
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
@@ -514,14 +515,24 @@ class Checker:
             print("\033[91m\u2717\033[00m File is not compliant.")  # red cross
         if num_errors:
             print("\nErrors:")
-            for i, error in enumerate(self.errors):
-                count = i + 1
-                print(f"\t{count:02d}. {error}")
+            by_target = self._group_issues_by_target(self.errors)
+            for target, err_list_by_target in by_target.items():
+                print(f"\n{target}")
+                by_category = self._group_issues_by_category(err_list_by_target)
+                for category, err_list_by_cats in by_category.items():
+                    print(f"  • {category}:")
+                    for e in err_list_by_cats:
+                        print(f"    - [{e.target_name}] {e.message}")
         if num_warnings and self.show_warnings:
             print("\nWarnings:")
-            for i, warning in enumerate(self.warnings):
-                count = i + 1
-                print(f"\t{count:02d}. {warning}")
+            by_target = self._group_issues_by_target(self.warnings)
+            for target, err_list_by_target in by_target.items():
+                print(f"\n{target}")
+                by_category = self._group_issues_by_category(err_list_by_target)
+                for category, err_list_by_cats in by_category.items():
+                    print(f"  • {category}:")
+                    for e in err_list_by_cats:
+                        print(f"    - [{e.target_name}] {e.message}")
 
 
     def _print_output_json(self) -> None:
@@ -534,6 +545,18 @@ class Checker:
             "warnings": self.warnings,
         }
         print(json.dumps(data, cls=ChecksitJSONEncoder))
+
+    def _group_issues_by_category(self, issues: list[CheckIssue]) -> Dict[str, List[CheckIssue]]:
+        grouped = defaultdict(list)
+        for issue in issues:
+            grouped[issue.category].append(issue)
+        return grouped
+
+    def _group_issues_by_target(self, issues: list[CheckIssue]) -> Dict[str, List[CheckIssue]]:
+        grouped = defaultdict(list)
+        for issue in issues:
+            grouped[issue.target_type].append(issue)
+        return grouped
 
     def check_file(self) -> None:
         """Check a data file against a template or specs.
