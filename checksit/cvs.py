@@ -10,7 +10,7 @@ import requests
 from typing import Dict, List, Union, Any
 import time
 
-from .utils import CheckIssue
+from .utils import CheckIssue, IssueCategory
 from .config import get_config
 
 conf = get_config()
@@ -266,7 +266,7 @@ class Vocabs:
             if value not in options:
                 errors.append(
                     CheckIssue(
-                        category="Vocab Value Mismtach",
+                        category=IssueCategory.VOCAB_VALUE_MISMATCH,
                         target_type=label.split(":")[0].replace("*",""),
                         target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                         message=f"`{value}` not in vocab options: `{options}` (using `{vocab_lookup}`)."
@@ -291,7 +291,7 @@ class Vocabs:
         elif value != options:
             errors.append(
                 CheckIssue(
-                    category="Vocab Value Mismatch",
+                    category=IssueCategory.VOCAB_VALUE_MISMATCH,
                     target_type=label.split(":")[0].replace("*",""),
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label,
                     message=f"`{value}` does not equal required vocab value: `{options}` (using: `{vocab_lookup}`)."

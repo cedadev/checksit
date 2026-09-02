@@ -9,7 +9,7 @@ from typing import Tuple, List, Dict
 
 from ..cvs import vocabs, vocabs_prefix
 from .base import BaseReader
-from ..utils import CheckIssue
+from ..utils import CheckIssue, IssueCategory
 
 
 def get_output(cmd: str) -> str:
@@ -113,7 +113,7 @@ class CDLParser(BaseReader):
             #)
             self.fmt_errors.append(
                 CheckIssue(
-                    category="File Format Error",
+                    category=IssueCategory.FILE_FORMAT,
                     target_type="global_attribute",
                     target_name="source",
                     message="Attribute `source` must be at least {min_chars} characters long"
@@ -274,7 +274,7 @@ class CDLParser(BaseReader):
                     #)
                     self.fmt_errors.append(
                         CheckIssue(
-                            category="Duplicate Attribute",
+                            category=IssueCategory.DUPLICATE_ATTRIBUTE,
                             target_type="variable",
                             target_name=var_id,
                             message=f"Attribute `{key}` defined multiple times for variable `{var_id}`"

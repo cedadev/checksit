@@ -6,8 +6,25 @@ import inspect
 import json
 from typing import List, Dict, Callable, Any, Optional
 from dataclasses import dataclass, asdict
+from enum import StrEnum
 
 UNDEFINED = "UNDEFINED"
+
+class IssueCategory(StrEnum):
+    VALUE_MISMATCH = "Value Mismatch"
+    MISSING_SECTION = "Missing Section"
+    FILE_FORMAT = "File Format"
+    DUPLICATE_ATTRIBUTE = "Duplicate Attribute"
+    UNDEFINED_VALUE =  "Undefined Value"
+    MISSING_ITEM = "Missing Item"
+    VALUE_FORMAT_MISMATCH = "Value Format Mismatch"
+    ITEM_NOT_ALLOWED = "Item Not Allowed"
+    FILE_NAME_FORMAT = "File Name Format"
+    VOCAB_VALUE_MISMATCH = "Vocab Value Mismatch"
+    TYPE_MISMATCH = "Type Mismatch"
+    REGEX_VALUE_MISMATCH = "Regex Value Mismatch"
+    URL_NOT_FOUND = "URL Not Found"
+
 
 @dataclass
 class CheckIssue:
@@ -21,7 +38,7 @@ class CheckIssue:
         expected: Expected value of the item that has the issue.
         found: Found value of the item that has the issue.
     """
-    category: str
+    category: IssueCategory
     target_type: str
     target_name: str
     message: str

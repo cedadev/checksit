@@ -20,7 +20,7 @@ from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
 from .readers import pp, badc_csv, cdl, yml, image
 from .specs import SpecificationChecker
-from .utils import get_file_base, extension, UNDEFINED, CheckIssue, ChecksitJSONEncoder
+from .utils import get_file_base, extension, UNDEFINED, CheckIssue, ChecksitJSONEncoder, IssueCategory
 from .config import get_config
 from .make_specs import make_amof_specs
 
@@ -181,7 +181,7 @@ class Checker:
                 #)
                 errors.append(
                     CheckIssue(
-                        category="Value Mismatch",
+                        category=IssueCategory.VALUE_MISMATCH,
                         target_type=label,
                         target_name=key,
                         message=f"`{rec.get(rec_key, UNDEFINED)}` does not match expected value `{tmpl[key]}`",
@@ -217,7 +217,7 @@ class Checker:
             #errors.append(f"Expected item '{label}' not found in data file.")
             errors.append(
                 CheckIssue(
-                    category="Missing Section",
+                    category=IssueCategory.MISSING_SECTION,
                     target_type=label,
                     target_name=label,
                     message=f"Item `{label}` not found in data file",

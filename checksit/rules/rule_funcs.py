@@ -15,7 +15,7 @@ import sys
 from typing import List, Dict, Optional, Any, Union
 
 from . import processors
-from ..utils import CheckIssue
+from ..utils import CheckIssue, IssueCategory
 from ..config import get_config
 
 conf = get_config()
@@ -71,7 +71,7 @@ def match_file_name(
     if value != file_name:
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` does not match file name: `{file_name}`.",
@@ -108,7 +108,7 @@ def match_one_of(
     if value not in options:
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be one of: `{options}`."
@@ -152,7 +152,7 @@ def match_one_or_more_of(
     if not values.issubset(options) or len(values) == 0:
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be one or more of: `{sorted(options)}`.",
@@ -192,7 +192,7 @@ def string_of_length(
         if len(value) < min_length:
             errors.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` must be at least {min_length} characters.",
@@ -201,7 +201,7 @@ def string_of_length(
     elif len(value) != min_length:
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be exactly {min_length} characters.",
@@ -243,7 +243,7 @@ def validate_image_date_time(
     if not match:
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
                 target_name="-".join(label.split(":")[1:]).replace("*",""),
                 message=f"`{value}` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
@@ -282,7 +282,7 @@ def validate_orcid_ID(
     if len(value) != 37:
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
@@ -308,7 +308,7 @@ def validate_orcid_ID(
     ):
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
@@ -352,7 +352,7 @@ def list_of_names(
                 )
                 warnings.append(
                     CheckIssue(
-                        category="Value Format Mismatch",
+                        category=IssueCategory.VALUE_FORMAT_MISMATCH,
                         target_type=label.split(":")[0],
                         target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                         message=message,
@@ -361,7 +361,7 @@ def list_of_names(
             if not re.fullmatch(character_name_pattern, i):
                 warnings.append(
                     CheckIssue(
-                        category="Value Format Mismatch",
+                        category=IssueCategory.VALUE_FORMAT_MISMATCH,
                         target_type=label.split(":")[0],
                         target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                         message=f"`{value}` - please use characters A-Z, a-z, À-ÿ where appropriate."
@@ -375,7 +375,7 @@ def list_of_names(
             )
             warnings.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=message,
@@ -384,7 +384,7 @@ def list_of_names(
         if not re.fullmatch(character_name_pattern, value):
             warnings.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` - please use characters A-Z, a-z, À-ÿ where appropriate."
@@ -418,7 +418,7 @@ def headline(
     if value == "":
         warnings.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` should not be empty",
@@ -429,7 +429,7 @@ def headline(
         if len(value) > 150:
             warnings.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should contain no more than one sentence."
@@ -439,7 +439,7 @@ def headline(
         if value.count(".") >= 2:
             warnings.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should contain no more than one sentance.",
@@ -449,7 +449,7 @@ def headline(
         if not value[0].isupper():
             warnings.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should start with a captial letter.",
@@ -459,7 +459,7 @@ def headline(
         if len(value) < 10:
             warnings.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should be at least 10 characters.",
@@ -493,7 +493,7 @@ def title_check(
     if value != os.path.basename(context):
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must match the name of the file.",
@@ -525,7 +525,7 @@ def url_checker(
     except:
         warnings.append(
             CheckIssue(
-                category="URL Not Found",
+                category=IssueCategory.URL_NOT_FOUND,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` is not a reachable url.",
@@ -535,7 +535,7 @@ def url_checker(
         if url.getcode() != 200:  # (200 means it exists and is up and reachable)
             warnings.append(
                 CheckIssue(
-                    category="URL Not Found",
+                    category=IssueCategory.URL_NOT_FOUND,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` is not a reachable url.",
@@ -569,7 +569,7 @@ def relation_url_checker(
     if " " not in value:
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` should contain a space before the url.",
@@ -611,7 +611,7 @@ def latitude(
     if int_latitude > 90 or (int_latitude == 90 and dec_latitude > 0):
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be within -90 and +90.",
@@ -645,7 +645,7 @@ def longitude(
     if int_longitude > 180 or (int_longitude == 180 and dec_longitude > 0):
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be within -180 and +180.",
@@ -687,7 +687,7 @@ def ceda_platform(
     if not legit_platform:
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` is not a valid platform in the CEDA catalogue.",
@@ -729,7 +729,7 @@ def ncas_platform(
     if value not in ncas_platforms:
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` is not a valid NCAS platform.",
@@ -768,7 +768,7 @@ def check_qc_flags(
     if not (isinstance(value, np.ndarray) or isinstance(value, tuple)):
         errors.append(
             CheckIssue(
-                category="Value Mismatch",
+                category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"QC flag_values must be an array or tuple of byte values, not `{type(value)}`",
@@ -779,7 +779,7 @@ def check_qc_flags(
     if not len(value) >= 2:
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="There must be at least two QC flag values.",
@@ -788,7 +788,7 @@ def check_qc_flags(
     elif not (np.all(value[:2] == [0, 1]) or np.all(value[:2] == (0, 1))):
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="First two QC flag_values must be `[0, 1]`.",
@@ -799,7 +799,7 @@ def check_qc_flags(
     if not len(meanings) >= 2:
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="There must be at least two QC flag meanings (space separated).",
@@ -808,7 +808,7 @@ def check_qc_flags(
     elif not np.all(meanings[:2] == ["not_used", "good_data"]):
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="First two QC flag_meanings must be 'not_used' and 'good_data'.",
@@ -819,7 +819,7 @@ def check_qc_flags(
     if not len(value) == len(meanings):
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="Number of flag_values must equal number of flag_meanings.",
@@ -857,7 +857,7 @@ def check_utc_date_iso_format(
         if (dt.utcoffset() != None) and (dt.utcoffset().total_seconds() != 0):
             errors.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"Date string `{original_value}` not in UTC.",
@@ -866,7 +866,7 @@ def check_utc_date_iso_format(
     except ValueError:
         errors.append(
             CheckIssue(
-                category="Value Format Mismatch",
+                category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"Date string `{original_value}` not in ISO 8601 format.",
@@ -903,7 +903,7 @@ def allow_proposed(value, context, extras=None, label="") -> List[CheckIssue]:
         errors.append(f"{label} does not contain standard_name or proposed_standard_name with value '{extras}'")
         errors.append(
             CheckIssue(
-                category="Missing Item",
+                category=IssueCategory.MISSING_ITEM,
                 target_type=label.split(":")[0],
                 target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"{label} does not contain standard_name or proposed_standard_name with value '{extras}'.",

@@ -18,7 +18,7 @@ from numbers import Number
 from typing import List, Union, Tuple, Dict
 
 from . import rule_funcs
-from ..utils import CheckIssue
+from ..utils import CheckIssue, IssueCategory
 from ..config import get_config
 
 conf = get_config()
@@ -201,7 +201,7 @@ class Rules:
                 if not isinstance(value, self._map_type_rule(type_rule)):
                     output.append(
                         CheckIssue(
-                            category="Type Mismatch",
+                            category=IssueCategory.TYPE_MISMATCH,
                             target_type=label.removeprefix("[").split(":")[0].replace("*",""),
                             target_name="-".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
                             message=f"Value `{value}` is not of required type: `{type_rule}`.",
@@ -220,7 +220,7 @@ class Rules:
                         )
                         output.append(
                             CheckIssue(
-                                category="Regex Value Mismatch",
+                                category=IssueCategory.REGEX_VALUE_MISMATCH,
                                 target_type=label.removeprefix("[").split(":")[0].replace("*",""),
                                 target_name="-".join(label.split(":")[1:]).replace("*","").removeprefix("-").removesuffix("]") or label.replace("*",""),
                                 message=message,
@@ -237,7 +237,7 @@ class Rules:
                 if not re.match(f"^{pattern}$", value):
                     output.append(
                         CheckIssue(
-                            category="Regex Value Mismatch",
+                            category=IssueCategory.REGEX_VALUE_MISMATCH,
                             target_type=label.removeprefix("[").split(":")[0].replace("*",""),
                             target_name="-".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
                             message=f"Value `{value}` does not match regular expression: `{pattern}`.",

@@ -6,7 +6,7 @@ specs MUST return two lists, errors and warnings, even if one will always be emp
 MUST take `skip_spellcheck` as a parameter, even if not used.
 """
 
-from .utils import UNDEFINED, is_undefined, CheckIssue
+from .utils import UNDEFINED, is_undefined, CheckIssue, IssueCategory
 from .cvs import vocabs
 from .rules import rules
 
@@ -149,7 +149,7 @@ def check_var_attrs(
             if is_undefined(var_dict.get(attr)):
                 errors.append(
                     CheckIssue(
-                        category="Undefined Value",
+                        category=IssueCategory.UNDEFINED_VALUE,
                         target_type="variable",
                         target_name=var_id,
                         message=f"Attribute {attr} must have a valid definition."
@@ -210,7 +210,7 @@ def check_global_attrs(
             )
             errors.append(
                 CheckIssue(
-                    category="Missing Item",
+                    category=IssueCategory.MISSING_ITEM,
                     target_type="global_attribute",
                     target_name=attr,
                     message=message,
@@ -219,7 +219,7 @@ def check_global_attrs(
         elif is_undefined(dct["global_attributes"].get(attr)):
             errors.append(
                 CheckIssue(
-                    category="Undefined Value",
+                    category=IssueCategory.UNDEFINED_VALUE,
                     target_type="global_attribute",
                     target_name=attr,
                     message=f"No value defined for attribute `{attr}`."
@@ -234,7 +234,7 @@ def check_global_attrs(
             )
             errors.append(
                 CheckIssue(
-                    category="Missing Item",
+                    category=IssueCategory.MISSING_ITEM,
                     target_type="global_attribute",
                     target_name=attr,
                     message=message
@@ -243,7 +243,7 @@ def check_global_attrs(
         elif is_undefined(dct["global_attributes"].get(attr)):
             errors.append(
                 CheckIssue(
-                    category="Undefined Value",
+                    category=IssueCategory.UNDEFINED_VALUE,
                     target_type="global_attribute",
                     target_name=attr,
                     message=f"No value defined for attribute {attr}."
@@ -266,7 +266,7 @@ def check_global_attrs(
             )
             errors.append(
                 CheckIssue(
-                    category="Missing Item",
+                    category=IssueCategory.MISSING_ITEM,
                     target_type="global_attribute",
                     target_name=attr,
                     message=message
@@ -275,7 +275,7 @@ def check_global_attrs(
         elif is_undefined(dct["global_attributes"].get(attr)):
             errors.append(
                 CheckIssue(
-                    category="Undefined Value",
+                    category=IssueCategory.UNDEFINED_VALUE,
                     target_type="global_attribute",
                     target_name=attr,
                     message="No value defined for attribute `{attr}`."
@@ -284,7 +284,7 @@ def check_global_attrs(
         elif not re.match(regex_attrs[attr], dct["global_attributes"].get(attr)):
             errors.append(
                 CheckIssue(
-                    category="Value Format Mismatch",
+                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type="global_attribute",
                     target_name=attr,
                     message=f"{dct['global_attributes'].get(attr, UNDEFINED)} does not match regex pattern '{regex_attrs[attr]}'.",
@@ -301,7 +301,7 @@ def check_global_attrs(
             )
             errors.append(
                 CheckIssue(
-                    category="Missing Item",
+                    category=IssueCategory.MISSING_ITEM,
                     target_type="global_attribute",
                     target_name=attr,
                     message=message
@@ -310,7 +310,7 @@ def check_global_attrs(
         elif is_undefined(dct["global_attributes"].get(attr)):
             errors.append(
                 CheckIssue(
-                    category="Undefined Value",
+                    category=IssueCategory.UNDEFINED_VALUE,
                     target_type="global_attribute",
                     target_name=attr,
                     message=f"No value defined for attribute `{attr}`."
@@ -364,7 +364,7 @@ def check_var_exists(
                 )
                 warnings.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="variable",
                         target_name=var,
                         message=message
@@ -378,7 +378,7 @@ def check_var_exists(
                 )
                 errors.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="variable",
                         target_name=var,
                         message=message
@@ -423,7 +423,7 @@ def check_dim_exists(
                 )
                 warnings.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="dimension",
                         target_name=dim,
                         message=message
@@ -437,7 +437,7 @@ def check_dim_exists(
                 )
                 errors.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="dimension",
                         target_name=dim,
                         message=message
@@ -476,7 +476,7 @@ def check_dim_regex(
             if len(matches) == 0:
                 warnings.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="dimension",
                         target_name=regex_dim,
                         message="No dimension matching optional regex check in file."
@@ -488,7 +488,7 @@ def check_dim_regex(
             if len(matches) == 0:
                 errors.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="dimension",
                         target_name=regex_dim,
                         message="No dimension matching regex check in file."
@@ -546,7 +546,7 @@ def check_var(
             )
             warnings.append(
                 CheckIssue(
-                    category="Missing Item",
+                    category=IssueCategory.MISSING_ITEM,
                     target_type="variable",
                     target_name=variable,
                     message=message,
@@ -566,7 +566,7 @@ def check_var(
                     )
                     errors.append(
                         CheckIssue(
-                            category="Missing Item",
+                            category=IssueCategory.MISSING_ITEM,
                             target_type="variable-attribute",
                             target_name=variable,
                             message=message
@@ -594,7 +594,7 @@ def check_var(
                         )
                         errors.append(
                             CheckIssue(
-                                category="Valid Mismatch",
+                                category=IssueCategory.VALUE_MISMATCH,
                                 target_type="variable-attribute",
                                 target_name=variable,
                                 message=message,
@@ -607,7 +607,7 @@ def check_var(
                     )
                     errors.append(
                         CheckIssue(
-                            category="Valid Mismatch",
+                            category=IssueCategory.VALUE_MISMATCH,
                             target_type="variable-attribute",
                             target_name=variable,
                             message=message,
@@ -630,7 +630,7 @@ def check_var(
                         )
                         errors.append(
                             CheckIssue(
-                                category="Missing Item",
+                                category=IssueCategory.MISSING_ITEM,
                                 target_type="variable-attribute",
                                 target_name=variable,
                                 message=message,
@@ -648,7 +648,7 @@ def check_var(
                 elif is_undefined(dct["variables"][variable].get(attr_key)):
                     errors.append(
                         CheckIssue(
-                            category="Undefined Value",
+                            category=IssueCategory.UNDEFINED_VALUE,
                             target_type="variable-attribute",
                             target_name=variable,
                             message=f"No value defined for attribute `{attr_key}` for variable `{variable}`.",
@@ -690,7 +690,7 @@ def check_var(
             )
             errors.append(
                 CheckIssue(
-                    category="Missing Item",
+                    category=IssueCategory.MISSING_ITEM,
                     target_type="variable",
                     target_name=variable,
                     message=message,
@@ -710,7 +710,7 @@ def check_var(
                     )
                     errors.append(
                         CheckIssue(
-                            category="Missing Item",
+                            category=IssueCategory.MISSING_ITEM,
                             target_type="variable-attribute",
                             target_name=variable,
                             message=message,
@@ -726,7 +726,7 @@ def check_var(
                     )
                     errors.append(
                         CheckIssue(
-                            category="Value Mismatch",
+                            category=IssueCategory.VALUE_MISMATCH,
                             target_type="variable-attribute",
                             target_name=variable,
                             message=message,
@@ -749,7 +749,7 @@ def check_var(
                         )
                         errors.append(
                             CheckIssue(
-                                category="Missing Item",
+                                category=IssueCategory.MISSING_ITEM,
                                 target_type="variable-attribute",
                                 target_name=variable,
                                 message=message,
@@ -821,7 +821,7 @@ def check_var(
             if attr not in all_allowed_attrs:
                 errors.append(
                     CheckIssue(
-                        category="Item Not Allowed",
+                        category=IssueCategory.ITEM_NOT_ALLOWED,
                         target_type="variable-attribute",
                         target_name=variable,
                         message=f"Attribute `{attr}` in variable `{variable}` is not allowed."
@@ -868,7 +868,7 @@ def check_file_name(
         ):
             errors.append(
                 CheckIssue(
-                    category="File Name Format",
+                    category=IssueCategory.FILE_NAME_FORMAT,
                     target_type="file_name-instrument_name",
                     target_name=file_name_parts[0],
                     message=f"Unknown instrument `{file_name_parts[0]}`.",
@@ -904,7 +904,7 @@ def check_file_name(
     if not DATE_REGEX.match(file_name_parts[2]):
         errors.append(
             CheckIssue(
-                category="File Name Format",
+                category=IssueCategory.FILE_NAME_FORMAT,
                 target_type="file_name-date",
                 target_name=file_name_parts[2],
                 message="Invalid date format in file name",
@@ -923,7 +923,7 @@ def check_file_name(
         if not valid_date_found:
             errors.append(
                 CheckIssue(
-                    category="File Name Format",
+                    category=IssueCategory.FILE_NAME_FORMAT,
                     target_type="file_name-date",
                     target_name=file_name_parts[2],
                     message="Invalid date in file name",
@@ -938,7 +938,7 @@ def check_file_name(
         ):
             errors.append(
                 CheckIssue(
-                    category="File Name Format",
+                    category=IssueCategory.FILE_NAME_FORMAT,
                     target_type="file_name-data_product",
                     target_name=file_name_parts[3],
                     message="Unknown data product in file name",
@@ -982,7 +982,7 @@ def check_file_name(
     if len(file_name_parts) > 8:
         errors.append(
             CheckIssue(
-                category="File Name Format",
+                category=IssueCategory.FILE_NAME_FORMAT,
                 target_type="file_name",
                 target_name="options",
                 message="Too many options in file name."
@@ -1072,7 +1072,7 @@ def check_generic_file_name(
             )
             errors.append(
                 CheckIssue(
-                    category="File Name Format",
+                    category=IssueCategory.FILE_NAME_FORMAT,
                     target_type="file_name",
                     target_name="fields",
                     message=message,
@@ -1087,7 +1087,7 @@ def check_generic_file_name(
             )
             errors.append(
                 CheckIssue(
-                    category="File Name Format",
+                    category=IssueCategory.FILE_NAME_FORMAT,
                     target_type="file_name",
                     target_name="fields",
                     message=message,
@@ -1110,7 +1110,7 @@ def check_generic_file_name(
                         )
                         errors.append(
                             CheckIssue(
-                                category="File Name Format",
+                                category=IssueCategory.FILE_NAME_FORMAT,
                                 target_type="file_name",
                                 target_name="fields",
                                 message=f"Unknown field `{key}` in vocab `{field}`.",
@@ -1129,7 +1129,7 @@ def check_generic_file_name(
                 if not DATE_REGEX_GENERIC.match(key):
                     errors.append(
                         CheckIssue(
-                            category="File Name Format",
+                            category=IssueCategory.FILE_NAME_FORMAT,
                             target_type="file_name",
                             target_name="date",
                             message=f"Expecting date/time - bad date format `{key}`.",
@@ -1155,7 +1155,7 @@ def check_generic_file_name(
                         )
                         errors.append(
                             CheckIssue(
-                                category="File Name Format",
+                                category=IssueCategory.FILE_NAME_FORMAT,
                                 target_type="file_name",
                                 target_name="date",
                                 message=message,
@@ -1176,7 +1176,7 @@ def check_generic_file_name(
                     )
                     errors.append(
                         CheckIssue(
-                            category="File Name Format",
+                            category=IssueCategory.FILE_NAME_FORMAT,
                             target_type="file_name",
                             target_name="file_version",
                             message=message
@@ -1189,7 +1189,7 @@ def check_generic_file_name(
                 # FIELD NOT RECOGNISED
                 errors.append(
                     CheckIssue(
-                        category="File Name Format",
+                        category=IssueCategory.FILE_NAME_FORMAT,
                         target_type="file_name",
                         target_name="field_type",
                         message=f"`{field}` field type not recognised."
@@ -1256,7 +1256,7 @@ def check_radar_moment_variables(
                 )
                 errors.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="variable-attribute",
                         target_name=variable,
                         message=message,
@@ -1275,7 +1275,7 @@ def check_radar_moment_variables(
                 )
                 errors.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="variable-attribute",
                         target_name=variable,
                         message=message,
@@ -1287,7 +1287,7 @@ def check_radar_moment_variables(
                 )
                 errors.append(
                     CheckIssue(
-                        category="Undefined Value",
+                        category=IssueCategory.UNDEFINED_VALUE,
                         target_type="variable-attribute",
                         target_name=variable,
                         message=f"No value defined for attribute `{attr_key}`.",
@@ -1310,7 +1310,7 @@ def check_radar_moment_variables(
             if matches == 0:
                 errors.append(
                     CheckIssue(
-                        category="Missing Item",
+                        category=IssueCategory.MISSING_ITEM,
                         target_type="variable-attribute",
                         target_name=variable,
                         message=f"One attribute of `{attr_options}` must be defined.",
@@ -1319,7 +1319,7 @@ def check_radar_moment_variables(
             elif matches > 1:
                 errors.append(
                     CheckIssue(
-                        category="Value Mismatch",
+                        category=IssueCategory.VALUE_MISMATCH,
                         target_type="variable-attribute",
                         target_name=variable,
                         message=f"Only one of `{attr_options}` should be defined, {matches} found.",
@@ -1353,7 +1353,7 @@ def check_defined_only(
         if attr not in all_global_attrs:
             errors.append(
                 CheckIssue(
-                    category="Item Not Allowed",
+                    category=IssueCategory.ITEM_NOT_ALLOWED,
                     target_type="global_attribute",
                     target_name=attr,
                     message=f"Invalid global attribute `{attr}` found in file.",
@@ -1363,7 +1363,7 @@ def check_defined_only(
         if dim not in all_dimensions:
             errors.append(
                 CheckIssue(
-                    category="Item Not Allowed",
+                    category=IssueCategory.ITEM_NOT_ALLOWED,
                     target_type="dimension",
                     target_name=dim,
                     message=f"Invalid dimension `{dim}` found in file.",
@@ -1373,7 +1373,7 @@ def check_defined_only(
         if var not in all_variables:
             errors.append(
                 CheckIssue(
-                    category="Item Not Allowed",
+                    category=IssueCategory.ITEM_NOT_ALLOWED,
                     target_type="variable",
                     target_name=var,
                     message=f"Invalid variable `{var}` found in file.",
