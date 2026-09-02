@@ -301,7 +301,7 @@ class Vocabs:
                     category=IssueCategory.VOCAB_VALUE_MISMATCH,
                     target_type=label.split(":")[0].replace("*",""),
                     target_name=":".join(label.split(":")[1:]).replace("*","") or label,
-                    message=f"`{value}` does not equal required vocab value: `{options}` (using: `{vocab_lookup}`)."
+                    message=f"`{value}` does not equal required vocab value: `{options}` (using `{vocab_lookup}`)."
                 )
             )
 
