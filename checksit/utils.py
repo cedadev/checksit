@@ -5,12 +5,22 @@ import os
 import inspect
 import json
 from typing import List, Dict, Callable, Any, Optional
-from dataclasses import dataclass, is_dataclass, asdict
+from dataclasses import dataclass, asdict
 
 UNDEFINED = "UNDEFINED"
 
 @dataclass
 class CheckIssue:
+    """Hold instances of warnings or errors from checks.
+
+    Attributes:
+        category: Category of the issue.
+        target_type: Section of file that has issue (global atribute, variable e.t.c.).
+        target_name: Name of the item that has the issue.
+        message: Message describing the issue.
+        expected: Expected value of the item that has the issue.
+        found: Found value of the item that has the issue.
+    """
     category: str
     target_type: str
     target_name: str
@@ -23,10 +33,19 @@ class CheckIssue:
 
 
 class ChecksitJSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if is_dataclass(obj):
-            return asdict(obj)
-        return super().default(obj)
+    def default(self, o: Any) -> Any:
+        """Encode dataclass objects as dictionaries for JSON serialization.
+
+        Args:
+            o: Object to encode.
+
+        Returns:
+            Dictionary representation of the dataclass object, or the default JSON
+              encoding for other objects.
+        """
+        if isinstance(o, CheckIssue):
+            return asdict(o)
+        return super().default(o)
 
 
 def string_to_dict(s: str) -> Dict[str, str]:
