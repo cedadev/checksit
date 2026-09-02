@@ -278,16 +278,16 @@ def check_global_attrs(
                     category=IssueCategory.UNDEFINED_VALUE,
                     target_type="global_attribute",
                     target_name=attr,
-                    message="No value defined for attribute `{attr}`."
+                    message=f"No value defined for attribute `{attr}`."
                 )
             )
         elif not re.match(regex_attrs[attr], dct["global_attributes"].get(attr)):
             errors.append(
                 CheckIssue(
-                    category=IssueCategory.VALUE_FORMAT_MISMATCH,
+                    category=IssueCategory.REGEX_VALUE_MISMATCH,
                     target_type="global_attribute",
                     target_name=attr,
-                    message=f"{dct['global_attributes'].get(attr, UNDEFINED)} does not match regex pattern '{regex_attrs[attr]}'.",
+                    message=f"`{dct['global_attributes'].get(attr, UNDEFINED)}` does not match regex pattern `{regex_attrs[attr]}`.",
                     expected=regex_attrs[attr],
                     found=dct["global_attributes"].get(attr, UNDEFINED)
                 )
@@ -589,8 +589,8 @@ def check_var(
                         )
                     ):
                         message = (
-                            f"Attribute `{attr_key}` for variable `{variable}` must have definition '{attr_value}', "
-                            f"not '{dct['variables'][variable].get(attr_key)}'."
+                            f"Attribute `{attr_key}` for variable `{variable}` must have definition `{attr_value}`, "
+                            f"not `{dct['variables'][variable].get(attr_key)}`."
                         )
                         errors.append(
                             CheckIssue(
@@ -602,8 +602,8 @@ def check_var(
                         )
                 elif not str(dct["variables"][variable].get(attr_key)) == attr_value:
                     message = (
-                        f"Attribute `{attr_key}` for variable `{variable}` must have definition '{attr_value}', "
-                        f"not '{dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}'."
+                        f"Attribute `{attr_key}` for variable `{variable}` must have definition `{attr_value}`, "
+                        f"not `{dct['variables'][variable].get(attr_key).encode('unicode_escape').decode('utf-8')}`."
                     )
                     errors.append(
                         CheckIssue(
@@ -883,12 +883,12 @@ def check_file_name(
         if rules.check(
             rule_checks["platform"],
             file_name_parts[1],
-            label="[file name]: Invalid file name format -",
+            label=f"file_name-platform:{file_name_parts[1]}",
         ) != ([], []):
             rule_errors, rule_warnings = rules.check(
                 rule_checks["platform"],
                 file_name_parts[1],
-                label="[file name]: Invalid file name format -",
+                label=f"file_name-platform:{file_name_parts[1]}",
             )
             if rule_errors != []:
                 errors.extend(rule_errors)
@@ -907,7 +907,7 @@ def check_file_name(
                 category=IssueCategory.FILE_NAME_FORMAT,
                 target_type="file_name-date",
                 target_name=file_name_parts[2],
-                message="Invalid date format in file name",
+                message="Invalid date format in file name.",
             )
         )
     else:
@@ -926,7 +926,7 @@ def check_file_name(
                     category=IssueCategory.FILE_NAME_FORMAT,
                     target_type="file_name-date",
                     target_name=file_name_parts[2],
-                    message="Invalid date in file name",
+                    message="Invalid date in file name.",
                 )
             )
 
@@ -941,14 +941,14 @@ def check_file_name(
                     category=IssueCategory.FILE_NAME_FORMAT,
                     target_type="file_name-data_product",
                     target_name=file_name_parts[3],
-                    message="Unknown data product in file name",
+                    message="Unknown data product in file name.",
                 )
             )
     elif "data_product" in rule_checks.keys():
         dp_rules_check = rules.check(
             rule_checks["data_product"],
             file_name_parts[3],
-            label="[file name]: Invalid file name format -",
+            label=f"file_name-data_product:{file_name_parts[3]}",
         )
         if dp_rules_check != ([], []):
             rule_errors, rule_warnings = dp_rules_check
@@ -966,7 +966,7 @@ def check_file_name(
         file_version_check = rules.check(
             rule_checks["file_version"],
             version_component,
-            label="[file name]: Invalid file name format -",
+            label=f"file_name-file_version:{version_component}",
         )
         if file_version_check != ([], []):
             rule_errors, rule_warnings = file_version_check
@@ -983,8 +983,8 @@ def check_file_name(
         errors.append(
             CheckIssue(
                 category=IssueCategory.FILE_NAME_FORMAT,
-                target_type="file_name",
-                target_name="options",
+                target_type="file_name-options",
+                target_name="_".join(file_name_parts[4:-1]),
                 message="Too many options in file name."
             )
         )
@@ -1068,7 +1068,7 @@ def check_generic_file_name(
         # Check if number of file name parts matches the number of fields specified in the user-defined yaml file
         if len(vocab_checks) < len(file_name_parts):
             message = (
-                f"[file name]: Number of file name fields ({len(file_name_parts)}) is greater than the {len(vocab_checks)} fields expected."
+                f"Number of file name fields ({len(file_name_parts)}) is greater than the {len(vocab_checks)} fields expected."
             )
             errors.append(
                 CheckIssue(
@@ -1083,7 +1083,7 @@ def check_generic_file_name(
             break
         elif len(vocab_checks) > len(file_name_parts):
             message = (
-                f"[file name]: Number of file name fields ({len(file_name_parts)}) is less than the {len(vocab_checks)} fields expected."
+                f"Number of file name fields ({len(file_name_parts)}) is less than the {len(vocab_checks)} fields expected."
             )
             errors.append(
                 CheckIssue(
@@ -1105,9 +1105,6 @@ def check_generic_file_name(
                         vocabs.check(field, key, spec_verb=spec_verb)
                         != []
                     ):
-                        errors.append(
-                            f"[file name]: Unknown field '{key}' in vocab {field}."
-                        )
                         errors.append(
                             CheckIssue(
                                 category=IssueCategory.FILE_NAME_FORMAT,

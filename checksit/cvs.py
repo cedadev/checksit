@@ -259,6 +259,7 @@ class Vocabs:
         """
         errors = []
         options = [self.lookup(vocab_lookup) if lookup else vocab_lookup][0]
+        label = label.replace("*","").removeprefix("[").removesuffix("]")
         if spec_verb:
             print(f"Vocab lookup: {vocab_lookup}")
 
@@ -268,7 +269,7 @@ class Vocabs:
                     CheckIssue(
                         category=IssueCategory.VOCAB_VALUE_MISMATCH,
                         target_type=label.split(":")[0].replace("*",""),
-                        target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                        target_name=":".join(label.split(":")[1:]).removeprefix(":") or label,
                         message=f"`{value}` not in vocab options: `{options}` (using `{vocab_lookup}`)."
                     )
                 )
@@ -290,8 +291,8 @@ class Vocabs:
                     errors.append(
                         CheckIssue(
                             category=IssueCategory.MISSING_ITEM,
-                            target_type=label.split(":")[0].replace("*",""),
-                            target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                            target_type=label.split(":")[0],
+                            target_name=":".join(label.split(":")[1:]).removeprefix(":") or label,
                             message=f"{label} does not have attribute `{key}`.",
                         )
                     )
@@ -299,8 +300,8 @@ class Vocabs:
             errors.append(
                 CheckIssue(
                     category=IssueCategory.VOCAB_VALUE_MISMATCH,
-                    target_type=label.split(":")[0].replace("*",""),
-                    target_name=":".join(label.split(":")[1:]).replace("*","") or label,
+                    target_type=label.split(":")[0],
+                    target_name=":".join(label.split(":")[1:]).removeprefix(":") or label,
                     message=f"`{value}` does not equal required vocab value: `{options}` (using `{vocab_lookup}`)."
                 )
             )
