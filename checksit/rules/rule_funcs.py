@@ -245,7 +245,7 @@ def validate_image_date_time(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
-                target_name="-".join(label.split(":")[1:]).replace("*",""),
+                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
             )
         )
@@ -442,7 +442,7 @@ def headline(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
-                    message=f"`{value}` should contain no more than one sentance.",
+                    message=f"`{value}` should contain no more than one sentence.",
                 )
             )
 
@@ -452,7 +452,7 @@ def headline(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
                     target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
-                    message=f"`{value}` should start with a captial letter.",
+                    message=f"`{value}` should start with a capital letter.",
                 )
             )
 
