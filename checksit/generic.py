@@ -207,7 +207,7 @@ def check_global_attrs(
             message = (
                 f"Attribute `{attr}` does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
-            )
+            ).rstrip()
             errors.append(
                 CheckIssue(
                     category=IssueCategory.MISSING_ITEM,
@@ -231,7 +231,7 @@ def check_global_attrs(
             message = (
                 f"Attribute `{attr}` does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
-            )
+            ).rstrip()
             errors.append(
                 CheckIssue(
                     category=IssueCategory.MISSING_ITEM,
@@ -246,7 +246,7 @@ def check_global_attrs(
                     category=IssueCategory.UNDEFINED_VALUE,
                     target_type="global_attribute",
                     target_name=attr,
-                    message=f"No value defined for attribute {attr}."
+                    message=f"No value defined for attribute `{attr}`."
                 )
             )
         else:
@@ -263,7 +263,7 @@ def check_global_attrs(
             message = (
                 f"Attribute `{attr}` does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
-            )
+            ).rstrip()
             errors.append(
                 CheckIssue(
                     category=IssueCategory.MISSING_ITEM,
@@ -298,7 +298,7 @@ def check_global_attrs(
             message = (
                 f"Attribute `{attr}` does not exist. "
                 f"{search_close_match(attr, dct['global_attributes'].keys()) if not skip_spellcheck else ''}"
-            )
+            ).rstrip()
             errors.append(
                 CheckIssue(
                     category=IssueCategory.MISSING_ITEM,
@@ -361,7 +361,7 @@ def check_var_exists(
                 message = (
                     f"Optional variable `{var}` does not exist in file. "
                     f"{search_close_match(var, dct['variables'].keys()) if not skip_spellcheck else ''}"
-                )
+                ).rstrip()
                 warnings.append(
                     CheckIssue(
                         category=IssueCategory.MISSING_ITEM,
@@ -375,7 +375,7 @@ def check_var_exists(
                 message = (
                     f"Variable `{var}` does not exist in file. "
                     f"{search_close_match(var, dct['variables'].keys()) if not skip_spellcheck else ''}"
-                )
+                ).rstrip()
                 errors.append(
                     CheckIssue(
                         category=IssueCategory.MISSING_ITEM,
@@ -420,7 +420,7 @@ def check_dim_exists(
                 message = (
                     f"Optional dimension `{dim}` does not exist in file. "
                     f"{search_close_match(dim, dct['dimensions'].keys()) if not skip_spellcheck else ''}"
-                )
+                ).rstrip()
                 warnings.append(
                     CheckIssue(
                         category=IssueCategory.MISSING_ITEM,
@@ -434,7 +434,7 @@ def check_dim_exists(
                 message = (
                     f"Dimension `{dim}` does not exist in file. "
                     f"{search_close_match(dim, dct['dimensions'].keys()) if not skip_spellcheck else ''}"
-                )
+                ).rstrip()
                 errors.append(
                     CheckIssue(
                         category=IssueCategory.MISSING_ITEM,
@@ -543,7 +543,7 @@ def check_var(
             message = (
                 f"Optional variable `{variable}` does not exist in file. "
                 f"{search_close_match(variable, dct['variables'].keys()) if not skip_spellcheck else ''}"
-            )
+            ).rstrip()
             warnings.append(
                 CheckIssue(
                     category=IssueCategory.MISSING_ITEM,
@@ -563,7 +563,7 @@ def check_var(
                     message = (
                         f"Attribute `{attr_key}` for variable `{variable}` does not exist. "
                         f"{search_close_match(attr_key, dct['variables'][variable]) if not skip_spellcheck else ''}"
-                    )
+                    ).rstrip()
                     errors.append(
                         CheckIssue(
                             category=IssueCategory.MISSING_ITEM,
@@ -627,7 +627,7 @@ def check_var(
                         message = (
                             f"Attribute `{attr_key}` for variable `{variable}` does not exist. "
                             f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
-                        )
+                        ).rstrip()
                         errors.append(
                             CheckIssue(
                                 category=IssueCategory.MISSING_ITEM,
@@ -687,7 +687,7 @@ def check_var(
             message = (
                 f"Variable `{variable}` does not exist in file. "
                 f"{search_close_match(variable, dct['variables'].keys()) if not skip_spellcheck else ''}"
-            )
+            ).rstrip()
             errors.append(
                 CheckIssue(
                     category=IssueCategory.MISSING_ITEM,
@@ -707,7 +707,7 @@ def check_var(
                     message = (
                         f"Attribute `{attr_key}` for variable `{variable}` does not exist. "
                         f"{search_close_match(attr_key, dct['variables'][variable]) if not skip_spellcheck else ''}"
-                    )
+                    ).rstrip()
                     errors.append(
                         CheckIssue(
                             category=IssueCategory.MISSING_ITEM,
@@ -746,7 +746,7 @@ def check_var(
                         message = (
                             f"Attribute `{attr_key}` for variable `{variable}` does not exist. "
                             f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
-                        )
+                        ).rstrip()
                         errors.append(
                             CheckIssue(
                                 category=IssueCategory.MISSING_ITEM,
@@ -1253,7 +1253,7 @@ def check_radar_moment_variables(
                 message = (
                     f"Attribute `{attr}` for variable `{variable}` does not exist. "
                     f"{search_close_match(attr, dct['variables'][variable]) if not skip_spellcheck else ''}"
-                )
+                ).rstrip()
                 errors.append(
                     CheckIssue(
                         category=IssueCategory.MISSING_ITEM,
@@ -1272,7 +1272,7 @@ def check_radar_moment_variables(
                 message = (
                     f"Attribute `{attr_key}` for variable `{variable}` does not exist. "
                     f"{search_close_match(attr_key, dct['variables'][variable].keys()) if not skip_spellcheck else ''}"
-                )
+                ).rstrip()
                 errors.append(
                     CheckIssue(
                         category=IssueCategory.MISSING_ITEM,
