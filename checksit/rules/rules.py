@@ -216,7 +216,7 @@ class Rules:
 
                     if not re.match("^" + pattern + "$", value):
                         message = (
-                            f"Value '{value}' does not match regex rule: '{regex_rule}' - Example valid value '{self.static_regex_rules[regex_rule]['example']}'."
+                            f"Value `{value}` does not match regex rule: `{regex_rule}` - Example valid value `{self.static_regex_rules[regex_rule]['example']}`."
                         )
                         output.append(
                             CheckIssue(
