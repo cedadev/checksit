@@ -268,7 +268,7 @@ class Vocabs:
                     CheckIssue(
                         category=IssueCategory.VOCAB_VALUE_MISMATCH,
                         target_type=label.split(":")[0].replace("*",""),
-                        target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                        target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                         message=f"`{value}` not in vocab options: `{options}` (using `{vocab_lookup}`)."
                     )
                 )
@@ -287,13 +287,20 @@ class Vocabs:
                         )
                     )
                 else:
-                    errors.append(f"{label} does not have attribute '{key}'")
+                    errors.append(
+                        CheckIssue(
+                            category=IssueCategory.MISSING_ITEM,
+                            target_type=label.split(":")[0].replace("*",""),
+                            target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                            message=f"{label} does not have attribute `{key}`.",
+                        )
+                    )
         elif value != options:
             errors.append(
                 CheckIssue(
                     category=IssueCategory.VOCAB_VALUE_MISMATCH,
                     target_type=label.split(":")[0].replace("*",""),
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label,
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label,
                     message=f"`{value}` does not equal required vocab value: `{options}` (using: `{vocab_lookup}`)."
                 )
             )
