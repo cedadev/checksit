@@ -1,4 +1,5 @@
 import checksit.generic as cg
+from checksit.utils import CheckIssue, IssueCategory
 import numpy as np
 
 
@@ -37,7 +38,12 @@ def test_check_var_attrs():
     }
     defined_attrs = ["long_name", "units"]
     errors, warnings = cg.check_var_attrs(dct, defined_attrs)
-    assert errors == ["[variable**************:var2]: Attribute 'units' must have a valid definition."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.UNDEFINED_VALUE,
+        target_type="variable",
+        target_name="var2",
+        message="Attribute units must have a valid definition.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles empty attributes
@@ -48,7 +54,20 @@ def test_check_var_attrs():
         }
     }
     errors, warnings = cg.check_var_attrs(dct, defined_attrs)
-    assert errors == ["[variable**************:var1]: Attribute 'long_name' must have a valid definition.", "[variable**************:var2]: Attribute 'units' must have a valid definition."]
+    assert errors == [
+        CheckIssue(
+            category=IssueCategory.UNDEFINED_VALUE,
+            target_type="variable",
+            target_name="var1",
+            message="Attribute long_name must have a valid definition.",
+        ),
+        CheckIssue(
+            category=IssueCategory.UNDEFINED_VALUE,
+            target_type="variable",
+            target_name="var2",
+            message="Attribute units must have a valid definition.",
+        ),
+    ]
     assert warnings == []
 
     # Test that the function correctly handles variables with all attributes defined
@@ -81,13 +100,23 @@ def test_check_global_attrs():
     }
     defined_attrs = ["attr2", "attr4"]
     errors, warnings = cg.check_global_attrs(dct, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="global_attribute",
+        target_name="attr4",
+        message="Attribute `attr4` does not exist.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles empty attributes
     defined_attrs = ["attr1", "attr2"]
     errors, warnings = cg.check_global_attrs(dct, defined_attrs)
-    assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.UNDEFINED_VALUE,
+        target_type="global_attribute",
+        target_name="attr1",
+        message="No value defined for attribute `attr1`.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles defined_attrs when all attributes are defined
@@ -101,7 +130,12 @@ def test_check_global_attrs():
         "attr4": "__vocabs__:tests/test_products:test_products"
     }
     errors, warnings = cg.check_global_attrs(dct, vocab_attrs = vocab_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="global_attribute",
+        target_name="attr4",
+        message="Attribute `attr4` does not exist.",
+    )]
     assert warnings == []
 
     # Test function handles undefined attributes with vocab checks correctly
@@ -109,7 +143,12 @@ def test_check_global_attrs():
         "attr1": "__vocabs__:tests/test_platforms:test_platforms:__all__"
     }
     errors, warnings = cg.check_global_attrs(dct, vocab_attrs = vocab_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.UNDEFINED_VALUE,
+        target_type="global_attribute",
+        target_name="attr1",
+        message="No value defined for attribute `attr1`.",
+    )]
     assert warnings == []
 
     # Test function handles incorrect values with vocab checks correctly
@@ -117,7 +156,12 @@ def test_check_global_attrs():
         "attr2": "__vocabs__:tests/test_platforms:test_platforms:__all__"
     }
     errors, warnings = cg.check_global_attrs(dct, vocab_attrs = vocab_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:******:attr2]*** 'value2' not in vocab options: ['plat1', 'plat2'] (using: '__vocabs__:tests/test_platforms:test_platforms:__all__')"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.VOCAB_VALUE_MISMATCH,
+        target_type="global_attribute",
+        target_name="attr2",
+        message="`value2` not in vocab options: `['plat1', 'plat2']` (using `__vocabs__:tests/test_platforms:test_platforms:__all__`).",
+    )]
     assert warnings == []
 
     # Test function handles correct values with vocab checks correctly
@@ -133,7 +177,12 @@ def test_check_global_attrs():
         "attr4": r"\d{4}-\d{2}-\d{2}"
     }
     errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="global_attribute",
+        target_name="attr4",
+        message="Attribute `attr4` does not exist.",
+    )]
     assert warnings == []
 
     # Test function handles undefined attributes with regex checks correctly
@@ -141,7 +190,12 @@ def test_check_global_attrs():
         "attr1": r"\d{4}-\d{2}-\d{2}"
     }
     errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.UNDEFINED_VALUE,
+        target_type="global_attribute",
+        target_name="attr1",
+        message="No value defined for attribute `attr1`.",
+    )]
     assert warnings == []
 
     # Test function handles incorrect values with regex checks correctly
@@ -149,7 +203,14 @@ def test_check_global_attrs():
         "attr2": r"\d{4}-\d{2}-\d{2}"
     }
     errors, warnings = cg.check_global_attrs(dct, regex_attrs = regex_attrs, skip_spellcheck=True)
-    assert errors == [r"[global-attributes:******:attr2]: 'value2' does not match regex pattern '\d{4}-\d{2}-\d{2}'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.REGEX_VALUE_MISMATCH,
+        target_type="global_attribute",
+        target_name="attr2",
+        message=r"`value2` does not match regex pattern `\d{4}-\d{2}-\d{2}`.",
+        expected=r"\d{4}-\d{2}-\d{2}",
+        found="value2"
+    )]
     assert warnings == []
 
     # Test function handles correct values with regex checks correctly
@@ -165,7 +226,12 @@ def test_check_global_attrs():
         "attr4": "rule-func:string-of-length:5"
     }
     errors, warnings = cg.check_global_attrs(dct, rules_attrs = rules_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr4]: Attribute 'attr4' does not exist. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="global_attribute",
+        target_name="attr4",
+        message="Attribute `attr4` does not exist.",
+    )]
     assert warnings == []
 
     # Test function handles undefined attributes with rules checks correctly
@@ -173,7 +239,12 @@ def test_check_global_attrs():
         "attr1": "rule-func:string-of-length:5"
     }
     errors, warnings = cg.check_global_attrs(dct, rules_attrs = rules_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:**************:attr1]: No value defined for attribute 'attr1'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.UNDEFINED_VALUE,
+        target_type="global_attribute",
+        target_name="attr1",
+        message="No value defined for attribute `attr1`.",
+    )]
     assert warnings == []
 
     # Test function handles incorrect values with rules checks correctly
@@ -181,7 +252,12 @@ def test_check_global_attrs():
         "attr2": "rule-func:string-of-length:5"
     }
     errors, warnings = cg.check_global_attrs(dct, rules_attrs = rules_attrs, skip_spellcheck=True)
-    assert errors == ["[global-attributes:******:attr2]*** 'value2' must be exactly 5 characters"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="global_attribute",
+        target_name="attr2",
+        message="`value2` must be exactly 5 characters.",
+    )]
     assert warnings == []
 
     # Test function handles correct values with rules checks correctly
@@ -196,7 +272,19 @@ def test_check_global_attrs():
     dct = {"global_attributes": {}}
     defined_attrs = ["attr1", "attr2"]
     errors, warnings = cg.check_global_attrs(dct, defined_attrs)
-    assert errors == ["[global-attributes:**************:attr1]: Attribute 'attr1' does not exist. ", "[global-attributes:**************:attr2]: Attribute 'attr2' does not exist. "]
+    assert errors == [
+        CheckIssue(
+            category=IssueCategory.MISSING_ITEM,
+            target_type="global_attribute",
+            target_name="attr1",
+            message="Attribute `attr1` does not exist.",
+        ), CheckIssue(
+            category=IssueCategory.MISSING_ITEM,
+            target_type="global_attribute",
+            target_name="attr2",
+            message="Attribute `attr2` does not exist.",
+        ),
+    ]
     assert warnings == []
 
 
@@ -210,14 +298,24 @@ def test_check_var_exists():
     }
     variables = ["var1", "var3"]
     errors, warnings = cg.check_var_exists(dct, variables, skip_spellcheck=True)
-    assert errors == ["[variable**************:var3]: Does not exist in file. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable",
+        target_name="var3",
+        message="Variable `var3` does not exist in file.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles optional variables
     variables = ["var1", "var3:__OPTIONAL__"]
     errors, warnings = cg.check_var_exists(dct, variables, skip_spellcheck=True)
     assert errors == []
-    assert warnings == ["[variable**************:var3]: Optional variable does not exist in file. "]
+    assert warnings == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable",
+        target_name="var3",
+        message="Optional variable `var3` does not exist in file.",
+    )]
 
     # Test that the function correctly handles variables that exist
     variables = ["var1", "var2"]
@@ -229,7 +327,20 @@ def test_check_var_exists():
     dct = {"variables": {}}
     variables = ["var1", "var2"]
     errors, warnings = cg.check_var_exists(dct, variables)
-    assert errors == ["[variable**************:var1]: Does not exist in file. ", "[variable**************:var2]: Does not exist in file. "]
+    assert errors == [
+        CheckIssue(
+            category=IssueCategory.MISSING_ITEM,
+            target_type="variable",
+            target_name="var1",
+            message="Variable `var1` does not exist in file.",
+        ),
+        CheckIssue(
+            category=IssueCategory.MISSING_ITEM,
+            target_type="variable",
+            target_name="var2",
+            message="Variable `var2` does not exist in file.",
+        ),
+    ]
     assert warnings == []
 
 
@@ -243,14 +354,24 @@ def test_check_dim_exists():
     }
     dimensions = ["dim1", "dim3"]
     errors, warnings = cg.check_dim_exists(dct, dimensions, skip_spellcheck=True)
-    assert errors == ["[dimension**************:dim3]: Does not exist in file. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="dimension",
+        target_name="dim3",
+        message="Dimension `dim3` does not exist in file.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles optional dimensions
     dimensions = ["dim1", "dim3:__OPTIONAL__"]
     errors, warnings = cg.check_dim_exists(dct, dimensions, skip_spellcheck=True)
     assert errors == []
-    assert warnings == ["[dimension**************:dim3]: Optional dimension does not exist in file. "]
+    assert warnings == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="dimension",
+        target_name="dim3",
+        message="Optional dimension `dim3` does not exist in file.",
+    )]
 
     # Test that the function correctly handles dimensions that exist
     dimensions = ["dim1", "dim2"]
@@ -262,7 +383,20 @@ def test_check_dim_exists():
     dct = {"dimensions": {}}
     dimensions = ["dim1", "dim2"]
     errors, warnings = cg.check_dim_exists(dct, dimensions)
-    assert errors == ["[dimension**************:dim1]: Does not exist in file. ", "[dimension**************:dim2]: Does not exist in file. "]
+    assert errors == [
+        CheckIssue(
+            category=IssueCategory.MISSING_ITEM,
+            target_type="dimension",
+            target_name="dim1",
+            message="Dimension `dim1` does not exist in file.",
+        ),
+        CheckIssue(
+            category=IssueCategory.MISSING_ITEM,
+            target_type="dimension",
+            target_name="dim2",
+            message="Dimension `dim2` does not exist in file.",
+        ),
+    ]
     assert warnings == []
 
 
@@ -276,14 +410,24 @@ def test_check_dim_regex():
     # Test function correctly identifies no matching dimension
     dim_regex = [r"^third_.*$"]
     errors, warnings = cg.check_dim_regex(dct, dim_regex)
-    assert errors == ["[dimension**************:^third_.*$]: No dimension matching regex check in file. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="dimension",
+        target_name="^third_.*$",
+        message="No dimension matching regex check in file.",
+    )]
     assert warnings == []
 
     # Test function correctly identifies no matching optional dimensions
     dim_regex = [r"^third_.*$:__OPTIONAL__"]
     errors, warnings = cg.check_dim_regex(dct, dim_regex)
     assert errors == []
-    assert warnings == ["[dimension**************:^third_.*$]: No dimension matching optional regex check in file. "]
+    assert warnings == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="dimension",
+        target_name="^third_.*$",
+        message="No dimension matching optional regex check in file.",
+    )]
 
     # Test function correctly identifies one and multiple matching dimensions
     dim_regex = [r"first_.*$"]
@@ -311,7 +455,12 @@ def test_check_dim_regex():
     dim_regex = [r"first_.*$", r"^third_.*$:__OPTIONAL__"]
     errors, warnings = cg.check_dim_regex(dct, dim_regex)
     assert errors == []
-    assert warnings == ["[dimension**************:^third_.*$]: No dimension matching optional regex check in file. "]
+    assert warnings == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="dimension",
+        target_name="^third_.*$",
+        message="No dimension matching optional regex check in file.",
+    )]
 
 
 def test_check_var():
@@ -326,14 +475,24 @@ def test_check_var():
     variable = "var3"
     defined_attrs = ["long_name:Variable 3", "units:s"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var3]: Variable does not exist in file. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable",
+        target_name="var3",
+        message="Variable `var3` does not exist in file.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles optional variables
     variable = "var3:__OPTIONAL__"
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
     assert errors == []
-    assert warnings == ["[variable**************:var3]: Optional variable does not exist in file. "]
+    assert warnings == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable",
+        target_name="var3",
+        message="Optional variable `var3` does not exist in file.",
+    )]
 
     # Test that the function correctly handles variables that exist
     variable = "var1:__OPTIONAL__"
@@ -346,33 +505,58 @@ def test_check_var():
     variable = "var2"
     defined_attrs = ["long_name:Variable 2", "units:kg", "attr3:value 3"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var2]: Attribute 'attr3' does not exist. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable-attribute",
+        target_name="var2",
+        message="Attribute `attr3` for variable `var2` does not exist.",
+    )]
     assert warnings == []
 
     variable = "var2:__OPTIONAL__"
     defined_attrs = ["long_name:Variable 2", "units:kg", "attr3:value 3"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var2]: Attribute 'attr3' does not exist. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable-attribute",
+        target_name="var2",
+        message="Attribute `attr3` for variable `var2` does not exist.",
+    )]
     assert warnings == []
 
     # Test that the function correctly identifies incorrect attributes
     variable = "var2"
     defined_attrs = ["long_name:Variable 2", "units:s"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var2]: Attribute 'units' must have definition 's', not 'kg'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="variable-attribute",
+        target_name="var2",
+        message="Attribute `units` for variable `var2` must have definition `s`, not `kg`.",
+    )]
     assert warnings == []
 
     variable = "var2:__OPTIONAL__"
     defined_attrs = ["long_name:Variable 2", "units:s"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var2]: Attribute 'units' must have definition 's', not 'kg'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="variable-attribute",
+        target_name="var2",
+        message="Attribute `units` for variable `var2` must have definition `s`, not `kg`.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles badly formatted flag_values
     variable = "var4:__OPTIONAL__"
     defined_attrs = ["flag_values:0b, 1b, 2b"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, skip_spellcheck=True)
-    assert errors == ["[variable**************:var4]: Attribute 'flag_values' must have definition '[0 1 2]', not '0b, 1b, 2b'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="variable-attribute",
+        target_name="var4",
+        message="Attribute `flag_values` for variable `var4` must have definition `[0 1 2]`, not `0b, 1b, 2b`.",
+    )]
     assert warnings == []
 
 
@@ -387,7 +571,12 @@ def test_check_var():
     variable = "var1:__OPTIONAL__"
     defined_attrs = ["long_name:Variable 1", "flag_values:0b, 1b, 2b"]
     errors, warnings = cg.check_var(dct, variable, defined_attrs, additional_attrs_allowed=False)
-    assert errors == ["[variable**************:var1]: Attribute 'units' in variable var1 is not allowed."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.ITEM_NOT_ALLOWED,
+        target_type="variable-attribute",
+        target_name="var1",
+        message="Attribute `units` in variable `var1` is not allowed.",
+    )]
     assert warnings == []
 
     variable = "var2:__OPTIONAL__"
@@ -400,7 +589,12 @@ def test_check_var():
     variable = "var2"
     dct = {"variables": {}}
     errors, warnings = cg.check_var(dct, variable, defined_attrs)
-    assert errors == ["[variable**************:var2]: Variable does not exist in file. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable",
+        target_name="var2",
+        message="Variable `var2` does not exist in file.",
+    )]
     assert warnings == []
 
 
@@ -416,49 +610,97 @@ def test_check_file_name():
     }
     file_name = "inst3_plat1_20220101_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown instrument 'inst3'"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name-instrument_name",
+        target_name="inst3",
+        message="Unknown instrument `inst3`.",
+    )]
     assert warnings == []
 
     # Test that the function correctly identifies invalid platform name
     file_name = "inst1_plat3_20220101_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - 'plat3' must be one of: '['plat1', 'plat2']'"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="file_name-platform",
+        target_name="plat3",
+        message="`plat3` must be one of: `['plat1', 'plat2']`.",
+    )]
     assert warnings == []
 
     # Test that the function correctly identifies invalid date format
     file_name = "inst1_plat1_2022010_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - bad date format '2022010'"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name-date",
+        target_name="2022010",
+        message="Invalid date format in file name.",
+    )]
     assert warnings == []
 
     # Test that the function correctly identifies invalid date
     file_name = "inst1_plat1_20221301_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - invalid date in file name '20221301'"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name-date",
+        target_name="20221301",
+        message="Invalid date in file name.",
+    )]
     assert warnings == []
 
     # Test that the function correctly identifies invalid data product
     file_name = "inst1_plat1_20220101_prod3_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown data product 'prod3'"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name-data_product",
+        target_name="prod3",
+        message="Unknown data product in file name.",
+    )]
     assert warnings == []
 
     # Test that the function correctly identifies invalid version number format
     file_name = "inst1_plat1_20220101_prod1_v10.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - Value 'v10' does not match regular expression: '^v[0-9]+(\\.[0-9]+)$'."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.REGEX_VALUE_MISMATCH,
+        target_type="file_name-file_version",
+        target_name="v10",
+        message=r"Value `v10` does not match regular expression: `^v[0-9]+(\.[0-9]+)$`.",
+    )]
     assert warnings == []
 
     # Test that the function correctly identifies too many options in file name
     file_name = "inst1_plat1_20220101_prod1_option1_option2_option3_option4_option5_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - too many options in file name"]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name-options",
+        target_name="option1_option2_option3_option4_option5",
+        message="Too many options in file name.",
+    )]
     assert warnings == []
 
     # Test that the function correctly handles multiple errors
     file_name = "inst3_plat3_20220101_prod1_v1.0.nc"
     errors, warnings = cg.check_file_name(file_name, vocab_checks, rule_checks)
-    assert errors == ["[file name]: Invalid file name format - unknown instrument 'inst3'","[file name]: Invalid file name format - 'plat3' must be one of: '['plat1', 'plat2']'"]
+    assert errors == [
+        CheckIssue(
+            category=IssueCategory.FILE_NAME_FORMAT,
+            target_type="file_name-instrument_name",
+            target_name="inst3",
+            message="Unknown instrument `inst3`.",
+        ),
+        CheckIssue(
+            category=IssueCategory.VALUE_MISMATCH,
+            target_type="file_name-platform",
+            target_name="plat3",
+            message="`plat3` must be one of: `['plat1', 'plat2']`.",
+        ),
+    ]
     assert warnings == []
 
     # Test that the function correctly handles valid file names
@@ -504,25 +746,45 @@ def test_check_generic_file_name():
     # Incorrect field00
     file_name = "ESAC3S-SOILMOISTURE-L3S-SSMV-COMBINED-20231231000000-fv09.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Unknown field 'ESAC3S' in vocab __vocabs__:esa-cci-file-name-config:field00."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name",
+        target_name="fields",
+        message="Unknown field `ESAC3S` in vocab `__vocabs__:esa-cci-file-name-config:field00`.",
+    )]
     assert warnings == []
 
     # Incorrect multiple fields
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-SSS-COMBINED-20231231000000-fv09.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Number of file name fields (8) is greater than the 7 fields expected."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name",
+        target_name="fields",
+        message="Number of file name fields (8) is greater than the 7 fields expected.",
+    )]
     assert warnings == []
 
     # Incorrect date
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-20231241000000-fv09.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Invalid date/time string '20231241000000'. Date/time should take the form YYYY[MM[DD[HH[MM[SS]]]]], where the fields in brackets are optional."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name",
+        target_name="date",
+        message="Invalid date/time string `20231241000000`. Date/time should take the form YYYY[MM[DD[HH[MM[SS]]]]], where the fields in brackets are optional.",
+    )]
     assert warnings == []
 
     # Incorrect version format
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-20231231000000-fv09.2.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Invalid file version 'fv09.2.1'. File versions should take the form n{1,}[.n{1,}]."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name",
+        target_name="file_version",
+        message="Invalid file version `fv09.2.1`. File versions should take the form n{1,}[.n{1,}].",
+    )]
     assert warnings == []
 
     # Test for Additional Segregator ESA CCI file name
@@ -546,7 +808,12 @@ def test_check_generic_file_name():
     # Legitimate Additional Segregator ESA CCI file name - should pass wihtout error
     file_name = "ESACCI-SOILMOISTURE-L3S-SSMV-COMBINED-TEST_ADD_SEG-20231231000000-fv09.1.nc"
     errors, warnings = cg.check_generic_file_name(file_name, vocab_checks, segregator, extension)
-    assert errors == ["[file name]: Unknown field 'TEST_ADD_SEG' in vocab __URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json."]
+    assert errors == [CheckIssue(
+        category=IssueCategory.FILE_NAME_FORMAT,
+        target_type="file_name",
+        target_name="fields",
+        message="Unknown field `TEST_ADD_SEG` in vocab `__URL__vocab.ceda.ac.uk/scheme/cci/cci-content/product.json`.",
+    )]
     assert warnings == []
 
 def test_check_radar_moment_variables():
