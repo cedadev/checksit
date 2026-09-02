@@ -73,7 +73,7 @@ def match_file_name(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` does not match file name: `{file_name}`.",
             )
         )
@@ -110,7 +110,7 @@ def match_one_of(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be one of: `{options}`."
             )
         )
@@ -154,7 +154,7 @@ def match_one_or_more_of(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be one or more of: `{sorted(options)}`.",
             )
         )
@@ -194,7 +194,7 @@ def string_of_length(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` must be at least {min_length} characters.",
                 )
             )
@@ -203,7 +203,7 @@ def string_of_length(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be exactly {min_length} characters.",
             )
         )
@@ -245,7 +245,7 @@ def validate_image_date_time(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0].replace("*",""),
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
             )
         )
@@ -284,7 +284,7 @@ def validate_orcid_ID(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
             )
         )
@@ -310,7 +310,7 @@ def validate_orcid_ID(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
             )
         )
@@ -354,7 +354,7 @@ def list_of_names(
                     CheckIssue(
                         category=IssueCategory.VALUE_FORMAT_MISMATCH,
                         target_type=label.split(":")[0],
-                        target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                        target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                         message=message,
                     )
                 )
@@ -363,7 +363,7 @@ def list_of_names(
                     CheckIssue(
                         category=IssueCategory.VALUE_FORMAT_MISMATCH,
                         target_type=label.split(":")[0],
-                        target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                        target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                         message=f"`{value}` - please use characters A-Z, a-z, À-ÿ where appropriate."
                     )
                 )
@@ -377,7 +377,7 @@ def list_of_names(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=message,
                 )
             )
@@ -386,7 +386,7 @@ def list_of_names(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` - please use characters A-Z, a-z, À-ÿ where appropriate."
                 )
             )
@@ -420,7 +420,7 @@ def headline(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` should not be empty",
             )
         )
@@ -431,7 +431,7 @@ def headline(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should contain no more than one sentence."
                 )
             )
@@ -441,7 +441,7 @@ def headline(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should contain no more than one sentence.",
                 )
             )
@@ -451,7 +451,7 @@ def headline(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should start with a capital letter.",
                 )
             )
@@ -461,7 +461,7 @@ def headline(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` should be at least 10 characters.",
                 )
             )
@@ -495,7 +495,7 @@ def title_check(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must match the name of the file.",
             )
         )
@@ -527,7 +527,7 @@ def url_checker(
             CheckIssue(
                 category=IssueCategory.URL_NOT_FOUND,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` is not a reachable url.",
             )
         )
@@ -537,7 +537,7 @@ def url_checker(
                 CheckIssue(
                     category=IssueCategory.URL_NOT_FOUND,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"`{value}` is not a reachable url.",
                 )
             )
@@ -571,7 +571,7 @@ def relation_url_checker(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` should contain a space before the url.",
             )
         )
@@ -613,7 +613,7 @@ def latitude(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be within -90 and +90.",
             )
         )
@@ -647,7 +647,7 @@ def longitude(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` must be within -180 and +180.",
             )
         )
@@ -689,7 +689,7 @@ def ceda_platform(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` is not a valid platform in the CEDA catalogue.",
             )
         )
@@ -731,7 +731,7 @@ def ncas_platform(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"`{value}` is not a valid NCAS platform.",
             )
         )
@@ -770,7 +770,7 @@ def check_qc_flags(
             CheckIssue(
                 category=IssueCategory.VALUE_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"QC flag_values must be an array or tuple of byte values, not `{type(value)}`",
             )
         )
@@ -781,7 +781,7 @@ def check_qc_flags(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="There must be at least two QC flag values.",
             )
         )
@@ -790,7 +790,7 @@ def check_qc_flags(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="First two QC flag_values must be `[0, 1]`.",
             )
         )
@@ -801,7 +801,7 @@ def check_qc_flags(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="There must be at least two QC flag meanings (space separated).",
             )
         )
@@ -810,7 +810,7 @@ def check_qc_flags(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="First two QC flag_meanings must be 'not_used' and 'good_data'.",
             )
         )
@@ -821,7 +821,7 @@ def check_qc_flags(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message="Number of flag_values must equal number of flag_meanings.",
             )
         )
@@ -859,7 +859,7 @@ def check_utc_date_iso_format(
                 CheckIssue(
                     category=IssueCategory.VALUE_FORMAT_MISMATCH,
                     target_type=label.split(":")[0],
-                    target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                    target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                     message=f"Date string `{original_value}` not in UTC.",
                 )
             )
@@ -868,7 +868,7 @@ def check_utc_date_iso_format(
             CheckIssue(
                 category=IssueCategory.VALUE_FORMAT_MISMATCH,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"Date string `{original_value}` not in ISO 8601 format.",
             )
         )
@@ -904,7 +904,7 @@ def allow_proposed(value, context, extras=None, label="") -> List[CheckIssue]:
             CheckIssue(
                 category=IssueCategory.MISSING_ITEM,
                 target_type=label.split(":")[0],
-                target_name="-".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
+                target_name=":".join(label.split(":")[1:]).replace("*","") or label.replace("*",""),
                 message=f"{label} does not contain standard_name or proposed_standard_name with value '{extras}'.",
             )
         )

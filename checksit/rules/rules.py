@@ -203,7 +203,7 @@ class Rules:
                         CheckIssue(
                             category=IssueCategory.TYPE_MISMATCH,
                             target_type=label.removeprefix("[").split(":")[0].replace("*",""),
-                            target_name="-".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
+                            target_name=":".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
                             message=f"Value `{value}` is not of required type: `{type_rule}`.",
                         )
                     )
@@ -222,7 +222,7 @@ class Rules:
                             CheckIssue(
                                 category=IssueCategory.REGEX_VALUE_MISMATCH,
                                 target_type=label.removeprefix("[").split(":")[0].replace("*",""),
-                                target_name="-".join(label.split(":")[1:]).replace("*","").removeprefix("-").removesuffix("]") or label.replace("*",""),
+                                target_name=":".join(label.split(":")[1:]).replace("*","").removeprefix(":").removesuffix("]") or label.replace("*",""),
                                 message=message,
                             )
                         )
@@ -239,7 +239,7 @@ class Rules:
                         CheckIssue(
                             category=IssueCategory.REGEX_VALUE_MISMATCH,
                             target_type=label.removeprefix("[").split(":")[0].replace("*",""),
-                            target_name="-".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
+                            target_name=":".join(label.split(":")[1:]).replace("*","").removesuffix("]") or label.replace("*",""),
                             message=f"Value `{value}` does not match regular expression: `{pattern}`.",
                         )
                     )
