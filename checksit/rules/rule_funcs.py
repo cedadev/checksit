@@ -900,7 +900,6 @@ def allow_proposed(value, context, extras=None, label="") -> List[CheckIssue]:
         extras = extras[0]
 
     if value != extras and context != extras:
-        errors.append(f"{label} does not contain standard_name or proposed_standard_name with value '{extras}'")
         errors.append(
             CheckIssue(
                 category=IssueCategory.MISSING_ITEM,
