@@ -1280,9 +1280,6 @@ def check_radar_moment_variables(
                 )
             elif is_undefined(dct["variables"][variable].get(attr_key)):
                 errors.append(
-                    f"[variable:**************:{variable}]: No value defined for attribute '{attr_key}'."
-                )
-                errors.append(
                     CheckIssue(
                         category=IssueCategory.UNDEFINED_VALUE,
                         target_type="variable-attribute",
@@ -1294,7 +1291,7 @@ def check_radar_moment_variables(
                 rule_errors, rule_warnings = rules.check(
                     attr_rule,
                     dct["variables"][variable].get(attr_key),
-                    label=f"[variables:******:{variable}] Value of attribute '{attr_key}' -",
+                    label=f"variable-attribute:{variable}:{attr_key}",
                 )
                 errors.extend(rule_errors)
                 warnings.extend(rule_warnings)

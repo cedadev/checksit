@@ -838,7 +838,12 @@ def test_check_radar_moment_variables():
     # Test for existence of some attributes in moment variables
     exist_attrs = ["attribute1", "attribute2", "attribute3"]
     errors, warnings = cg.check_radar_moment_variables(dct, exist_attrs = exist_attrs, skip_spellcheck = True)
-    assert errors == ["[variable**************:var2]: Attribute 'attribute3' does not exist. "]
+    assert errors == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="variable-attribute",
+        target_name="var2",
+        message="Attribute `attribute3` for variable `var2` does not exist.",
+    )]
     assert warnings == []
 
     # Test rule attrs and one_of_attrs
@@ -846,8 +851,18 @@ def test_check_radar_moment_variables():
     one_of_attrs = ["attribute3|attribute4"]
     errors, warnings = cg.check_radar_moment_variables(dct, rule_attrs = rule_attrs, one_of_attrs = one_of_attrs)
     assert errors == [
-        "[variables:******:var2] Value of attribute 'attribute2' - Value 'not_attribute2_value' does not match regular expression: 'attribute2_value'.",
-        "[variable:**************:var2]: One attribute of '['attribute3', 'attribute4']' must be defined."
+        CheckIssue(
+            category=IssueCategory.REGEX_VALUE_MISMATCH,
+            target_type="variable-attribute",
+            target_name="var2:attribute2",
+            message="Value `not_attribute2_value` does not match regular expression: `attribute2_value`.",
+        ),
+        CheckIssue(
+            category=IssueCategory.MISSING_ITEM,
+            target_type="variable-attribute",
+            target_name="var2",
+            message="One attribute of `['attribute3', 'attribute4']` must be defined.",
+        ),
     ]
     assert warnings == []
 
@@ -884,9 +899,24 @@ def test_check_defined_only():
     errors, warnings = cg.check_defined_only(dct, defined_attrs, defined_dims, defined_vars, skip_spellcheck=True)
     assert len(errors) == 3
     assert len(warnings) == 0
-    assert "[variable**************:var3]: Invalid variable 'var3' found in file." in errors
-    assert "[dimension**************:dim2]: Invalid dimension 'dim2' found in file." in errors
-    assert "[global-attributes:**************:attr2]: Invalid global attribute 'attr2' found in file." in errors
+    assert CheckIssue(
+        category=IssueCategory.ITEM_NOT_ALLOWED,
+        target_type="variable",
+        target_name="var3",
+        message="Invalid variable `var3` found in file.",
+    ) in errors
+    assert CheckIssue(
+        category=IssueCategory.ITEM_NOT_ALLOWED,
+        target_type="dimension",
+        target_name="dim2",
+        message="Invalid dimension `dim2` found in file.",
+    ) in errors
+    assert CheckIssue(
+        category=IssueCategory.ITEM_NOT_ALLOWED,
+        target_type="global_attribute",
+        target_name="attr2",
+        message="Invalid global attribute `attr2` found in file.",
+    ) in errors
 
     defined_vars = ["var1", "var2", "var3"]
     defined_dims = ["dim1", "dim2"]
