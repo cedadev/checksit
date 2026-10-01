@@ -1,5 +1,5 @@
 import os
-from configparser import ConfigParser
+from configparser import ConfigParser, ExtendedInterpolation
 from itertools import chain
 import sys
 
@@ -110,7 +110,7 @@ def _load_config(package=None):
     global _CONFIG
 
     conf_files = _gather_config_files(package)
-    conf = ConfigParser()
+    conf = ConfigParser(interpolation=ExtendedInterpolation())
 
     conf.read(conf_files)
     conf["settings"].update({'basedir': str(PACKAGE_ROOT)})
