@@ -1,14 +1,7 @@
 import os
 from configparser import ConfigParser, ExtendedInterpolation
 from itertools import chain
-import sys
-
-if sys.version_info >= (3, 9):
-    from importlib.resources import files
-else:
-    from importlib_resources import files as imported_files
-    def files(package):
-        return imported_files(package)
+from importlib.resources import files
 
 
 PACKAGE_ROOT = files("checksit")

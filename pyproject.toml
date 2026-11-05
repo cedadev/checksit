@@ -34,13 +34,11 @@ classifiers = [
 dependencies = [
     "click",
     "pyyaml",
-    "cf-python < 3.19.0 ; python_version <= '3.10'",
-    "cf-python ; python_version >= '3.11'",
+    "cf-python",
     "netcdf4",
     "pandas",
     "requests",
     "numpy",
-    "importlib-resources ; python_version < '3.9'",
 ]
 keywords = [
     "checksit",
