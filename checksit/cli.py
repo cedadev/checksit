@@ -36,7 +36,7 @@ def main():
 @click.option("-l", "--log-mode", default="standard")
 @click.option("-v", "--verbose/--no-verbose", default=False)
 @click.option("-t", "--template", default="auto")
-@click.option("-w", "--ignore-warnings", is_flag=True)
+@click.option("-w", "--show-warnings/--ignore-warnings", default=False)
 @click.option("-p", "--skip-spellcheck", is_flag=True)
 def check_files(
     file_paths: Tuple[str,...],
@@ -52,7 +52,7 @@ def check_files(
     log_mode: str = "standard",
     verbose: bool = False,
     template: str = "auto",
-    ignore_warnings: bool = False,
+    show_warnings: bool = False,
     skip_spellcheck: bool = False,
 ):
     """CLI call to check a number of files against a set of rules, specs or templates.
@@ -87,7 +87,7 @@ def check_files(
         template: Template to use for checking. Options are "auto" (default), "off", or
           `<template file>`. File location is relative to the top level of the checksit
           repository.
-        ignore_warnings: Ignore warnings when checking the file, only return errors.
+        show_warnings: Show warnings when checking the file.
         skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
           checking.
     """
@@ -99,6 +99,9 @@ def check_files(
         or ignore_all_variable_attrs
     ):
         raise Exception("Options not implemented yet!!!!!")
+
+    if log_mode == "standard":
+        _checksit_ascii()
 
     if mappings is not None:
         mappings = string_to_dict(mappings)
@@ -123,7 +126,7 @@ def check_files(
             auto_cache=auto_cache,
             verbose=verbose,
             log_mode=log_mode,
-            ignore_warnings=ignore_warnings,
+            show_warnings=show_warnings,
             skip_spellcheck=skip_spellcheck,
         )
 
@@ -142,7 +145,7 @@ def check_files(
 @click.option("-l", "--log-mode", default="standard")
 @click.option("-v", "--verbose/--no-verbose", default=False)
 @click.option("-t", "--template", default="auto")
-@click.option("-w", "--ignore-warnings", is_flag=True)
+@click.option("-w", "--show-warnings/--ignore-warnings", default=False)
 @click.option("-p", "--skip-spellcheck", is_flag=True)
 def check(
     file_path: str,
@@ -158,7 +161,7 @@ def check(
     log_mode: str = "standard",
     verbose: bool = False,
     template: str = "auto",
-    ignore_warnings: bool = False,
+    show_warnings: bool = False,
     skip_spellcheck: bool = False,
 ):
     """CLI call to check a file against a set of rules, specs or templates.
@@ -193,7 +196,7 @@ def check(
         template: Template to use for checking. Options are "auto" (default), "off", or
           `<template file>`. File location is relative to the top level of the checksit
           repository.
-        ignore_warnings: Ignore warnings when checking the file, only return errors.
+        show_warnings: Show warnings when checking the file.
         skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
           checking.
     """
@@ -205,6 +208,9 @@ def check(
         or ignore_all_variable_attrs
     ):
         raise Exception("Options not implemented yet!!!!!")
+
+    if log_mode == "standard":
+        _checksit_ascii()
 
     if mappings is not None:
         mappings = string_to_dict(mappings)
@@ -228,7 +234,7 @@ def check(
         auto_cache=auto_cache,
         verbose=verbose,
         log_mode=log_mode,
-        ignore_warnings=ignore_warnings,
+        show_warnings=show_warnings,
         skip_spellcheck=skip_spellcheck,
     )
 
@@ -323,6 +329,14 @@ def show_specs(spec_ids: Optional[List[str]] = None):
         spec_ids: List of specs to show.
     """
     specs.show_specs(spec_ids)
+
+def _checksit_ascii() -> None:
+    print(r"      _               _        _ _   ")
+    print(r"  ___| |__   ___  ___| | _____(_) |_ ")
+    print(r" / __| '_ \ / _ \/ __| |/ / __| | __|")
+    print(r"| (__| | | |  __/ (__|   <\__ \ | |_ ")
+    print(r" \___|_| |_|\___|\___|_|\_\___/_|\__|")
+    print("")
 
 
 if __name__ == "__main__":

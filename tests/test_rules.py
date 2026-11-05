@@ -5,6 +5,7 @@ from numbers import Number
 
 from checksit.rules import rules as r
 import checksit.rules.rule_funcs as crf
+from checksit.utils import CheckIssue, IssueCategory
 
 
 # rule_funcs.py
@@ -25,27 +26,42 @@ def test_string_of_length():
     assert crf.string_of_length("abcd", {}, ["3+"], "Test") == []
 
     # Test that the function correctly handles strings shorter than the minimum length
-    assert crf.string_of_length("ab", {}, ["3"], "Test") == [
-        "Test 'ab' must be exactly 3 characters"
-    ]
-    assert crf.string_of_length("ab", {}, ["3+"], "Test") == [
-        "Test 'ab' must be at least 3 characters"
-    ]
+    assert crf.string_of_length("ab", {}, ["3"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`ab` must be exactly 3 characters.",
+    )]
+    assert crf.string_of_length("ab", {}, ["3+"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`ab` must be at least 3 characters.",
+    )]
 
     # Test that the function correctly handles strings longer than the minimum length
-    assert crf.string_of_length("abcd", {}, ["3"], "Test") == [
-        "Test 'abcd' must be exactly 3 characters"
-    ]
+    assert crf.string_of_length("abcd", {}, ["3"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`abcd` must be exactly 3 characters."
+    )]
     assert crf.string_of_length("abcd", {}, ["3+"], "Test") == []
 
     # Test that the function correctly handles empty strings
     assert crf.string_of_length("", {}, ["0"], "Test") == []
-    assert crf.string_of_length("", {}, ["1"], "Test") == [
-        "Test '' must be exactly 1 characters"
-    ]
-    assert crf.string_of_length("", {}, ["1+"], "Test") == [
-        "Test '' must be at least 1 characters"
-    ]
+    assert crf.string_of_length("", {}, ["1"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` must be exactly 1 characters.",
+    )]
+    assert crf.string_of_length("", {}, ["1+"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` must be at least 1 characters.",
+    )]
 
 
 def test_match_one_of():
@@ -53,14 +69,20 @@ def test_match_one_of():
     assert crf.match_one_of("apple", {}, ["apple|banana|orange"], "Test") == []
 
     # Test that the function correctly handles invalid inputs
-    assert crf.match_one_of("kiwi", {}, ["apple|banana|orange"], "Test") == [
-        "Test 'kiwi' must be one of: '['apple', 'banana', 'orange']'"
-    ]
+    assert crf.match_one_of("kiwi", {}, ["apple|banana|orange"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`kiwi` must be one of: `['apple', 'banana', 'orange']`.",
+    )]
 
     # Test that the function correctly handles empty strings
-    assert crf.match_one_of("", {}, ["apple|banana|orange"], "Test") == [
-        "Test '' must be one of: '['apple', 'banana', 'orange']'"
-    ]
+    assert crf.match_one_of("", {}, ["apple|banana|orange"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` must be one of: `['apple', 'banana', 'orange']`.",
+    )]
 
 
 def test_match_one_or_more_of():
@@ -74,15 +96,26 @@ def test_match_one_or_more_of():
     # Test that the function correctly handles invalid inputs
     assert crf.match_one_or_more_of(
         "apple,kiwi", {}, ["apple|banana|orange"], "Test"
-    ) == ["Test 'apple,kiwi' must be one or more of: '['apple', 'banana', 'orange']'"]
-    assert crf.match_one_or_more_of("kiwi", {}, ["apple|banana|orange"], "Test") == [
-        "Test 'kiwi' must be one or more of: '['apple', 'banana', 'orange']'"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`apple,kiwi` must be one or more of: `['apple', 'banana', 'orange']`.",
+    )]
+    assert crf.match_one_or_more_of("kiwi", {}, ["apple|banana|orange"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`kiwi` must be one or more of: `['apple', 'banana', 'orange']`.",
+    )]
 
     # Test that the function correctly handles empty strings
-    assert crf.match_one_or_more_of("", {}, ["apple|banana|orange"], "Test") == [
-        "Test '' must be one or more of: '['apple', 'banana', 'orange']'"
-    ]
+    assert crf.match_one_or_more_of("", {}, ["apple|banana|orange"], "Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` must be one or more of: `['apple', 'banana', 'orange']`.",
+    )]
 
 
 def test_validate_image_date_time():
@@ -94,23 +127,38 @@ def test_validate_image_date_time():
     )
 
     # Test that the function correctly handles invalid date-time strings
-    assert crf.validate_image_date_time("2022-01-01 12:00:00", {}, label="Test") == [
-        "Test '2022-01-01 12:00:00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"
-    ]
-    assert crf.validate_image_date_time("2022:01:01 12:00", {}, label="Test") == [
-        "Test '2022:01:01 12:00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"
-    ]
-    assert crf.validate_image_date_time("2022:01:01", {}, label="Test") == [
-        "Test '2022:01:01' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"
-    ]
-    assert crf.validate_image_date_time("2022:01:01 12:00:00.00", {}, label="Test") == [
-        "Test '2022:01:01 12:00:00.00' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"
-    ]
+    assert crf.validate_image_date_time("2022-01-01 12:00:00", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`2022-01-01 12:00:00` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
+    )]
+    assert crf.validate_image_date_time("2022:01:01 12:00", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`2022:01:01 12:00` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
+    )]
+    assert crf.validate_image_date_time("2022:01:01", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`2022:01:01` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
+    )]
+    assert crf.validate_image_date_time("2022:01:01 12:00:00.00", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`2022:01:01 12:00:00.00` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
+    )]
 
     # Test that the function correctly handles empty strings
-    assert crf.validate_image_date_time("", {}, label="Test") == [
-        "Test '' needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s"
-    ]
+    assert crf.validate_image_date_time("", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name= "Test",
+        message="`` needs to be of the format YYYY:MM:DD hh:mm:ss or YYYY:MM:DD hh:mm:ss.s",
+    )]
 
 
 def test_validate_orcid_ID():
@@ -131,41 +179,62 @@ def test_validate_orcid_ID():
     # Test that the function correctly handles ORCID IDs with incorrect lengths
     assert crf.validate_orcid_ID(
         "https://orcid.org/0000-0002-1825-009", {}, label="Test"
-    ) == [
-        "Test 'https://orcid.org/0000-0002-1825-009' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`https://orcid.org/0000-0002-1825-009` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
+    )]
     assert crf.validate_orcid_ID(
         "https://orcid.org/1234-5678-9012-34567", {}, label="Test"
-    ) == [
-        "Test 'https://orcid.org/1234-5678-9012-34567' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`https://orcid.org/1234-5678-9012-34567` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+    )]
 
     # Test that the function correctly handles ORCID IDs with incorrect formats
     assert crf.validate_orcid_ID(
         "https://orcid.org/0000-0002-1825-009Z", {}, label="Test"
-    ) == [
-        "Test 'https://orcid.org/0000-0002-1825-009Z' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`https://orcid.org/0000-0002-1825-009Z` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
+    )]
     assert crf.validate_orcid_ID(
         "https://orcid.org/1234-5678-9012-34X5", {}, label="Test"
-    ) == [
-        "Test 'https://orcid.org/1234-5678-9012-34X5' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`https://orcid.org/1234-5678-9012-34X5` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
+    )]
     assert crf.validate_orcid_ID(
         "https://orcid.org/1234-5678-9012-3456-", {}, label="Test"
-    ) == [
-        "Test 'https://orcid.org/1234-5678-9012-3456-' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`https://orcid.org/1234-5678-9012-3456-` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
+    )]
     assert crf.validate_orcid_ID(
         "https://orcid.org/1234-5678-9012-3456X", {}, label="Test"
-    ) == [
-        "Test 'https://orcid.org/1234-5678-9012-3456X' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`https://orcid.org/1234-5678-9012-3456X` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
+    )]
 
     # Test that the function correctly handles empty strings
-    assert crf.validate_orcid_ID("", {}, label="Test") == [
-        "Test '' needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX"
-    ]
+    assert crf.validate_orcid_ID("", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` needs to be of the format https://orcid.org/XXXX-XXXX-XXXX-XXXX",
+    )]
 
 
 def test_list_of_names():
@@ -175,32 +244,57 @@ def test_list_of_names():
     assert crf.list_of_names(["Doe, John", "Smith, Jane"], {}, label="Test") == []
 
     # Test that the function correctly handles names with incorrect formats
-    assert crf.list_of_names("John Doe", {}, label="Test") == [
-        "Test 'John Doe' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"
-    ]
-    assert crf.list_of_names("Doe John", {}, label="Test") == [
-        "Test 'Doe John' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"
-    ]
-    assert crf.list_of_names(["Doe, John", "Jane Smith"], {}, label="Test") == [
-        "Test '['Doe, John', 'Jane Smith']' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate"
-    ]
+    assert crf.list_of_names("John Doe", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`John Doe` should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate",
+    )]
+    assert crf.list_of_names("Doe John", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`Doe John` should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate",
+    )]
+    assert crf.list_of_names(["Doe, John", "Jane Smith"], {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`['Doe, John', 'Jane Smith']` should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate",
+    )]
 
     # Test that the function correctly handles names with invalid characters
-    assert crf.list_of_names("Doe, J0hn", {}, label="Test") == [
-        "Test 'Doe, J0hn' - please use characters A-Z, a-z, À-ÿ where appropriate"
-    ]
-    assert crf.list_of_names("Doe, John!", {}, label="Test") == [
-        "Test 'Doe, John!' - please use characters A-Z, a-z, À-ÿ where appropriate"
-    ]
-    assert crf.list_of_names(["Doe, John", "Smith, J@ne"], {}, label="Test") == [
-        "Test '['Doe, John', 'Smith, J@ne']' - please use characters A-Z, a-z, À-ÿ where appropriate"
-    ]
+    assert crf.list_of_names("Doe, J0hn", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`Doe, J0hn` - please use characters A-Z, a-z, À-ÿ where appropriate.",
+    )]
+    assert crf.list_of_names("Doe, John!", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`Doe, John!` - please use characters A-Z, a-z, À-ÿ where appropriate.",
+    )]
+    assert crf.list_of_names(["Doe, John", "Smith, J@ne"], {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`['Doe, John', 'Smith, J@ne']` - please use characters A-Z, a-z, À-ÿ where appropriate.",
+    )]
 
     # Test that the function correctly handles empty strings
-    assert crf.list_of_names("", {}, label="Test") == [
-        "Test '' should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate",
-        "Test '' - please use characters A-Z, a-z, À-ÿ where appropriate",
-    ]
+    assert crf.list_of_names("", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` should be of the format <last name>, <first name> <middle initials(s)> or <last name>, <first name> <middle name(s)> where appropriate",
+    ), CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` - please use characters A-Z, a-z, À-ÿ where appropriate.",
+    )]
     assert crf.list_of_names([], {}, label="Test") == []
 
 
@@ -222,33 +316,52 @@ def test_headline():
     # Test that the function correctly handles headlines longer than 150 characters
     assert crf.headline(
         "This headline is longer than 150 characters." + "a" * 120, {}, label="Test"
-    ) == [
-        "Test 'This headline is longer than 150 characters."
-        + "a" * 120
-        + "' should contain no more than one sentence"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message=(
+            "`This headline is longer than 150 characters."
+            + "a" * 120
+            + "` should contain no more than one sentence."
+        ),
+    )]
 
     # Test that the function correctly handles headlines with more than one sentence
     assert crf.headline(
         "This is a headline. It has two sentences.", {}, label="Test"
-    ) == [
-        "Test 'This is a headline. It has two sentences.' should contain no more than one sentence"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`This is a headline. It has two sentences.` should contain no more than one sentence.",
+    )]
 
     # Test that the function correctly handles headlines that do not start with a capital letter
     assert crf.headline(
         "this headline does not start with a capital letter.", {}, label="Test"
-    ) == [
-        "Test 'this headline does not start with a capital letter.' should start with a capital letter"
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`this headline does not start with a capital letter.` should start with a capital letter.",
+    )]
 
     # Test that the function correctly handles headlines shorter than 10 characters
-    assert crf.headline("Too short", {}, label="Test") == [
-        "Test 'Too short' should be at least 10 characters"
-    ]
+    assert crf.headline("Too short", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`Too short` should be at least 10 characters.",
+    )]
 
     # Test that the function correctly handles empty strings
-    assert crf.headline("", {}, label="Test") == ["Test '' should not be empty"]
+    assert crf.headline("", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` should not be empty"
+    )]
 
 
 def test_title_check():
@@ -267,15 +380,28 @@ def test_title_check():
     # Test that the function correctly handles titles that do not match the filename
     assert crf.title_check(
         "sad_netcdf", "/path/to/file/happy_netcdf", label="Test"
-    ) == ["Test 'sad_netcdf' must match the name of the file"]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`sad_netcdf` must match the name of the file."
+    )]
     assert crf.title_check(
         "happy_NetCDF.nc", "/path/to/file/sad_NetCDF.nc", label="Test"
-    ) == ["Test 'happy_NetCDF.nc' must match the name of the file"]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`happy_NetCDF.nc` must match the name of the file."
+    )]
 
     # Test that the function correctly handles empty titles
-    assert crf.title_check("", "/path/to/file/happy_netcdf", label="Test") == [
-        "Test '' must match the name of the file"
-    ]
+    assert crf.title_check("", "/path/to/file/happy_netcdf", label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` must match the name of the file.",
+    )]
 
 
 def test_url_checker():
@@ -283,17 +409,30 @@ def test_url_checker():
     assert crf.url_checker("https://www.example.com", {}, label="Test") == []
 
     # Test that the function correctly handles an unreachable URL
-    assert crf.url_checker("fake://www.nonexistenturl.com", {}, label="Test") == [
-        "Test 'fake://www.nonexistenturl.com' is not a reachable url"
-    ]
+    assert crf.url_checker("fake://www.nonexistenturl.com", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.URL_NOT_FOUND,
+        target_type="Test",
+        target_name="Test",
+        message="`fake://www.nonexistenturl.com` is not a reachable url.",
+    )]
 
     # Test that the function correctly handles an existing but unreachable URL
     assert crf.url_checker(
         "https://www.example.com/nonexistentpage", {}, label="Test"
-    ) == ["Test 'https://www.example.com/nonexistentpage' is not a reachable url"]
+    ) == [CheckIssue(
+        category=IssueCategory.URL_NOT_FOUND,
+        target_type="Test",
+        target_name="Test",
+        message="`https://www.example.com/nonexistentpage` is not a reachable url.",
+    )]
 
     # Test that the function correctly handles an empty URL
-    assert crf.url_checker("", {}, label="Test") == ["Test '' is not a reachable url"]
+    assert crf.url_checker("", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.URL_NOT_FOUND,
+        target_type="Test",
+        target_name="Test",
+        message="`` is not a reachable url.",
+    )]
 
 
 def test_relation_url_checker():
@@ -305,17 +444,28 @@ def test_relation_url_checker():
     # Test that the function correctly handles inputs without a space
     assert crf.relation_url_checker(
         "relationhttps://example.com", {}, label="Test"
-    ) == ["Test 'relationhttps://example.com' should contain a space before the url"]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`relationhttps://example.com` should contain a space before the url.",
+    )]
 
     # Test that the function correctly handles inputs with an invalid URL
-    assert crf.relation_url_checker("relation https://", {}, label="Test") == [
-        "Test 'https://' is not a reachable url"
-    ]
+    assert crf.relation_url_checker("relation https://", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.URL_NOT_FOUND,
+        target_type="Test",
+        target_name="Test",
+        message="`https://` is not a reachable url.",
+    )]
 
     # Test that the function correctly handles empty strings
-    assert crf.relation_url_checker("", {}, label="Test") == [
-        "Test '' should contain a space before the url"
-    ]
+    assert crf.relation_url_checker("", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`` should contain a space before the url.",
+    )]
 
 
 def test_latitude():
@@ -325,15 +475,24 @@ def test_latitude():
     assert crf.latitude("90.0000", {}, label="Test") == []
 
     # Test that the function correctly handles invalid latitudes
-    assert crf.latitude("90.0001", {}, label="Test") == [
-        "Test '90.0001' must be within -90 and +90 "
-    ]
-    assert crf.latitude("-90.0001", {}, label="Test") == [
-        "Test '-90.0001' must be within -90 and +90 "
-    ]
-    assert crf.latitude("100.0000", {}, label="Test") == [
-        "Test '100.0000' must be within -90 and +90 "
-    ]
+    assert crf.latitude("90.0001", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`90.0001` must be within -90 and +90.",
+    )]
+    assert crf.latitude("-90.0001", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`-90.0001` must be within -90 and +90.",
+    )]
+    assert crf.latitude("100.0000", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`100.0000` must be within -90 and +90.",
+    )]
 
 
 def test_longitude():
@@ -343,15 +502,24 @@ def test_longitude():
     assert crf.longitude("180.0000", {}, label="Test") == []
 
     # Test that the function correctly handles invalid longitudes
-    assert crf.longitude("180.0001", {}, label="Test") == [
-        "Test '180.0001' must be within -180 and +180 "
-    ]
-    assert crf.longitude("-180.0001", {}, label="Test") == [
-        "Test '-180.0001' must be within -180 and +180 "
-    ]
-    assert crf.longitude("200.0000", {}, label="Test") == [
-        "Test '200.0000' must be within -180 and +180 "
-    ]
+    assert crf.longitude("180.0001", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`180.0001` must be within -180 and +180.",
+    )]
+    assert crf.longitude("-180.0001", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`-180.0001` must be within -180 and +180.",
+    )]
+    assert crf.longitude("200.0000", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`200.0000` must be within -180 and +180.",
+    )]
 
 
 def test_ceda_platform():
@@ -371,9 +539,12 @@ def test_ceda_platform():
     # Test function returns no errors for a non-NCAS platform
     assert crf.ceda_platform("netheravon", {}) == []
     # Test function returns error for example platform
-    assert crf.ceda_platform("example", {}, label="Test") == [
-        "Test 'example' is not a valid platform in the CEDA catalogue"
-    ]
+    assert crf.ceda_platform("example", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`example` is not a valid platform in the CEDA catalogue.",
+    )]
 
 
 def test_ncas_platform():
@@ -391,13 +562,19 @@ def test_ncas_platform():
     ]:
         assert crf.ncas_platform(plat, {}) == []
     # Test function returns error for a non-NCAS platform
-    assert crf.ncas_platform("netheravon", {}, label="Test") == [
-        "Test 'netheravon' is not a valid NCAS platform"
-    ]
+    assert crf.ncas_platform("netheravon", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`netheravon` is not a valid NCAS platform.",
+    )]
     # Test function returns error for example platform
-    assert crf.ncas_platform("example", {}, label="Test") == [
-        "Test 'example' is not a valid NCAS platform"
-    ]
+    assert crf.ncas_platform("example", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`example` is not a valid NCAS platform.",
+    )]
 
 
 def test_utc_date_iso_format():
@@ -428,25 +605,46 @@ def test_utc_date_iso_format():
     # Test function returns error for ISO formatted date NOT in UTC
     assert crf.check_utc_date_iso_format(
         "2024-11-17T01:23:45+0100", {}, label="Test"
-    ) == ["Test Date string '2024-11-17T01:23:45+0100' not in UTC."]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="Date string `2024-11-17T01:23:45+0100` not in UTC.",
+    )]
     assert crf.check_utc_date_iso_format(
         "2024-11-17T01:23:45-01:00", {}, label="Test"
-    ) == ["Test Date string '2024-11-17T01:23:45-01:00' not in UTC."]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="Date string `2024-11-17T01:23:45-01:00` not in UTC.",
+    )]
     # Test function returns error for non ISO formatted date in UTC
-    assert crf.check_utc_date_iso_format("2024/11/17T01:23:45Z", {}, label="Test") == [
-        "Test Date string '2024/11/17T01:23:45Z' not in ISO 8601 format."
-    ]
+    assert crf.check_utc_date_iso_format("2024/11/17T01:23:45Z", {}, label="Test") == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="Date string `2024/11/17T01:23:45Z` not in ISO 8601 format.",
+    )]
     assert crf.check_utc_date_iso_format(
         "20241117T01-23-45+0000", {}, label="Test"
-    ) == ["Test Date string '20241117T01-23-45+0000' not in ISO 8601 format."]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="Date string `20241117T01-23-45+0000` not in ISO 8601 format.",
+    )]
     # Test function returns error for something that is very much not a date
     assert crf.check_utc_date_iso_format(
         "11th November 2024 at 23 minutes and 45 seconds past 1 in the morning",
         {},
         label="Test",
-    ) == [
-        "Test Date string '11th November 2024 at 23 minutes and 45 seconds past 1 in the morning' not in ISO 8601 format."
-    ]
+    ) == [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="Date string `11th November 2024 at 23 minutes and 45 seconds past 1 in the morning` not in ISO 8601 format.",
+    )]
 
 
 def test_allow_proposed():
@@ -457,9 +655,12 @@ def test_allow_proposed():
     # Test function returns no errors when value of "extra" matches value of "context"
     assert crf.allow_proposed(None, "name2", extras="name2", label="Test") == []
     # Test function returns errors when there is no match
-    assert crf.allow_proposed("name1", "name2", extras="name3", label="Test") == [
-        "Test does not contain standard_name or proposed_standard_name with value 'name3'"
-    ]
+    assert crf.allow_proposed("name1", "name2", extras="name3", label="Test") == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="Test",
+        target_name="Test",
+        message="Test does not contain standard_name or proposed_standard_name with value 'name3'.",
+    )]
 
 
 # rules.py
@@ -699,7 +900,12 @@ def test_check():
     ) == ([], [])
     assert rules_instance.check(
         "rule-func:string_of_length:3", "abcd", {}, label="Test"
-    ) == (["Test 'abcd' must be exactly 3 characters"], [])
+    ) == ([CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`abcd` must be exactly 3 characters.",
+    )], [])
 
     # Test that the function correctly handles rule-func-warning
     assert rules_instance.check(
@@ -707,12 +913,22 @@ def test_check():
     ) == ([], [])
     assert rules_instance.check(
         "rule-func-warning:string_of_length:3", "abcd", {}, label="Test"
-    ) == ([], ["Test 'abcd' must be exactly 3 characters"])
+    ) == ([], [CheckIssue(
+        category=IssueCategory.VALUE_FORMAT_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`abcd` must be exactly 3 characters.",
+    )])
 
     # Test that the function correctly handles type-rule
     assert rules_instance.check("type-rule:int", 123, {}, label="Test") == ([], [])
     assert rules_instance.check("type-rule:int", "abc", {}, label="Test") == (
-        ["Test Value 'abc' is not of required type: 'int'."],
+        [CheckIssue(
+            category=IssueCategory.TYPE_MISMATCH,
+            target_type="Test",
+            target_name="Test",
+            message="Value `abc` is not of required type: `int`.",
+        )],
         [],
     )
 
@@ -723,13 +939,23 @@ def test_check():
     )
     assert rules_instance.check("regex-warning:^[a-z]+$", "ABC", {}, label="Test") == (
         [],
-        ["Test Value 'ABC' does not match regular expression: '^[a-z]+$'."],
+        [CheckIssue(
+            category=IssueCategory.REGEX_VALUE_MISMATCH,
+            target_type="Test",
+            target_name="Test",
+            message="Value `ABC` does not match regular expression: `^[a-z]+$`.",
+        )],
     )
 
     # Test that the function correctly handles regex
     assert rules_instance.check("regex:^[a-z]+$", "abc", {}, label="Test") == ([], [])
     assert rules_instance.check("regex:^[a-z]+$", "ABC", {}, label="Test") == (
-        ["Test Value 'ABC' does not match regular expression: '^[a-z]+$'."],
+        [CheckIssue(
+            category=IssueCategory.REGEX_VALUE_MISMATCH,
+            target_type="Test",
+            target_name="Test",
+            message="Value `ABC` does not match regular expression: `^[a-z]+$`.",
+        )],
         [],
     )
 
@@ -741,9 +967,12 @@ def test_check():
         "regex-rule-warning:integer", "123.45", {}, label="Test"
     ) == (
         [],
-        [
-            "Test Value '123.45' does not match regex rule: 'integer' - Example valid value '10'."
-        ],
+        [CheckIssue(
+            category=IssueCategory.REGEX_VALUE_MISMATCH,
+            target_type="Test",
+            target_name="Test",
+            message="Value `123.45` does not match regex rule: `integer` - Example valid value `10`.",
+        )],
     )
 
     # Test that the function correctly handles regex-rule
@@ -752,9 +981,12 @@ def test_check():
         [],
     )
     assert rules_instance.check("regex-rule:integer", "123.45", {}, label="Test") == (
-        [
-            "Test Value '123.45' does not match regex rule: 'integer' - Example valid value '10'."
-        ],
+        [CheckIssue(
+            category=IssueCategory.REGEX_VALUE_MISMATCH,
+            target_type="Test",
+            target_name="Test",
+            message="Value `123.45` does not match regex rule: `integer` - Example valid value `10`.",
+        )],
         [],
     )
 

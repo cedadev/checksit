@@ -3,9 +3,66 @@
 
 import os
 import inspect
-from typing import List, Dict, Callable, Any
+import json
+from typing import List, Dict, Callable, Any, Optional
+from dataclasses import dataclass, asdict
+from enum import StrEnum
 
 UNDEFINED = "UNDEFINED"
+
+class IssueCategory(StrEnum):
+    VALUE_MISMATCH = "Value Mismatch"
+    MISSING_SECTION = "Missing Section"
+    FILE_FORMAT = "File Format"
+    DUPLICATE_ATTRIBUTE = "Duplicate Attribute"
+    UNDEFINED_VALUE =  "Undefined Value"
+    MISSING_ITEM = "Missing Item"
+    VALUE_FORMAT_MISMATCH = "Value Format Mismatch"
+    ITEM_NOT_ALLOWED = "Item Not Allowed"
+    FILE_NAME_FORMAT = "File Name Format"
+    VOCAB_VALUE_MISMATCH = "Vocab Value Mismatch"
+    TYPE_MISMATCH = "Type Mismatch"
+    REGEX_VALUE_MISMATCH = "Regex Value Mismatch"
+    URL_NOT_FOUND = "URL Not Found"
+
+
+@dataclass
+class CheckIssue:
+    """Hold instances of warnings or errors from checks.
+
+    Attributes:
+        category: Category of the issue.
+        target_type: Section of file that has issue (global atribute, variable e.t.c.).
+        target_name: Name of the item that has the issue.
+        message: Message describing the issue.
+        expected: Expected value of the item that has the issue.
+        found: Found value of the item that has the issue.
+    """
+    category: IssueCategory
+    target_type: str
+    target_name: str
+    message: str
+    expected: Optional[Any] = None
+    found: Optional[Any] = None
+
+    def __str__(self) -> str:
+        return f"[{self.target_type}:{self.target_name}] {self.message}"
+
+
+class ChecksitJSONEncoder(json.JSONEncoder):
+    def default(self, o: Any) -> Any:
+        """Encode dataclass objects as dictionaries for JSON serialization.
+
+        Args:
+            o: Object to encode.
+
+        Returns:
+            Dictionary representation of the dataclass object, or the default JSON
+              encoding for other objects.
+        """
+        if isinstance(o, CheckIssue):
+            return asdict(o)
+        return super().default(o)
 
 
 def string_to_dict(s: str) -> Dict[str, str]:

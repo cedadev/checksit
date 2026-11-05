@@ -14,12 +14,13 @@ import json
 import urllib.request
 import urllib.error
 from typing import Optional, Union, List, Dict, Tuple
+from collections import defaultdict
 
 from .cvs import vocabs, vocabs_prefix
 from .rules import rules, rules_prefix
 from .readers import pp, badc_csv, cdl, yml, image
 from .specs import SpecificationChecker
-from .utils import get_file_base, extension, UNDEFINED
+from .utils import get_file_base, extension, UNDEFINED, CheckIssue, ChecksitJSONEncoder, IssueCategory
 from .config import get_config
 from .make_specs import make_amof_specs
 
@@ -53,7 +54,7 @@ class Checker:
         log_mode: How the output should be printed. Options are "standard" (default) and
           "compact".
         verbose: Print additional information.
-        ignore_warnings: Ignore warnings when checking the file, only return errors.
+        show_warnings: Show warnings when checking the file.
         skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
           checking.
         errors: Errors found in file by checks.
@@ -71,7 +72,7 @@ class Checker:
         auto_cache: bool = False,
         verbose: bool = False,
         log_mode: str = "standard",
-        ignore_warnings: bool = False,
+        show_warnings: bool = False,
         skip_spellcheck: bool = False,
     ) -> None:
         """Initialise the Checker class.
@@ -92,7 +93,7 @@ class Checker:
             log_mode: How the output should be printed. Options are "standard" (default)
               and "compact".
             verbose: Print additional information.
-            ignore_warnings: Ignore warnings when checking the file, only return errors.
+            show_warnings: Show warnings when checking the file.
             skip_spellcheck: Skip the spellcheck in rules and functions that utilise spell
               checking.
         """
@@ -103,13 +104,13 @@ class Checker:
         self.specs = specs or []
         self.ignore_attrs = ignore_attrs or []
         self.auto_cache = auto_cache
-        self.ignore_warnings = ignore_warnings
+        self.show_warnings = show_warnings
         self.verbose = verbose
         self.log_mode = log_mode
         self.skip_spellcheck = skip_spellcheck
         self._check_context = {}
-        self.errors: List[str] = []
-        self.warnings: List[str] = []
+        self.errors: List[CheckIssue] = []
+        self.warnings: List[CheckIssue] = []
 
     def _update_check_context(self) -> None:
         self._check_context["file_path"] = self.file_path
@@ -119,7 +120,7 @@ class Checker:
     def _compare_items(
         self, rec, tmpl, key, label
     ):
-        errors = []
+        errors: List[CheckIssue] = []
         label_key = f"{label}:{key}"
 
         if label_key in self.ignore_attrs:
@@ -157,7 +158,7 @@ class Checker:
                         rec.get(rec_key, UNDEFINED),
                         context=self._check_context,
                         label=label_key,
-                    )
+                    )[0]
                 )
             # Rule defined in `extra_rules` dictionary
             elif [rule for rule in self.extra_rules if rule.startswith(label_key)]:
@@ -171,12 +172,22 @@ class Checker:
                         rec.get(rec_key, UNDEFINED),
                         context=self._check_context,
                         label=label_key,
-                    )
+                    )[0]
                 )
             # Else...
             elif tmpl[key] != rec.get(rec_key, UNDEFINED):
+                #errors.append(
+                #    f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'"
+                #)
                 errors.append(
-                    f"{label_key}: '{rec.get(rec_key, UNDEFINED)}' does not match expected: '{tmpl[key]}'"
+                    CheckIssue(
+                        category=IssueCategory.VALUE_MISMATCH,
+                        target_type=label,
+                        target_name=key,
+                        message=f"`{rec.get(rec_key, UNDEFINED)}` does not match expected value `{tmpl[key]}`",
+                        expected=tmpl[key],
+                        found=rec.get(rec_key, UNDEFINED),
+                    )
                 )
         return errors
 
@@ -203,7 +214,15 @@ class Checker:
                     )
                 )
         else:
-            errors.append(f"Expected item '{label}' not found in data file.")
+            #errors.append(f"Expected item '{label}' not found in data file.")
+            errors.append(
+                CheckIssue(
+                    category=IssueCategory.MISSING_SECTION,
+                    target_type=label,
+                    target_name=label,
+                    message=f"Item `{label}` not found in data file",
+                )
+            )
         return errors
 
     def _check_file(
@@ -225,7 +244,7 @@ class Checker:
             template = template.to_dict()
 
         if self.log_mode == "standard":
-            print("\n\n---------------- Running checks ------------------\n")
+            print("\nRunning checks...")
 
         if hasattr(file_content, "fmt_errors"):
             self.errors.extend(file_content.fmt_errors)
@@ -243,9 +262,7 @@ class Checker:
             self.errors.extend(spec_errors)
             self.warnings.extend(spec_warnings)
 
-        if template == "off" and self.log_mode == "standard":
-            print("[WARNING] Template checks switched off!")
-        elif template != "off":
+        if template != "off":
             sections = "dimensions", "variables", "global_attributes"
 
             for section in sections:
@@ -254,7 +271,9 @@ class Checker:
                     template,
                     section,
                 )
-                self.errors.extend([f"[{section}] {err}" for err in errs])
+                self.errors.extend(errs)
+        if self.log_mode == "standard":
+            print("\nChecks complete!\n")
 
     def _get_ncas_specs(
         self,
@@ -453,50 +472,91 @@ class Checker:
     def _print_output(self) -> None:
         """Print output from checks"""
         if self.log_mode == "compact":
-            if len(self.errors) > 0:
-                highest = "ERROR"
-                endstr = ""
-                number = len(self.errors)
-            elif len(self.warnings) > 0 and not self.ignore_warnings:
-                highest = "WARNING"
-                endstr = "\n"
-                number = len(self.warnings)
-            else:
-                highest = "NONE"
-                endstr = "\n"
-                number = 0
-            print(f"{highest} | {number} ", end=endstr)
-            err_string = " | ".join(
-                [err.replace("|", "__VERTICAL_BAR_REPLACED__") for err in self.errors]
-            )
-            if err_string:
-                print(f"| {err_string}")
+            self._print_output_compact()
         elif self.log_mode == "standard":
-            if self.errors:
-                print(f"[FAILED] with {len(self.errors)} errors:\n")
-                for i, error in enumerate(self.errors):
-                    count = i + 1
-                    print(f"\t{count:02d}. {error}")
-                compliant = False
-            else:
-                compliant = True
-            if self.warnings and not self.ignore_warnings:
-                print(f"\n[WARNING] {len(self.warnings)} warnings about file:\n")
-                for i, warning in enumerate(self.warnings):
-                    count = i + 1
-                    print(f"\t{count:02d}. {warning}")
-            if compliant:
-                print("[INFO] File is compliant!")
+            self._print_output_standard()
         elif self.log_mode == "json":
-            data = {
-                "input_file": self.file_path,
-                "specs": self.specs,
-                "template": self.template,
-                "compliant": len(self.errors) == 0,
-                "errors": self.errors,
-                "warnings": self.warnings
-            }
-            print(json.dumps(data))
+            self._print_output_json()
+
+    def _print_output_compact(self) -> None:
+        if len(self.errors) > 0:
+            highest = "ERROR"
+            endstr = ""
+            number = len(self.errors)
+        elif len(self.warnings) > 0 and self.show_warnings:
+            highest = "WARNING"
+            endstr = "\n"
+            number = len(self.warnings)
+        else:
+            highest = "NONE"
+            endstr = "\n"
+            number = 0
+        print(f"{highest} | {number} ", end=endstr)
+        err_string = " | ".join(
+            [f'{err.target_type}:{err.target_name} {err.message.replace("|", "__VERTICAL_BAR_REPLACED__")}' for err in self.errors]
+        )
+        if err_string:
+            print(f"| {err_string}")
+
+    def _print_output_standard(self) -> None:
+        num_errors = len(self.errors)
+        num_warnings = len(self.warnings)
+        compliant = num_errors == 0
+        if self.show_warnings:
+            warnings_message = "see details below"
+        else:
+            warnings_message = "run checksit with `--show-warnings` flag to display"
+        print("Summary:")
+        print(f"  {num_errors} errors found{' (see details below)' if num_errors else ''}")
+        print(f"  {num_warnings} warnings found{f' ({warnings_message})' if num_warnings else ''}")
+        if compliant:
+            print("\033[92m\u2714\033[00m File is compliant!")  # green tick
+        else:
+            print("\033[91m\u2717\033[00m File is not compliant.")  # red cross
+        if num_errors:
+            print("\nErrors:")
+            by_target = self._group_issues_by_target(self.errors)
+            for target, err_list_by_target in by_target.items():
+                print(f"\n{target}")
+                by_category = self._group_issues_by_category(err_list_by_target)
+                for category, err_list_by_cats in by_category.items():
+                    print(f"  • {category}:")
+                    for e in err_list_by_cats:
+                        print(f"    - [{e.target_name}] {e.message}")
+        if num_warnings and self.show_warnings:
+            print("\nWarnings:")
+            by_target = self._group_issues_by_target(self.warnings)
+            for target, err_list_by_target in by_target.items():
+                print(f"\n{target}")
+                by_category = self._group_issues_by_category(err_list_by_target)
+                for category, err_list_by_cats in by_category.items():
+                    print(f"  • {category}:")
+                    for e in err_list_by_cats:
+                        print(f"    - [{e.target_name}] {e.message}")
+
+
+    def _print_output_json(self) -> None:
+        data = {
+            "input_file": self.file_path,
+            "specs": self.specs,
+            "template": self.template,
+            "compliant": len(self.errors) == 0,
+            "errors": self.errors,
+            "warnings": self.warnings,
+        }
+        print(json.dumps(data, cls=ChecksitJSONEncoder))
+
+    def _group_issues_by_category(self, issues: list[CheckIssue]) -> Dict[str, List[CheckIssue]]:
+        grouped = defaultdict(list)
+        for issue in issues:
+            grouped[issue.category].append(issue)
+        return grouped
+
+    def _group_issues_by_target(self, issues: list[CheckIssue]) -> Dict[str, List[CheckIssue]]:
+        grouped = defaultdict(list)
+        for issue in issues:
+            grouped[issue.target_type].append(issue)
+        return grouped
 
     def check_file(self) -> None:
         """Check a data file against a template or specs.
@@ -561,9 +621,11 @@ class Checker:
         if self.log_mode == "compact":
             print(f"{self.file_path} | {tmpl_input} | ", end="")
         elif self.log_mode == "standard":
-            print(
-                f"\nRunning with:\n\tTemplate: {tmpl_input}\n\tSpec Files: {self.specs}\n\tDatafile: {file_content.inpt}"
-            )
+            print(f"Checking file {self.file_path}")
+            if self.specs:
+                print(f"Using spec files: {self.specs}")
+            if self.template != "off":
+                print(f"Using template: {tmpl_input}")
 
         self._check_file(file_content, template=tmpl)
         self._print_output()

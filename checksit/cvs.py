@@ -10,7 +10,7 @@ import requests
 from typing import Dict, List, Union, Any
 import time
 
-
+from .utils import CheckIssue, IssueCategory
 from .config import get_config
 
 conf = get_config()
@@ -230,7 +230,7 @@ class Vocabs:
         label: str = "",
         lookup: bool = True,
         spec_verb: bool = False,
-    ):
+    ) -> List[CheckIssue]:
         """Checks value or values against value or values in vocabulary.
 
         Checks whether a given value (or values) matches the value or values at a given
@@ -259,13 +259,19 @@ class Vocabs:
         """
         errors = []
         options = [self.lookup(vocab_lookup) if lookup else vocab_lookup][0]
+        label = label.replace("*","").removeprefix("[").removesuffix("]")
         if spec_verb:
             print(f"Vocab lookup: {vocab_lookup}")
 
         if isinstance(options, list):
             if value not in options:
                 errors.append(
-                    f"{label} '{value}' not in vocab options: {options} (using: '{vocab_lookup}')"
+                    CheckIssue(
+                        category=IssueCategory.VOCAB_VALUE_MISMATCH,
+                        target_type=label.split(":")[0].replace("*",""),
+                        target_name=":".join(label.split(":")[1:]).removeprefix(":") or label,
+                        message=f"`{value}` not in vocab options: `{options}` (using `{vocab_lookup}`)."
+                    )
                 )
             else:
                 if spec_verb:
@@ -282,10 +288,22 @@ class Vocabs:
                         )
                     )
                 else:
-                    errors.append(f"{label} does not have attribute '{key}'")
+                    errors.append(
+                        CheckIssue(
+                            category=IssueCategory.MISSING_ITEM,
+                            target_type=label.split(":")[0],
+                            target_name=":".join(label.split(":")[1:]).removeprefix(":") or label,
+                            message=f"{label} does not have attribute `{key}`.",
+                        )
+                    )
         elif value != options:
             errors.append(
-                f"{label} '{value}' does not equal required vocab value: '{options}' (using: '{vocab_lookup}')"
+                CheckIssue(
+                    category=IssueCategory.VOCAB_VALUE_MISMATCH,
+                    target_type=label.split(":")[0],
+                    target_name=":".join(label.split(":")[1:]).removeprefix(":") or label,
+                    message=f"`{value}` does not equal required vocab value: `{options}` (using `{vocab_lookup}`)."
+                )
             )
 
         return errors

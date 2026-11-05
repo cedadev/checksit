@@ -1,4 +1,5 @@
 from checksit.cvs import vocabs
+from checksit.utils import CheckIssue, IssueCategory
 import pytest
 
 
@@ -14,9 +15,22 @@ def test_check():
     assert vocabs.check('__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id', 'inst1', label = "Test") == []
     assert vocabs.check(
         "__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id", "inst3", label="Test",
-    ) == [
-        "Test 'inst3' not in vocab options: ['inst1', 'inst2'] (using: '__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id')"
-    ]
-    assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1', {"platform_id": "plat1"}, label = "Test") == ["Test does not have attribute 'description'"]
+    ) == [CheckIssue(
+        category=IssueCategory.VOCAB_VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`inst3` not in vocab options: `['inst1', 'inst2']` (using `__vocabs__:tests/test_instruments:test_instruments:__all__:instrument_id`).",
+    )]
+    assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1', {"platform_id": "plat1"}, label = "Test") == [CheckIssue(
+        category=IssueCategory.MISSING_ITEM,
+        target_type="Test",
+        target_name="Test",
+        message="Test does not have attribute `description`.",
+    )]
     assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id', "plat1", label = "Test") == []
-    assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id', "plat2", label = "Test") == ["Test 'plat2' does not equal required vocab value: 'plat1' (using: '__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id')"]
+    assert vocabs.check('__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id', "plat2", label = "Test") == [CheckIssue(
+        category=IssueCategory.VOCAB_VALUE_MISMATCH,
+        target_type="Test",
+        target_name="Test",
+        message="`plat2` does not equal required vocab value: `plat1` (using `__vocabs__:tests/test_platforms:test_platforms:plat1:platform_id`).",
+    )]
