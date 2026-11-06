@@ -13,6 +13,12 @@ var-requires0:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -28,6 +34,12 @@ var-requires1:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -44,6 +56,10 @@ var-requires2:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -60,6 +76,10 @@ var-requires3:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -74,6 +94,12 @@ var-requires4:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -88,6 +114,12 @@ var-requires5:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: rule-func:match-one-of:time:point|time:mean
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:
@@ -103,6 +135,10 @@ var-requires6:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires7:
   func: checksit.generic.check_var
   params:
@@ -118,6 +154,10 @@ var-requires7:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires8:
   func: checksit.generic.check_var
   params:
@@ -132,6 +172,12 @@ var-requires8:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires9:
   func: checksit.generic.check_var
   params:
@@ -146,6 +192,12 @@ var-requires9:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires10:
   func: checksit.generic.check_var
   params:
@@ -161,6 +213,10 @@ var-requires10:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires11:
   func: checksit.generic.check_var
   params:
@@ -176,6 +232,10 @@ var-requires11:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires12:
   func: checksit.generic.check_var
   params:
@@ -190,6 +250,12 @@ var-requires12:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires13:
   func: checksit.generic.check_var
   params:
@@ -204,6 +270,12 @@ var-requires13:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires14:
   func: checksit.generic.check_var
   params:
@@ -219,6 +291,10 @@ var-requires14:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires15:
   func: checksit.generic.check_var
   params:
@@ -234,6 +310,10 @@ var-requires15:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires16:
   func: checksit.generic.check_var
   params:
@@ -248,6 +328,12 @@ var-requires16:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires17:
   func: checksit.generic.check_var
   params:
@@ -262,6 +348,12 @@ var-requires17:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires18:
   func: checksit.generic.check_var
   params:
@@ -277,6 +369,10 @@ var-requires18:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires19:
   func: checksit.generic.check_var
   params:
@@ -292,6 +388,10 @@ var-requires19:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires20:
   func: checksit.generic.check_var
   params:
@@ -306,6 +406,12 @@ var-requires20:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires21:
   func: checksit.generic.check_var
   params:
@@ -320,6 +426,12 @@ var-requires21:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires22:
   func: checksit.generic.check_var
   params:
@@ -335,6 +447,10 @@ var-requires22:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires23:
   func: checksit.generic.check_var
   params:
@@ -350,6 +466,10 @@ var-requires23:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires24:
   func: checksit.generic.check_var
   params:
@@ -364,6 +484,12 @@ var-requires24:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires25:
   func: checksit.generic.check_var
   params:
@@ -378,6 +504,12 @@ var-requires25:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires26:
   func: checksit.generic.check_var
   params:
@@ -393,6 +525,10 @@ var-requires26:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires27:
   func: checksit.generic.check_var
   params:
@@ -408,6 +544,10 @@ var-requires27:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires28:
   func: checksit.generic.check_var
   params:
@@ -422,6 +562,12 @@ var-requires28:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires29:
   func: checksit.generic.check_var
   params:
@@ -436,6 +582,12 @@ var-requires29:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires30:
   func: checksit.generic.check_var
   params:
@@ -451,6 +603,10 @@ var-requires30:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires31:
   func: checksit.generic.check_var
   params:
@@ -466,6 +622,10 @@ var-requires31:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires32:
   func: checksit.generic.check_var
   params:
@@ -480,6 +640,12 @@ var-requires32:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires33:
   func: checksit.generic.check_var
   params:
@@ -494,6 +660,12 @@ var-requires33:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    rules_attrs:
+      - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
+      - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires34:
   func: checksit.generic.check_var
   params:
@@ -509,6 +681,10 @@ var-requires34:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires35:
   func: checksit.generic.check_var
   params:
@@ -524,6 +700,10 @@ var-requires35:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires36:
   func: checksit.generic.check_var
   params:
@@ -536,6 +716,8 @@ var-requires36:
       - long_name:Data Quality flag: CCl4
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires37:
   func: checksit.generic.check_var
   params:
@@ -548,6 +730,8 @@ var-requires37:
       - long_name:Data Quality flag: CHBr3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires38:
   func: checksit.generic.check_var
   params:
@@ -560,6 +744,8 @@ var-requires38:
       - long_name:Data Quality flag: CH2I2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires39:
   func: checksit.generic.check_var
   params:
@@ -572,6 +758,8 @@ var-requires39:
       - long_name:Data Quality flag: CH2ICl
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires40:
   func: checksit.generic.check_var
   params:
@@ -584,6 +772,8 @@ var-requires40:
       - long_name:Data Quality flag: CHBrCl2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires41:
   func: checksit.generic.check_var
   params:
@@ -596,6 +786,8 @@ var-requires41:
       - long_name:Data Quality flag: CH2Br2
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires42:
   func: checksit.generic.check_var
   params:
@@ -608,6 +800,8 @@ var-requires42:
       - long_name:Data Quality flag: CHCl3
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires43:
   func: checksit.generic.check_var
   params:
@@ -620,6 +814,8 @@ var-requires43:
       - long_name:Data Quality flag: CH3I
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
 var-requires44:
   func: checksit.generic.check_var
   params:
@@ -632,3 +828,135 @@ var-requires44:
       - long_name:Data Quality flag: CH2BrCl
     rules_attrs:
       - flag_values: rule-func:check-qc-flags
+    additional_attrs_allowed:
+      False
+strict-checking:
+  func: checksit.generic.check_defined_only
+  params:
+    all_global_attrs:
+        - source
+        - platform
+        - Conventions
+        - instrument_manufacturer
+        - instrument_model
+        - instrument_serial_number
+        - instrument_software
+        - instrument_software_version
+        - creator_name
+        - creator_email
+        - creator_url
+        - institution
+        - processing_software_url
+        - processing_software_version
+        - calibration_sensitivity
+        - calibration_certification_date
+        - calibration_certification_url
+        - sampling_interval
+        - averaging_interval
+        - product_version
+        - processing_level
+        - last_revised_date
+        - project
+        - project_principal_investigator
+        - project_principal_investigator_email
+        - project_principal_investigator_url
+        - licence
+        - acknowledgement
+        - platform_type
+        - deployment_mode
+        - title
+        - featureType
+        - time_coverage_start
+        - time_coverage_end
+        - geospatial_bounds
+        - platform_altitude
+        - location_keywords
+        - amf_vocabularies_release
+        - history
+        - comment
+    all_dimensions:
+        - time
+        - latitude
+        - longitude
+        - altitude
+    all_variables:
+        - time
+        - latitude
+        - longitude
+        - altitude
+        - day_of_year
+        - year
+        - month
+        - day
+        - hour
+        - minute
+        - second
+        - platform_speed_wrt_air
+        - platform_course
+        - platform_orientation
+        - platform_speed_wrt_ground
+        - platform_pitch_angle
+        - platform_pitch_rate
+        - platform_roll_angle
+        - platform_roll_rate
+        - platform_yaw_angle
+        - platform_yaw_rate
+        - instrument_pitch_angle
+        - instrument_pitch_rate
+        - instrument_pitch_minimum
+        - instrument_pitch_maximum
+        - instrument_pitch_standard_deviation
+        - instrument_roll_angle
+        - instrument_roll_rate
+        - instrument_roll_minimum
+        - instrument_roll_maximum
+        - instrument_roll_standard_deviation
+        - instrument_yaw_angle
+        - instrument_yaw_rate
+        - instrument_yaw_minimum
+        - instrument_yaw_maximum
+        - instrument_yaw_standard_deviation
+        - mole_fraction_of_carbon_tetrachloride_in_air
+        - mass_fraction_of_carbon_tetrachloride_in_air
+        - mole_concentration_of_carbon_tetrachloride_in_air
+        - mass_concentration_of_carbon_tetrachloride_in_air
+        - mole_fraction_of_bromoform_in_air
+        - mass_fraction_of_bromoform_in_air
+        - mole_concentration_of_bromoform_in_air
+        - mass_concentration_of_bromoform_in_air
+        - mole_fraction_of_diiodomethane_in_air
+        - mass_fraction_of_diiodomethane_in_air
+        - mole_concentration_of_diiodomethane_in_air
+        - mass_concentration_of_diiodomethane_in_air
+        - mole_fraction_of_chloroiodomethane_in_air
+        - mass_fraction_of_chloroiodomethane_in_air
+        - mole_concentration_of_chloroiodomethane_in_air
+        - mass_concentration_of_chloroiodomethane_in_air
+        - mole_fraction_of_bromodichloromethane_in_air
+        - mass_fraction_of_bromodichloromethane_in_air
+        - mole_concentration_of_bromodichloromethane_in_air
+        - mass_concentration_of_bromodichloromethane_in_air
+        - mole_fraction_of_dibromomethane_in_air
+        - mass_fraction_of_dibromomethane_in_air
+        - mole_concentration_of_dibromomethane_in_air
+        - mass_concentration_of_dibromomethane_in_air
+        - mole_fraction_of_chloroform_in_air
+        - mass_fraction_of_chloroform_in_air
+        - mole_concentration_of_chloroform_in_air
+        - mass_concentration_of_chloroform_in_air
+        - mole_fraction_of_methyl_iodide_in_air
+        - mass_fraction_of_methyl_iodide_in_air
+        - mole_concentration_of_methyl_iodide_in_air
+        - mass_concentration_of_methyl_iodide_in_air
+        - mole_fraction_of_bromochloromethane_in_air
+        - mass_fraction_of_bromochloromethane_in_air
+        - mole_concentration_of_bromochloromethane_in_air
+        - qc_flag_ccl4
+        - qc_flag_chbr3
+        - qc_flag_ch2i2
+        - qc_flag_ch2icl
+        - qc_flag_chbrcl2
+        - qc_flag_ch2br2
+        - qc_flag_chcl3
+        - qc_flag_ch3i
+        - qc_flag_ch2brcl

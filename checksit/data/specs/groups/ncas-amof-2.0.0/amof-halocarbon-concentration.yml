@@ -16,6 +16,7 @@ var-requires0:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires1:
@@ -27,7 +28,7 @@ var-requires1:
       - type:float
       - dimension:time
       - standard_name:mass_fraction_of_carbon_tetrachloride_in_air
-      - long_name:Mass Fraction of  Carbon Tetrachloride in air
+      - long_name:Mass Fraction of Carbon Tetrachloride in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -36,6 +37,7 @@ var-requires1:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires2:
@@ -54,6 +56,8 @@ var-requires2:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires3:
@@ -66,12 +70,14 @@ var-requires3:
       - dimension:time
       - units:kg m-3
       - standard_name:mass_concentration_of_carbon_tetrachloride_in_air
-      - long_name:Mass Concentration of  Carbon Tetrachloride in air
+      - long_name:Mass Concentration of Carbon Tetrachloride in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CCl4
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires4:
@@ -91,6 +97,7 @@ var-requires4:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires5:
@@ -110,6 +117,7 @@ var-requires5:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: rule-func:match-one-of:time:point|time:mean
     additional_attrs_allowed:
       False
 var-requires6:
@@ -127,6 +135,8 @@ var-requires6:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires7:
@@ -144,6 +154,8 @@ var-requires7:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBr3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires8:
@@ -154,7 +166,7 @@ var-requires8:
     defined_attrs:
       - type:float
       - dimension:time
-      - long_name:Mole Fraction of  Diiodomethane in air
+      - long_name:Mole Fraction of Diiodomethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -163,6 +175,7 @@ var-requires8:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires9:
@@ -173,7 +186,7 @@ var-requires9:
     defined_attrs:
       - type:float
       - dimension:time
-      - long_name:Mass Fraction of  Diiodomethane in air
+      - long_name:Mass Fraction of Diiodomethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
@@ -182,6 +195,7 @@ var-requires9:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires10:
@@ -199,6 +213,8 @@ var-requires10:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires11:
@@ -210,12 +226,14 @@ var-requires11:
       - type:float
       - dimension:time
       - units:kg m-3
-      - long_name:Mass Concentration of  Diiodomethane in air
+      - long_name:Mass Concentration of Diiodomethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2I2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires12:
@@ -235,6 +253,7 @@ var-requires12:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires13:
@@ -254,6 +273,7 @@ var-requires13:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires14:
@@ -271,6 +291,8 @@ var-requires14:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires15:
@@ -288,6 +310,8 @@ var-requires15:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2ICl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires16:
@@ -307,6 +331,7 @@ var-requires16:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires17:
@@ -326,6 +351,7 @@ var-requires17:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires18:
@@ -343,6 +369,8 @@ var-requires18:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires19:
@@ -354,12 +382,14 @@ var-requires19:
       - type:float
       - dimension:time
       - units:kg m-3
-      - long_name:Mass Concentration ofBromodichloromethane in air
+      - long_name:Mass Concentration of Bromodichloromethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHBrCl2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires20:
@@ -379,6 +409,7 @@ var-requires20:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires21:
@@ -398,6 +429,7 @@ var-requires21:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires22:
@@ -415,6 +447,8 @@ var-requires22:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires23:
@@ -432,6 +466,8 @@ var-requires23:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2Br2
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires24:
@@ -451,6 +487,7 @@ var-requires24:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires25:
@@ -470,6 +507,7 @@ var-requires25:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires26:
@@ -487,6 +525,8 @@ var-requires26:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires27:
@@ -504,6 +544,8 @@ var-requires27:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CHCl3
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires28:
@@ -523,6 +565,7 @@ var-requires28:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires29:
@@ -542,6 +585,7 @@ var-requires29:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires30:
@@ -559,6 +603,8 @@ var-requires30:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires31:
@@ -576,6 +622,8 @@ var-requires31:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH3I
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires32:
@@ -595,6 +643,7 @@ var-requires32:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:mmol mol-1|micro mol mol-1|nmol mol-1|pmol mol-1
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires33:
@@ -614,6 +663,7 @@ var-requires33:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires34:
@@ -631,6 +681,8 @@ var-requires34:
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires35:
@@ -642,12 +694,14 @@ var-requires35:
       - type:float
       - dimension:time
       - units:kg m-3
-      - long_name:Mass Concentration ofBromochloromethane in air
+      - long_name:Mass Concentration of Bromochloromethane in air
       - _FillValue:-1e+20
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
       - chemical_species:CH2BrCl
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires36:
@@ -867,7 +921,7 @@ strict-checking:
         - mole_concentration_of_carbon_tetrachloride_in_air
         - mass_concentration_of_carbon_tetrachloride_in_air
         - mole_fraction_of_bromoform_in_air
-        - mole_fraction_of_bromoform_in_air
+        - mass_fraction_of_bromoform_in_air
         - mole_concentration_of_bromoform_in_air
         - mass_concentration_of_bromoform_in_air
         - mole_fraction_of_diiodomethane_in_air
