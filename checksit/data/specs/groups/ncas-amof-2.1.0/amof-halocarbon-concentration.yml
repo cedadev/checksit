@@ -117,7 +117,7 @@ var-requires5:
     rules_attrs:
       - units: rule-func:match-one-of:1|1e-3|1e-6|1e-9|1e-12
       - practical_units: rule-func:match-one-of:ppm|ppb|ppt
-      - cell_methods: rule-func:match-one-of:time:point|time:mean
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires6:

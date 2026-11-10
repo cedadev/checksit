@@ -13,6 +13,10 @@ var-requires0:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires1:
   func: checksit.generic.check_var
   params:
@@ -28,6 +32,10 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires2:
   func: checksit.generic.check_var
   params:
@@ -42,6 +50,10 @@ var-requires2:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires3:
   func: checksit.generic.check_var
   params:
@@ -57,6 +69,10 @@ var-requires3:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires4:
   func: checksit.generic.check_var
   params:
@@ -71,6 +87,10 @@ var-requires4:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires5:
   func: checksit.generic.check_var
   params:
@@ -86,6 +106,10 @@ var-requires5:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
+    additional_attrs_allowed:
+      False
 var-requires6:
   func: checksit.generic.check_var
   params:

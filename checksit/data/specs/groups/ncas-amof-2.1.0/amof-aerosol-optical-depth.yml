@@ -29,6 +29,8 @@ var-requires1:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires2:
@@ -46,6 +48,8 @@ var-requires2:
       - valid_min:<derived from file>
       - valid_max:<derived from file>
       - coordinates:latitude longitude
+    rules_attrs:
+      - cell_methods: "rule-func:match-one-of:time: point|time: mean"
     additional_attrs_allowed:
       False
 var-requires3:
