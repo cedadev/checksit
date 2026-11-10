@@ -669,7 +669,7 @@ def check_var(
                         attr_rule,
                         dct["variables"][variable].get("flag_values"),
                         context=dct["variables"][variable].get("flag_meanings"),
-                        label=f"[variable******:{variable}]: ",
+                        label=f"[variable******:{variable}]",
                     )
                     errors.extend(rule_errors)
                     warnings.extend(rule_warnings)
