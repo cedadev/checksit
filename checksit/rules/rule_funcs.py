@@ -677,7 +677,7 @@ def ceda_platform(
     """Check if the platform is in the CEDA catalogue API
 
     Attempt to find the platform in the CEDA catalogue API, at
-    `https://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}`.
+    `https://api.catalogue.ceda.ac.uk/api/v3/identifiers.json/?url={value}`.
 
     Args:
         value: platform value to check
@@ -689,7 +689,7 @@ def ceda_platform(
     label = label.replace("*", "").removeprefix("[").removesuffix("]")
     errors = []
     api_result = requests.get(
-        f"https://api.catalogue.ceda.ac.uk/api/v2/identifiers.json/?url={value}"
+        f"https://api.catalogue.ceda.ac.uk/api/v3/identifiers.json/?url={value}"
     )
     if (len(api_result.json()["results"]) == 1) and (
         api_result.json()["results"][0]["relatedTo"]["short_code"] == "plat"
